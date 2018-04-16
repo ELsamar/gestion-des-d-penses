@@ -1,0 +1,102 @@
+<section class="container-fluid" id="contact" style="background-image: url('assets/img/bgb.jpeg')">
+    <footer class="footer1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <a class="nav-link" href="#" role="button" (click)="openWindowCustomClass(content3)">
+                        <b>
+                            <u class="title-widget">nous contacter</u>
+                        </b>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <ul class="list-unstyled clear-margins">
+
+                        <li class="widget-container widget_recent_news">
+
+                            <h1 class="title-widget">Contact </h1>
+
+                            <div class="footerp">
+                                <p>
+                                    <b>Email :</b>
+                                    <a href="mailto:info@.com">info@gestiondep.com</a>
+                                </p>
+                                <p>
+                                    <b> Téléphones: </b>
+                                    <b>(8AM jusqu'a 10PM):</b> +2016-55033189, +216-23847837 </p>
+
+                            </div>
+
+                            <div class="social-icons">
+
+                                <ul class="nomargin">
+
+                                    <a href="https://www.facebook.com/">
+                                        <i class="fab fa-facebook-f fa-3x "></i>
+                                    </a>
+                                    <a href="https://twitter.com/">
+                                        <i class="fab fa-twitter fa-3x "> </i>
+                                    </a>
+                                    <a href="https://plus.google.com/">
+                                        <i class="fab fa-google-plus-g fa-3x"></i>
+                                    </a>
+                                    <a href="mailto:sidhomjihene50@gmail.com">
+                                        <i class="fas fa-envelope fa-3x"></i>
+                                    </a>
+
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    <footer class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="copyright">
+                        © 2018, projet PFE gestion et organisation des dépenses
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="design">
+                        <a href="#">retour </a> |
+                        <a target="_blank" href="">Jihene SIDHOM & Samar ELOUAFI</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</section>
+
+<ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">nous contacter</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-inline">
+            <input id="contact_username" class="form-control" type="email" placeholder="Nom" required>
+            <input id="contact-mail" class="form-control " type="password" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input id="contact_password" class="form-control " type="password" placeholder="Mot de passe" required>
+        </div>
+        <div>
+            <textarea rows="6"  class="form-control " type="text" placeholder="Votre commentaire" required>
+            </textarea>
+        </div>
+
+        <div class ="col-12">
+            <button type="submit" class="btn btn-secondary btn-lg btn-block" style="background-color:#000000">envoyer</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="c('Close click')">Annuler </button>
+    </div>
+  </ng-template>
