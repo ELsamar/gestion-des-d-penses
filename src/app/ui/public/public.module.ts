@@ -8,7 +8,7 @@ import { FonctionalitesComponent } from './fonctionalites/fonctionalites.compone
 import { ContactsComponent } from './contacts/contacts.component';
 import { PublicComponent } from './public.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {Routes, RouterModule} from "@angular/router";
+import {Routes, RouterModule} from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,

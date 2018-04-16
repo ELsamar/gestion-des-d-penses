@@ -9,15 +9,17 @@ import {ClientComponent} from './ui/client/client.component';
 import { LoginComponent } from './login/login.component';
 
 import { HomeComponent } from './home/home.component';
+import {PasswordlessAuthComponent} from './passwordless-auth/passwordless-auth.component';
+import {PublicComponent} from './ui/public/public.component';
 
 const routes: Routes = [
- // {
-  //  path: 'public',
- //   component: PublicComponent,
- //  loadChildren: './ui/public/public.module#PublicModule'
-//  },
   {
-    path: 'client',
+    path: 'public',
+    component: PublicComponent,
+   loadChildren: './ui/public/public.module#PublicModule'
+  },
+  {
+    path: '',
     component: ClientComponent,
     loadChildren: './ui/client/client.module#ClientModule'
   },
@@ -26,13 +28,15 @@ const routes: Routes = [
  //   component: NotFound404Component,
  // },
   {
-    path: '',
+    path: 'home',
     component: HomeComponent
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  }
+ // {
+  //  path: 'login',
+  //  component: LoginComponent
+ // },
+  { path: 'login2',
+    component: PasswordlessAuthComponent }
 ];
 
 @NgModule({

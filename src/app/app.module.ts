@@ -18,7 +18,10 @@ import {ClientModule} from './ui/client/client.module';
 import {PageService} from './shared/page.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-
+import { PasswordlessAuthComponent } from './passwordless-auth/passwordless-auth.component';
+import {FormsModule} from '@angular/forms';
+import {PublicComponent} from './ui/public/public.component';
+import {PublicModule} from './ui/public/public.module';
 
 
 @NgModule({
@@ -27,16 +30,18 @@ import { HomeComponent } from './home/home.component';
     NotFound404Component,
     LoginComponent,
     HomeComponent,
-
+    PasswordlessAuthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ClientModule,
+    PublicModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FormsModule
   ],
   providers: [PageService, AuthService  ],
   bootstrap: [AppComponent]

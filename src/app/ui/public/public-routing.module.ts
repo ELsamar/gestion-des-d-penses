@@ -5,7 +5,6 @@ import { EngagementsComponent } from './engagements/engagements.component';
 import { FonctionalitesComponent } from './fonctionalites/fonctionalites.component';
 import { ContactsComponent } from './contacts/contacts.component';
 const routes: Routes = [
-   
 ];
 
 @NgModule({

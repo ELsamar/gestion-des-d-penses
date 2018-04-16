@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 
 import { AuthService } from './providers/auth.service';
@@ -19,39 +19,37 @@ export class AppComponent {
   user: Observable<firebase.User>;
 
   isLogged: Boolean;
-
   pseudo: String;
-
   email: String;
 
-  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router) {
+  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router, private afs: AngularFirestore) {
 
     this.user = this.authService.afAuth.authState;
+    /*  this.user.subscribe( (auth) => {
 
-    this.user.subscribe( (auth) => {
+          if (auth) {
 
-        if (auth) {
+            this.isLogged = true;
+            this.pseudo = auth.displayName;
+            this.email = auth.email;
+            console.log('Connecté');
+            console.log(auth);
+            this.router.navigate(['']);
+          } else {
 
-          this.isLogged = true;
-          this.pseudo = auth.displayName;
-          this.email = auth.email;
-          console.log('Connecté');
-          console.log(auth);
-          this.router.navigate(['']);
-        } else {
+            console.log('Déconnecté');
+            this.isLogged = false;
+            this.pseudo = '';
+            this.email = '';
+            this.router.navigate(['login2']);
 
-          console.log('Déconnecté');
-          this.isLogged = false;
-          this.pseudo = '';
-          this.email = '';
-          this.router.navigate(['login']);
+          }
 
         }
 
-      }
+      );
 
-    );
+    } */
 
   }
-
 }
