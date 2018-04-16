@@ -1,0 +1,22 @@
+.error-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.error-actions {
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.error-actions .btn {
+  margin-right:10px;
+}
+.number-404{
+  color: #ae5052;
+  font-size: 200px;
+}
+.oops{
+  font-size: 20px;
+  font-weight: bold;
+  color:black;
+  text-align: center;
+}
+

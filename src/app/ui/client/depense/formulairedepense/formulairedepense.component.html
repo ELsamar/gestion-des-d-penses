@@ -1,0 +1,149 @@
+<div class="container-fluid">
+  <div class=" content row">
+      <div class="card">
+        <div class="container-fluid">
+          <h3 class="col-10"></h3>
+          <div class="col-2">
+            <div class="form-group">
+              <select class="custom-select mr-sm-2 btn btn-primary" id="selectdepense">
+                <option selected>+</option>
+                <option value="1">d'apres module</option>
+                <option value="2">...</option>
+                <option value="3">....</option>
+              </select>
+            </div>
+          </div>
+
+        <div class="form-group">
+          <label for="titre" class="col-form-label">Titre:</label>
+          <input type="text" class="form-control" id="titredep">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label" for="montant">Montant :</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="montant" placeholder="0000.0000">
+            <div class="input-group-prepend">
+              <div class="input-group-text">TND</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="date" class="col-form-label">Date :</label>
+          <input type="date" class="form-control" name="Dtn" id="date">
+        </div>
+        <div class="form-group">
+          <label for="Categorie" class="col-form-label">Categorie :</label>
+          <select class="custom-select form-group mr-sm-2" id="categorie">
+            <option selected>categorie</option>
+            <option value="1">transport/vehicule</option>
+            <option value="2">loisire</option>
+            <option value="3">electricite</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message-text" class="col-form-label">Description: </label>
+          <input class="form-control" id=""/>
+        </div>
+        <div class="form-group">
+          <label for="messagtext" class="col-form-label">Justificatif: </label>
+          <input type="file" class="form-control" id="justificatif" />
+        </div>
+
+      <div class="custom-control custom-checkbox récurents ">
+        <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
+               role="button" aria-expanded="false" aria-controls="collapseExample"
+               id="customCheckrecudep">
+        <label class="custom-control-label" for="customCheckrecudep"> Définir comme dépense récurrent </label>
+        <div class="collapse" id="collapserecudep">
+          <div class="card card-body form-group">
+            <div class="form-group">
+              <select class="custom-select mr-sm-2" >
+                <option selected> Répéter</option>
+                <option value="1">jamais</option>
+                <option value="2" >semaine</option>
+                <option value="2">mois</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select class="custom-select mr-sm-2">
+                <option selected> semaine</option>
+                <option value="1">lundi </option>
+                <option value="2">mardi </option>
+                <option value="3">mercredi </option>
+                <option value="4">jeudi</option>
+                <option value="5">vendredi</option>
+                <option value="6">samedi </option>
+                <option value="7">dimanche</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select class="custom-select mr-sm-2">
+                <option selected> mois</option>
+                <option value="1">1 </option>
+                <option value="2">2 </option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+            <div class="form-group">
+              Du <input type="date"> au <input type="date">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="custom-control custom-checkbox alerte  ">
+        <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
+               role="button" aria-expanded="false" aria-controls="collapseExample"
+               id="customCheckalertedep">
+        <label class="custom-control-label" for="customCheckalertedep">Ajouter un alerte :</label>
+        <div class="collapse" id="collapsealertedep">
+          <div class="card card-body">
+            <div class="form-group">
+              <label class="" type=""> m'avertir avant : </label>
+              <div class="row">
+                <div class="col-6">
+                  <select class="custom_menu">
+                    <option value="1">1</option>
+                    <option value="1">2</option>
+                    <option value="1">3</option>
+                    <option value="1">4</option>
+                    <option value="1">5</option>
+                    <option value="1">6</option>
+                    <option value="1">7</option>
+                    <option value="1">8</option>
+                    <option value="1">9</option>
+                    <option value="1">10</option>
+                  </select>
+                </div>
+                <div class="col-6"> <label class="" type=""> jour(s) </label></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-1 content-center">
+          <button type="button" class="btn btn-primary bouton">ajouter</button>
+        </div>
+        <div class="col-4 content-center">
+          <button type="button" class="btn btn-primary bouton ">enregistrer comme Dépenses modèles
+          </button>
+        </div>
+        <div class="col-4 content-center">
+          <button type="button" class="btn btn-primary bouton">enregistrer comme Dépenses récurents
+          </button>
+        </div>
+        <div class="col-1 content-center">
+          <button type="reset" class="btn btn-secondary  bouton">annuler
+          </button>
+        </div>
+      </div>
+        </div>
+    </div>
+  </div>
+</div>

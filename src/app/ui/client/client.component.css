@@ -1,0 +1,15 @@
+/* .wrapper {
+  position: relative;
+  top: 0;
+  height: 100vh; }
+.wrapper {
+  min-height: 100vh;
+  position: relative; }
+.main-panel {
+  background: rgba(203, 203, 210, 0.15);
+  position: relative;
+  z-index: 2;
+  float: right;
+  width: calc(100% - 260px);
+  min-height: 100%;
+  overflow: auto; }*/
