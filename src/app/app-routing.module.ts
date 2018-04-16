@@ -4,17 +4,17 @@ import {Routes, RouterModule} from '@angular/router';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import {ClientComponent} from './ui/client/client.component';
 
-import {PublicComponent} from './ui/public/public.component';
+
 import { LoginComponent } from './login/login.component';
 
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {
-    path: 'public',
-    component: PublicComponent,
-   loadChildren: './ui/public/public.module#PublicModule'
-  },
+ // {
+  //  path: 'public',
+ //   component: PublicComponent,
+ //  loadChildren: './ui/public/public.module#PublicModule'
+//  },
   {
     path: 'client',
     component: ClientComponent,

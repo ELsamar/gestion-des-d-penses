@@ -13,7 +13,7 @@ import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import { AuthService} from './providers/auth.service';
 
-import {PublicModule} from './ui/public/public.module';
+
 import {ClientModule} from './ui/client/client.module';
 import {PageService} from './shared/page.service';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +33,6 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     ClientModule,
-    PublicModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,

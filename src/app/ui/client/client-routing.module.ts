@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import {DepenseModule} from './depense/depense.module';
+import {DepensesModule} from './depense/depenses.module';
 
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {TransactionComponent} from './transaction/transaction.component';
@@ -21,12 +21,12 @@ const routes: Routes = [
     component: ProfilComponent
   },
   {
-    path: 'depense',
-    loadChildren: './depense/depense.module#DepenseModule'
+    path: 'depenses',
+    loadChildren: './depense/depenses.module#DepensesModule'
   },
   {
-    path: 'revenu',
-    loadChildren: './revenu/revenu.module#RevenuModule'
+    path: 'revenus',
+    loadChildren: './revenu/revenus.module#RevenusModule'
   },
 ];
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {DepenseModule} from './depense/depense.module';
+import {DepensesModule} from './depense/depenses.module';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientComponent } from './client.component';
 
@@ -17,7 +17,7 @@ import { ProfilComponent } from './profil/profil.component';
   imports: [
     CommonModule,
     ClientRoutingModule,
-    DepenseModule
+    DepensesModule
   ],
   declarations: [
     ClientComponent,
