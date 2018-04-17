@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DepensesRoutingModule } from './depenses-routing.module';
 import { DepensesComponent} from './depenses.component';
@@ -9,7 +10,9 @@ import { DepenseComponent } from './depense/depense.component';
 @NgModule({
   imports: [
     CommonModule,
-    DepensesRoutingModule
+    DepensesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DepenseComponent,

@@ -94,7 +94,7 @@ button {
 *, ::after, ::before {
     box-sizing: border-box;
 }
- 
+
 input, textarea, select, button {
     text-rendering: auto;
     color: initial;
@@ -481,9 +481,10 @@ li.nav-item a {
     margin-bottom: 5%;
 }
 @media all {
-    body {
-        font-family: 'Open Sans', sans-serif;
-    }
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
+}
 
 
 
