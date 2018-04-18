@@ -1520,7 +1520,7 @@ display: -ms-inline-flexbox;
 .alert.alert-with-icon {
   padding-left: 65px; }
 
-img {
+.img-logo {
   max-width: 50%;
   border-radius: 0.1875rem;
 }

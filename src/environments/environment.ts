@@ -12,6 +12,9 @@ export const environment = {
     projectId: "pfe2018-f27c8",
     storageBucket: "pfe2018-f27c8.appspot.com",
     messagingSenderId: "506761310540"
+  },
+  dialogflow: {
+    angularBot: 'babbabf28ca34b21b174d4a2e3707c3c'
   }
 };
 

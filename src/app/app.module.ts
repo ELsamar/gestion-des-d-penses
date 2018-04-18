@@ -8,6 +8,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { ChatModule } from './chat/chat.module';
 
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
@@ -41,7 +42,8 @@ import {PublicModule} from './ui/public/public.module';
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
-    FormsModule
+    FormsModule,
+    // ChatModule
   ],
   providers: [PageService, AuthService  ],
   bootstrap: [AppComponent]

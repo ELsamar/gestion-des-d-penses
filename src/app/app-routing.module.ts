@@ -19,7 +19,7 @@ const routes: Routes = [
    loadChildren: './ui/public/public.module#PublicModule'
   },
   {
-    path: '',
+    path: 'client',
     component: ClientComponent,
     loadChildren: './ui/client/client.module#ClientModule'
   },

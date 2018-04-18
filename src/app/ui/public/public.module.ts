@@ -13,7 +13,6 @@ import {Routes, RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     PublicRoutingModule,
-    BrowserAnimationsModule,
   ],
   declarations: [AcceuilComponent, EngagementsComponent,
     FonctionalitesComponent, ContactsComponent, PublicComponent]

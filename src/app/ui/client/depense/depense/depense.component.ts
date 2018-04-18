@@ -12,10 +12,12 @@ export class DepenseComponent implements OnInit {
     this.createForm();
   }
   createForm() {
-    this.form = this.fb.group({
+    this.form = this.fb.group(
+      {
       dateTo: ['', Validators.required ],
-      dateFrom: ['', Validators.required ]
-    }, {validator: this.dateLessThan('dateFrom', 'dateTo')});
+      dateFrom: ['', Validators.required ],
+    },
+      {validator: this.dateLessThan('dateFrom', 'dateTo')});
   }
   dateLessThan(from: string, to: string) {
     return (group: FormGroup): {[key: string]: any} => {

@@ -8,9 +8,11 @@ import {PageService} from '../../../shared/page.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-public pageName: any = '';
+  public pageName: any = 'thispage';
+
   constructor() {
   }
+
   ngOnInit() {
   }
 
