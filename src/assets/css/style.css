@@ -450,25 +450,7 @@ color: #000000;
 text-decoration: none;
 background-color: transparent;
 }
-.a{
-    font-width: 150px;
-}
-ul a:hover {
-    text-decoration: none;
-}
-ul.nav  li ul li  {
-    margin-left: 20px;
-}
-ul.nav  li ul li a {
-    display: block;
-    padding: 5px;
-    font-size: 0.9em;
-}
-li.nav-item {
-    }
-li.nav-item a {
-    padding:  15px;
-}
+
 .bouton {
     margin-right: 9% ;
     margin-bottom: 9%;

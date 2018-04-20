@@ -8,7 +8,7 @@ import {DepenseComponent} from './depense/depense.component';
 
 const routes: Routes = [
   {
-    path: '' ,
+    path: 'dep' ,
     component: DepensesComponent
   },
   {

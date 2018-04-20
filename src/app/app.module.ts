@@ -2,6 +2,7 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -13,7 +14,7 @@ import { ChatModule } from './chat/chat.module';
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import { AuthService} from './providers/auth.service';
-
+import {TransactionService} from './shared/transaction.service';
 
 import {ClientModule} from './ui/client/client.module';
 import {PageService} from './shared/page.service';
@@ -21,7 +22,6 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PasswordlessAuthComponent } from './passwordless-auth/passwordless-auth.component';
 import {FormsModule} from '@angular/forms';
-import {PublicComponent} from './ui/public/public.component';
 import {PublicModule} from './ui/public/public.module';
 
 
@@ -43,9 +43,10 @@ import {PublicModule} from './ui/public/public.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
+    ToastrModule.forRoot()
     // ChatModule
   ],
-  providers: [PageService, AuthService  ],
+  providers: [PageService, AuthService, TransactionService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
