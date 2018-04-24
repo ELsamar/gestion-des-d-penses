@@ -24,8 +24,8 @@ export class AppComponent {
 
   constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router, private afs: AngularFirestore) {
 
-    this.user = this.authService.afAuth.authState;
-    /*  this.user.subscribe( (auth) => {
+   this.user = this.authService.afAuth.authState;
+     this.user.subscribe( (auth) => {
 
           if (auth) {
 
@@ -34,14 +34,15 @@ export class AppComponent {
             this.email = auth.email;
             console.log('Connecté');
             console.log(auth);
-            this.router.navigate(['']);
+            console.log(this.pseudo);
+            this.router.navigate(['client']);
           } else {
 
             console.log('Déconnecté');
             this.isLogged = false;
             this.pseudo = '';
             this.email = '';
-            this.router.navigate(['login2']);
+            this.router.navigate(['login']);
 
           }
 
@@ -49,7 +50,7 @@ export class AppComponent {
 
       );
 
-    } */
+    }
 
   }
-}
+

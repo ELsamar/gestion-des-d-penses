@@ -1,5 +1,7 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {PageService} from '../../../shared/page.service';
+import {AuthService} from '../../../providers/auth.service';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 
 @Component({
@@ -10,10 +12,13 @@ import {PageService} from '../../../shared/page.service';
 export class NavbarComponent implements OnInit {
   public pageName: any = 'thispage';
 
-  constructor() {
+  constructor(public afAuth: AngularFireAuth) {
   }
 
   ngOnInit() {
+  }
+  logout() {
+    return this.afAuth.auth.signOut();
   }
 
 }
