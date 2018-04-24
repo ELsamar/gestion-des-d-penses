@@ -25,13 +25,14 @@ import {FormsModule} from '@angular/forms';
 import {PublicModule} from './ui/public/public.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NotFound404Component,
     LoginComponent,
     HomeComponent,
-    PasswordlessAuthComponent,
+    PasswordlessAuthComponent
   ],
   imports: [
     BrowserModule,

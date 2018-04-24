@@ -1,3 +1,26 @@
-<p>
-  listdepenses works!
-</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Titre</th>
+              <th scope="col">Date</th>
+              <th scope="col">Montant</th>
+              <th scope="col">Cathégorie</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let Depenses of depenseslist">
+                  <td>{{Depenses.titredepense}}</td>
+                  <td>{{Depenses.datedepense}}</td>
+                  <td>{{Depenses.montantdepense}}</td>
+                  <td>{{Depenses.cathegoriedepense}}</td>
+                  <td>
+                    <a (click)="onEdit(Depenses.$key)"><i class="far fa-edit"></i></a>   
+                    <a class="btn btn-danger" (click)="onDelete(Depenses.$key)">
+                      <i class="fas fa-trash-alt"></i>
+                    </a>
+                  </td>
+              </tr>
+          </tbody>
+    </table>
+  </div>

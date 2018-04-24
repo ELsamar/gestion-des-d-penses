@@ -4,12 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import {DepensesComponent} from './depenses.component';
 import {DepenseComponent} from './depense/depense.component';
+import { ListdepensesComponent } from './listdepenses/listdepenses.component';
 
 
 const routes: Routes = [
   {
-    path: 'dep' ,
-    component: DepensesComponent
+    path: 'listdep' ,
+    component: ListdepensesComponent
   },
   {
     path: 'formulaire' ,
