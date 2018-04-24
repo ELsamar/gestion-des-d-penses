@@ -6,7 +6,7 @@ import {TransactionComponent} from './transaction/transaction.component';
 
 const routes: Routes = [
   {
-    path: '' ,
+    path: 't' ,
     component: TransactionComponent
   },
   {

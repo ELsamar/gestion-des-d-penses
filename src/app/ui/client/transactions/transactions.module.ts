@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
-//import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 import { TransactionsRoutingModule } from './transactions-routing.module';
 import { TransactionComponent } from './transaction/transaction.component';
@@ -13,7 +13,7 @@ import {Transaction} from '../../../shared/transaction';
     CommonModule,
     TransactionsRoutingModule,
     FormsModule,
-   // ToastrModule.forRoot()
+  // ToastrModule.forRoot()
   ],
   declarations: [
     TransactionComponent,

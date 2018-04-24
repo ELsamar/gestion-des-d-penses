@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Router } from '@angular/router';
-import { AuthService } from '../providers/auth.service';
-import {ToastrService} from 'ngx-toastr';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
+import {AngularFireAuth} from 'angularfire2/auth';
+import {AuthService} from '../../../providers/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-medialogin',
+  templateUrl: './medialogin.component.html',
+  styleUrls: ['./medialogin.component.css']
 })
-export class LoginComponent implements OnInit {
+export class MedialoginComponent implements OnInit {
   user: Observable <any>;
   email: string;
   emailSent = false;
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
   loginfacebook() {
     this.authService.loginWithFacebook().then((data) => {
       this.router.navigate(['client']);
-  });
+    });
   }
   logingoogle() {
     this.authService.loginWithGoogle().then((data) => {
