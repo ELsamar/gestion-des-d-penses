@@ -21,7 +21,7 @@ export class DepensesService {
       descriptiondepense: depenses.descriptiondepense,
       justificatifdepenses: depenses.justificatifdepense });
   }
-  updateDepense(depenses: Depenses){
+  updateDepense(depenses: Depenses)  {
     this.depenseslist.update(depenses.$iddepense,
       {
         titredepense:depenses.titredepense,

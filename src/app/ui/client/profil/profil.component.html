@@ -1,108 +1,97 @@
+<form  #UserForm="ngForm" (ngSubmit)="onSubmit(UserForm)">
 
 <div class="container-fluid">
   <div class="row">
   <div class="col-md-8">
     <div class="card">
+      <input type="hidden"  #iduser="ngModel" name="id" [(ngModel)]="user.$iduser">
       <h4 class="col-md-6 mb-3 text-center ">Mes coordonnés</h4>
       <hr class="mb-4">
-      <form class="needs-validation" novalidate="">
+      <div class="needs-validation" novalidate="">
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 form-group" >
           <label for="nom">Nom</label>
-          <input type="text" class="form-control " name="nom">
+          <input type="text" class="form-control" name="nom" #nom="ngModel" [(ngModel)]="user.nom">
           <div class="valid-feedback">Cela semble bon!</div>
           <div class="invalid-feedback"> Veuillez tappez votre nom. </div>
         </div>
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 ">
           <label for="prenom">Prenom</label>
-          <input type="text" class="form-control" name="Prenom">
+          <input type="text" class="form-control" name="prenom"  #prenom="ngModel" [(ngModel)]="user.prenom">
           <div class="valid-feedback"> Cela semble bon!</div>
           <div class="invalid-feedback"> Veuillez tappez votre prenom.</div>
         </div>
-        <div class="col-md-6 mb-3">
-          <label for="validationTooltipUsername">Nom d'utilisateur</label>
+        <div class="col-md-6 mb-3 form-group">
+          <label >Nom d'utilisateur</label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+              <span class="input-group-text" >@</span>
             </div>
-            <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+            <input type="text" class="form-control" name="nomutulisateur" #nomutulisateur="ngModel" [(ngModel)]="user.nomutulisateur" placeholder="Username" >
             <div class="valid-feedback"> valide !</div>
             <div class="invalid-feedback"> Veuillez choisir un nom d'utilisateur unique et valide.</div>
 
           </div>
         </div>
-        <div class="col-md-6 mb-3">
-          <label for="email">Email </label>
-          <input type="email" class="form-control" name="email" placeholder="nom@exemple.com">
+        <div class="col-md-6 mb-3 form-group">
+          <label for="emailuser">Email </label>
+          <input type="email" class="form-control" id="emailuser" name="emailuser" #emailuser="ngModel" [(ngModel)]="user.emailuser" placeholder="nom@exemple.com">
           <div class="valid-feedback">valide ! </div>
           <div class="invalid-feedback">S'il vous plaît entrer une adresse email valide .</div>
         </div>
-      </form>
+      </div>
       <hr class="mb-4">
     </div>
     <div class="card">
       <h4 class="col-md-6 mb-3 text-center ">Mes  données </h4>
       <hr class="mb-4">
-      <form class="needs-validation" novalidate="">
-
-        <div class="mb-3">
-          <div class="col-auto my-1">
+      <div class="needs-validation" novalidate="">
+          <div class="col-auto my-1 form-group">
             <label class="mr-sm-2" for="sexe">sexe</label>
-            <select class="custom-select mr-sm-2" id="sexe">
-              <option selected>choisir...</option>
-              <option value="1">homme</option>
-              <option value="2">femme</option>
-            </select>
+       <!--     <select class="custom-select mr-sm-2" id="sexe">
+              <option *ngFor="let sexe of Sexe" [value]="sexe" {{sexe}}></option>
+            </select> -->
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="Dtn">Date de naissance</label>
-          <input type="date" class="form-control" name="Dtn">
+        <div class="col-md-6 mb-3 form-group ">
+          <label for="datenaissance">Date de naissance</label>
+          <input type="date" class="form-control" id="datenaissance" name="datenaissance" #datenaissance="ngModel" [(ngModel)]="user.datenaissance">
           <div class="valid-feedback"> valide !</div>
           <div class="invalid-feedback"> S'il vous plaît entrer une date valide . </div>
 
         </div>
-        <div class="col-md-6 mb-3">
-          <label for="nationalité">Nationalité</label>
-          <input type="text" class="form-control" name="nationalité">
+        <div class="col-md-6 mb-3 form-group">
+          <label for="nationalite">Nationalité</label>
+          <input type="text" class="form-control" name="nationalite" #nationalite="ngModel"[(ngModel)]="user.nationalite">
           <div class="valid-feedback">Cela semble bon!</div>
           <div class="invalid-feedback"> Veuillez tappez votre nationalité.</div>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 form-group">
           <label for="pays">Pays</label>
-          <input type="text" class="form-control" name="pays"/>
+          <input type="text" class="form-control" name="pays" #pay="ngModel"[(ngModel)]="user.pays"/>
           <div class="valid-feedback"> Cela semble bon! </div>
           <div class="invalid-feedback">Veuillez tappez votre pays.</div>
         </div>
-        <div class="mb-3">
-          <div class="col-auto my-1">
+        <div class="col-md-6 mb-3 form-group">
             <label class="mr-sm-2" for="état civil">état civil</label>
-            <select class="custom-select mr-sm-2" id="état civil">
-              <option selected>choisir...</option>
-              <option value="1">célibataire</option>
-              <option value="2">marier</option>
-              <option value="3">divorcé</option>
-            </select>
-          </div>
+         <!--   <select class="custom-select mr-sm-2" id="état civil">
+              <option *ngFor="let etatcivil of Etatcivil" [value]="etatcivil">{{etatcivil}}</option>
+            </select> -->
         </div>
 
-        <div class="mb-3">
-          <div class="col-auto my-1">
+          <div class="col-md-6 mb-3 form-group">
             <label class="mr-sm-2" for="profession">Profession</label>
-            <select class="custom-select mr-sm-2" id="profession">
-              <option selected>choisir...</option>
-              <option value="1">étudiant</option>
-              <option value="2">salarié</option>
-              <option value="3">gérant</option>
-            </select>
+         <!--   <select class="custom-select mr-sm-2" id="profession">
+              <option *ngFor="let profession of Profession" [value]="profession">{{profession}}</option>
+            </select> -->
           </div>
-        </div>
 
-        <hr class="mb-4 center">
+
+        <hr class="col-md-6 mb-3 form-group center">
+        <button type="submit" class="btn btn-primary bouton" >ajouter</button>
         <button class="btn" type="submit">Modifier</button>
         <button class="btn" type="reseat">Annuler</button>
-      </form>
+      </div>
     </div>
 
 
@@ -145,3 +134,4 @@
     </div>
   </div>
 </div>
+</form>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule, NgForm} from '@angular/forms';
 
 import {DepensesModule} from './depense/depenses.module';
 import { ClientRoutingModule } from './client-routing.module';
@@ -18,7 +19,8 @@ import {TransactionsModule} from './transactions/transactions.module';
     CommonModule,
     ClientRoutingModule,
     DepensesModule,
-    TransactionsModule
+    TransactionsModule,
+    FormsModule
   ],
   declarations: [
     ClientComponent,
