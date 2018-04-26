@@ -35,7 +35,7 @@ export class PasswordlessAuthComponent implements OnInit {
     }
   }
   async sendEmailLink() {
-    this.authService.sendEmailLink();
+    this.authService.sendEmailLink(this.email);
   }
 
   async confirmSignIn(url) {

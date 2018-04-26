@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   user: Observable<firebase.User>;
   isLogged: Boolean;
   pseudo: String;
-  email: String;
+  email: string;
   emailSent = false;
   errorMessage: string;
 
@@ -52,19 +52,21 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.afAuth.authState;
+    this.user = this.authService.afAuth.authState;
+    this.user.subscribe((auth) => {
+      sessionStorage.setItem('id', JSON.stringify(auth));
+    })
     console.log(this.user);
     console.log(this.email);
     const url = this.router.url;
 
     if (url.includes('signIn')) {
       this.confirmSignIn(url);
-      this.toastr.success('Congrats You logged in without a password!', 'succes');
     }
   }
 
   async sendEmailLink() {
-    this.authService.sendEmailLink();
+    this.authService.sendEmailLink(this.email);
   }
 
   async confirmSignIn(url) {
@@ -83,4 +85,5 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['client']);
     });
   }
+
 }

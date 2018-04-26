@@ -10,4 +10,5 @@ export class User {
 //  etatcivil: string;
  // profession: string ;
 //  imageuser: File;
+  idauth: string;
 }

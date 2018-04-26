@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import { MedialoginComponent } from './medialogin/medialogin.component';
 import {PasswordlessAuthComponent} from './passwordless-auth/passwordless-auth.component';
 
 @NgModule({
@@ -15,7 +14,6 @@ import {PasswordlessAuthComponent} from './passwordless-auth/passwordless-auth.c
   ],
   declarations: [
     LoginComponent,
-    MedialoginComponent,
   PasswordlessAuthComponent]
 })
 export class LoginModule { }
