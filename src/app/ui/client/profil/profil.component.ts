@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UserService } from '../../../shared/services/user.service';
+import {FormsModule, NgForm} from '@angular/forms';
+import { User} from '../../../shared/models/user';
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilComponent implements OnInit {
 
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit() {
+    
   }
+
+
 
 }

@@ -3,7 +3,6 @@ export class Revenus {
     titrerevenu : string;
     montantrevenu : number;
     daterevenu : Date ;
-    cathegorierevenu : string ;
     descriptionrevenu : string ;
     justificatifrevenu : File;
 }
