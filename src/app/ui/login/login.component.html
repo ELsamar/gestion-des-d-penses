@@ -4,7 +4,7 @@
 
   <button class="btn btn-sucess" (click)="logingoogle()">Connexion avec Google</button>
   <button class="btn btn-sucess" (click)="loginfacebook()">Connexion avec facebook</button>
-  <button class="btn" (click)="openBackDropCustomClass(content)">s'inscrire</button>
+  <button class="btn" (click)="openBackDropCustomClass(content)">s'inscrire/connecter</button>
 
   <button class="btn btn-sucess" routerLink="/login2">connexion sans mot de passe</button>
 
@@ -46,12 +46,24 @@
       <input type="email" id="inputEmail" class="form-control" name="email"  required autofocus>
       <label for="inputPassword" class="sr-only">Mot de passe</label>
       <input type="password" id="inputPassword" class="form-control" name="password" [(ngModel)]="password" required>
+
       <button class="btn btn-secondary" type="submit" (click)="singup()">s'inscrire</button>
       <button class="btn btn-secondary" type="submit" (click)="signin()">Connecter</button>
     </form>
+
 
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="('Close click')">Annuler </button>
   </div>
 </ng-template>
+<form #captchaProtectedForm="ngForm">
+  <re-captcha (resolved)="resolved($event)" [(ngModel)]="formModel.captcha" name="captcha"required siteKey="6Ldw8FUUAAAAAGGrC5Sf-sI5N6co4HT5pykzIBDJ" #captchaControl="ngModel">
+  </re-captcha>
+  <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>
+  <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
+  <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
+  <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
+  <button (click)="formModel.captcha = ''">Reset Captcha</button>
+  
+</form>

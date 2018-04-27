@@ -19,7 +19,7 @@ import {TransactionService} from './shared/transaction.service';
 import {ClientModule} from './ui/client/client.module';
 import {PageService} from './shared/page.service';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+
 
 import {FormsModule} from '@angular/forms';
 import {PublicModule} from './ui/public/public.module';
@@ -33,7 +33,6 @@ import {LoginModule} from './ui/login/login.module';
     AppComponent,
     NotFound404Component,
     LoginComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,

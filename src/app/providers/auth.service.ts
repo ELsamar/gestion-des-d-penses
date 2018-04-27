@@ -33,8 +33,9 @@ export class AuthService {
   }
   singin(email: string, password: string) {
     try {
-      firebase.auth().signInWithEmailAndPassword(email, password);
-      this.toastr.success('bienvenu', 'singin seccued');
+      if (firebase.auth().signInWithEmailAndPassword(email, password)) {
+        this.toastr.success('bienvenu', 'singin seccued');
+      }
     } catch (error) {
       // Handle Errors here.
       this.errorCode = error.code;
@@ -59,11 +60,12 @@ export class AuthService {
       handleCodeInApp: true
     };
     try {
-      await this.afAuth.auth.sendSignInLinkToEmail(email, actionCodeSettings);
+      if ( await this.afAuth.auth.sendSignInLinkToEmail(email, actionCodeSettings)) {
       sessionStorage.setItem('emailForSignIn', email);
       this.toastr.success( 'Cool! We sent you an email with your login link', 'succes');
       this.emailSent = true;
       console.log(this.emailSent);
+      }
     } catch (err) {
       this.errorMessage = err.message;
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');

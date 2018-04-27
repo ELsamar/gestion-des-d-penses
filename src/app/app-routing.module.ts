@@ -8,7 +8,7 @@ import {ClientComponent} from './ui/client/client.component';
 
 import { LoginComponent } from './ui/login/login.component';
 
-import { HomeComponent } from './home/home.component';
+
 import {PasswordlessAuthComponent} from './ui/login/passwordless-auth/passwordless-auth.component';
 import {PublicComponent} from './ui/public/public.component';
 
@@ -21,7 +21,8 @@ const routes: Routes = [
   {
     path: 'client',
     component: ClientComponent,
-    loadChildren: './ui/client/client.module#ClientModule'
+    loadChildren: './ui/client/client.module#ClientModule',
+    // CanActivate: [AuthSerrviceVControel]
   },
   {
     path: 'login',
@@ -32,11 +33,6 @@ const routes: Routes = [
  //   path: '**',
  //   component: NotFound404Component,
  // },
-  {
-    path: 'home',
-    component: HomeComponent,
-    // CanActivate: [AuthSerrviceVControel]
-  },
  // {
   //  path: 'login',
  //  component: LoginComponent

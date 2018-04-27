@@ -7,6 +7,9 @@ import {AuthService} from '../../providers/auth.service';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {ToastrService} from 'ngx-toastr';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+export interface FormModel {
+  captcha?: string;
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +24,7 @@ export class LoginComponent implements OnInit {
   emailSent = false;
   errorMessage: string;
   password: string;
-
+  public formModel: FormModel = {};
   constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router,
               private afs: AngularFirestore, private toastr: ToastrService, private modalService: NgbModal) {
 
@@ -93,5 +96,8 @@ export class LoginComponent implements OnInit {
   }
   openBackDropCustomClass(content) {
     this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+  }
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response ${captchaResponse}:`);
   }
 }
