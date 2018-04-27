@@ -4,6 +4,7 @@
 
   <button class="btn btn-sucess" (click)="logingoogle()">Connexion avec Google</button>
   <button class="btn btn-sucess" (click)="loginfacebook()">Connexion avec facebook</button>
+  <button class="btn" (click)="openBackDropCustomClass(content)">s'inscrire</button>
 
   <button class="btn btn-sucess" routerLink="/login2">connexion sans mot de passe</button>
 
@@ -30,4 +31,27 @@
 
   <hr>
 
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Connexion</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-signin">
+      <label for="inputEmail" class="sr-only">Email</label>
+      <input type="email" id="inputEmail" class="form-control" name="email"  required autofocus>
+      <label for="inputPassword" class="sr-only">Mot de passe</label>
+      <input type="password" id="inputPassword" class="form-control" name="password" [(ngModel)]="password" required>
+      <button class="btn btn-secondary" type="submit" (click)="singup()">s'inscrire</button>
+      <button class="btn btn-secondary" type="submit" (click)="signin()">Connecter</button>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="('Close click')">Annuler </button>
+  </div>
 </ng-template>

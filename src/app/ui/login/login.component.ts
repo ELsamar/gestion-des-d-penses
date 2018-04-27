@@ -6,7 +6,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import {AuthService} from '../../providers/auth.service';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {ToastrService} from 'ngx-toastr';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,9 +20,10 @@ export class LoginComponent implements OnInit {
   email: string;
   emailSent = false;
   errorMessage: string;
+  password: string;
 
   constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router,
-              private afs: AngularFirestore, private toastr: ToastrService) {
+              private afs: AngularFirestore, private toastr: ToastrService, private modalService: NgbModal) {
 
     this.user = this.authService.afAuth.authState;
     this.user.subscribe((auth) => {
@@ -43,9 +44,7 @@ export class LoginComponent implements OnInit {
           this.pseudo = '';
           this.email = '';
           this.router.navigate(['login']);
-
         }
-
       }
     );
 
@@ -86,4 +85,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  singup() {
+    this.authService.singup(this.email, this.password);
+  }
+  signin() {
+    this.authService.singin(this.email, this.password);
+  }
+  openBackDropCustomClass(content) {
+    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
+  }
 }

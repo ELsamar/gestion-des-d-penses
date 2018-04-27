@@ -12,13 +12,13 @@ import {AngularFireAuth} from 'angularfire2/auth';
 export class NavbarComponent implements OnInit {
   public pageName: any = 'thispage';
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth, public authservice: AuthService) {
   }
 
   ngOnInit() {
   }
   logout() {
-    return this.afAuth.auth.signOut();
+    return this.authservice.signout();
   }
 
 }

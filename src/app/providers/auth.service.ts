@@ -19,10 +19,10 @@ export class AuthService {
   errorMessage: string;
   errorCode: string;
   constructor(public afAuth: AngularFireAuth, private toastr: ToastrService ) {}
-  Signup(email: string, password: string) {
+  singup(email: string, password: string) {
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password);
-      this.toastr.success('usercreated', 'singup seccued');
+      this.toastr.success('user created', 'singup seccued');
     } catch (error) {
       // Handle Errors here.
       this.errorCode = error.code;
@@ -34,7 +34,7 @@ export class AuthService {
   singin(email: string, password: string) {
     try {
       firebase.auth().signInWithEmailAndPassword(email, password);
-      this.toastr.success('user created', 'singup seccued');
+      this.toastr.success('bienvenu', 'singin seccued');
     } catch (error) {
       // Handle Errors here.
       this.errorCode = error.code;
@@ -91,7 +91,11 @@ export class AuthService {
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
     }
   }
-  logout() {
-    this.logout();
+  signout() {
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+    }).catch(function(error) {
+      // An error happened.
+    });
   }
 }
