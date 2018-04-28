@@ -18,12 +18,13 @@ export interface FormModel {
 export class LoginComponent implements OnInit {
 
   user: Observable<firebase.User>;
-  isLogged: Boolean;
+  isLogged: boolean;
   pseudo: String;
   email: string;
   emailSent = false;
   errorMessage: string;
   password: string;
+  resetPassword: boolean = false;
   public formModel: FormModel = {};
   constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router,
               private afs: AngularFirestore, private toastr: ToastrService, private modalService: NgbModal) {
@@ -99,5 +100,13 @@ export class LoginComponent implements OnInit {
   }
   resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response ${captchaResponse}:`);
+  }
+  sendResetEmail() {
+    this.authService.resetPassword(this.email)
+      .then(() => this.resetPassword = true)
+      .catch(_error => {
+        this.errorMessage = _error;
+      });
+    console.log(this.resetPassword);
   }
 }

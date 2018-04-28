@@ -33,9 +33,8 @@ export class AuthService {
   }
   singin(email: string, password: string) {
     try {
-      if (firebase.auth().signInWithEmailAndPassword(email, password)) {
-        this.toastr.success('bienvenu', 'singin seccued');
-      }
+      firebase.auth().signInWithEmailAndPassword(email, password);
+      this.toastr.success('bienvenu', 'singin seccued');
     } catch (error) {
       // Handle Errors here.
       this.errorCode = error.code;
@@ -43,6 +42,11 @@ export class AuthService {
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
       this.toastr.error(this.errorCode.toLocaleString(), 'erreur');
     }
+  }
+  resetPassword(email: string) {
+    return this.afAuth.auth.sendPasswordResetEmail(email)
+      .then(() => console.log('sent Password Reset Email!'))
+      .catch((error) => console.log(error));
   }
   loginWithFacebook() {
     this.providerF = new firebase.auth.FacebookAuthProvider();
