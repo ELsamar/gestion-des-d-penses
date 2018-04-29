@@ -8,7 +8,7 @@ export class User {
   nationalite: string;
   pays: string;
 //  etatcivil: string;
- // profession: string ;
+  profession: string ;
 //  imageuser: File;
   idauth: string;
 }

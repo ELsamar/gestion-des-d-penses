@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import {TransactionService} from './../../../../shared/transaction.service';
-import { Transaction} from './../../../../shared/transaction';
+import { Transaction} from '../../../../shared/models/transaction';
 
 @Component({
   selector: 'app-list-transaction',

@@ -6,7 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TransactionsRoutingModule } from './transactions-routing.module';
 import { TransactionComponent } from './transaction/transaction.component';
 import { ListTransactionComponent } from './list-transaction/list-transaction.component';
-import {Transaction} from '../../../shared/transaction';
+import {Transaction} from '../../../shared/models/transaction';
 
 @NgModule({
   imports: [

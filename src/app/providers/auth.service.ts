@@ -1,5 +1,5 @@
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 
 import { Injectable } from '@angular/core';
@@ -10,7 +10,7 @@ import {User} from 'firebase';
 @Injectable()
 
 export class AuthService {
-
+  authState: any = null;
   providerG: firebase.auth.GoogleAuthProvider;
   providerF: firebase.auth.FacebookAuthProvider;
   public user: Observable <any>;
@@ -18,7 +18,14 @@ export class AuthService {
   emailSent = false;
   errorMessage: string;
   errorCode: string;
-  constructor(public afAuth: AngularFireAuth, private toastr: ToastrService ) {}
+  constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth;
+    });
+  }
+  get currentUserId(): string {
+    return (this.authState !== null) ? this.authState.uid : '';
+  }
   singup(email: string, password: string) {
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -98,10 +105,12 @@ export class AuthService {
     }
   }
   signout() {
-    firebase.auth().signOut().then(function() {
+    this.authState.signOut().then(function() {
       // Sign-out successful.
     }).catch(function(error) {
+      console.log(error);
       // An error happened.
     });
   }
+
 }

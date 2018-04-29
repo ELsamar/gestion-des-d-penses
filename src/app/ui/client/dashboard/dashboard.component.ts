@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ListdepensesComponent} from '../depense/listdepenses/listdepenses.component';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Transaction} from './transaction';
+import { Transaction} from './models/transaction';
 @Injectable()
 export class TransactionService {
   transactionlist: AngularFireList<any>;

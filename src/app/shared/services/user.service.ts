@@ -23,7 +23,7 @@ export class UserService {
     nationalite: user.nationalite,
     pays: user.pays,
 //    etatcivil: user.etatcivil,
-   // profession: user.profession,
+    profession: user.profession,
    // imageuser: user.imageuser
     }) ;
     console.log(User);

@@ -46,7 +46,7 @@
       <label for="Passwordsignup" class="">Mot de passe</label>
       <input type="password" id="Passwordsignup" class="form-control" name="password" [(ngModel)]="password" required>
 
-      
+
       <re-captcha (resolved)="resolved($event)" [(ngModel)]="formModel.captcha" name="captcha"required siteKey="6Ldw8FUUAAAAAGGrC5Sf-sI5N6co4HT5pykzIBDJ" #captchaControl="ngModel">
       </re-captcha>
       <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>

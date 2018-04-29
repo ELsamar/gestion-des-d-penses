@@ -6,14 +6,15 @@ import { Observable } from 'rxjs/Observable';
 export class DepensesService {
   depenseslist: AngularFireList <any>;
   selectedDepense: Depenses = new Depenses();
-  constructor(private firebase : AngularFireDatabase) { }
-  getDepense (){
+  constructor(private firebase: AngularFireDatabase) { }
+  getDepense () {
     return this.depenseslist = this.firebase.list('depenses');
   }
   insertDepense (depenses: Depenses ) {
     this.depenseslist = this.firebase.list('depenses');
     console.log(depenses);
     this.depenseslist.push({
+      iduser: depenses.iduser,
       titredepense: depenses.titredepense,
       montantdepense: depenses.montantdepense,
       datedepense: depenses.datedepense,
@@ -24,15 +25,16 @@ export class DepensesService {
   updateDepense(depenses: Depenses)  {
     this.depenseslist.update(depenses.$iddepense,
       {
-        titredepense:depenses.titredepense,
-        montantdepense:depenses.montantdepense,
-        datedepense:depenses.datedepense,
-        cathegoriedepense:depenses.cathegoriedepense,
-        descriptiondepense:depenses.descriptiondepense,
-        justificatifdepenses:depenses.justificatifdepense,
+        iduser: depenses.iduser,
+        titredepense: depenses.titredepense,
+        montantdepense: depenses.montantdepense,
+        datedepense: depenses.datedepense,
+        cathegoriedepense: depenses.cathegoriedepense,
+        descriptiondepense: depenses.descriptiondepense,
+        justificatifdepenses: depenses.justificatifdepense,
       });
   }
-  deleteDepense ($iddepense:string){
+  deleteDepense ($iddepense: string) {
     this.depenseslist.remove($iddepense);
   }
 

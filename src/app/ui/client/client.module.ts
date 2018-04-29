@@ -13,14 +13,13 @@ import { ProfilComponent } from './profil/profil.component';
 import {TransactionsModule} from './transactions/transactions.module';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
     ClientRoutingModule,
     DepensesModule,
     TransactionsModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     ClientComponent,
