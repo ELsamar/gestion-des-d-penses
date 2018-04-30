@@ -15,12 +15,10 @@ export class ListdepensesComponent implements OnInit {
     var x = this.depenseservice.getDepense();
     x.snapshotChanges().subscribe(item => {
       this.depenseslist = [];
-     
       item.forEach(element => {
         var y = element.payload.toJSON();
         y["$key"] = element.key;
         this.depenseslist.push(y as Depenses);
-       
       });
     });
   }

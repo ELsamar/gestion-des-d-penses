@@ -1,5 +1,6 @@
 <form  #depensesForm="ngForm" (ngSubmit)="onSubmit(depensesForm)">
   <input type="hidden" name="$iddepense" #iddepense  ngModel [(ngModel)]="currentdepenses.$iddepense">
+  <input type="hidden" name="iduser" #iduser  ngModel [(ngModel)]="currentdepenses.iduser">
       <div class="container-fluid">
         <div class=" content row">
               <div class="card">
@@ -33,7 +34,7 @@
                   <label class="col-form-label">Cathegorie :</label>
                   <input type="text" class="form-control" name="cathegoriedepense" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense "/>
                 </div>
-                <!--<div class="form-group">
+                <!--1<div class="form-group">
                   <label for="Categorie" class="col-form-label">Cathegorie :</label>
                   <select class="custom-select form-group mr-sm-2" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense">
                     <option *ngFor = "let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>

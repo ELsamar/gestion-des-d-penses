@@ -6,10 +6,10 @@ import {NotFound404Component} from './shared/not-found404/not-found404.component
 import {ClientComponent} from './ui/client/client.component';
 
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './ui/login/login.component';
 
-import { HomeComponent } from './home/home.component';
-import {PasswordlessAuthComponent} from './passwordless-auth/passwordless-auth.component';
+
+import {PasswordlessAuthComponent} from './ui/login/passwordless-auth/passwordless-auth.component';
 import {PublicComponent} from './ui/public/public.component';
 
 const routes: Routes = [
@@ -21,22 +21,25 @@ const routes: Routes = [
   {
     path: 'client',
     component: ClientComponent,
-    loadChildren: './ui/client/client.module#ClientModule'
+    loadChildren: './ui/client/client.module#ClientModule',
+    // CanActivate: [AuthSerrviceVControel]
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    loadChildren: './ui/login/login.module#LoginModule'
   },
  // {
  //   path: '**',
  //   component: NotFound404Component,
  // },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'login',
-   component: LoginComponent
- },
-  { path: 'login2',
-    component: PasswordlessAuthComponent }
+ // {
+  //  path: 'login',
+ //  component: LoginComponent
+ //},
+ // { path: 'login2',
+ //   component: PasswordlessAuthComponent
+  // }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
-import { Transaction} from './transaction';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Transaction} from './models/transaction';
 @Injectable()
 export class TransactionService {
   transactionlist: AngularFireList<any>;
@@ -9,9 +9,10 @@ export class TransactionService {
   constructor(private firebase: AngularFireDatabase) { }
 
   getData() {
-    this.transactionlist = this.firebase.list('Transaction');
+    this.transactionlist = this.firebase.list('transaction');
+    return this.transactionlist;
   }
-  insertEmployee(transaction: Transaction) {
+  inserttran(transaction: Transaction) {
     this.transactionlist.push({
       key: transaction.$key,
       titre: transaction.titre,
@@ -19,7 +20,7 @@ export class TransactionService {
     });
   }
 
-  updateEmployee(transaction: Transaction) {
+  updatetran(transaction: Transaction) {
     this.transactionlist.update(transaction.$key,
       {
         key: transaction.$key,
@@ -28,7 +29,7 @@ export class TransactionService {
       });
   }
 
-  deleteEmployee($key: string) {
+  deletetran($key: string) {
     this.transactionlist.remove($key);
   }
 

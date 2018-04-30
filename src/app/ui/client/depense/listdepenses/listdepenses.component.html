@@ -1,6 +1,25 @@
-<div class="table-responsive">
-    <table class="table">
-        <thead>
+<div class="container-fluid">
+  <div class="content row">
+    <div class="card">
+      <nav class="navbar">
+        <h1 class="h2">Depenses</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">cette semaine</button>
+            <button class="btn btn-sm btn-outline-secondary">cet ans</button>
+            <button class="btn btn-sm btn-outline-secondary">ce mois</button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary ">
+            tous
+          </button>
+        </div>
+      </nav>
+      <hr>
+      <div class="container-fluid">
+        <h6 class="text-center">---</h6><br/>
+        <div class="table-responsive">
+          <table class="table table-sm table-hover table table-striped ">
+          <thead>
             <tr>
               <th scope="col">Titre</th>
               <th scope="col">Date</th>
@@ -15,7 +34,7 @@
                   <td>{{Depenses.montantdepense}}</td>
                   <td>{{Depenses.cathegoriedepense}}</td>
                   <td>
-                    <a (click)="onEdit(Depenses.$key)"><i class="far fa-edit"></i></a>   
+                    <a (click)="onEdit(Depenses.$key)"><i class="far fa-edit"></i></a>
                     <a class="btn btn-danger" (click)="onDelete(Depenses.$key)">
                       <i class="fas fa-trash-alt"></i>
                     </a>

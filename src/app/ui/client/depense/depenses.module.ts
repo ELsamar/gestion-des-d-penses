@@ -21,7 +21,7 @@ import { DepenseComponent } from './depense/depense.component';
   ],
   providers: [
     DepensesService,
-  
+
   ],
 })
 export class DepensesModule { }

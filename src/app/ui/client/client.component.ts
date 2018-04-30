@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../providers/auth.service';
 
 @Component({
   selector: 'app-client',
@@ -6,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-
-
-  constructor() { }
+  public currentUserId: any ;
+  constructor(public authService: AuthService) {
+    console.log('id', this.authService.currentUserId);
+    this.currentUserId = this.authService.currentUserId ;
+  }
 
   ngOnInit() {
   }

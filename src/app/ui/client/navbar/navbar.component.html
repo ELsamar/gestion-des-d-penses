@@ -50,7 +50,7 @@
                        width="60">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" routerLink="profil">
                     <img class=" rounded-circle "
                          src="assets/img/profil.png" width="60" height="60">
                   </a>
@@ -59,7 +59,7 @@
                     <p class="content-center"> e-mail</p>
                   </div>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">déconnecter</a>
+                  <a class="dropdown-item"  (click)="logout()" >déconnecter</a>
                 </div>
               </form>
             </li>
