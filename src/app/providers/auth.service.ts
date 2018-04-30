@@ -105,12 +105,13 @@ export class AuthService {
     }
   }
   signout() {
-    this.authState.signOut().then(function() {
-      // Sign-out successful.
-    }).catch(function(error) {
-      console.log(error);
-      // An error happened.
-    });
+      return this.afAuth.auth.signOut();
+    // this.authState.signOut().then(function() {
+    //   // Sign-out successful.
+    // }).catch(function(error) {
+    //   console.log(error);
+    //   // An error happened.
+    // });
   }
 
 }

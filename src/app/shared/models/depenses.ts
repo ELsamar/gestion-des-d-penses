@@ -1,6 +1,6 @@
 export class Depenses {
     $iddepense: string;
-    iduser: string;
+    idauth: string;
     titredepense: string;
     montantdepense: number;
     datedepense: Date ;

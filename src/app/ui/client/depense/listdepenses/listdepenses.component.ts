@@ -17,13 +17,13 @@ export class ListdepensesComponent implements OnInit {
       this.depenseslist = [];
       item.forEach(element => {
         var y = element.payload.toJSON();
-        y["$key"] = element.key;
+        y['$key'] = element.key;
         this.depenseslist.push(y as Depenses);
       });
     });
   }
   onDelete(key: string) {
-    if (confirm('éte vous sure de supprimer ce projet ?') == true) {
+    if (confirm('éte vous sure de supprimer ce projet ?') === true) {
       this.depenseservice.deleteDepense(key);
     }
     }

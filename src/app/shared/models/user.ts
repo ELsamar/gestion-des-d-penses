@@ -1,5 +1,6 @@
 export class User {
   $iduser: string ;
+  idauth; string;
   nom: string;
   prenom: string;
   nomutulisateur: string ;

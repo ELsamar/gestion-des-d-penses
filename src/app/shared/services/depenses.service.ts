@@ -14,7 +14,7 @@ export class DepensesService {
     this.depenseslist = this.firebase.list('depenses');
     console.log(depenses);
     this.depenseslist.push({
-      iduser: depenses.iduser,
+      iduser: depenses.idauth,
       titredepense: depenses.titredepense,
       montantdepense: depenses.montantdepense,
       datedepense: depenses.datedepense,
@@ -25,7 +25,7 @@ export class DepensesService {
   updateDepense(depenses: Depenses)  {
     this.depenseslist.update(depenses.$iddepense,
       {
-        iduser: depenses.iduser,
+        iduser: depenses.idauth,
         titredepense: depenses.titredepense,
         montantdepense: depenses.montantdepense,
         datedepense: depenses.datedepense,

@@ -15,6 +15,7 @@ export class UserService {
   insertUser (user: User ) {
     this.userlist = this.firebase.list('User');
     this.userlist.push({
+      idauth: this.authservice.currentUserId,
     nom: user.nom,
     prenom: user.prenom,
     nomutulisateur: user.nomutulisateur,
@@ -31,6 +32,7 @@ export class UserService {
   updateuser(user: User)  {
     this.userlist.update(user.$iduser,
       {
+        idauth: this.authservice.currentUserId,
         nom: user.nom,
         prenom: user.prenom,
         nomutulisateur: user.nomutulisateur,
