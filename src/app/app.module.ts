@@ -1,9 +1,8 @@
 import {AppRoutingModule} from './app-routing.module';
-
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
-
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
@@ -45,12 +44,17 @@ import {LoginModule} from './ui/login/login.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
+<<<<<<< HEAD
+    DateValueAccessorModule,
+    ToastrModule.forRoot()
+=======
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
+>>>>>>> master
     // ChatModule
   ],
   providers: [PageService, AuthService, TransactionService  ],

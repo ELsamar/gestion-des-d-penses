@@ -1,0 +1,26 @@
+<div class="table-responsive">
+  <table class="table">
+      <thead>
+          <tr>
+            <th scope="col">Titre</th>
+            <th scope="col">Date</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Revenus of revenuslist">
+                <td>{{Revenus.titrerevenu}}</td>
+                <td>{{Revenus.daterevenu}}</td>
+                <td>{{Revenus.montantrevenu}}</td>
+                <td>{{Revenus.typerevenu}}</td>
+                <td>
+                  <a (click)="onEdit(Revenus.$key)"><i class="far fa-edit"></i></a>   
+                  <a class="btn btn-danger" (click)="onDelete(Revenus.$key)">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </td>
+            </tr>
+        </tbody>
+  </table>
+</div>

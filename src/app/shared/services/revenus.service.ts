@@ -5,35 +5,33 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class RevenusService {
   revenuslist: AngularFireList <any>;
-  selectedRevenu:Revenus= new Revenus();
-  constructor(private firebase : AngularFireDatabase) { }
-  getDepense (){
+  justificatifrevenu : File;
+  constructor(private firebase : AngularFireDatabase , ) { }
+  getRevenu (){
     return this.revenuslist = this.firebase.list('revenus');
   }
-  insertDepense (revenus :Revenus) {
+  insertRevenu (revenus :Revenus) {
     this.revenuslist = this.firebase.list('revenus');
     console.log(revenus);
     this.revenuslist.push({
       titrerevenu:revenus.titrerevenu,
       montantrevenu:revenus.montantrevenu,
       daterevenu:revenus.daterevenu,
-      cathegorierevenu:revenus.cathegorierevenu,
       descriptionrevenu:revenus.descriptionrevenu,
       justificatifrevenu:revenus.justificatifrevenu, 
     });
   };
-  updateDepense(revenus :Revenus){
+  updateRevenu(revenus :Revenus){
     this.revenuslist.update(revenus.$idrevenu,
       {
         titrerevenu:revenus.titrerevenu,
         montantrevenu:revenus.montantrevenu,
         daterevenu:revenus.daterevenu,
-        cathegorierevenu:revenus.cathegorierevenu,
         descriptionrevenu:revenus.descriptionrevenu,
         justificatifrevenu:revenus.justificatifrevenu,
       });
   }
-  deleteDepense ($idrevenu:string){
+  deleteRevenu ($idrevenu:string){
     this.revenuslist.remove($idrevenu);
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as firebase from 'firebase/app';
 @Component({
   selector: 'app-revenu',
   templateUrl: './revenu.component.html',
