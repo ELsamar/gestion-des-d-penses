@@ -5,7 +5,7 @@ import {FormsModule, NgForm} from '@angular/forms';
 @Component({
   selector: 'app-revenu',
   templateUrl: './revenu.component.html',
-  styleUrls: ['./revenu.component.css']
+  styleUrls: ['./revenu.component.css'],
 })
 export class RevenuComponent implements OnInit {
   typrev :any =  ["D'aprés module","...","..."];

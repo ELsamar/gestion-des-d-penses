@@ -3,7 +3,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { ToastrModule } from 'ngx-toastr';
-
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
@@ -44,6 +44,7 @@ import {PublicModule} from './ui/public/public.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
+    DateValueAccessorModule,
     ToastrModule.forRoot()
     // ChatModule
   ],

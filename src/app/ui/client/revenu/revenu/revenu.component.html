@@ -12,22 +12,49 @@
                       </select>
                     </div>
                   </div>
-                <div class="form-group">
-                  <label class="col-form-label">Titre:</label>
-                  <input type="text" class="form-control" name="titrerevenu" #titrerevenu="ngModel" [(ngModel)]="currentrevenus.titrerevenu">
-                </div>
+                  <div class="form-group">
+                    <label class="col-form-label">Titre:</label>
+                    <input type="text" class="form-control" name="titrerevenu" #titrerevenu="ngModel" [(ngModel)]="currentrevenus.titrerevenu" required minlength="4" maxlength="30">
+                      <div *ngIf ="titrerevenu.errors && (titrerevenu.dirty|| titrerevenu.touched)" class ="alert alert-danger"  >
+                        <div [hidden] = "!titrerevenu.errors.required">
+                          <strong>Error:</strong>Ce champs est obligatoire 
+                        </div>
+                        <div [hidden] = "!titrerevenu.errors.minlength">
+                          <strong>Error:</strong>Ce champs est trés cours 
+                        </div>
+                        <div [hidden] = "!titrerevenu.errors.required">
+                          <strong>Error:</strong>Ce champs est trés long 
+                        </div>
+                      </div>
                 <div class="form-group">
                   <label class="col-form-label">Montant :</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu" #montantrevenu="ngModel" [(ngModel)]="currentrevenus.montantrevenu">
+                    <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu" #montantrevenu="ngModel" [(ngModel)]="currentrevenus.montantrevenu" pattern= "\d*" required>
+                   
                     <div class="input-group-prepend">
                       <div class="input-group-text">TND</div>
+                    </div>
+                    <div *ngIf ="montantrevenu.errors && (montantrevenu.dirty|| montantrevenu.touched)" class ="alert alert-danger"  >
+                      <div [hidden] = "!montantrevenu.errors.required">
+                        <strong>Error:</strong>Ce champs est obligatoire 
+                      </div>
+                      <div [hidden] = "!montantrevenu.errors.pattern">
+                        <strong>Error:</strong>le montant doit étre nombre  
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Date :</label>
-                  <input type="date" class="form-control" name="daterevenu" #daterevenu="ngModel" [(ngModel)]="currentrevenus.daterevenu "  />
+                  <input type="date" class="form-control" name="daterevenu" #daterevenu="ngModel" [(ngModel)]="currentrevenus.daterevenu "  pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required />
+                  <div *ngIf ="daterevenu.errors && (daterevenu.dirty|| daterevenu.touched)" class ="alert alert-danger"  >
+                    <div [hidden] = "!daterevenu.errors.required">
+                      <strong>Error:</strong>Ce champs est obligatoire 
+                    </div>
+                    <div [hidden] = "!daterevenu.errors.pattern">
+                      <strong>Error:</strong>Veuillez inserrez une date correcte   
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Description: </label>
@@ -57,13 +84,13 @@
                     </div>
                     <div class="form-group">
                       <select class="custom-select mr-sm-2">
-                        <option *ngFor = "let moi of mois" [value]="moi">{{ moi}}</option>
+                        <option *ngFor = "let moi of mois" [value]="moi">{{moi}}</option>
                       </select>
                     </div>
-                    <div class="form-group" >
+                    <!--<div class="form-group" >
                       Du  <input formControlName="dateFrom" type="date" useValueAsDate />
-                      au  <input formControlName="dateTo" type="date" useValueAsDate />
-                    </div>
+                      Au  <input formControlName="dateTo" type="date" useValueAsDate />
+                    </div>-->
                     <div class="custom-control custom-checkbox alerte  ">
                       <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
                              role="button" aria-expanded="false" aria-controls="collapseExample"
@@ -87,7 +114,7 @@
                     </div>
                   </div>
                 </div>
-              </div>-->
+              </div>
               <div class="row">
                 <div class="col-1 content-center">
                   <button type="submit" class="btn btn-primary bouton">ajouter</button>
@@ -101,4 +128,5 @@
             </div>
           </div>
         </div>
+      </div>
 </form>

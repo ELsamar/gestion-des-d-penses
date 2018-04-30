@@ -6,3 +6,7 @@ export class Projets {
     descriptionprojet : string ;
     prioriteprojet : string;
 }
+export class priorite {
+    id : number ;
+    nom : string ;
+}

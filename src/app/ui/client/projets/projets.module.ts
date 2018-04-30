@@ -7,6 +7,7 @@ import { ListprojetsComponent } from './listprojets/listprojets.component';
 import { ProjetComponent } from './projet/projet.component';
 import { ProjetsService} from '../../../shared/services/projets.service';
 import {FormsModule, NgForm} from '@angular/forms';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,7 @@ import {FormsModule, NgForm} from '@angular/forms';
   declarations: [ProjetsComponent, ListprojetsComponent, ProjetComponent],
   providers: [
     ProjetsService,
-  
+    DateValueAccessorModule,
   ],
 })
 export class ProjetsModule { }

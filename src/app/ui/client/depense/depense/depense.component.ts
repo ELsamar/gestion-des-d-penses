@@ -24,7 +24,7 @@ export class DepenseComponent implements OnInit {
       this.currentdepenses = new Depenses();
       this.currentdepenses.$iddepense = null;
       this.currentdepenses.datedepense = null;
-      this.currentdepenses.montantdepense= null;
+      this.currentdepenses.montantdepense = null;
       this.currentdepenses.titredepense = null;
       this.currentdepenses.cathegoriedepense = null;
       this.currentdepenses.descriptiondepense = null;
