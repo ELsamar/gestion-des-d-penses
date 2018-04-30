@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class RevenusService {
   revenuslist: AngularFireList <any>;
-  selectedRevenu:Revenus= new Revenus();
-  constructor(private firebase : AngularFireDatabase) { }
+  justificatifrevenu : File;
+  constructor(private firebase : AngularFireDatabase , ) { }
   getRevenu (){
     return this.revenuslist = this.firebase.list('revenus');
   }
