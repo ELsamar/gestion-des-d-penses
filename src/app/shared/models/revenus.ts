@@ -6,4 +6,5 @@ export class Revenus {
     cathegorierevenu : string ;
     descriptionrevenu : string ;
     justificatifrevenu : File;
+    
 }
