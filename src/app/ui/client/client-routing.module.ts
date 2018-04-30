@@ -9,7 +9,7 @@ import {TransactionsModule} from './transactions/transactions.module';
 
 const routes: Routes = [
   {
-    path: 'dashboard' ,
+     path: 'dash' ,
     component: DashboardComponent
   },
   {

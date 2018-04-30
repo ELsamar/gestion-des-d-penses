@@ -1,4 +1,6 @@
+<form #UserForm="ngForm" (ngSubmit)="onSubmit(UserForm)">
 
+<<<<<<< HEAD
 <!--<div class="container-fluid">
   <div class="row">
   <div class="col-md-8">
@@ -24,13 +26,54 @@
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-            </div>
-            <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
-            <div class="valid-feedback"> valide !</div>
-            <div class="invalid-feedback"> Veuillez choisir un nom d'utilisateur unique et valide.</div>
+=======
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <input type="hidden" #iduser="ngModel" name="id" [(ngModel)]="user.$iduser">
+          <h4 class="col-md-6 mb-3 text-center ">Mes coordonnés</h4>
+          <hr class="mb-4">
+          <div class="needs-validation" novalidate="">
 
+            <div class="col-md-6 mb-3 form-group">
+              <label for="nom">Nom</label>
+              <input type="text" class="form-control" name="nom" #nom="ngModel" [(ngModel)]="user.nom">
+              <div class="valid-feedback">Cela semble bon!</div>
+              <div class="invalid-feedback"> Veuillez tappez votre nom.</div>
+            </div>
+
+            <div class="col-md-6 mb-3 ">
+              <label for="prenom">Prenom</label>
+              <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="user.prenom">
+              <div class="valid-feedback"> Cela semble bon!</div>
+              <div class="invalid-feedback"> Veuillez tappez votre prenom.</div>
+>>>>>>> master
+            </div>
+            <div class="col-md-6 mb-3 form-group">
+              <label>Nom d'utilisateur</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" name="nomutulisateur" #nomutulisateur="ngModel"
+                       [(ngModel)]="user.nomutulisateur" placeholder="Username">
+                <div class="valid-feedback"> valide !</div>
+                <div class="invalid-feedback"> Veuillez choisir un nom d'utilisateur unique et valide.</div>
+
+              </div>
+            </div>
+            <div class="col-md-6 mb-3 form-group">
+              <label for="emailuser">Email </label>
+              <input type="email" class="form-control" id="emailuser" name="emailuser" #emailuser="ngModel"
+                     [(ngModel)]="user.emailuser" placeholder="nom@exemple.com">
+              <div class="valid-feedback">valide !</div>
+              <div class="invalid-feedback">S'il vous plaît entrer une adresse email valide .</div>
+            </div>
           </div>
+          <hr class="mb-4">
         </div>
+<<<<<<< HEAD
         <div class="col-md-6 mb-3">
           <label for="email">Email </label>
           <input type="email" class="form-control" name="email" #nom="ngModel" [(ngModel)]="currentuser.email" placeholder="nom@exemple.com">
@@ -90,43 +133,104 @@
       </form>
     </div>
 
+=======
+        <div class="card">
+          <h4 class="col-md-6 mb-3 text-center ">Mes données </h4>
+          <hr class="mb-4">
+          <div class="needs-validation" novalidate="">
+            <div class="col-auto my-1 form-group">
+              <label class="mr-sm-2" for="sexe">sexe</label>
+              <!--     <select class="custom-select mr-sm-2" id="sexe">
+                     <option *ngFor="let sexe of Sexe" [value]="sexe" {{sexe}}></option>
+                   </select> -->
+            </div>
+            <div class="col-md-6 mb-3 form-group ">
+              <label for="datenaissance">Date de naissance</label>
+              <input type="date" class="form-control" id="datenaissance" name="datenaissance" #datenaissance="ngModel"
+                     [(ngModel)]="user.datenaissance">
+              <div class="valid-feedback"> valide !</div>
+              <div class="invalid-feedback"> S'il vous plaît entrer une date valide .</div>
 
-  </div>
-  <div class="col-md-4">
-    <div class="card card-user">
-      <div class="image">
-        <img src="" alt="...">
-      </div>
-      <div class="card-body">
-        <div class="author">
-          <a href="#">
-            <img class="avatar border-gray" src="../assets/img/profil.png" alt="...">
-            <h5 class="title">Mike Andrew</h5>
-          </a>
-          <p class="description">
-            michael24
-          </p>
+            </div>
+            <div class="col-md-6 mb-3 form-group">
+              <label for="nationalite">Nationalité</label>
+              <input type="text" class="form-control" name="nationalite" #nationalite="ngModel"
+                     [(ngModel)]="user.nationalite">
+              <div class="valid-feedback">Cela semble bon!</div>
+              <div class="invalid-feedback"> Veuillez tappez votre nationalité.</div>
+            </div>
+            <div class="col-md-6 mb-3 form-group">
+              <label for="pays">Pays</label>
+              {{user.pays}}
+              <input type="text" class="form-control" name="pays" #pay="ngModel" [(ngModel)]="user.pays"/>
+              <div class="valid-feedback"> Cela semble bon!</div>
+              <div class="invalid-feedback">Veuillez tappez votre pays.</div>
+            </div>
+            <div class="col-md-6 mb-3 form-group">
+              <label class="mr-sm-2" for="état civil">état civil</label>
+              <!--   <select class="custom-select mr-sm-2" id="état civil">
+                   <option *ngFor="let etatcivil of Etatcivil" [value]="etatcivil">{{etatcivil}}</option>
+                 </select> -->
+            </div>
+
+            <div class="col-md-6 mb-3 form-group">
+              <label class="mr-sm-2" for="profession">Profession</label>
+              <select class="custom-select mr-sm-2" id="profession" name="profession">
+                <option *ngFor="let profession of Profession" [value]="profession">{{profession}}</option>
+              </select>
+            </div>
+
+
+            <hr class="col-md-6 mb-3 form-group center">
+            <button type="submit" class="btn btn-primary bouton">ajouter</button>
+            <button class="btn" type="submit">Modifier</button>
+            <button class="btn" type="reseat">Annuler</button>
+          </div>
         </div>
-        <p class="description text-center">
-          "Lamborghini Mercy
-          <br> Your chick she so thirsty
-          <br> I'm in that two seat Lambo"
-        </p>
-      </div>
-      <hr>
-      <div class="button-container">
-        <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-          <i class="fab fa-facebook-f"></i>
-        </button>
-        <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-          <i class="fab fa-twitter"></i>
-        </button>
-        <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-          <i class="fab fa-google-plus-g"></i>
-        </button>
-      </div>
-    </div>
 
+>>>>>>> master
+
+      </div>
+      <div class="col-md-4">
+        <div class="card card-user">
+          <div class="image">
+            <img src="" alt="...">
+          </div>
+          <div class="card-body">
+            <div class="author">
+              <a href="#">
+                <img class="avatar border-gray" src="../assets/img/profil.png" alt="...">
+                <h5 class="title">Mike Andrew</h5>
+              </a>
+              <p class="description">
+                michael24
+              </p>
+            </div>
+            <p class="description text-center">
+              "Lamborghini Mercy
+              <br> Your chick she so thirsty
+              <br> I'm in that two seat Lambo"
+            </p>
+          </div>
+          <hr>
+          <div class="button-container">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fab fa-google-plus-g"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>-->
+=======
+</form>
+>>>>>>> master

@@ -17,21 +17,23 @@ export class TransactionComponent implements OnInit {
   }
 
   onSubmit(transactionForm: NgForm) {
-    if(transactionForm.value.$key == null)
-      this.transactionservice.insertEmployee(transactionForm.value);
-    else
-      this.transactionservice.updateEmployee(transactionForm.value);
+    if (transactionForm.value.$key == null) {
+      this.transactionservice.inserttran(transactionForm.value);
+    } else {
+      this.transactionservice.updatetran(transactionForm.value);
+    }
     this.resetForm(transactionForm);
     this.tostr.success('Submitted Succcessfully', 'Employee Register');
   }
 
   resetForm(transactionForm?: NgForm) {
-    if (transactionForm != null)
+    if (transactionForm != null) {
       transactionForm.reset();
-    this.transactionservice.selectedtransaction = {
-      $key: null,
-      titre: '',
-      date: '',
     }
+  //  this.transactionservice.selectedtransaction = {
+   ///   $key: null,
+   //   titre: '',
+   //   date: '',
+   //};
   }
 }

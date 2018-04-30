@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TransactionService} from '../../../shared/transaction.service';
 import { ToastrService } from 'ngx-toastr';
-import {Transaction} from '../../../shared/transaction';
 
 @Component({
   selector: 'app-transactions',

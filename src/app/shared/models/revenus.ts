@@ -5,6 +5,7 @@ export class Revenus {
     daterevenu : Date ;
     descriptionrevenu : string ;
     justificatifrevenu : File;
+    
 }
 export class Upload {
 

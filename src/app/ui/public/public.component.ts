@@ -28,7 +28,7 @@ export class PublicComponent implements OnInit {
   ngOnInit() {
   }
 
-  closeResult: string;
+  closeResul : string;
 
   constructor(private modalService: NgbModal) { }
   openBackDropCustomClass(content) {
