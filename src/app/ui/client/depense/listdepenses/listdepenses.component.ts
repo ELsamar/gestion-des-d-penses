@@ -9,6 +9,7 @@ import { Depenses } from '../../../../shared/models/depenses';
 })
 export class ListdepensesComponent implements OnInit {
   depenseslist: Depenses[];
+  typeaffich: string;
   constructor(private depenseservice: DepensesService) { }
 
   ngOnInit() {

@@ -13,15 +13,7 @@ import {AuthService} from '../../../../providers/auth.service';
   ],
 })
 export class DepenseComponent implements OnInit {
-<<<<<<< HEAD
-  typdep :any =  ["D'aprés module","...","..."];
-  cathegories :any = ["Transport/Vehicule","Loisir","Eléctricité"];
-  repetes :any = ["Jamais" , "Semaine" , "mois"];
-  semaines : any =["Lundi" , "Mardi" , "Mercredi" , "Jeudi" , "Vendredi" , "Samedi" , "Dimanche"];
-  mois : any =["1" ,"2" ,"3" ,"4" , "5" , "6" ,"7" , "8" ,"9" ,"10" ,"11" ,"12"];
-  averts :any =["1" ,"2" ,"3" ,"4" , "5" , "6" ,"7" , "8" ,"9" ,"10" ,"11" ,"12" ,"13" ,"14" , "15" , "16" ,"17" , "18" ,"19" ,"20" ,"21" ,"22"];
-  constructor(private depenseservice:DepensesService) { }
-=======
+
   depensesform: FormGroup;
   typdeps: any = ['Daprés module', '...', '...'];
   cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
@@ -30,7 +22,6 @@ export class DepenseComponent implements OnInit {
   mois: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   averts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   constructor(private depenseservice: DepensesService, public authservice: AuthService ) { }
->>>>>>> master
   currentdepenses: Depenses;
   ngOnInit() {
       this.currentdepenses = new Depenses();
@@ -41,7 +32,7 @@ export class DepenseComponent implements OnInit {
       this.currentdepenses.cathegoriedepense = null;
       this.currentdepenses.descriptiondepense = null;
       this.currentdepenses.justificatifdepense = null;
-      this.currentdepenses.idauth = this.authservice.currentUserId;
+    //  this.currentdepenses.idauth = this.authservice.currentUserId;
     }
     onSubmit(depensesForm: NgForm) {
        this.depenseservice.insertDepense(depensesForm.value);

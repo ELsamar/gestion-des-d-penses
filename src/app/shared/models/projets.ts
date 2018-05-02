@@ -1,5 +1,5 @@
 export class Projets {
-    $idprojet :string;
+    $idprojet: string;
     titreprojet : string;
     montantprojet : number;
     dateprojet : Date ;

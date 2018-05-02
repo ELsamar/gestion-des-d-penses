@@ -9,7 +9,7 @@ import { ListdepensesComponent } from './listdepenses/listdepenses.component';
 
 const routes: Routes = [
   {
-    path: 'listdep' ,
+    path: '' ,
     component: ListdepensesComponent
   },
   {

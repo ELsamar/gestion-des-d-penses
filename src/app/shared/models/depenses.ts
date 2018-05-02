@@ -1,6 +1,6 @@
 export class Depenses {
     $iddepense: string;
-    idauth: string;
+  //  idauth: any;
     titredepense: string;
     montantdepense: number;
     datedepense: Date ;

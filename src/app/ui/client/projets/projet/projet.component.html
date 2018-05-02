@@ -1,5 +1,6 @@
 <form #projetForm="ngForm" (ngSubmit)="onSubmit(projetForm)">
   <input type="hidden" name="$idprojet" #idprojet ="ngModel" [(ngModel)]="currentprojet.$idprojet">
+  <input type="hidden" name="iduser" #iduser  ngModel [(ngModel)]="currentprojet.idauth">
       <div class="container-fluid">
         <div class=" content row">
               <div class="card">
@@ -17,10 +18,10 @@
                   <input type="text" class="form-control" name="titreprojet" #titreprojet="ngModel" [(ngModel)]="currentprojet.titreprojet" required minlength="4">
                     <div *ngIf ="titreprojet.errors && (titreprojet.dirty|| titreprojet.touched)" class ="alert alert-danger"  >
                       <div [hidden] = "!titreprojet.errors.required">
-                        <strong>Error:</strong>Ce champs est obligatoire 
+                        <strong>Error:</strong>Ce champs est obligatoire
                       </div>
                       <div [hidden] = "!titreprojet.errors.minlength">
-                        <strong>Error:</strong>Ce champs est trés cours 
+                        <strong>Error:</strong>Ce champs est trés cours
                       </div>
                     </div>
                 </div>
@@ -33,10 +34,10 @@
                     </div>
                     <div *ngIf ="montantprojet.errors && (montantprojet.dirty|| montantprojet.touched)" class ="alert alert-danger"  >
                       <div [hidden] = "!montantprojet.errors.required">
-                        <strong>Error:</strong>Ce champs est obligatoire 
+                        <strong>Error:</strong>Ce champs est obligatoire
                       </div>
                       <div [hidden] = "!montantprojet.errors.pattern">
-                        <strong>Error:</strong>le montant doit étre nombre  
+                        <strong>Error:</strong>le montant doit étre nombre
                       </div>
                     </div>
                   </div>
@@ -46,10 +47,10 @@
                     <input type="date" class="form-control" name="dateprojet" #dateprojet="ngModel" [(ngModel)]="currentprojet.dateprojet "  pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required >
                     <div *ngIf ="dateprojet.errors && (dateprojet.dirty|| dateprojet.touched)" class ="alert alert-danger"  >
                       <div [hidden] = "!dateprojet.errors.required">
-                        <strong>Error:</strong>Ce champs est obligatoire 
+                        <strong>Error:</strong>Ce champs est obligatoire
                       </div>
                       <div [hidden] = "!dateprojet.errors.pattern">
-                        <strong>Error:</strong>Veuillez inserrez une date correcte   
+                        <strong>Error:</strong>Veuillez inserrez une date correcte
                       </div>
                     </div>
                 </div>
@@ -58,10 +59,10 @@
                   <!--<select class="custom-select form-group mr-sm-2" #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet">
                     <option *ngFor = "let priorite of priorites"  [value]="priorite.id">{{priorite.nom}}</option>
                   </select>-->
-                  <input class="form-control" name="prioriteprojet" #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet" required> 
+                  <input class="form-control" name="prioriteprojet" #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet" required>
                   <div *ngIf ="prioriteprojet.errors && (prioriteprojet.dirty|| prioriteprojet.touched)" class ="alert alert-danger"  >
                     <div [hidden] = "!prioriteprojet.errors.required">
-                      <strong>Error:</strong>Ce champs est obligatoire 
+                      <strong>Error:</strong>Ce champs est obligatoire
                     </div>
                   </div>
                 </div>

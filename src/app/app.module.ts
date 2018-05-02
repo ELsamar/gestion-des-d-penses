@@ -44,17 +44,13 @@ import {LoginModule} from './ui/login/login.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
-<<<<<<< HEAD
     DateValueAccessorModule,
-    ToastrModule.forRoot()
-=======
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
->>>>>>> master
     // ChatModule
   ],
   providers: [PageService, AuthService, TransactionService  ],

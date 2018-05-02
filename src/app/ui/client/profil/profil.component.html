@@ -1,38 +1,11 @@
 <form #UserForm="ngForm" (ngSubmit)="onSubmit(UserForm)">
 
-<<<<<<< HEAD
-<!--<div class="container-fluid">
-  <div class="row">
-  <div class="col-md-8">
-    <div class="card">
-      <h4 class="col-md-6 mb-3 text-center ">Mes coordonnés</h4>
-      <hr class="mb-4">
-      <form  class="needs-validation" novalidate="">
-        <div class="col-md-6 mb-3">
-          <label for="nom">Nom</label>
-          <input type="text" class="form-control " name="nom"  #nom="ngModel" [(ngModel)]="currentuser.nom">
-          <div class="valid-feedback">Cela semble bon!</div>
-          <div class="invalid-feedback"> Veuillez tappez votre nom. </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label for="prenom">Prenom</label>
-          <input type="text" class="form-control" name="Prenom" #nom="ngModel" [(ngModel)]="currentuser.prenom">
-          <div class="valid-feedback"> Cela semble bon!</div>
-          <div class="invalid-feedback"> Veuillez tappez votre prenom.</div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="validationTooltipUsername">Nom d'utilisateur</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-=======
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
         <div class="card">
           <input type="hidden" #iduser="ngModel" name="id" [(ngModel)]="user.$iduser">
-          <input type="hidden" #iduser="ngModel" name="id" [(ngModel)]="user.$iduser">
+          <input type="hidden" #idauth="ngModel" name="idauth" [(ngModel)]="user.idauth">
           <h4 class="col-md-6 mb-3 text-center ">Mes coordonnés</h4>
           <hr class="mb-4">
           <div class="needs-validation" novalidate="">
@@ -49,7 +22,6 @@
               <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="user.prenom">
               <div class="valid-feedback"> Cela semble bon!</div>
               <div class="invalid-feedback"> Veuillez tappez votre prenom.</div>
->>>>>>> master
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label>Nom d'utilisateur</label>
@@ -74,67 +46,6 @@
           </div>
           <hr class="mb-4">
         </div>
-<<<<<<< HEAD
-        <div class="col-md-6 mb-3">
-          <label for="email">Email </label>
-          <input type="email" class="form-control" name="email" #nom="ngModel" [(ngModel)]="currentuser.email" placeholder="nom@exemple.com">
-          <div class="valid-feedback">valide ! </div>
-          <div class="invalid-feedback">S'il vous plaît entrer une adresse email valide .</div>
-        </div>
-      </form>
-      <hr class="mb-4">
-    </div>
-    <div class="card">
-      <h4 class="col-md-6 mb-3 text-center ">Mes  données </h4>
-      <hr class="mb-4">
-      <form class="needs-validation" novalidate="">
-
-        <div class="mb-3">
-          <div class="col-auto my-1">
-            <label class="mr-sm-2" for="sexe">sexe</label>
-            <input type="text" class="form-control" name="sexe" #sexe="ngModel" [(ngModel)]="currentuser.sexe">
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="Dtn">Date de naissance</label>
-          <input type="date" class="form-control" name="datenais" #datenais="ngModel" [(ngModel)]="currentuser.datenais">
-          <div class="valid-feedback"> valide !</div>
-          <div class="invalid-feedback"> S'il vous plaît entrer une date valide . </div>
-
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="nationalité">Nationalité</label>
-          <input type="text" class="form-control" name="nationalite" #nationalite="ngModel" [(ngModel)]="currentuser.nationalite">
-          <div class="valid-feedback">Cela semble bon!</div>
-          <div class="invalid-feedback"> Veuillez tappez votre nationalité.</div>
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="pays">Pays</label>
-          <input type="text" class="form-control" name="pays" #pays="ngModel" [(ngModel)]="currentuser.pays"/>
-          <div class="valid-feedback"> Cela semble bon! </div>
-          <div class="invalid-feedback">Veuillez tappez votre pays.</div>
-        </div>
-        <div class="mb-3">
-          <div class="col-auto my-1">
-            <label class="mr-sm-2" for="état civil">état civil</label>
-            <input type="text" class="form-control" name="etatcivil" #etatcivil="ngModel" [(ngModel)]="currentuser.etatcivil"/>
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <div class="col-auto my-1">
-            <label class="mr-sm-2" for="profession">Profession</label>
-            <input type="text" class="form-control" name="profession" #profession="ngModel" [(ngModel)]="currentuser.profession"/>
-          </div>
-        </div>
-
-        <hr class="mb-4 center">
-        <button class="btn" type="submit" [disabled]="!userForm.valid">Enregistrer</button>
-        <button class="btn" type="reseat">Annuler</button>
-      </form>
-    </div>
-
-=======
         <div class="card">
           <h4 class="col-md-6 mb-3 text-center ">Mes données </h4>
           <hr class="mb-4">
@@ -189,8 +100,6 @@
           </div>
         </div>
 
->>>>>>> master
-
       </div>
       <div class="col-md-4">
         <div class="card card-user">
@@ -230,8 +139,5 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
-</div>-->
-=======
 </form>
->>>>>>> master
+

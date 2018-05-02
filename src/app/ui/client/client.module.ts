@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-=======
 import {FormsModule, NgForm} from '@angular/forms';
-
->>>>>>> master
 import {DepensesModule} from './depense/depenses.module';
 import {RevenusModule} from './revenu/revenus.module';
 import {ProjetsModule} from './projets/projets.module';
@@ -22,14 +18,10 @@ import {TransactionsModule} from './transactions/transactions.module';
     CommonModule,
     ClientRoutingModule,
     DepensesModule,
-<<<<<<< HEAD
     RevenusModule,
     ProjetsModule,
-    TransactionsModule
-=======
     TransactionsModule,
     FormsModule,
->>>>>>> master
   ],
   declarations: [
     ClientComponent,

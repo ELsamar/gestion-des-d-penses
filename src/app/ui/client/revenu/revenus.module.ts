@@ -16,7 +16,6 @@ import {FormsModule, NgForm} from '@angular/forms';
   declarations: [RevenusComponent, RevenuComponent, RevenulistComponent],
   providers: [
     RevenusService,
-  
   ],
 })
 export class RevenusModule { }

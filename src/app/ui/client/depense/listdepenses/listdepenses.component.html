@@ -2,17 +2,25 @@
   <div class="content row">
     <div class="card">
       <nav class="navbar">
-        <h1 class="h2">Depenses</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary">cette semaine</button>
-            <button class="btn btn-sm btn-outline-secondary">cet ans</button>
-            <button class="btn btn-sm btn-outline-secondary">ce mois</button>
-          </div>
-          <button class="btn btn-sm btn-outline-secondary ">
-            tous
+        <div class="dropdown">
+          <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{typeaffich}}
           </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" >toutes les depences</a>
+            <a class="dropdown-item" href="#">depences recurantes</a>
+            <a class="dropdown-item" href="#">depences  models </a>
+          </div>
         </div>
+        <form class="form-inline nav-item">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+          <button routerLink="listdep/formulaire" class="btn btn-sm btn-outline-secondary ">
+            ajouter
+
+          </button>
+
       </nav>
       <hr>
       <div class="container-fluid">

@@ -10,7 +10,7 @@ import { RevenulistComponent } from './revenulist/revenulist.component';
 
 const routes: Routes = [
   {
-    path: 'liste' ,
+    path: 'listrev' ,
     component: RevenulistComponent
   },
   {

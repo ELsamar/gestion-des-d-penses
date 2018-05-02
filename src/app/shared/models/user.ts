@@ -1,19 +1,4 @@
 export class User {
-<<<<<<< HEAD
-    $iduser : string ;
-    nom:string ;
-    prenom : string ;
-    username : string;
-    email : string ;
-    sexe : string ;
-    datenais : string ;
-    nationalite : Date ;
-    pays : string ;
-    etatcivil : string ;
-    profission : string ;
-}
-
-=======
   $iduser: string ;
   idauth; string;
   nom: string;
@@ -26,6 +11,5 @@ export class User {
 //  etatcivil: string;
   profession: string ;
 //  imageuser: File;
-  idauth: string;
 }
->>>>>>> master
+

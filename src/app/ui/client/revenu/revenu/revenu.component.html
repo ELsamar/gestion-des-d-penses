@@ -1,5 +1,6 @@
 <form  #revenusForm="ngForm" (ngSubmit)="onSubmit(revenusForm)">
-  <input type="hidden" name="$idrevenu" #idrevenu  ngModel [(ngModel)]="currentrevenus.$iddepense">
+  <input type="hidden" name="$idrevenu" #idrevenu  ngModel [(ngModel)]="currentrevenus.$idrevenu">
+  <input type="hidden" name="iduser" #iduser  ngModel [(ngModel)]="currentrevenus.idauth">
       <div class="container-fluid">
         <div class=" content row">
               <div class="card">
@@ -14,12 +15,12 @@
                   </div>
                 <div class="form-group">
                   <label class="col-form-label">Titre:</label>
-                  <input type="text" class="form-control" name="titrerevenu" #titrerevenu="ngModel" [(ngModel)]="currentrevenus.titredepense">
+                  <input type="text" class="form-control" name="titrerevenu" #titrerevenu="ngModel" [(ngModel)]="currentrevenus.titrerevenu">
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Montant :</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="0000.0000" name="montantdepense" #montantdepense="ngModel" [(ngModel)]="currentdepenses.montantdepense">
+                    <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu" #montantdepense="ngModel" [(ngModel)]="currentrevenus.montantrevenu">
                     <div class="input-group-prepend">
                       <div class="input-group-text">TND</div>
                     </div>
@@ -27,25 +28,25 @@
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Date :</label>
-                  <input type="date" class="form-control" name="datedepense" #datedepense="ngModel" [(ngModel)]="currentrevenus.datedepense "  />
+                  <input type="date" class="form-control" name="daterevenu" #datedepense="ngModel" [(ngModel)]="currentrevenus.daterevenu"  />
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Cathegorie :</label>
-                  <input type="text" class="form-control" name="cathegoriedepense" #cathegoriedepense="ngModel" [(ngModel)]="currentrevenus.cathegoriedepense "/>
+                  <input type="text" class="form-control" name="cathegorierevenu" #cathegorierevenu="ngModel" [(ngModel)]="currentrevenus.cathegorierevenu"/>
                 </div>
                 <!--<div class="form-group">
                   <label for="Categorie" class="col-form-label">Cathegorie :</label>
-                  <select class="custom-select form-group mr-sm-2" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense">
+                  <select class="custom-select form-group mr-sm-2" #cathegorierevenu="ngModel" [(ngModel)]="currentrevenus.cathegorierevenu">
                     <option *ngFor = "let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
                   </select>
                 </div>-->
                 <div class="form-group">
                   <label class="col-form-label">Description: </label>
-                  <input class="form-control" name="descriptiondepense" #descriptiondepense="ngModel" [(ngModel)]="currentrevenus.descriptiondepense"/>
+                  <input class="form-control" name="descriptionrevenu" #descriptionrevenu="ngModel" [(ngModel)]="currentrevenus.descriptionrevenu"/>
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Justificatif: </label>
-                  <input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentrevenus.justificatifdepense" />
+                  <input type="file" class="form-control" name="justificatifrevenu" #justificatifrevenu="ngModel" [(ngModel)]="currentrevenus.justificatifrevenu" />
                 </div>
 
               <!--div class="custom-control custom-checkbox récurents ">
@@ -100,7 +101,7 @@
               </div>-->
               <div class="row">
                 <div class="col-1 content-center">
-                  <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesForm.valid">ajouter</button>
+                  <button type="submit" class="btn btn-primary bouton" [disabled]="!revenusForm.valid">ajouter</button>
                 </div>
                 <div class="col-1 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
