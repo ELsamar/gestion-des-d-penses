@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DepensesService } from '../../../../shared/services/depenses.service';
-import { Depenses } from '../../../../shared/models/depenses';
+import { Depenses, FileUpload } from '../../../../shared/models/depenses';
 import {FormsModule, NgForm} from '@angular/forms';
 import {AuthService} from '../../../../providers/auth.service';
 @Component({
@@ -13,7 +13,9 @@ import {AuthService} from '../../../../providers/auth.service';
   ],
 })
 export class DepenseComponent implements OnInit {
-
+  selectedFiles: FileList;
+  currentFileUpload: FileUpload;
+  progress: { percentage: number } = { percentage: 0 };
   depensesform: FormGroup;
   typdeps: any = ['Daprés module', '...', '...'];
   cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
@@ -31,12 +33,37 @@ export class DepenseComponent implements OnInit {
       this.currentdepenses.titredepense = null;
       this.currentdepenses.cathegoriedepense = null;
       this.currentdepenses.descriptiondepense = null;
-      this.currentdepenses.justificatifdepense = null;
+      this.currentdepenses.coverUrl = null;
     //  this.currentdepenses.idauth = this.authservice.currentUserId;
     }
-    onSubmit(depensesForm: NgForm) {
-       this.depenseservice.insertDepense(depensesForm.value);
-   }
+
+  savedepense() {
+    const file = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
+
+    this.currentFileUpload = new FileUpload(file);
+    this.depenseservice.insertDepense(this.currentdepenses, this.currentFileUpload, this.progress);
+  }
+  // onSubmit(depensesForm: NgForm) {
+  //   const file = this.selectedFiles.item(0);
+  //   this.selectedFiles = undefined;
+  //
+  //   this.currentFileUpload = new FileUpload(file);
+  //   this.depenseservice.insertDepense(depensesForm.value, this.currentFileUpload, this.progress);
+  // }
+  selectFile(event) {
+    const file = event.target.files.item(0);
+
+    if (file.type.match('image.*')) {
+      this.selectedFiles = event.target.files;
+    } else {
+      alert('invalid format!');
+    }
+  }
+
+   //  onSubmit(depensesForm: NgForm) {
+   //     this.depenseservice.insertDepense(depensesForm.value);
+   // }
 /*<createForm() {
     this.form = this.fb.group(
       {

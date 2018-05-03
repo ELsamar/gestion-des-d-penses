@@ -1,30 +1,28 @@
 <div class="container-fluid">
   <div class="content row">
-    <div class="card">
-      <nav class="navbar">
-        <div class="dropdown">
-          <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{typeaffich}}
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" >toutes les depences</a>
-            <a class="dropdown-item" href="#">depences recurantes</a>
-            <a class="dropdown-item" href="#">depences  models </a>
-          </div>
+    <nav class="navbar container-fluid">
+      <div class="dropdown">
+        <button class="dropdown-toggle nav-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{typeaffich}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" >toutes les depences</a>
+          <a class="dropdown-item" href="#">depences recurantes</a>
+          <a class="dropdown-item" href="#">depences  models </a>
         </div>
-        <form class="form-inline nav-item">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-          <button routerLink="listdep/formulaire" class="btn btn-sm btn-outline-secondary ">
-            ajouter
+      </div>
+      <form class="form-inline nav-item">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <button routerLink="listdep/formulaire" class="btn btn-sm btn-outline-secondary nav-item ">
+        ajouter
 
-          </button>
+      </button>
 
-      </nav>
-      <hr>
+    </nav>
+    <div class="card">
       <div class="container-fluid">
-        <h6 class="text-center">---</h6><br/>
         <div class="table-responsive">
           <table class="table table-sm table-hover table table-striped ">
           <thead>

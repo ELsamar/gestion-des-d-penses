@@ -6,5 +6,18 @@ export class Depenses {
     datedepense: Date ;
     cathegoriedepense: string ;
     descriptiondepense: string ;
-    justificatifdepense: File;
+    //justificatifdepense: File;
+  coverUrl: string;
+
+}
+export class FileUpload {
+
+  key: string;
+  name: string;
+  url: string;
+  file: File;
+
+  constructor(file: File) {
+    this.file = file;
+  }
 }

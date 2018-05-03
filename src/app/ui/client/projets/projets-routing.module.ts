@@ -6,7 +6,7 @@ import { ListprojetsComponent } from './listprojets/listprojets.component';
 
 const routes: Routes = [
   {
-    path: 'listpro' ,
+    path: '' ,
     component: ListprojetsComponent
   },
   {

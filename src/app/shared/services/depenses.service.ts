@@ -1,20 +1,49 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
- import { Depenses } from '../.../../../shared/models/depenses';
+import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
+ import {Depenses, FileUpload} from '../.../../../shared/models/depenses';
 import { Observable } from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
-
+import * as firebase from 'firebase';
 @Injectable()
 export class DepensesService {
+  private basePath = '/depenses';
+  private storageBasePath = '/uploads';
   depenseslist: AngularFireList <any>;
+  depensesRef: AngularFireList <Depenses>;
+  depenseRef: AngularFireObject <Depenses>;
   selectedDepense: Depenses = new Depenses();
-  constructor(private firebase: AngularFireDatabase, public authservice: AuthService) { }
+  constructor(private db: AngularFireDatabase, public authservice: AuthService) {
+    this.depensesRef = db.list(`${this.basePath}`);
+  }
 
   getDepense () {
-    return this.depenseslist = this.firebase.list('depenses');
+    return this.depenseslist = this.db.list('depenses');
   }
-  insertDepense (depenses: Depenses ) {
-    this.depenseslist = this.firebase.list('depenses');
+  insertDepense (depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void  {
+    this.depenseslist = this.db.list('depenses');
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        // in progress
+        const snap = snapshot as firebase.storage.UploadTaskSnapshot;
+        progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+      },
+      (error) => {
+        // fail
+        console.log(error);
+      },
+      () => {
+        // success
+        fileUpload.url = uploadTask.snapshot.downloadURL;
+        fileUpload.name = fileUpload.file.name;
+        depenses.coverUrl = fileUpload.url;
+
+      // this.depensesRef.push(depenses);
+      }
+    );
+
     this.depenseslist.push({
       idauth: this.authservice.currentUserId,
       titredepense: depenses.titredepense,
@@ -22,7 +51,9 @@ export class DepensesService {
       datedepense: depenses.datedepense,
       cathegoriedepense: depenses.cathegoriedepense,
       descriptiondepense: depenses.descriptiondepense,
-      justificatifdepenses: depenses.justificatifdepense });
+      depcoverUrl: depenses.coverUrl
+    //  justificatifdepenses: depenses.justificatifdepense
+      });
   }
   updateDepense(depenses: Depenses)  {
     this.depenseslist.update(depenses.$iddepense,
@@ -33,7 +64,7 @@ export class DepensesService {
         datedepense: depenses.datedepense,
         cathegoriedepense: depenses.cathegoriedepense,
         descriptiondepense: depenses.descriptiondepense,
-        justificatifdepenses: depenses.justificatifdepense,
+     //   justificatifdepenses: depenses.justificatifdepense,
       });
   }
   deleteDepense ($iddepense: string) {
