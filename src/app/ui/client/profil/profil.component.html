@@ -8,20 +8,31 @@
           <input type="hidden" #idauth="ngModel" name="idauth" [(ngModel)]="user.idauth">
           <h4 class="col-md-6 mb-3 text-center ">Mes coordonnés</h4>
           <hr class="mb-4">
-          <div class="needs-validation" novalidate="">
 
             <div class="col-md-6 mb-3 form-group">
               <label for="nom">Nom</label>
-              <input type="text" class="form-control" name="nom" #nom="ngModel" [(ngModel)]="user.nom">
-              <div class="valid-feedback">Cela semble bon!</div>
-              <div class="invalid-feedback"> Veuillez tappez votre nom.</div>
+              <input type="text" class="form-control" name="nom" #nom="ngModel" [(ngModel)]="user.nom" required minlength="4"pattern= "[A-Za-z]*">
+              <div *ngIf ="nom.errors && (nom.dirty|| nom.touched)" class ="alert alert-danger"  >
+                <div [hidden] = "!nom.errors.required">
+                  <strong>Error:</strong>Ce champs est obligatoire
+                </div>
+                <div [hidden] = "!nom.errors.minlength">
+                  <strong>Error:</strong>Ce champs est trés cours
+                </div>
+              </div>
             </div>
 
             <div class="col-md-6 mb-3 ">
               <label for="prenom">Prenom</label>
-              <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="user.prenom">
-              <div class="valid-feedback"> Cela semble bon!</div>
-              <div class="invalid-feedback"> Veuillez tappez votre prenom.</div>
+              <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="user.prenom"required minlength="4"pattern= "[A-Za-z]*">
+              <div *ngIf ="prenom.errors && (prenom.dirty|| prenom.touched)" class ="alert alert-danger"  >
+                <div [hidden] = "!prenom.errors.required">
+                  <strong>Error:</strong>Ce champs est obligatoire
+                </div>
+                <div [hidden] = "!prenom.errors.minlength">
+                  <strong>Error:</strong>Ce champs est trés cours
+                </div>
+              </div>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label>Nom d'utilisateur</label>
@@ -30,20 +41,34 @@
                   <span class="input-group-text">@</span>
                 </div>
                 <input type="text" class="form-control" name="nomutulisateur" #nomutulisateur="ngModel"
-                       [(ngModel)]="user.nomutulisateur" placeholder="Username">
-                <div class="valid-feedback"> valide !</div>
-                <div class="invalid-feedback"> Veuillez choisir un nom d'utilisateur unique et valide.</div>
-
+                       [(ngModel)]="user.nomutulisateur" placeholder="Username"required minlength="4" pattern= "[A-Za-z]*">
+                       <div *ngIf ="nomutulisateur.errors && (nomutulisateur.dirty|| nomutulisateur.touched)" class ="alert alert-danger"  >
+                        <div [hidden] = "!nomutulisateur.errors.required">
+                          <strong>Error:</strong>Ce champs est obligatoire
+                        </div>
+                        <div [hidden] = "!nomutulisateur.errors.minlength">
+                          <strong>Error:</strong>Ce champs est trés cours
+                        </div>
+                        <div [hidden] = "!nomutulisateur.errors.pattern">
+                          <strong>Error:</strong>votre nom d'utilisateur n'est pas un nombre
+                        </div>
+                      </div> 
               </div>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label for="emailuser">Email </label>
               <input type="email" class="form-control" id="emailuser" name="emailuser" #emailuser="ngModel"
-                     [(ngModel)]="user.emailuser" placeholder="nom@exemple.com">
-              <div class="valid-feedback">valide !</div>
-              <div class="invalid-feedback">S'il vous plaît entrer une adresse email valide .</div>
-            </div>
-          </div>
+                     [(ngModel)]="user.emailuser" placeholder="nom@exemple.com" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" >
+                     <div *ngIf ="emailuser.errors && (emailuser.dirty|| emailuser.touched)" class ="alert alert-danger"  >
+                      <div [hidden] = "!emailuser.errors.required">
+                        <strong>Error:</strong>Ce champs est obligatoire
+                      </div>
+                      <div [hidden] = "!emailuser.errors.pattern">
+                        <strong>Error:</strong>Veillez entrer un mail
+                      </div>
+                    </div> 
+                    </div>
+          
           <hr class="mb-4">
         </div>
         <div class="card">
