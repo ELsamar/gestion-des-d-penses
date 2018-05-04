@@ -1,25 +1,28 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
- import {Depenses, FileUpload} from '../.../../../shared/models/depenses';
-import { Observable } from 'rxjs/Observable';
+import {Depenses, FileUpload} from '../.../../../shared/models/depenses';
+import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
 import * as firebase from 'firebase';
+
 @Injectable()
 export class DepensesService {
   private basePath = '/depenses';
   private storageBasePath = '/uploads';
-  depenseslist: AngularFireList <any>;
-  depensesRef: AngularFireList <Depenses>;
-  depenseRef: AngularFireObject <Depenses>;
+  depenseslist: AngularFireList<any>;
+  depensesRef: AngularFireList<Depenses>;
+  depenseRef: AngularFireObject<Depenses>;
   selectedDepense: Depenses = new Depenses();
+
   constructor(private db: AngularFireDatabase, public authservice: AuthService) {
     this.depensesRef = db.list(`${this.basePath}`);
   }
 
-  getDepense () {
+  getDepense() {
     return this.depenseslist = this.db.list('depenses');
   }
-  insertDepense (depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void  {
+
+  insertDepense(depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void {
     this.depenseslist = this.db.list('depenses');
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
@@ -38,9 +41,9 @@ export class DepensesService {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
-        depenses.coverUrl = fileUpload.url;
+        // depenses.coverUrl = fileUpload.url;
 
-      // this.depensesRef.push(depenses);
+        // this.depensesRef.push(depenses);
       }
     );
 
@@ -51,25 +54,35 @@ export class DepensesService {
       datedepense: depenses.datedepense,
       cathegoriedepense: depenses.cathegoriedepense,
       descriptiondepense: depenses.descriptiondepense,
-      depcoverUrl: depenses.coverUrl
-    //  justificatifdepenses: depenses.justificatifdepense
-      });
+      //  depcoverUrl: depenses.coverUrl
+      //  justificatifdepenses: depenses.justificatifdepense
+    });
   }
-  updateDepense(depenses: Depenses)  {
+
+  updateDepense(depenses: Depenses) {
     this.depenseslist.update(depenses.$iddepense,
       {
-       idauth: this.authservice.currentUserId,
+        idauth: this.authservice.currentUserId,
         titredepense: depenses.titredepense,
         montantdepense: depenses.montantdepense,
         datedepense: depenses.datedepense,
         cathegoriedepense: depenses.cathegoriedepense,
         descriptiondepense: depenses.descriptiondepense,
-     //   justificatifdepenses: depenses.justificatifdepense,
-      });
+        //   justificatifdepenses: depenses.justificatifdepense,
+      }).then((response) => {
+      if (response) {
+        return true;
+        console.log('test1');
+      } else {
+        return false;
+      }
+    });
   }
-  deleteDepense ($iddepense: string) {
+
+  deleteDepense($iddepense: string) {
     this.depenseslist.remove($iddepense);
   }
+
   // getdata1(titre: string) {
   //   const myUserId = firebase.auth().currentUser.uid;
   //   const searchdep = firebase.database().ref('depence/' + myUserId).equalTo(titre);

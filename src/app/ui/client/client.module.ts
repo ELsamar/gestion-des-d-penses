@@ -16,12 +16,12 @@ import {TransactionsModule} from './transactions/transactions.module';
 @NgModule({
   imports: [
     CommonModule,
-    ClientRoutingModule,
     DepensesModule,
     RevenusModule,
     ProjetsModule,
     TransactionsModule,
     FormsModule,
+    ClientRoutingModule,
   ],
   declarations: [
     ClientComponent,

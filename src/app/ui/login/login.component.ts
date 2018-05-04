@@ -107,6 +107,5 @@ export class LoginComponent implements OnInit {
       .catch(_error => {
         this.errorMessage = _error;
       });
-    console.log(this.resetPassword);
   }
 }

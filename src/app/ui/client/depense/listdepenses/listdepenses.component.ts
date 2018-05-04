@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { DepensesService } from '../../../../shared/services/depenses.service';
-import { Depenses } from '../../../../shared/models/depenses';
+import {Component, OnInit} from '@angular/core';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {DepensesService} from '../../../../shared/services/depenses.service';
+import {Depenses} from '../../../../shared/models/depenses';
+import {NgForm} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-listdepenses',
   templateUrl: './listdepenses.component.html',
@@ -10,7 +14,9 @@ import { Depenses } from '../../../../shared/models/depenses';
 export class ListdepensesComponent implements OnInit {
   depenseslist: Depenses[];
   typeaffich: string;
-  constructor(private depenseservice: DepensesService) { }
+
+  constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) {
+  }
 
   ngOnInit() {
     var x = this.depenseservice.getDepense();
@@ -23,9 +29,31 @@ export class ListdepensesComponent implements OnInit {
       });
     });
   }
+
+  openWindowCustomClass(content, depense: Depenses) {
+    this.modalService.open(content, {windowClass: 'dark-modal'});
+    this.depenseservice.selectedDepense = Object.assign({}, depense);
+  }
+
   onDelete(key: string) {
-    if (confirm('éte vous sure de supprimer ce projet ?') === true) {
+    if (confirm('éte vous sure de supprimer ce depense ?') === true) {
       this.depenseservice.deleteDepense(key);
+      this.tostr.warning('suppression', 'depense supprimée avec succée');
     }
-    }
+  }
+
+  onEdit(depense: Depenses) {
+    this.depenseservice.selectedDepense = Object.assign({}, depense);
+  }
+
+  onsubmit(depenseForm: NgForm) {
+  if ( this.depenseservice.updateDepense(depenseForm.value)) {
+    console.log('test');
+  }
+    this.tostr.success('modification', 'modification avec succès');
+
+    //modal clonse
+    // else
+  }
+
 }

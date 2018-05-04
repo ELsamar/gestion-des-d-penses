@@ -6,8 +6,8 @@ export class Depenses {
     datedepense: Date ;
     cathegoriedepense: string ;
     descriptiondepense: string ;
+  //coverUrl: string;
     //justificatifdepense: File;
-  coverUrl: string;
 
 }
 export class FileUpload {

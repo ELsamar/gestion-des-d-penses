@@ -33,7 +33,7 @@ export class DepenseComponent implements OnInit {
       this.currentdepenses.titredepense = null;
       this.currentdepenses.cathegoriedepense = null;
       this.currentdepenses.descriptiondepense = null;
-      this.currentdepenses.coverUrl = null;
+     // this.currentdepenses.coverUrl = null;
     //  this.currentdepenses.idauth = this.authservice.currentUserId;
     }
 
