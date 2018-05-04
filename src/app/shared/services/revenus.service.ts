@@ -31,6 +31,7 @@ export class RevenusService {
         daterevenu: revenus.daterevenu,
         descriptionrevenu: revenus.descriptionrevenu,
         //justificatifrevenu: revenus.justificatifrevenu,
+       // justificatifrevenu: revenus.justificatifrevenu,
       });
   }
   deleteRevenu ($idrevenu: string) {

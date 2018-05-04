@@ -1,4 +1,4 @@
-<form  #depensesForm="ngForm" (ngSubmit)="onSubmit(depensesForm)">
+<form  #depensesForm="ngForm" (ngSubmit)="savedepense()">
   <input type="hidden" name="$iddepense" #iddepense  ngModel [(ngModel)]="currentdepenses.$iddepense">
   <input type="hidden" name="iduser" #iduser  ngModel [(ngModel)]="currentdepenses.idauth">
       <div class="container-fluid">
@@ -71,8 +71,28 @@
                   <input class="form-control" name="descriptiondepense" #descriptiondepense="ngModel" [(ngModel)]="currentdepenses.descriptiondepense"/>
                 </div>
                 <div class="form-group">
-                  <label class="col-form-label">Justificatif: </label>
-                  <input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.justificatifdepense" />
+                  <!--<label class="col-form-label">Justificatif: </label>-->
+                  <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+                  <div class="row form-group">
+                    <div class="col-md-4">
+                      <label>File</label>
+                    </div>
+                    <div class="col-md-8">
+                      <label class="btn btn-default">
+                        <input type="file" name="cover" id="cover" (change)="selectFile($event)">
+                      </label>
+                    </div>
+                  </div>
+
+                  <div *ngIf="currentFileUpload" class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped"
+                         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                         aria-valuemin="0" aria-valuemax="100"
+                         [ngStyle]="{width:progress.percentage+'%'}">
+                      <!--{{progress.percentage}}%-->
+                    </div>
+                  </div>
+
                 </div>
 
               <div class="custom-control custom-checkbox récurents ">

@@ -10,7 +10,7 @@ import {DepensesComponent} from './depense/depenses.component';
 import {ProjetsComponent} from './projets/projets.component';
 import {RevenusComponent} from './revenu/revenus.component';
 
-const routes: Routes = [
+const routes: Routes = <Routes> [
   {
     path: '',
     component: DashboardComponent

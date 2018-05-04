@@ -11,15 +11,7 @@
         <form class="form-signin">
               <div>
                 <label for="Emailsignin" class="">Email</label>
-                <input type="email" id="Emailsignin" class="form-control" name="email" [(ngModel)]="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <div *ngIf ="email.errors && (email.dirty|| email.touched)" class ="alert alert-danger"  >
-                  <div [hidden] = "!email.errors.required">
-                    <strong>Error:</strong>Ce champs est obligatoire
-                  </div>
-                  <div [hidden] = "!email.errors.pattern">
-                    <strong>Error:</strong>Veuillez inserrez un email
-                  </div>
-                </div>
+                <input type="email" id="Emailsignin" class="form-control" name="email" [(ngModel)]="email" required >
               </div>
               <label for="Passwordsignin" class="">Mot de passe</label>
               <input type="password" id="Passwordsignin" class="form-control" name="password" [(ngModel)]="password" required>
@@ -28,11 +20,7 @@
             <p *ngIf="resetPassword" class="">
               Vérifiez votre email pour réinitialiser le mot de passe!</p>
             <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signin()">Connexion</button>
-            <div class="txt1 text-center p-t-54 p-b-20">
-                    <span>
-                      ou se connecter via
-                    </span>
-            </div>
+            
             <!--<div class="flex-c-m">
               <a class="login100-social-item bg1">
                 <i class="fab fa-facebook"></i>
@@ -43,22 +31,7 @@
               <a class="login100-social-item bg3" (click)="logingoogle()">
                 <i class="fab fa-google"></i>
               </a>
-            </div>-->
-            <div class="row">
-              <div class="col-md-4"><a class="login100-social-item bg1">
-                <i class="fab fa-facebook"></i>
-              </a></div>
-              <div class="col-md-4"><a class="login100-social-item bg2">
-                <i class="fab fa-twitter"></i>
-              </a></div>
-              <a class="login100-social-item bg3" (click)="logingoogle()">
-                <i class="fab fa-google"></i></a>
-            </div>
-            <div class="flex-col-c p-t-155">
-              <span class="txt1 p-b-17">vous n'éte pas membre !</span>
-              <a href="#" class="txt2">S'inscrire</a>
-            </div>
-        
+            </div>-->     
           </form>
   </div>
   <div class="vl"></div>
@@ -67,9 +40,33 @@
           
               <label for="Emailsignin" class="">Email</label>
               <input type="email" id="Emailsignin" class="form-control" name="email" [(ngModel)]="email" required autofocus>
-              <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signin()">Connexion</button>
+              <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="sendEmailLink()">Connexion</button>
             </form>
     </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-4">
+          <div class="txt1 text-center p-t-54 p-b-20">
+              <span>
+                ou se connecter via
+              </span>
+      </div>
+        <div class="row">
+          <div class="col-md-4"><a class="login100-social-item bg1">
+            <i class="fab fa-facebook"></i>
+          </a></div>
+          <div class="col-md-4"><a class="login100-social-item bg2">
+            <i class="fab fa-twitter"></i>
+          </a></div>
+          <a class="login100-social-item bg3" (click)="logingoogle()">
+            <i class="fab fa-google"></i></a>
+        </div>
+        <div class="flex-col-c p-t-155">
+          <span class="txt1 p-b-17">vous n'avez pas un compte!</span>
+          <a href="#" class="txt2">S'inscrire</a>
+        </div>
+      </div>
     </div>
     <form class="form-signup" #captchaProtectedForm="ngForm">
         <div class="row">
@@ -88,12 +85,15 @@
        <br>
       <re-captcha (resolved)="resolved($event)"  [(ngModel)]="formModel.captcha" name="captcha"required siteKey="6Ldw8FUUAAAAAGGrC5Sf-sI5N6co4HT5pykzIBDJ" #captchaControl="ngModel">
       </re-captcha>
+  
       <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>
       <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
       <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
       <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
-      <button (click)="formModel.captcha = ''">Annuler</button>
 
+      <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="formModel.captcha = ''">Annuler</button> 
+      <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="singup()">s'inscrire</button>
+    
     </form>
   </div>
 </div>

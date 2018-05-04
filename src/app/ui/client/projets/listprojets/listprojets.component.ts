@@ -14,7 +14,6 @@ export class ListprojetsComponent implements OnInit {
     var x = this.projetservice.getProjet();
     x.snapshotChanges().subscribe(item => {
       this.projetlist = [];
-     
       item.forEach(element => {
         var y = element.payload.toJSON();
         y["$key"] = element.key;
@@ -27,4 +26,5 @@ export class ListprojetsComponent implements OnInit {
       this.projetservice.deleteProjet(key);
     }
     }
+
 }

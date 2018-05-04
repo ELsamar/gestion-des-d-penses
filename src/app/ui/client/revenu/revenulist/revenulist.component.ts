@@ -15,12 +15,10 @@ export class RevenulistComponent implements OnInit {
     var x = this.revenuservice.getRevenu();
     x.snapshotChanges().subscribe(item => {
       this.revenuslist = [];
-     
       item.forEach(element => {
         var y = element.payload.toJSON();
-        y["$key"] = element.key;
+        y['$key'] = element.key;
         this.revenuslist.push(y as Revenus);
-       
       });
     });
   }

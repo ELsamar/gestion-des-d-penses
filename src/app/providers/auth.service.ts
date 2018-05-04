@@ -40,7 +40,7 @@ export class AuthService {
   }
   singin(email: string, password: string) {
     try {
-      firebase.auth().signInWithEmailAndPassword(email, password);
+       firebase.auth().signInWithEmailAndPassword(email, password);
       this.toastr.success('bienvenu', 'singin seccued');
     } catch (error) {
       // Handle Errors here.

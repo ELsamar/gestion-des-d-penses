@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ChatModule } from './chat/chat.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
@@ -24,6 +25,7 @@ import {FormsModule} from '@angular/forms';
 import {PublicModule} from './ui/public/public.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from './ui/login/login.module';
+import {AuthGuardService} from './shared/services/auth-guard.service';
 
 
 
@@ -35,7 +37,6 @@ import {LoginModule} from './ui/login/login.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     ClientModule,
     PublicModule,
     LoginModule,
@@ -44,6 +45,7 @@ import {LoginModule} from './ui/login/login.module';
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
+    AppRoutingModule,
     DateValueAccessorModule,
     ToastrModule.forRoot({
       timeOut: 10000,
@@ -51,9 +53,9 @@ import {LoginModule} from './ui/login/login.module';
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
-    // ChatModule
+    NgbModule
   ],
-  providers: [PageService, AuthService, TransactionService  ],
+  providers: [PageService, AuthService, TransactionService , AuthGuardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
