@@ -87,4 +87,9 @@ export class DepensesService {
   //   const searchdep = firebase.database().ref('depence/' + myUserId).equalTo(titre);
   //   return searchdep;
   // }
+  getSearchdep(start, end): Observable<Depenses[]> {
+    return this.db.list<Depenses>('/depenses',
+        ref => ref.orderByChild('titredepense').limitToFirst(10).startAt(start).endAt(end)
+    ).valueChanges();
+  }
 }

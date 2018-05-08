@@ -14,6 +14,9 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class ListdepensesComponent implements OnInit {
   depenseslist: Depenses[];
   typeaffich: string;
+  startAt: string;
+  endAt: string;
+  depenses: Depenses[];
 
   constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) {
   }
@@ -47,13 +50,24 @@ export class ListdepensesComponent implements OnInit {
   }
 
   onsubmit(depenseForm: NgForm) {
-  if ( this.depenseservice.updateDepense(depenseForm.value)) {
-    console.log('test');
-  }
+    if (this.depenseservice.updateDepense(depenseForm.value)) {
+      console.log('test');
+    }
     this.tostr.success('modification', 'modification avec succès');
 
     //modal clonse
     // else
   }
 
+  onSearchdep(searchText) {
+    const text = searchText;
+    this.startAt = text;
+    this.endAt = text + '\uf8ff';
+    this.depenseservice.getSearchdep(this.startAt, this.endAt)
+      .subscribe((depenses) => this.depenseslist = depenses);
+  }
+  onSearch(event) {
+    const text = event.target.value;
+    this.onSearchdep(text);
+  }
 }
