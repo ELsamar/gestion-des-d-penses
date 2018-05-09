@@ -38,6 +38,7 @@ export class ListdepensesComponent implements OnInit {
     this.depenseservice.selectedDepense = Object.assign({}, depense);
   }
 
+
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce depense ?') === true) {
       this.depenseservice.deleteDepense(key);
