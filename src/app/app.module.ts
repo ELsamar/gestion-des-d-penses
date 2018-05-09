@@ -1,6 +1,6 @@
-import {AppRoutingModule} from './app-routing.module';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { AngularFireModule } from 'angularfire2';

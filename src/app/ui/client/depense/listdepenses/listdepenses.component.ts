@@ -4,7 +4,7 @@ import {DepensesService} from '../../../../shared/services/depenses.service';
 import {Depenses} from '../../../../shared/models/depenses';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-listdepenses',
@@ -22,7 +22,7 @@ export class ListdepensesComponent implements OnInit {
   }
 
   ngOnInit() {
-    var x = this.depenseservice.getDepense();
+    var x = this.depenseservice.getDepense('Depenses/Depenses');
     x.snapshotChanges().subscribe(item => {
       this.depenseslist = [];
       item.forEach(element => {
@@ -44,6 +44,12 @@ export class ListdepensesComponent implements OnInit {
       this.tostr.warning('suppression', 'depense supprimée avec succée');
     }
   }
+  onDeleteAll() {
+    if (confirm('éte vous sure de supprimer toutes tes depenses ?') === true) {
+      this.depenseservice.deleteAllDepense();
+      this.tostr.warning('suppression', 'Depense supprimée avec succée');
+    }
+  }
 
   onEdit(depense: Depenses) {
     this.depenseservice.selectedDepense = Object.assign({}, depense);
@@ -63,11 +69,12 @@ export class ListdepensesComponent implements OnInit {
     const text = searchText;
     this.startAt = text;
     this.endAt = text + '\uf8ff';
-    this.depenseservice.getSearchdep(this.startAt, this.endAt)
+    this.depenseservice.getSearchdep(this.startAt, this.endAt, 'Depenses/Depenses')
       .subscribe((depenses) => this.depenseslist = depenses);
   }
   onSearch(event) {
     const text = event.target.value;
     this.onSearchdep(text);
   }
+
 }

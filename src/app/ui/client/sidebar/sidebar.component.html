@@ -1,3 +1,10 @@
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+      <i class="glyphicon glyphicon-align-left"></i>
+      <span>Toggle Sidebar</span>
+    </button>
+  </div>
 <div class="sidebar-sticky sidebar">
 <ul class="nav flex-column mb-2">
   <li class="active nav-item" class="nav-item">
@@ -46,3 +53,11 @@
   </li>
 </ul>
 </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');
+    });
+  });
+</script>

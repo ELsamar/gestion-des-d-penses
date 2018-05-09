@@ -8,7 +8,12 @@ export class Depenses {
     descriptiondepense: string ;
   //coverUrl: string;
     //justificatifdepense: File;
-
+    typerep: string ;
+    active: boolean;
+    jourRep: string;
+    moisRep: string;
+  dateFrom: Date;
+  dateto: Date;
 }
 export class FileUpload {
 

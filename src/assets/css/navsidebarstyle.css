@@ -282,7 +282,7 @@
 .navbar .navbar-nav > a.btn.dropdown-toggle:focus,
 .show >
 .navbar .navbar-nav > a.btn.dropdown-toggle:hover {
-  background-color: #979797;
+
   color: #FFFFFF;
   -webkit-box-shadow: none;
   box-shadow: none; }
@@ -326,31 +326,20 @@ fieldset[disabled]
 fieldset[disabled]
   .navbar .navbar-nav > a.btn:active,
 fieldset[disabled]
-  .navbar .navbar-nav > a.btn.active {
-  background-color: #888;
-  border-color: #888; }
-.btn.btn-simple,
-.navbar .navbar-nav > a.btn.btn-simple {
-  color: #888;
-  border-color: #888; }
+
 .btn.btn-simple:hover, .btn.btn-simple:focus, .btn.btn-simple:active,
 .navbar .navbar-nav > a.btn.btn-simple:hover,
 .navbar .navbar-nav > a.btn.btn-simple:focus,
 .navbar .navbar-nav > a.btn.btn-simple:active {
   background-color: transparent;
-  color: #979797;
   border-color: #979797;
   -webkit-box-shadow: none;
   box-shadow: none; }
-.btn.btn-link,
-.navbar .navbar-nav > a.btn.btn-link {
-  color: #888; }
 .btn.btn-link:hover, .btn.btn-link:focus, .btn.btn-link:active,
 .navbar .navbar-nav > a.btn.btn-link:hover,
 .navbar .navbar-nav > a.btn.btn-link:focus,
 .navbar .navbar-nav > a.btn.btn-link:active {
   background-color: transparent;
-  color: #979797;
   text-decoration: none;
   -webkit-box-shadow: none;
   box-shadow: none; }
