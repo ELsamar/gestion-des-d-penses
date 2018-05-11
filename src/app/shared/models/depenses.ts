@@ -10,9 +10,9 @@ export class Depenses {
     //justificatifdepense: File;
     typerep: string ;
     active: boolean;
-    jourRep: string;
-    moisRep: string;
-  dateFrom: Date;
+    jourrep: string;
+    moisrep: string;
+  datefrom: Date;
   dateto: Date;
 }
 export class FileUpload {

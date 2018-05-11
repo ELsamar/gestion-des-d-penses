@@ -7,10 +7,9 @@ import {AuthService} from '../../providers/auth.service';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  public currentUserId: any ;
   constructor(public authService: AuthService) {
-    this.currentUserId = this.authService.currentUserId ;
-    console.log('id', this.currentUserId );
+    console.log(this.authService.currentUserId);
+    localStorage.setItem('currentUserId', this.authService.currentUserId);
   }
 
   ngOnInit() {

@@ -13,6 +13,7 @@ export class DepensesService {
   depensesRef: AngularFireList<Depenses>;
   depenseRef: AngularFireObject<Depenses>;
   selectedDepense: Depenses = new Depenses();
+  selectedDepenseR: Depenses = new Depenses();
 
   constructor(private db: AngularFireDatabase, public authservice: AuthService) {
     this.depensesRef = db.list(`${this.basePath}`);
@@ -21,9 +22,11 @@ export class DepensesService {
   getDepense(childPath: string) {
     return this.depenseslist = this.db.list(childPath);
   }
+
   getDepensesimple() {
     return this.depenseslist = this.db.list('depenses/depensessimple');
   }
+
   insertDepense(childPath: string, depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void {
     this.depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
@@ -60,6 +63,7 @@ export class DepensesService {
       //  justificatifdepenses: depenses.justificatifdepense
     });
   }
+
   insertDepenseRecurrent(childPath: string, depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void {
     this.depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
@@ -96,12 +100,13 @@ export class DepensesService {
       //  justificatifdepenses: depenses.justificatifdepense
       typerep: depenses.typerep,
       active: true,
-      jourrep: depenses.jourRep,
-      moisrep: depenses.moisRep,
-      dateform: depenses.dateFrom,
+      jourrep: depenses.jourrep,
+      moisrep: depenses.moisrep,
+      dateform: depenses.datefrom,
       dateto: depenses.dateto
     });
   }
+
   updateDepense(depenses: Depenses) {
     this.depenseslist.update(depenses.$iddepense,
       {
@@ -119,7 +124,9 @@ export class DepensesService {
         return false;
       }
     });
+    console.log('updateDepense');
   }
+
   updateDepenseRecurrent(depenses: Depenses) {
     this.depenseslist.update(depenses.$iddepense,
       {
@@ -131,9 +138,11 @@ export class DepensesService {
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
         typerep: depenses.typerep,
-        active: depenses.active,
-        jourrep: depenses.jourRep,
-        moisrep: depenses.moisRep
+        // active: depenses.active,
+        jourrep: depenses.jourrep,
+        moisrep: depenses.moisrep,
+        dateform: depenses.datefrom,
+        dateto: depenses.dateto
       }).then((response) => {
       if (response) {
         return true;
@@ -142,9 +151,11 @@ export class DepensesService {
       }
     });
   }
+
   disactivedep(depenses: Depenses) {
     depenses.active = false;
   }
+
   deleteDepense($iddepense: string) {
     this.depenseslist.remove($iddepense);
   }
@@ -152,15 +163,24 @@ export class DepensesService {
   deleteAllDepense() {
     this.depenseslist.remove();
   }
-   getdata1(titre: string) {
-    const myUserId = this.authservice.currentUserId ;
-     const searchdep = firebase.database().ref('depenses/' + myUserId).equalTo(titre);
-    console.log(searchdep);
-   }
-  getSearchdep(start, end , bath: string): Observable<Depenses[]> {
+
+
+
+  getSearchdep(start, end, bath: string): Observable<Depenses[]> {
     return this.db.list<Depenses>(bath,
-        ref => ref.orderByChild('titredepense').limitToFirst(10).startAt(start).endAt(end)
+      ref => ref.orderByChild('titredepense').limitToFirst(10).startAt(start).endAt(end)
     ).valueChanges();
   }
-
+  getdataauth( bath: string) {
+    let myUserId = this.authservice.currentUserId;
+    console.log(myUserId);
+    return this.db.list<Depenses>(bath,
+      ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));
+  }
+  getdataauthdash(bath: string, num: number) {
+    let myUserId = this.authservice.currentUserId;
+    console.log(myUserId);
+    return this.db.list<Depenses>(bath,
+      ref => ref.orderByChild('idauth').limitToFirst(num).startAt(myUserId).endAt(myUserId + '\uf8ff'));
+  }
 }

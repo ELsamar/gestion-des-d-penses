@@ -819,9 +819,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400; }
 */
 a {
-  color: #4bde62; }
+ color: #1d2124 ;}
 a:hover, a:focus {
-  color: #25dea5; }
+  color: #aaaaaa ;}
 
 body {
   color: #2c2c2c;
@@ -1815,9 +1815,6 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
     text-align: right; }
   .section-nucleo-icons .icons-container {
     margin-top: 65px; }
-  .navbar-nav .nav-link i.fa,
-  .navbar-nav .nav-link i.now-ui-icons {
-    opacity: .5; }
 
   .bootstrap-navbar {
     /*position: fixed;*/

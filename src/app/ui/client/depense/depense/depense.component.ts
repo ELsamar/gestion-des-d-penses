@@ -8,9 +8,6 @@ import {AuthService} from '../../../../providers/auth.service';
   selector: 'app-formulairedepense',
   templateUrl: './depense.component.html',
   styleUrls: ['./depense.component.css'] ,
-  providers: [
-  DepensesService,
-  ],
 })
 export class DepenseComponent implements OnInit {
 

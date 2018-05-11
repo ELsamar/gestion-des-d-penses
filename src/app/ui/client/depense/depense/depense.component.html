@@ -102,20 +102,20 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <select class="custom-select mr-sm-2 form-control" name="jourRep" #jourRep="ngModel" [(ngModel)]="currentdepenses.jourRep">
+                      <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel" [(ngModel)]="currentdepenses.jourrep">
                         <option *ngFor ="let semaine of semaines" [value]="semaine">{{semaine}}</option>
                       </select>
                     </div>
                     <div class="form-group">
-                      <select class="custom-select mr-sm-2" name="moisRep" #moisRep="ngModel" [(ngModel)]="currentdepenses.moisRep">
+                      <select class="custom-select mr-sm-2" name="moisrep" #moisrep="ngModel" [(ngModel)]="currentdepenses.moisrep">
                         <option *ngFor = "let mois of Mois" [value]="mois">{{mois}}</option>
                       </select>
                     </div>
                     <div class="form-group">
-                      Du  <input  type="date" class="form-control"  name="dateFrom" #dateFrom="ngModel" [(ngModel)]="currentdepenses.dateFrom"/>
-                     au  <input  type="date" class="form-control" name="dateTo" #dateTo="ngModel" [(ngModel)]="currentdepenses.dateto" />
+                      Du  <input  type="date" class="form-control"  name="datefrom" #datefrom="ngModel" [(ngModel)]="currentdepenses.datefrom"/>
+                     au  <input  type="date" class="form-control" name="dateto" #dateto="ngModel" [(ngModel)]="currentdepenses.dateto" />
                   </div>
-                    <div *ngIf ="dateTo.value < dateFrom.value"   >
+                    <div *ngIf ="dateto.value < datefrom.value"   >
                       <div  class ="alert alert-danger">
                         <strong>Error:</strong>date invalide
                       </div>
@@ -146,11 +146,11 @@
               </div>
               <div class="row">
                 <div class="col-1 content-center">
-                  <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateTo.value < dateFrom.value )" (click)="savedepense()">
+                  <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )" (click)="savedepense()">
                     ajouter</button>
                 </div>
                 <div class="col-1 content-center">
-                  <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateTo.value < dateFrom.value )" (click)="savedepenseRecurrent()">ajouter recurent</button>
+                  <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )" (click)="savedepenseRecurrent()">ajouter recurent</button>
                 </div>
                 <div class="col-1 content-center">
                   <button type="reset" class="btn btn-secondary bouton">annuler</button>

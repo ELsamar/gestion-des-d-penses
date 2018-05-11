@@ -12,6 +12,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./listdepenses.component.css']
 })
 export class ListdepensesComponent implements OnInit {
+  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
+  repetes: any = ['Jamais' , 'Semaine' , 'mois'];
+  semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
+  Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
+  alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   depenseslist: Depenses[];
   typeaffich: string;
   startAt: string;
@@ -22,7 +27,7 @@ export class ListdepensesComponent implements OnInit {
   }
 
   ngOnInit() {
-    var x = this.depenseservice.getDepense('Depenses/Depenses');
+    var x = this.depenseservice.getdataauth('Depenses/Depenses');
     x.snapshotChanges().subscribe(item => {
       this.depenseslist = [];
       item.forEach(element => {
@@ -34,6 +39,7 @@ export class ListdepensesComponent implements OnInit {
   }
 
   openWindowCustomClass(content, depense: Depenses) {
+    console.table(depense);
     this.modalService.open(content, {windowClass: 'dark-modal'});
     this.depenseservice.selectedDepense = Object.assign({}, depense);
   }
@@ -56,7 +62,7 @@ export class ListdepensesComponent implements OnInit {
     this.depenseservice.selectedDepense = Object.assign({}, depense);
   }
 
-  onsubmit(depenseForm: NgForm) {
+  onUpdate(depenseForm: NgForm) {
     if (this.depenseservice.updateDepense(depenseForm.value)) {
       console.log('test');
     }
