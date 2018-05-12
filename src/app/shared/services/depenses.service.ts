@@ -22,11 +22,6 @@ export class DepensesService {
   getDepense(childPath: string) {
     return this.depenseslist = this.db.list(childPath);
   }
-
-  getDepensesimple() {
-    return this.depenseslist = this.db.list('depenses/depensessimple');
-  }
-
   insertDepense(childPath: string, depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void {
     this.depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
@@ -124,7 +119,6 @@ export class DepensesService {
         return false;
       }
     });
-    console.log('updateDepense');
   }
 
   updateDepenseRecurrent(depenses: Depenses) {
@@ -154,6 +148,11 @@ export class DepensesService {
 
   disactivedep(depenses: Depenses) {
     depenses.active = false;
+    this.depenseslist.update(depenses.$iddepense,
+      {
+        idauth: this.authservice.currentUserId,
+        active: depenses.active
+  });
   }
 
   deleteDepense($iddepense: string) {

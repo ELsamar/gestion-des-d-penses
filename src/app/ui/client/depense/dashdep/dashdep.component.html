@@ -1,8 +1,12 @@
+
 <div class="row">
   <div class="col-6">
     <div class="card">
       <div class="container-fluid">
+        <div class="card-header">
         <h3> Derniers Dépenses</h3>
+      </div>
+        <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-hover table table-striped ">
             <thead>
@@ -29,14 +33,18 @@
             </tr>
             </tbody>
           </table>
-        </div>
+        </div></div>
+        <div class="card-footer"><a routerLink="/client/depenses/listdepR">afficher la suite</a></div>
       </div>
     </div>
-  <a routerLink="/client/depenses/listdepR">afficher la suite</a>
   </div>
   <div class="col-6">
     <div class="card">
       <div class="container-fluid">
+        <div class="card-header">
+        <h3> Derniers Dépenses Recurrent</h3>
+        </div>
+        <div class="card-body">
         <div class="table-responsive">
           <table class="table table-sm table-hover table table-striped ">
             <thead>
@@ -59,15 +67,15 @@
                   <i class="fas fa-trash-alt"></i>
                 </a>
                 <a><i class="fas fa-eye"></i></a>
-
               </td>
             </tr>
             </tbody>
           </table>
         </div>
+        </div>
+        <div class="card-footer"> <a routerLink="/client/depenses/listdep">afficher la suite</a></div>
       </div>
     </div>
-    <a routerLink="/client/depenses/listdep">afficher la suite</a>
   </div>
 </div>
 

@@ -27,6 +27,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from './ui/login/login.module';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 
+import {} from '@polymer/paper-toggle-button';
+
 
 
 
@@ -35,6 +37,7 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
     AppComponent,
     NotFound404Component,
     LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -54,9 +57,10 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+
   ],
-  providers: [PageService, AuthService, TransactionService , AuthGuardService ],
+  providers: [PageService, AuthService, TransactionService , AuthGuardService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

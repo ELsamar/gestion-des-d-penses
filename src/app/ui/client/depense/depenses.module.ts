@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {AuthService} from '../../../providers/auth.service';
 import { DepensesService } from '../../../shared/services/depenses.service';
@@ -13,13 +13,14 @@ import { ModeldepenseComponent } from './modeldepense/modeldepense.component';
 import { ListmodeldepenseComponent } from './listmodeldepense/listmodeldepense.component';
 import { ListDepensesRecurrentComponent } from './list-depenses-recurrent/list-depenses-recurrent.component';
 import { DashdepComponent } from './dashdep/dashdep.component';
+import {AlertService} from '../../../shared/services/alert.service';
+import {ModeleDépenseService} from '../../../shared/services/modele-dépense.service';
 
 @NgModule({
   imports: [
     CommonModule,
     DepensesRoutingModule,
     FormsModule,
-    ReactiveFormsModule
   ],
   declarations: [
     DepenseComponent,
@@ -32,7 +33,9 @@ import { DashdepComponent } from './dashdep/dashdep.component';
   ],
   providers: [
     DepensesService,
-    AuthService
+    AuthService,
+    AlertService,
+    ModeleDépenseService
 
   ],
 })
