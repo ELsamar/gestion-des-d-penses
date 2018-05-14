@@ -1,4 +1,4 @@
-export class ModeleDépense {
+export class ModeleDepense {
   $idModele: string;
   titreModele: string;
   montantModele: number;

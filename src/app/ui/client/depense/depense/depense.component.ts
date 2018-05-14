@@ -4,8 +4,8 @@ import {Depenses, FileUpload} from '../../../../shared/models/depenses';
 import {FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
 import {AuthService} from '../../../../providers/auth.service';
 import {AlertService} from '../../../../shared/services/alert.service';
-import {ModeleDépense} from '../../../../shared/models/modele-dépense';
-import {ModeleDépenseService} from '../../../../shared/services/modele-dépense.service';
+import {ModeleDepense} from '../../../../shared/models/modele-depense';
+import {ModeleDepenseService} from '../../../../shared/services/modele-depense.service';
 
 @Component({
   selector: 'app-formulairedepense',
@@ -13,11 +13,11 @@ import {ModeleDépenseService} from '../../../../shared/services/modele-dépense
   styleUrls: ['./depense.component.css'],
 })
 export class DepenseComponent implements OnInit {
-  selectedModel: ModeleDépense;
+  selectedModel: ModeleDepense;
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
   progress: { percentage: number } = {percentage: 0};
-  Modelelist: ModeleDépense [];
+  Modelelist: ModeleDepense [];
   cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
   repetes: any = ['Jamais', 'Semaine', 'mois'];
   semaines: any = ['', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
@@ -25,7 +25,7 @@ export class DepenseComponent implements OnInit {
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 
   constructor(private alertservice: AlertService, private depenseservice: DepensesService, public authservice: AuthService,
-              private ModeleDépenseservice: ModeleDépenseService) {
+              private modeledepenseservice: ModeleDepenseService) {
   }
 
   currentdepenses: any;
@@ -42,20 +42,21 @@ export class DepenseComponent implements OnInit {
 
   ngOnInit() {
     this.currentdepenses = new Depenses();
-    let x = this.ModeleDépenseservice.getdataauth();
+    let x = this.modeledepenseservice.getdataauth();
     x.snapshotChanges().subscribe(item => {
       this.Modelelist = [];
       item.forEach(element => {
         let y = element.payload.toJSON();
         y['$key'] = element.key;
-        this.Modelelist.push(y as ModeleDépense);
+        this.Modelelist.push(y as ModeleDepense);
       });
     });
   }
 
-  selectModelAction(model) {
-    this.selectedModel = Object.assign({}, model);
-    this.currentdepenses = this.selectedModel;
+  selectModelAction(model: any) {
+    console.log('test');
+    this.modeledepenseservice.selectedModele = Object.assign({}, model);
+    console.log( this.modeledepenseservice.selectedModele);
   }
 
   savedepense() {

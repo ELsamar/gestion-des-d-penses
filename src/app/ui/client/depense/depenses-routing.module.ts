@@ -8,6 +8,7 @@ import { ListdepensesComponent } from './listdepenses/listdepenses.component';
 import {ModeldepenseComponent} from './modeldepense/modeldepense.component';
 import {ListDepensesRecurrentComponent} from './list-depenses-recurrent/list-depenses-recurrent.component';
 import {DashdepComponent} from './dashdep/dashdep.component';
+import {ListmodeldepenseComponent} from './listmodeldepense/listmodeldepense.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'Model' ,
     component: ModeldepenseComponent
+  },
+  {
+    path: 'listModel' ,
+    component: ListmodeldepenseComponent
   }
 ];
 

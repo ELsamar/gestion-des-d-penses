@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
-import {ModeleDépense} from '../models/modele-dépense';
+import {ModeleDepense} from '../models/modele-depense';
 import {AuthService} from '../../providers/auth.service';
 import {User} from '../models/user';
 import {Depenses} from '../models/depenses';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class ModeleDépenseService {
+export class ModeleDepenseService {
   Modelelist: AngularFireList<any>;
-  selectedModele: ModeleDépense = new ModeleDépense();
+  selectedModele: ModeleDepense = new ModeleDepense() ;
 
   constructor(private db: AngularFireDatabase, public authservice: AuthService) { }
 
-  insertModeleDépense(modele: ModeleDépense ) {
+  insertModeleDepense(modele: ModeleDepense ) {
     this.Modelelist = this.db.list('ModeleDépense');
     this.Modelelist.push({
       idauth: this.authservice.currentUserId,
@@ -24,7 +24,7 @@ export class ModeleDépenseService {
     descriptionModele: modele.descriptionModele
     }) ;
   }
-  updateModeleDépense(modele: ModeleDépense )  {
+  updateModeleDepense(modele: ModeleDepense )  {
     this.Modelelist.update(modele.$idModele,
       {
         titreModele: modele.titreModele,
@@ -34,11 +34,11 @@ export class ModeleDépenseService {
         descriptionModele: modele.descriptionModele
       });
   }
-  deleteModeleDépense($idModele: string) {
+  deleteModeleDepense($idModele: string) {
     this.Modelelist.remove($idModele);
   }
-  getSearchModeleDépense(start, end): Observable<ModeleDépense[]> {
-    return this.db.list<ModeleDépense>('ModeleDépense',
+  getSearchModeleDepense(start, end): Observable<ModeleDepense[]> {
+    return this.db.list<ModeleDepense>('ModeleDépense',
       ref => ref.orderByChild('titreModele').startAt(start).endAt(end)
     ).valueChanges();
   }

@@ -1,17 +1,14 @@
 <form #UserForm="ngForm" (ngSubmit)="onSubmit(UserForm)">
-
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
         <div class="card">
-          <input type="hidden" #iduser="ngModel" name="id" [(ngModel)]="user.$iduser">
-          <input type="hidden" #idauth="ngModel" name="idauth" [(ngModel)]="user.idauth">
           <h4 class="col-md-6 mb-3 text-center ">Mes coordonnés</h4>
           <hr class="mb-4">
-
-            <div class="col-md-6 mb-3 form-group">
-              <label for="nom">Nom</label>
-              <input type="text" class="form-control" name="nom" #nom="ngModel" [(ngModel)]="user.nom" required minlength="4"pattern= "[A-Za-z]*">
+            <div class="col-md-6 mb-3">
+              <label >Nom</label>
+              <input type="text" class="form-control" name="nom" #nom="ngModel" [(ngModel)]="userObject.nom" [ngModelOptions]="{updateOn: 'submit'}"
+                     required minlength="4"pattern= "[A-Za-z]*">
               <div *ngIf ="nom.errors && (nom.dirty|| nom.touched)" class ="alert alert-danger"  >
                 <div [hidden] = "!nom.errors.required">
                   <strong>Error:</strong>Ce champs est obligatoire
@@ -21,10 +18,9 @@
                 </div>
               </div>
             </div>
-
             <div class="col-md-6 mb-3 ">
-              <label for="prenom">Prenom</label>
-              <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="user.prenom"required minlength="4"pattern= "[A-Za-z]*">
+              <label >Prenom</label>
+              <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="userObject.prenom" [ngModelOptions]="{updateOn: 'submit'}"required minlength="4"pattern= "[A-Za-z]*">
               <div *ngIf ="prenom.errors && (prenom.dirty|| prenom.touched)" class ="alert alert-danger"  >
                 <div [hidden] = "!prenom.errors.required">
                   <strong>Error:</strong>Ce champs est obligatoire
@@ -41,7 +37,7 @@
                   <span class="input-group-text">@</span>
                 </div>
                 <input type="text" class="form-control" name="nomutulisateur" #nomutulisateur="ngModel"
-                       [(ngModel)]="user.nomutulisateur" placeholder="Username"required minlength="4" pattern= "[A-Za-z]*">
+                       [(ngModel)]="userObject.nomutulisateur" [ngModelOptions]="{updateOn: 'submit'}" placeholder="Username" required minlength="4" pattern= "[A-Za-z]*">
                        <div *ngIf ="nomutulisateur.errors && (nomutulisateur.dirty|| nomutulisateur.touched)" class ="alert alert-danger"  >
                         <div [hidden] = "!nomutulisateur.errors.required">
                           <strong>Error:</strong>Ce champs est obligatoire
@@ -52,13 +48,13 @@
                         <div [hidden] = "!nomutulisateur.errors.pattern">
                           <strong>Error:</strong>votre nom d'utilisateur n'est pas un nombre
                         </div>
-                      </div> 
+                      </div>
               </div>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label for="emailuser">Email </label>
               <input type="email" class="form-control" id="emailuser" name="emailuser" #emailuser="ngModel"
-                     [(ngModel)]="user.emailuser" placeholder="nom@exemple.com" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" >
+                     [(ngModel)]="userObject.emailuser" [ngModelOptions]="{updateOn: 'submit'}" placeholder="nom@exemple.com" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" >
                      <div *ngIf ="emailuser.errors && (emailuser.dirty|| emailuser.touched)" class ="alert alert-danger"  >
                       <div [hidden] = "!emailuser.errors.required">
                         <strong>Error:</strong>Ce champs est obligatoire
@@ -66,9 +62,8 @@
                       <div [hidden] = "!emailuser.errors.pattern">
                         <strong>Error:</strong>Veillez entrer un mail
                       </div>
-                    </div> 
                     </div>
-          
+                    </div>
           <hr class="mb-4">
         </div>
         <div class="card">
@@ -76,48 +71,44 @@
           <hr class="mb-4">
           <div class="needs-validation" novalidate="">
             <div class="col-auto my-1 form-group">
-              <label class="mr-sm-2" for="sexe">sexe</label>
-              <!--     <select class="custom-select mr-sm-2" id="sexe">
-                     <option *ngFor="let sexe of Sexe" [value]="sexe" {{sexe}}></option>
-                   </select> -->
+              <label class="mr-sm-2">sexe</label>
+                   <select class="custom-select mr-sm-2" name="sexe" #sexe="ngModel" [ngModel]="userObject.sexe" [ngModelOptions]="{updateOn: 'submit'}">
+                     <option *ngFor="let sexe of Sexe" [value]="sexe"> {{sexe}}</option>
+                   </select>
             </div>
             <div class="col-md-6 mb-3 form-group ">
               <label for="datenaissance">Date de naissance</label>
               <input type="date" class="form-control" id="datenaissance" name="datenaissance" #datenaissance="ngModel"
-                     [(ngModel)]="user.datenaissance">
+                     [(ngModel)]="userObject.datenaissance">
               <div class="valid-feedback"> valide !</div>
               <div class="invalid-feedback"> S'il vous plaît entrer une date valide .</div>
 
             </div>
             <div class="col-md-6 mb-3 form-group">
-              <label for="nationalite">Nationalité</label>
+              <label >Nationalité</label>
               <input type="text" class="form-control" name="nationalite" #nationalite="ngModel"
-                     [(ngModel)]="user.nationalite">
+                     [(ngModel)]="userObject.nationalite" [ngModelOptions]="{updateOn: 'submit'}">
               <div class="valid-feedback">Cela semble bon!</div>
               <div class="invalid-feedback"> Veuillez tappez votre nationalité.</div>
             </div>
             <div class="col-md-6 mb-3 form-group">
-              <label for="pays">Pays</label>
-              {{user.pays}}
-              <input type="text" class="form-control" name="pays" #pay="ngModel" [(ngModel)]="user.pays"/>
+              <label >Pays</label>
+              <input type="text" class="form-control" name="pays" #pay="ngModel" [(ngModel)]="userObject.pays" [ngModelOptions]="{updateOn: 'submit'}"/>
               <div class="valid-feedback"> Cela semble bon!</div>
               <div class="invalid-feedback">Veuillez tappez votre pays.</div>
             </div>
             <div class="col-md-6 mb-3 form-group">
-              <label class="mr-sm-2" for="état civil">état civil</label>
-              <!--   <select class="custom-select mr-sm-2" id="état civil">
+              <label class="mr-sm-2" >état civil</label>
+                 <select class="custom-select mr-sm-2"  name="etatcivil" [(ngModel)]="userObject.etatcivil" [ngModelOptions]="{updateOn: 'submit'}">
                    <option *ngFor="let etatcivil of Etatcivil" [value]="etatcivil">{{etatcivil}}</option>
-                 </select> -->
+                 </select>
             </div>
-
             <div class="col-md-6 mb-3 form-group">
               <label class="mr-sm-2" for="profession">Profession</label>
-              <select class="custom-select mr-sm-2" id="profession" name="profession">
+              <select class="custom-select mr-sm-2" id="profession" name="profession" #profession="ngModel" [(ngModel)]="userObject.profession" >
                 <option *ngFor="let profession of Profession" [value]="profession">{{profession}}</option>
               </select>
             </div>
-
-
             <hr class="col-md-6 mb-3 form-group center">
             <button type="submit" class="btn btn-primary bouton">ajouter</button>
             <button class="btn" type="submit">Modifier</button>
@@ -126,7 +117,7 @@
         </div>
 
       </div>
-      <div class="col-md-4">
+      <div *ngIf="test" class="col-md-4">
         <div class="card card-user">
           <div class="image">
             <img src="" alt="...">
@@ -135,10 +126,47 @@
             <div class="author">
               <a href="#">
                 <img class="avatar border-gray" src="../assets/img/profil.png" alt="...">
-                <h5 class="title">Mike Andrew</h5>
+                <h5 class="title"> {{userObject.nom}} {{userObject.prenom}}</h5>
               </a>
               <p class="description">
-                michael24
+
+              </p>
+            </div>
+            <p class="description text-center">
+              "Lamborghini Mercy
+              <br> Your chick she so thirsty
+              <br> I'm in that two seat Lambo"
+            </p>
+          </div>
+          <hr>
+          <div class="button-container">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fab fa-google-plus-g"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="!test" class="col-md-4">
+        <div class="card card-user">
+          <div class="image">
+            <img src="" alt="...">
+          </div>
+          <div class="card-body">
+            <div class="author">
+              <a href="#">
+                <img class="avatar border-gray" src="../assets/img/profil.png" alt="...">
+                <h6 class="my-0">Télécharger mon image </h6>
+                <input type="file" class="form-control" name="image">
+                <h5 class="title"> {{userObject.nom}} {{userObject.prenom}}</h5>
+              </a>
+              <p class="description">
               </p>
             </div>
             <p class="description text-center">
@@ -165,4 +193,6 @@
     </div>
   </div>
 </form>
+
+
 

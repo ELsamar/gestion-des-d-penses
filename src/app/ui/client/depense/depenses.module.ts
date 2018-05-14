@@ -14,7 +14,7 @@ import { ListmodeldepenseComponent } from './listmodeldepense/listmodeldepense.c
 import { ListDepensesRecurrentComponent } from './list-depenses-recurrent/list-depenses-recurrent.component';
 import { DashdepComponent } from './dashdep/dashdep.component';
 import {AlertService} from '../../../shared/services/alert.service';
-import {ModeleDépenseService} from '../../../shared/services/modele-dépense.service';
+import {ModeleDepenseService} from '../../../shared/services/modele-depense.service';
 
 @NgModule({
   imports: [
@@ -35,7 +35,7 @@ import {ModeleDépenseService} from '../../../shared/services/modele-dépense.se
     DepensesService,
     AuthService,
     AlertService,
-    ModeleDépenseService
+    ModeleDepenseService
 
   ],
 })

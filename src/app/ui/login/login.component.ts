@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
-import {AngularFireAuth} from 'angularfire2/auth';
 import {AuthService} from '../../providers/auth.service';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {ToastrService} from 'ngx-toastr';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export interface FormModel {
   captcha?: string;
 }
@@ -16,7 +14,6 @@ export interface FormModel {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   user: Observable<firebase.User>;
   isLogged: boolean;
   pseudo: String;
@@ -26,8 +23,8 @@ export class LoginComponent implements OnInit {
   password: string;
   resetPassword: boolean = false;
   public formModel: FormModel = {};
-  constructor(public authService: AuthService, public afAuth: AngularFireAuth, private router: Router,
-              private afs: AngularFirestore, private toastr: ToastrService, private modalService: NgbModal) {
+  constructor(public authService: AuthService, private router: Router,
+              private afs: AngularFirestore, private toastr: ToastrService) {
 
     this.user = this.authService.afAuth.authState;
     this.user.subscribe((auth) => {
@@ -94,9 +91,6 @@ export class LoginComponent implements OnInit {
   }
   signin() {
     this.authService.singin(this.email, this.password);
-  }
-  openBackDropCustomClass(content) {
-    this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
   }
   resolved(captchaResponse: string) {
     console.log(`Resolved captcha with response ${captchaResponse}:`);

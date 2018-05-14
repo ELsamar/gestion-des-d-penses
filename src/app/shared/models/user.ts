@@ -1,6 +1,5 @@
 export class User {
-  $iduser: string ;
-  idauth; string;
+ // $iduser: string ;
   nom: string;
   prenom: string;
   nomutulisateur: string ;
@@ -8,8 +7,9 @@ export class User {
   datenaissance: string ;
   nationalite: string;
   pays: string;
-//  etatcivil: string;
+  etatcivil: string;
   profession: string ;
-//  imageuser: File;
+  sexe: string ;
+// imageuser: File;
 }
 
