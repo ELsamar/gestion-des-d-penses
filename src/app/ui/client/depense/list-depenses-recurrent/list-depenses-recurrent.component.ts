@@ -24,7 +24,7 @@ export class ListDepensesRecurrentComponent implements OnInit {
   constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    var x = this.depenseservice.getdataauth('Depenses/DepensesRecurrent');
+    var x = this.depenseservice.getDepense('Depenses/DepensesRecurrent');
     x.snapshotChanges().subscribe(item => {
       this.DepensesRlist = [];
       item.forEach(element => {

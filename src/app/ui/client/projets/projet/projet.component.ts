@@ -21,7 +21,7 @@ export class ProjetComponent implements OnInit {
     { id : 1 , nom : 'moyenne'},
     { id : 1 , nom : 'faible'},
   ];
-  constructor(private projetservice: ProjetsService, private _renderer: Renderer, private _elementRef: ElementRef) { }
+  constructor(private projetservice: ProjetsService, private _elementRef: ElementRef) { }
   currentprojet: Projets;
   ngOnInit() {
     this.currentprojet = new Projets();

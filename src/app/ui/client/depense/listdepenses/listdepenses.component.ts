@@ -27,15 +27,26 @@ export class ListdepensesComponent implements OnInit {
   }
 
   ngOnInit() {
-    var x = this.depenseservice.getdataauth('Depenses/Depenses');
-    x.snapshotChanges().subscribe(item => {
-      this.depenseslist = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        this.depenseslist.push(y as Depenses);
-      });
+    var x = this.depenseservice.getDepense('Depenses/Depenses');
+     x.snapshotChanges().subscribe(item => {
+       this.depenseslist = [];
+       item.forEach(element => {
+         var y = element.payload.toJSON();
+         y['$key'] = element.key;
+         this.depenseslist.push(y as Depenses);
+       });
+     });
+  }
+  checkdata() {
+    this.depenseservice.checkdata('Depenses/Depenses').
+    then(snapshot => {
+      if (snapshot.val()) {
+     return true ;
+      } else if (!snapshot.val()) {
+        return false ;
+      }
     });
+
   }
 
   openWindowCustomClass(content, depense: Depenses) {
@@ -63,7 +74,7 @@ export class ListdepensesComponent implements OnInit {
   }
 
   onUpdate(depenseForm: NgForm) {
-    if (this.depenseservice.updateDepense(depenseForm.value)) {
+    if (this.depenseservice.updateDepense(depenseForm.value, 'Depenses/Depenses')) {
       console.log('test');
     }
     this.tostr.success('modification', 'modification avec succès');
@@ -76,7 +87,7 @@ export class ListdepensesComponent implements OnInit {
     const text = searchText;
     this.startAt = text;
     this.endAt = text + '\uf8ff';
-    this.depenseservice.getSearchdep(this.startAt, this.endAt, 'Depenses/Depenses')
+    this.depenseservice.getSearchdep(this.startAt, this.endAt, 'Depenses/Depenses' )
       .subscribe((depenses) => this.depenseslist = depenses);
   }
   onSearch(event) {

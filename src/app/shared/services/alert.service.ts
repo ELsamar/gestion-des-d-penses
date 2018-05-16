@@ -12,18 +12,23 @@ export class AlertService {
  list: AngularFireList<Depenses>;
   constructor(private db: AngularFireDatabase, public authservice: AuthService) { }
   getalertauth( bath: string) {
-    let myUserId = this.authservice.currentUserId;
+    const myUserId = this.authservice.currentUserId;
     console.log(myUserId);
     return this.db.list<Alert>(bath,
       ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));
   }
-  insertAlert (alert: Alert ) {
-    this.alertlist = this.db.list('Alert');
-    this.alertlist.push({
-      idauth : this.authservice.currentUserId ,
+  insertAlert (childPath: string, newdepenseKey: string, alert: Alert ) {
+    const alertlist = this.db.database.ref(childPath).child('qfLQdWnNA5U4IiRQxevRB4Z46bg1' + '/' + newdepenseKey).child('alert');
+    console.log(alertlist);
+    console.log(alert);
+    console.log('testalert');
+    alertlist.set({
+      alert : {
       msg : alert.msg,
       date: alert.date
+      }
     }) ;
+
   }
 
   updateAler(alert: Alert) {

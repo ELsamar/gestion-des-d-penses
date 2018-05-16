@@ -26,6 +26,7 @@ export class AuthService {
   get currentUserId(): string {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
+      return (this.authState !== null) ? this.authState.uid : '';
     });
     return (this.authState !== null) ? this.authState.uid : '';
   }

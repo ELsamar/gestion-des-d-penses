@@ -5,28 +5,17 @@
         <h3 class="col-10"></h3>
         <div class="col-2">
           <div class="form-group">
-
-            <select #selectedCategory ngModel name="categ">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-
-            <select class="custom-select  btn " id="selectdepense" name="selectedTest" #selectdepense ngModel  (click)="selectModelAction(Modele)">
+            <select class="custom-select btn " id="selectdepense" name="selectdepense" #selectdepense="ngModel"  [(ngModel)]="selectedModel"
+                    (click)="selectModelAction(selectedModel)">
               <option *ngFor="let Modele of Modelelist , let  i = index " [value]="Modele" >
                 {{Modele.titreModele}}
               </option>
             </select>
           </div>
         </div>
-        {{selectedTest}}
 
         <form #depensesForm="ngForm">
-
-          {{ModelelistDefault | json}}
-          <input type="text" name="$iddepense" #iddepense value=" {{'66666666666' ? Modelelist : ModelelistDefault['cathegorieModele']}}"
-          >
-
+          <input type="hidden" name="$iddepense" #iddepense [(ngModel)]="currentdepenses.$iddepense">
           <input type="hidden" name="iduser" #iduser ngModel [(ngModel)]="currentdepenses.idauth">
           <div class="form-group">
             <label class="col-form-label">Titre:</label>
@@ -91,12 +80,12 @@
           <div class="form-group">
             <!--<label class="col-form-label">Justificatif: </label>-->
             <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
-            <div class="row form-group">
+            <div class="form-group">
               <div class="col-md-4">
                 <label>Justificatif:</label>
               </div>
               <div class="col-md-8">
-                <input type="file" name="cover" id="cover" (change)="selectFile($event)">
+                <input type="file" class="form-control" name="cover" id="cover" (change)="selectFile($event)">
               </div>
             </div>
 
@@ -162,6 +151,18 @@
                             </select>
                           </div>
                           <div class="col-6"><label class="" type=""> jour(s) </label></div>
+                        </div>
+                        <div class="row">
+                          <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
+                                 [(ngModel)]="currentalert.$idalert">
+                        </div>
+                        <div class="row">
+                          <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
+                                      [(ngModel)]="currentalert.msg">
+                        </div>
+                        <div class="row">
+                          <input type="date" class="form-control" name="datealert" #datealert="ngModel"
+                                 [(ngModel)]="currentalert.date"/>
                         </div>
                       </div>
                     </div>

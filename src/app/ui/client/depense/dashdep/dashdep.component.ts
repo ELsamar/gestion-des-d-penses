@@ -24,7 +24,7 @@ export class DashdepComponent implements OnInit {
   constructor( private depenseservice: DepensesService) { }
 
   ngOnInit() {
-  this.depenseservice.getdataauthdash('Depenses/Depenses', 5).snapshotChanges().subscribe(item => {
+  this.depenseservice.getdatadash('Depenses/Depenses', 5).snapshotChanges().subscribe(item => {
       this.depenseslist = [];
       item.forEach(element => {
         var y = element.payload.toJSON();
@@ -32,7 +32,7 @@ export class DashdepComponent implements OnInit {
         this.depenseslist.push(y as Depenses);
       });
     });
-    this.depenseservice.getdataauthdash('Depenses/DepensesRecurrent', 5).snapshotChanges().subscribe(item => {
+    this.depenseservice.getdatadash('Depenses/DepensesRecurrent', 5).snapshotChanges().subscribe(item => {
       this.DepensesRlist = [];
       item.forEach(element => {
         var T = element.payload.toJSON();
