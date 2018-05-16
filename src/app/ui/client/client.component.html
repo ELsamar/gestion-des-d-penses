@@ -1,17 +1,22 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <app-navbar></app-navbar>
     </div>
+  </div>
     <div class="col-12">
       <div class="row">
-        <div class="col-md-2 col-12">
+        <div class=" col-md-3 col-12 sidebar" [@sidebarAnim]='openclose' >
           <app-sidebar></app-sidebar>
+        </div> 
+            <div class="toggle-btn col-1" (click)=toggle()>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        <div class="col-md-8 col-12 mainc" [@maincAnim]='openclose'>
+            <router-outlet></router-outlet>
         </div>
-        <div class="col-md-10 col-12">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
     </div>
   </div>
 </div>

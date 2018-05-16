@@ -92,16 +92,22 @@
             <div class="col-md-6 mb-3 form-group">
               <label for="nationalite">Nationalité</label>
               <input type="text" class="form-control" name="nationalite" #nationalite="ngModel"
-                     [(ngModel)]="user.nationalite">
-              <div class="valid-feedback">Cela semble bon!</div>
-              <div class="invalid-feedback"> Veuillez tappez votre nationalité.</div>
+                     [(ngModel)]="user.nationalite"pattern= "[A-Za-z]*">
+                     <div *ngIf ="nationalite.errors && (nationalite.dirty|| nationalite.touched)" class ="alert alert-danger"  >
+                      <div [hidden] = "!nationalite.errors.required">
+                        <strong>Error:</strong>Ce champs n'est pas valide
+                      </div>
+                      </div>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label for="pays">Pays</label>
               {{user.pays}}
-              <input type="text" class="form-control" name="pays" #pay="ngModel" [(ngModel)]="user.pays"/>
-              <div class="valid-feedback"> Cela semble bon!</div>
-              <div class="invalid-feedback">Veuillez tappez votre pays.</div>
+              <input type="text" class="form-control" name="pays" #pay="ngModel" [(ngModel)]="user.pays" pattern= "[A-Za-z]*"/>
+              <div *ngIf ="pays.errors && (pays.dirty||pays.touched)" class ="alert alert-danger"  >
+                <div [hidden] = "!nationalite.errors.pattern">
+                  <strong>Error:</strong>Ce champs n'est pas valide
+                </div>
+                </div>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label class="mr-sm-2" for="état civil">état civil</label>

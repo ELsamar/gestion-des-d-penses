@@ -10,7 +10,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ChatModule } from './chat/chat.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import { AuthService} from './providers/auth.service';

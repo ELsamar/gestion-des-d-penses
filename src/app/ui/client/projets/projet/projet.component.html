@@ -56,16 +56,18 @@
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Priorité </label>
-                  <!--<select class="custom-select form-group mr-sm-2" #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet">
-                    <option *ngFor = "let priorite of priorites"  [value]="priorite.id">{{priorite.nom}}</option>
-                  </select>-->
-                  <input class="form-control" name="prioriteprojet" #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet" required>
+                  <select class="custom-select form-group mr-sm-2" name=prioriteprojet #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet">
+                    <option *ngFor = "let priorite of priorites"  [value]="priorite">{{priorite}}</option>
+                  </select>
+                  <!--<input class="form-control" name="prioriteprojet" #prioriteprojet="ngModel" [(ngModel)]="currentprojet.prioriteprojet" required>
                   <div *ngIf ="prioriteprojet.errors && (prioriteprojet.dirty|| prioriteprojet.touched)" class ="alert alert-danger"  >
                     <div [hidden] = "!prioriteprojet.errors.required">
                       <strong>Error:</strong>Ce champs est obligatoire
                     </div>
-                  </div>
+                  </div>-->
                 </div>
+
+              
                 <div class="form-group">
                   <label class="col-form-label">Description: </label>
                   <input class="form-control" name="descriptionprojet" #descriptionprojet="ngModel" [(ngModel)]="currentprojet.descriptionprojet"/>

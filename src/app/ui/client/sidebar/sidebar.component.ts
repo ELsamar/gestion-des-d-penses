@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import {NavbarComponent} from '../navbar/navbar.component';
 import {PageService} from '../../../shared/page.service';
-
+declare const $: any;
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -10,16 +10,12 @@ import {PageService} from '../../../shared/page.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private navbar: NavbarComponent) {
-  }
+  @Input() show: true;
+  menuItems: any[];
+
+  constructor() { }
 
   ngOnInit() {
   }
-
-  change(name: any) {
-    this.navbar.pageName = name;
-    console.log('sidebar');
-    console.log(this.navbar.pageName);
-  }
-
+    
 }

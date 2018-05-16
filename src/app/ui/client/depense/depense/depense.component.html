@@ -15,13 +15,16 @@
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Titre:</label>
-                    <input type="text" class="form-control" name="titredepense" #titredepense="ngModel" [(ngModel)]="currentdepenses.titredepense" required minlength="4">
-                      <div *ngIf ="titredepense.errors && (titredepense.dirty|| titredepense.touched)" class ="alert alert-danger"  >
+                    <input type="text" class="form-control" name="titredepense" #titredepense="ngModel" [(ngModel)]="currentdepenses.titredepense" required minlength="4" pattern= "[A-Za-z]*">
+                      <div *ngIf ="titredepense.errors && (titredepense.dirty|| titredepense.touched)" class ="alert alert-danger"  >.
                         <div [hidden] = "!titredepense.errors.required">
                           <strong>Error:</strong>Ce champs est obligatoire
                         </div>
                         <div [hidden] = "!titredepense.errors.minlength">
                           <strong>Error:</strong>Ce champs est trés cours
+                        </div>
+                        <div [hidden] = "!titredepense.errors.pattern">
+                          <strong>Error:</strong>Le nom ne contient pas des chiffres
                         </div>
                       </div>
                 <div class="form-group">
