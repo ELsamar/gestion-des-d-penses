@@ -4,55 +4,39 @@ import {DepensesService} from '../../../../shared/services/depenses.service';
 import {Depenses} from '../../../../shared/models/depenses';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
-  selector: 'app-listdepenses',
-  templateUrl: './listdepenses.component.html',
-  styleUrls: ['./listdepenses.component.css']
+  selector: 'app-list-depenses-recurrent',
+  templateUrl: './list-depenses-recurrent.component.html',
+  styleUrls: ['./list-depenses-recurrent.component.css']
 })
-export class ListdepensesComponent implements OnInit {
+export class ListDepensesRecurrentComponent implements OnInit {
   cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
   repetes: any = ['Jamais' , 'Semaine' , 'mois'];
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  depenseslist: Depenses[];
-  typeaffich: string;
+  DepensesRlist: Depenses[];
   startAt: string;
   endAt: string;
-  depenses: Depenses[];
-
-  constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) {
-  }
+  depensesR: Depenses[];
+  selectedDepenseR: any;
+  constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    var x = this.depenseservice.getDepense('Depenses/Depenses');
-     x.snapshotChanges().subscribe(item => {
-       this.depenseslist = [];
-       item.forEach(element => {
-         var y = element.payload.toJSON();
-         y['$key'] = element.key;
-         this.depenseslist.push(y as Depenses);
-       });
-     });
-  }
-  checkdata() {
-    this.depenseservice.checkdata('Depenses/Depenses').
-    then(snapshot => {
-      if (snapshot.val()) {
-     return true ;
-      } else if (!snapshot.val()) {
-        return false ;
-      }
+    var x = this.depenseservice.getDepense('Depenses/DepensesRecurrent');
+    x.snapshotChanges().subscribe(item => {
+      this.DepensesRlist = [];
+      item.forEach(element => {
+        var y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.DepensesRlist.push(y as Depenses);
+      });
     });
-
   }
-
   openWindowCustomClass(content, depense: Depenses) {
-    console.table(depense);
     this.modalService.open(content, {windowClass: 'dark-modal'});
-    this.depenseservice.selectedDepense = Object.assign({}, depense);
+    this.selectedDepenseR = Object.assign({}, depense);
   }
 
 
@@ -70,11 +54,11 @@ export class ListdepensesComponent implements OnInit {
   }
 
   onEdit(depense: Depenses) {
-    this.depenseservice.selectedDepense = Object.assign({}, depense);
+    this.depenseservice.selectedDepenseR = Object.assign({}, depense);
   }
 
-  onUpdate(depenseForm: NgForm) {
-    if (this.depenseservice.updateDepense(depenseForm.value, 'Depenses/Depenses')) {
+  onUpdateR(depensesFormR: NgForm) {
+    if (this.depenseservice.updateDepenseRecurrent(depensesFormR.value)) {
       console.log('test');
     }
     this.tostr.success('modification', 'modification avec succès');
@@ -87,8 +71,8 @@ export class ListdepensesComponent implements OnInit {
     const text = searchText;
     this.startAt = text;
     this.endAt = text + '\uf8ff';
-    this.depenseservice.getSearchdep(this.startAt, this.endAt, 'Depenses/Depenses' )
-      .subscribe((depenses) => this.depenseslist = depenses);
+    this.depenseservice.getSearchdep(this.startAt, this.endAt, 'Depenses/DepensesRecurrent')
+      .subscribe((depenses) => this.DepensesRlist = depenses);
   }
   onSearch(event) {
     const text = event.target.value;

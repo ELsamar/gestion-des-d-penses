@@ -1,6 +1,6 @@
-import {AppRoutingModule} from './app-routing.module';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { AngularFireModule } from 'angularfire2';
@@ -26,6 +26,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from './ui/login/login.module';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 
+import {} from '@polymer/paper-toggle-button';
+
+
 
 
 @NgModule({
@@ -33,6 +36,7 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
     AppComponent,
     NotFound404Component,
     LoginComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -52,9 +56,10 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
       preventDuplicates: true,
     }),
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+
   ],
-  providers: [PageService, AuthService, TransactionService , AuthGuardService ],
+  providers: [PageService, AuthService, TransactionService , AuthGuardService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

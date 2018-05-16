@@ -25,10 +25,9 @@ import{trigger,state,transition,style,animate} from '@angular/animations';
   ]
 })
 export class ClientComponent implements OnInit {
-  public currentUserId: any ;
   constructor(public authService: AuthService) {
-    this.currentUserId = this.authService.currentUserId ;
-    console.log('id', this.currentUserId );
+    console.log(this.authService.currentUserId);
+    localStorage.setItem('currentUserId', this.authService.currentUserId);
   }
   openclose :string ='open'
   ngOnInit() {

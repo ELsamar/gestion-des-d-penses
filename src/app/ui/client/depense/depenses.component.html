@@ -1,12 +1,16 @@
-<div class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="callapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li> <a routerLink = "/client/depenses/formulaire"><i class="fas fa-plus-circle"></i> ajouter une dépense </a> </li>
-        <li><a routerLink = "/client/depenses"> <i class="fas fa-chevron-circle-left"></i> </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active"  routerLink = "/client/depenses"><i class="far fa-list-alt"></i> / </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink = "/client/depenses/Model">Models / </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink = "/client/depenses/formulaire"> <i class="fas fa-plus"></i> </a>
+  </li>
+  <li class="nav-item">
+  </li>
+</ul>
+
+
 <router-outlet></router-outlet>

@@ -1,165 +1,198 @@
-<form  #depensesForm="ngForm" (ngSubmit)="savedepense()">
-  <input type="hidden" name="$iddepense" #iddepense  ngModel [(ngModel)]="currentdepenses.$iddepense">
-  <input type="hidden" name="iduser" #iduser  ngModel [(ngModel)]="currentdepenses.idauth">
-      <div class="container-fluid">
-        <div class=" content row">
-          <div class="card">
-                <div class="container-fluid">
-                  <h3 class="col-10"></h3>
-                  <div class="col-2">
-                    <div class="form-group">
-                      <select class="custom-select mr-sm-2 btn btn-primary" id="selectdepense">
-                        <option *ngFor = "let typedep of typedeps" [value]="typedep">{{typedep}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-form-label">Titre:</label>
-                    <input type="text" class="form-control" name="titredepense" #titredepense="ngModel" [(ngModel)]="currentdepenses.titredepense" required minlength="4" pattern= "[A-Za-z]*">
-                      <div *ngIf ="titredepense.errors && (titredepense.dirty|| titredepense.touched)" class ="alert alert-danger"  >.
-                        <div [hidden] = "!titredepense.errors.required">
-                          <strong>Error:</strong>Ce champs est obligatoire
-                        </div>
-                        <div [hidden] = "!titredepense.errors.minlength">
-                          <strong>Error:</strong>Ce champs est trés cours
-                        </div>
-                        <div [hidden] = "!titredepense.errors.pattern">
-                          <strong>Error:</strong>Le nom ne contient pas des chiffres
-                        </div>
-                      </div>
-                <div class="form-group">
-                  <label class="col-form-label">Montant :</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="0000.0000" name="montantdepense" #montantdepense="ngModel" [(ngModel)]="currentdepenses.montantdepense" pattern= "\d*" required>
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">TND</div>
-                    </div>
-                    <div *ngIf ="montantdepense.errors && (montantdepense.dirty|| montantdepense.touched)" class ="alert alert-danger"  >
-                      <div [hidden] = "!montantdepense.errors.required">
-                        <strong>Error:</strong>Ce champs est obligatoire
-                      </div>
-                      <div [hidden] = "!montantdepense.errors.pattern">
-                        <strong>Error:</strong>le montant doit étre nombre
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-form-label">Date :</label>
-                  <input type="date" class="form-control" name="datedepense" #datedepense="ngModel" [(ngModel)]="currentdepenses.datedepense " pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required  />
-                  <div *ngIf ="datedepense.errors && (datedepense.dirty|| datedepense.touched)" class ="alert alert-danger"  >
-                    <div [hidden] = "!datedepense.errors.required">
-                      <strong>Error:</strong>Ce champs est obligatoire
-                    </div>
-                    <div [hidden] = "!datedepense.errors.pattern">
-                      <strong>Error:</strong>Veuillez inserrez une date correcte
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="Cathegorie" class="col-form-label">Cathegorie :</label>
-                  <!--<select class="custom-select form-group mr-sm-2" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense">
-                  <label class="col-form-label">Cathegorie :</label>
-                  <input type="text" class="form-control" name="cathegoriedepense" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense "/>
-                </div>
-                <!--1<div class="form-group">
-                  <label for="Categorie" class="col-form-label">Cathegorie :</label>
-                  <select class="custom-select form-group mr-sm-2" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense">
-                    <option *ngFor = "let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
-                  </select>-->
-                  <input class="form-control" name="cathegoriedepense" #cathegoriedepense="ngModel" [(ngModel)]="currentdepenses.cathegoriedepense"/>
-                </div>
-                <div class="form-group">
-                  <label class="col-form-label">Description: </label>
-                  <input class="form-control" name="descriptiondepense" #descriptiondepense="ngModel" [(ngModel)]="currentdepenses.descriptiondepense"/>
-                </div>
-                <div class="form-group">
-                  <!--<label class="col-form-label">Justificatif: </label>-->
-                  <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
-                  <div class="row form-group">
-                    <div class="col-md-4">
-                      <label>File</label>
-                    </div>
-                    <div class="col-md-8">
-                      <label class="btn btn-default">
-                        <input type="file" name="cover" id="cover" (change)="selectFile($event)">
-                      </label>
-                    </div>
-                  </div>
+<div class="container-fluid">
+  <div class=" content row">
+    <div class="card">
+      <div class="container-fluid">        
+        <h3 class="col-10"></h3>
+        <div class="col-2">
+          <div class="form-group">
+            <select class="custom-select btn " id="selectdepense" name="selectdepense" #selectdepense="ngModel"  [(ngModel)]="selectedModel"
+                    (click)="selectModelAction(selectedModel)">
+              <option *ngFor="let Modele of Modelelist , let  i = index " [value]="Modele" >
+                {{Modele.titreModele}}
+              </option>
+            </select>
+          </div>
+        </div>
 
-                  <div *ngIf="currentFileUpload" class="progress">
-                    <div class="progress-bar progress-bar-info progress-bar-striped"
-                         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-                         aria-valuemin="0" aria-valuemax="100"
-                         [ngStyle]="{width:progress.percentage+'%'}">
-                      <!--{{progress.percentage}}%-->
-                    </div>
-                  </div>
+        <form #depensesForm="ngForm">
+          <input type="hidden" name="$iddepense" #iddepense [(ngModel)]="currentdepenses.$iddepense">
+          <input type="hidden" name="iduser" #iduser ngModel [(ngModel)]="currentdepenses.idauth">
+          <div class="form-group">
+            <label class="col-form-label">Titre:</label>
+            <input type="text" class="form-control" name="titredepense" #titredepense="ngModel"
+                   [(ngModel)]="currentdepenses.titredepense" required minlength="4">
 
-                </div>
-
-              <div class="custom-control custom-checkbox récurents ">
-                <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
-                       role="button" aria-expanded="false" aria-controls="collapseExample"
-                       id="customCheckrecudep">
-                <label class="col-form-label" for="customCheckrecudep"> Définir comme dépense récurrent </label>
-                <div class="collapse" id="collapserecudep">
-                  <div class="card card-body form-group">
-                    <div class="form-group">
-                      <select class="custom-select mr-sm-2 form-control" >
-                        <option *ngFor ="let repete of repetes" [value]="repete">{{repete}}</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <select class="custom-select mr-sm-2 form-control">
-                        <option *ngFor ="let semaine of semaines" [value]="semaine">{{semaine}}</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <select class="custom-select mr-sm-2">
-                        <option *ngFor = "let moi of mois" [value]="moi">{{moi}}</option>
-                      </select>
-                    </div>
-                    <!--<div class="form-group" >
-                      Du  <input formControlName="dateFrom" type="date" useValueAsDate />
-                      au  <input formControlName="dateTo" type="date" useValueAsDate />
-                    </div>-->
-                    <div class="custom-control custom-checkbox alerte  ">
-                      <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
-                             role="button" aria-expanded="false" aria-controls="collapseExample"
-                             id="customCheckalertedep">
-                      <label class="custom-control-label" for="customCheckalertedep">Ajouter un alerte :</label>
-                      <div class="collapse" id="collapsealertedep">
-                        <div class="card card-body">
-                          <div class="form-group">
-                            <label class="" type=""> m'avertir avant : </label>
-                            <div class="row">.
-                              <div class="col-6">
-                                <select class="custom_menu">
-                                  <option *ngFor ="let avert of averts" [value]="avert"> {{avert}}</option>
-                                </select>
-                              </div>
-                              <div class="col-6"> <label class="" type=""> jour(s) </label></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div *ngIf="titredepense.errors && (titredepense.dirty|| titredepense.touched)" class="alert alert-danger">
+              <div [hidden]="!titredepense.errors.required">
+                <strong>Error:</strong>Ce champs est obligatoire
               </div>
-              <div class="row">
-                <div class="col-1 content-center">
-                  <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesForm.valid">ajouter</button>
-                </div>
-                <div class="col-1 content-center">
-                  <button type="reset" class="btn btn-secondary  bouton">annuler
-                  </button>
-                </div>
-              </div>
+              <div [hidden]="!titredepense.errors.minlength">
+                <strong>Error:</strong>Ce champs est trés cours
               </div>
             </div>
           </div>
-        </div>
+          <div class="form-group">
+            <label class="col-form-label">Montant :</label>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="0000.0000" name="montantdepense"
+                     #montantdepense="ngModel" [(ngModel)]="currentdepenses.montantdepense" pattern="\d*" required>
+              <div class="input-group-prepend">
+                <div class="input-group-text">TND</div>
+              </div>
+              <div *ngIf="montantdepense.errors && (montantdepense.dirty|| montantdepense.touched)"
+                   class="alert alert-danger">
+                <div [hidden]="!montantdepense.errors.required">
+                  <strong>Error:</strong>Ce champs est obligatoire
+
+                </div>
+                <div [hidden]="!montantdepense.errors.pattern">
+                  <strong>Error:</strong>le montant doit étre nombre
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Date :</label>
+            <input type="date" class="form-control" name="datedepense" #datedepense="ngModel"
+                   [(ngModel)]="currentdepenses.datedepense"
+                   pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                   required/>
+            <div *ngIf="datedepense.errors && (datedepense.dirty|| datedepense.touched)" class="alert alert-danger">
+              <div [hidden]="!datedepense.errors.required">
+                <strong>Error:</strong>Ce champs est obligatoire
+              </div>
+              <div [hidden]="!datedepense.errors.pattern">
+                <strong>Error:</strong>Veuillez inserrez une date correcte
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Cathegorie :</label>
+            <select class="custom-select form-group mr-sm-2" name="cathegoriedepense" #cathegoriedepense="ngModel"
+                    [(ngModel)]="currentdepenses.cathegoriedepense">
+              <option *ngFor="let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="col-form-label">Description: </label>
+            <input class="form-control" name="descriptiondepense" #descriptiondepense="ngModel"
+                   [(ngModel)]="currentdepenses.descriptiondepense"/>
+          </div>
+          <div class="form-group">
+            <!--<label class="col-form-label">Justificatif: </label>-->
+            <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+            <div class="form-group">
+              <div class="col-md-4">
+                <label>Justificatif:</label>
+              </div>
+              <div class="col-md-8">
+                <input type="file" class="form-control" name="cover" id="cover" (change)="selectFile($event)">
+              </div>
+            </div>
+
+            <div *ngIf="currentFileUpload" class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped"
+                   role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                   aria-valuemin="0" aria-valuemax="100"
+                   [ngStyle]="{width:progress.percentage+'%'}">
+                <!--{{progress.percentage}}%-->
+              </div>
+            </div>
+
+          </div>
+          <div class="custom-control custom-checkbox récurents ">
+            <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
+                   role="button" aria-expanded="false" aria-controls="collapseExample"
+                   id="customCheckrecudep">
+            <label class="col-form-label" for="customCheckrecudep"> Définir comme dépense récurrent </label>
+            <div class="collapse" id="collapserecudep">
+              <div class="card card-body form-group">
+                <div class="form-group">
+                  <select class="custom-select mr-sm-2 form-control" name="typerep" #typerep="ngModel"
+                          [(ngModel)]="currentdepenses.typerep">
+                    <option *ngFor="let repete of repetes" [value]="repete">{{repete}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
+                          [(ngModel)]="currentdepenses.jourrep">
+                    <option *ngFor="let semaine of semaines" [value]="semaine">{{semaine}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select class="custom-select mr-sm-2" name="moisrep" #moisrep="ngModel"
+                          [(ngModel)]="currentdepenses.moisrep">
+                    <option *ngFor="let mois of Mois" [value]="mois">{{mois}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  Du <input type="date" class="form-control" name="datefrom" #datefrom="ngModel"
+                            [(ngModel)]="currentdepenses.datefrom"/>
+                  au <input type="date" class="form-control" name="dateto" #dateto="ngModel"
+                            [(ngModel)]="currentdepenses.dateto"/>
+                </div>
+                <div *ngIf="dateto.value < datefrom.value">
+                  <div class="alert alert-danger">
+                    <strong>Error:</strong>date invalide
+                  </div>
+                </div>
+                <div class="custom-control custom-checkbox alerte  ">
+                  <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
+                         role="button" aria-expanded="false" aria-controls="collapseExample"
+                         id="customCheckalertedep">
+                  <label class="custom-control-label" for="customCheckalertedep">Ajouter un alerte :</label>
+                  <div class="collapse" id="collapsealertedep">
+                    <div class="card card-body">
+                      <div class="form-group">
+                        <label class="" type=""> m'avertir avant : </label>
+                        <div class="row">.
+                          <div class="col-6">
+                            <select class="custom_menu">
+                              <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
+                            </select>
+                          </div>
+                          <div class="col-6"><label class="" type=""> jour(s) </label></div>
+                        </div>
+                        <div class="row">
+                          <input type="hidden" class="form-control" name="msgalert" #msgalert="ngModel"
+                                 [(ngModel)]="currentalert.$idalert">
+                        </div>
+                        <div class="row">
+                          <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
+                                      [(ngModel)]="currentalert.msg">
+                        </div>
+                        <div class="row">
+                          <input type="date" class="form-control" name="datealert" #datealert="ngModel"
+                                 [(ngModel)]="currentalert.date"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1 content-center">
+              <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
+                      (click)="savedepense()">
+                ajouter
+              </button>
+            </div>
+            <div class="col-1 content-center">
+              <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
+                      (click)="savedepenseRecurrent()">ajouter recurent
+              </button>
+            </div>
+            <div class="col-1 content-center">
+              <button type="reset" class="btn btn-secondary bouton">annuler</button>
+            </div>
+          </div>
+        </form>
       </div>
-</form>
+    </div>
+  </div>
+</div>
+
+
+

@@ -13,7 +13,7 @@ export class AuthService {
   authState: any = null;
   providerG: firebase.auth.GoogleAuthProvider;
   providerF: firebase.auth.FacebookAuthProvider;
-  public user: Observable <any>;
+  public user: Observable<firebase.User | null>;
   email: string;
   emailSent = false;
   errorMessage: string;
@@ -24,6 +24,10 @@ export class AuthService {
     });
   }
   get currentUserId(): string {
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth;
+      return (this.authState !== null) ? this.authState.uid : '';
+    });
     return (this.authState !== null) ? this.authState.uid : '';
   }
   singup(email: string, password: string) {
@@ -105,13 +109,14 @@ export class AuthService {
     }
   }
   signout() {
-      return this.afAuth.auth.signOut();
-    // this.authState.signOut().then(function() {
-    //   // Sign-out successful.
-    // }).catch(function(error) {
-    //   console.log(error);
-    //   // An error happened.
-    // });
+      //return this.afAuth.auth.signOut();
+    //thismethodforemaipasswordlogout
+    return firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    }).catch(function(error) {
+      console.log(error);
+      // An error happened.
+     });
   }
 
 }
