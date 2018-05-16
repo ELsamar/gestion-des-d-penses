@@ -88,16 +88,6 @@
                 <input type="file" class="form-control" name="cover" id="cover" (change)="selectFile($event)">
               </div>
             </div>
-
-            <div *ngIf="currentFileUpload" class="progress">
-              <div class="progress-bar progress-bar-info progress-bar-striped"
-                   role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-                   aria-valuemin="0" aria-valuemax="100"
-                   [ngStyle]="{width:progress.percentage+'%'}">
-                <!--{{progress.percentage}}%-->
-              </div>
-            </div>
-
           </div>
           <div class="custom-control custom-checkbox récurents ">
             <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
@@ -169,6 +159,15 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div *ngIf="currentFileUpload" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped"
+                 role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                 aria-valuemin="0" aria-valuemax="100"
+                 [ngStyle]="{width:progress.percentage+'%'}">
+              <!--{{progress.percentage}}%-->
             </div>
           </div>
           <div class="row">

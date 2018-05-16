@@ -15,7 +15,7 @@ export class DepensesService {
   selectedDepenseR: Depenses = new Depenses();
   newdepenseKey: string;
   currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
-  depenseslist: AngularFireList ;
+  depenseslist: AngularFireList <any>;
   constructor(private db: AngularFireDatabase, public authservice: AuthService) {
     this.depensesRef = db.list(`${this.basePath}`);
   }
