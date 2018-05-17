@@ -16,12 +16,14 @@ import {FormsModule, NgForm ,ControlValueAccessor, NG_VALUE_ACCESSOR} from '@ang
     ],
 })
 export class ProjetComponent implements OnInit {
+
   priorites: priorite[] = [
     { id : 1 , nom : 'forte'},
     { id : 1 , nom : 'moyenne'},
     { id : 1 , nom : 'faible'},
   ];
   constructor(private projetservice: ProjetsService, private _elementRef: ElementRef) { }
+
   currentprojet: Projets;
   ngOnInit() {
     this.currentprojet = new Projets();

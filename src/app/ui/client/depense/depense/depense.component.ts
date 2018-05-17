@@ -67,8 +67,8 @@ export class DepenseComponent implements OnInit {
     const newdepenseKey = this.depenseservice.getnewdepenseKey('Depenses/Depenses');
     this.currentFileUpload = new FileUpload(file);
     this.depenseservice.insertDepense('Depenses/Depenses', newdepenseKey, this.currentdepenses, this.currentFileUpload, this.progress);
-  }
 
+  }
   savedepenseRecurrent() {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;

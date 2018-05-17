@@ -1,21 +1,28 @@
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand my-0 mr-md-auto font-weight-normal" routerLink="/">
-            <img src="./../../../../assets/img/logo.png" width="30" height="30" class="d-inline-block align-top img-circle"
-                 alt="">
-            <label class="title-bon-plan">port money</label>
-          </a>
-        <div class="my-2 my-md-0 mr-md-3 ml-5">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <form class="nav-item dropdown form-inline ">
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-light " style="background-color:#fff" >
+  <div class="container-fluid row">
+        <div class="col-2">
+            <a class="navbar-brand my-0 mr-md-auto font-weight-normal" routerLink="/">
+              <img src="./../../../../assets/img/logo.png" width="40" height="40" class="d-inline-block align-top img-circle"
+                   alt="">
+              <label class="title" ><strong>Port money</strong></label>
+            </a>
+        </div>
+  <!--<div class="my-2 my-md-0 mr-md-3 ml-5">-->
+  <div class="col-6"></div>
+  <!--<div class="col-1">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+  </div>-->
+        <ul class="navbar-nav">
+            <li class="">
+              <form class=" dropdown form-inline ">
+
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="assets/png/alarm.png" class="icon">
+                  <!--<i class="fas fa-bell fa-2x"></i>-->
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                   <a class="dropdown-item" href="#">
@@ -28,30 +35,18 @@
                 </div>
               </form>
             </li>
-            <li class="nav-item">
-              <form class="nav-item dropdown form-inline ">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img class="rounded-circle" alt="Card image cap" src="assets/img/profil.png"
-                       width="60">
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" routerLink="profil">
-                    <img class=" rounded-circle "
-                         src="assets/img/profil.png" width="60" height="60">
-                  </a>
-                  <div class="dropdown-item" href="#">
-                    <h5> Nom prenom </h5>
-                    <p class="content-center"> e-mail</p>
-                  </div>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item"  (click)="logout()" >déconnecter</a>
-                </div>
-              </form>
-            </li>
           </ul>
-        </div>
-        </div>
-        </div>
-      </nav>
 
 
+          <a class=""role="button" routerLink="profil" aria-haspopup="true" aria-expanded="false">
+              <img class="rounded-circle" alt="Card image cap" src="assets/img/profil.png"
+                   width="35">
+            </a>
+
+            <a class=""  (click)="logout()" ><img src="assets/png/logout.png" class="icon"></a>
+
+
+
+  </div>
+  <div class="col-2"></div>
+</nav>

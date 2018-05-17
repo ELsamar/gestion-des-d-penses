@@ -13,3 +13,32 @@
   width: calc(100% - 260px);
   min-height: 100%;
   overflow: auto; }*/
+  .icon{
+    width: 2.4em;
+  }
+  .toggle-btn{
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    padding-top: 80px;
+    margin-left: 320px
+  }
+  .toggle-btn span{
+    display : block ;
+    width: 30px;
+    height: 1px;
+    background: #151719;
+    margin: 3px 0px;
+   
+  }
+  .sidebar{
+    width: 380px;
+    height: 100%;
+    position: fixed;
+    padding-top: 70px;
+    margin-left: -30px;
+  }
+  .mainc{
+    margin-left: 380px;
+    padding-top: 100px;
+  }

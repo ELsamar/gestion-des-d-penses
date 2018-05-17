@@ -1,22 +1,21 @@
-<div class="row">
-  <div *ngFor="let Projets of projetlist" class="col-md-6" >
-    <div class="projet projet-success">
+<div class="row listes-projets">
+  <div *ngFor="let Projets of projetlist" class="col-md-6">
+    <section class="projet " [class.projet-success]>
       <div class="projet-desc">
         <h4 class="projet-title">{{Projets.titreprojet}}</h4>
         <span class="projet-details">
-          {{Projets.descriptionprojet}} <br>{{Projets.dateprojet}}
+          {{Projets.descriptionprojet}}
+          <br>{{Projets.dateprojet}}
         </span>
       </div>
       <div class="projet-price">
         <div class="projet-amount">
-          <span class="currency">$</span>
+          <span class="currency">DNT</span>
           <span class="price">{{Projets.montantprojet}}</span>
           <span class="frecuency">/mo</span>
         </div>
-        <a href="#" class="btn btn-success be-booking-btn-price">détailler</a>
-        <a class="btn btn-danger" (click)="onDelete(Projets.$key)"><i class="fas fa-trash-alt"></i></a>
+        <a href="#" class="btn btn-warning be-booking-btn-price">détailler</a>
       </div>
-    </div>
+    </section>
   </div>
-
 </div>

@@ -87,9 +87,15 @@
       <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
       <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
 
+<<<<<<< HEAD
+      <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="formModel.captcha =''">Annuler</button> 
+      <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="singup()">s'inscrire</button>
+    
+=======
       <button class="btn btn-lg btn-secondary btn-block" type="submit"  (click)="formModel.captcha = ''">Annuler</button>
       <button class="btn btn-lg btn-secondary btn-block" type="submit"  (click)="singup()">s'inscrire</button>
 
+>>>>>>> b4c94f273180be76a92db201526d31902da9af28
     </form>
   </div>
 </div>

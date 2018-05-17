@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class=" content row">
     <div class="card">
-      <div class="container-fluid">
+      <div class="container-fluid">        
         <h3 class="col-10"></h3>
         <div class="col-2">
           <div class="form-group">
@@ -43,6 +43,7 @@
                    class="alert alert-danger">
                 <div [hidden]="!montantdepense.errors.required">
                   <strong>Error:</strong>Ce champs est obligatoire
+
                 </div>
                 <div [hidden]="!montantdepense.errors.pattern">
                   <strong>Error:</strong>le montant doit étre nombre
@@ -143,7 +144,7 @@
                           <div class="col-6"><label class="" type=""> jour(s) </label></div>
                         </div>
                         <div class="row">
-                          <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
+                          <input type="hidden" class="form-control" name="msgalert" #msgalert="ngModel"
                                  [(ngModel)]="currentalert.$idalert">
                         </div>
                         <div class="row">

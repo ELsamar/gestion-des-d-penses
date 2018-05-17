@@ -1,6 +1,8 @@
 /**
 aefzoubvrgz
  */
+<<<<<<< HEAD
+=======
 .container-fluid {
   width: 100%;
   padding-right: 30px; !important;
@@ -422,6 +424,7 @@ a {
         flex: 0 0 50%;
         max-width: 50%;
     }
+>>>>>>> b4c94f273180be76a92db201526d31902da9af28
 
 /** */
 
@@ -474,7 +477,6 @@ background-color: transparent;
   body {
     font-family: 'Open Sans', sans-serif;
   }
-}
 }
 
 
