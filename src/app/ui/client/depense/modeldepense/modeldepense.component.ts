@@ -25,9 +25,11 @@ export class ModeldepenseComponent implements OnInit {
     this.modeledepenseservice.updateModeleDepense(ModeleDepenseForm.value);
   }
   onSubmit(ModeleDepenseForm: NgForm) {
-    if (ModeleDepenseForm.value.$key == null) {
+    console.log(ModeleDepenseForm.value.key);
+    if (!(ModeleDepenseForm.value.key)) {
       this.modeledepenseservice.insertModeleDepense(ModeleDepenseForm.value);
-    } else { this.modeledepenseservice.updateModeleDepense(ModeleDepenseForm.value); }
+    } else {
+      this.modeledepenseservice.updateModeleDepense(ModeleDepenseForm.value); }
     this.resetForm(ModeleDepenseForm);
   }
 

@@ -1,5 +1,17 @@
+<header >
+  <nav class="site-header fixed-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" routerLink="/public">Acceuil</a>
+      <a class="py-2 d-none d-md-inline-block" routerLink ="#engagements">Nos engagements</a>
+      <a class="py-2 d-none d-md-inline-block" routerLink="#fonctionnalite">Fonctionnalités</a>
+      <a class="py-2 d-none d-md-inline-block" routerLink="#contacts">Contacts</a>
+      <a class="py-2 d-none d-md-inline-block" routerLink="/login"role="button">Connexion</a>
+      <a class="py-2 d-none d-md-inline-block" role="button" ></a>
+    </div>
+  </nav>
+</header>
   <div class="container-login100 text-white" style="background-image: url('./../../../assets/img/bgc.jpg');">
-  <div >
+  <div *ngIf="connecter" >
       <div class="row">
           <div class="col-md-4"></div>
           <div class="col-md-4"><img class="mb-4 " src="./../../../assets/img/logo.png" alt="" width="72" height="72">
@@ -11,7 +23,7 @@
           <h1 class="h3 font-weight-normal">Je me connecte</h1>
         </div>
       </div>
-  <div class="row">
+      <div class="row">
     <div class="col-md-5">
         <form class="form-signin">
                 <label for="Emailsignin" class="">Email</label>
@@ -19,8 +31,8 @@
               <label for="Passwordsignin" class="">Mot de passe</label>
               <input type="password" id="Passwordsignin" class="form-control" name="password" [(ngModel)]="password" required><br>
             <a *ngIf="!resetPassword"  class="text-left" (click)="sendResetEmail()"> Mot de passe oubliée ! </a>
-            <!--<p *ngIf="resetPassword" class="">
-              Vérifiez votre email pour réinitialiser le mot de passe!</p>-->
+            <p *ngIf="resetPassword" class="">
+              Vérifiez votre email pour réinitialiser le mot de passe!</p>
             <button class="btn btn-lg btn-secondary " type="submit" (click)="signin()">Connexion</button>
           </form>
   </div>
@@ -29,20 +41,16 @@
         <form class="form-signin" >
               <label for="Emailsignin2" class="">Email</label>
               <input type="email" id="Emailsignin2" class="form-control" name="email1" [(ngModel)]="email1" required autofocus>
-              <button class="btn btn-lg btn-secondary" type="submit" (click)="signin()">Connexion</button>
+              <button class="btn btn-lg btn-secondary" type="submit" (click)="sendEmailLink()">Connexion</button>
             </form>
     </div>
     </div>
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-4">
-      <div class="txt1 text-center">
-              <span>
-                ou se connecter via
-              </span>
-      </div>
+      <div class="txt1 text-center"><span>ou se connecter via</span></div>
         <div class="row">
-          <div class="col-md-4"><a class="login100-social-item bg1">
+          <div class="col-md-4"><a class="login100-social-item bg1" (click)="loginfacebook()">
             <i class="fab fa-facebook"></i>
           </a></div>
           <div class="col-md-4"><a class="login100-social-item bg2">
@@ -51,12 +59,17 @@
           <a class="login100-social-item bg3" (click)="logingoogle()">
             <i class="fab fa-google"></i></a>
         </div>
-        <div class="">
-          <span class="txt1 p-b-17">vous n'avez pas un compte! </span>
+        <div class=""><span class="txt1 p-b-17">vous n'avez pas un compte! </span></div>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-4">
+            <a  (click)="sinscrire()" class="txt1 p-r-17" style="color: #ffffff">S'inscrire</a>
+          </div>
         </div>
-        <div class="row"><div class="col-md-3"></div><div class="col-md-4"><a  href="#"class="txt1 p-r-17" style="color: #ffffff">S'inscrire</a></div></div>
       </div>
     </div>
+  </div>
+    <div *ngIf="!connecter">
     <form class="form-signup" #captchaProtectedForm="ngForm">
         <div class="row">
             <div class="col-md-4"></div>
@@ -79,83 +92,9 @@
       <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
       <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
       <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="formModel.captcha =''">Annuler</button> 
+      <button class="btn btn-lg btn-primary btn-block" type="reset"  (click)="formModel.captcha =''">Annuler</button>
       <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="singup()">s'inscrire</button>
     </form>
   </div>
-</div>
-
-
-
-<!--
-
-<div class="container">
-
-  <h1>Connecté vous à votre compte 2 </h1>
-
-  <button class="btn btn-sucess" (click)="logingoogle()">Connexion avec Google</button>
-  <button class="btn btn-sucess" (click)="loginfacebook()">Connexion avec facebook</button>
-  <button class="btn" (click)="openBackDropCustomClass(content)">s'inscrire/connecter</button>
-
-  <button class="btn btn-sucess" routerLink="/login2">connexion sans mot de passe</button>
-
-</div>
-
-
-<ng-container *ngIf="user | async; else login">
-
-  <div class="notification is-success">
-    Congrats You logged in without a password!
-  </div>
-
-  <button (click)="logout()" class="button">Signout</button>
-
-</ng-container>
-
-<ng-template #login>
-  <label for="email" class="label">e-mail</label><br>
-  <input type="email" class="input" [(ngModel)]="email">
-
-  <hr>
-
-  <button class="button is-primary" [disabled]="emailSent" (click)="sendEmailLink(email)">Get Login Link</button>
-
-  <hr>
-
-</ng-template>
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Connexion</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form class="form-signin">
-      <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" id="inputEmail" class="form-control" name="email"  required autofocus>
-      <label for="inputPassword" class="sr-only">Mot de passe</label>
-      <input type="password" id="inputPassword" class="form-control" name="password" [(ngModel)]="password" required>
-
-      <button class="btn btn-secondary" type="submit" (click)="singup()">s'inscrire</button>
-      <button class="btn btn-secondary" type="submit" (click)="signin()">Connecter</button>
-    </form>
-
 
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="('Close click')">Annuler </button>
-  </div>
-</ng-template>
-<form #captchaProtectedForm="ngForm">
-  <re-captcha (resolved)="resolved($event)" [(ngModel)]="formModel.captcha" name="captcha"required siteKey="6Ldw8FUUAAAAAGGrC5Sf-sI5N6co4HT5pykzIBDJ" #captchaControl="ngModel">
-  </re-captcha>
-  <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>
-  <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
-  <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
-  <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
-  <button (click)="formModel.captcha = ''">Reset Captcha</button>
-
-</form>
--->

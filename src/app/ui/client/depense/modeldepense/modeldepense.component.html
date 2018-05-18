@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-6"> <form  #ModeleDepenseForm="ngForm" >
-      {{modeledepenseservice.selectedModele}}
+  <div class="col-md-6 mb-3 text-center ">
+    <form  #ModeleDepenseForm="ngForm" >
       <input type="" name="$idModele" #$idModele="ngModel" [(ngModel)]="modeledepenseservice.selectedModele.$key">
       <div class="container-fluid">
         <div class=" content row">
@@ -26,6 +26,7 @@
                     <div class="input-group-prepend">
                       <div class="input-group-text">TND</div>
                     </div>
+                  </div>
                     <div *ngIf ="montantModele.errors && (montantModele.dirty|| montantModele.touched)" class ="alert alert-danger"  >
                       <div [hidden] = "!montantModele.errors.required">
                         <strong>Error:</strong>Ce champs est obligatoire
@@ -34,7 +35,6 @@
                         <strong>Error:</strong>le montant doit étre nombre
                       </div>
                     </div>
-                  </div>
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Date :</label>
@@ -62,7 +62,7 @@
 
                 <div class="row">
                   <div class="col-4 content-center">
-                    <button type="submit" class="" [disabled]="(!ModeleDepenseForm.valid)" (click)="saveModeleDepense(ModeleDepenseForm)">
+                    <button type="submit" class="" [disabled]="(!ModeleDepenseForm.valid)" (click)="onSubmit(ModeleDepenseForm)">
                       ajouter</button>
                   </div>
                   <div class="col-4 content-center">
@@ -80,6 +80,6 @@
         </div>
       </div>
   </form></div>
-  <div class="col-6"><app-listmodeldepense></app-listmodeldepense></div>
+  <div class="col-md-6 mb-3 text-center "><app-listmodeldepense></app-listmodeldepense></div>
   </div>
 

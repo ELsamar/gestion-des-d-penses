@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
   password: string;
   resetPassword: boolean = false;
+  connecter = true;
   public formModel: FormModel = {};
   constructor(public authService: AuthService, private router: Router,
               private afs: AngularFirestore, private toastr: ToastrService) {
@@ -64,7 +65,9 @@ export class LoginComponent implements OnInit {
       this.confirmSignIn(url);
     }
   }
-
+  sinscrire() {
+    this.connecter = false;
+  }
   async sendEmailLink() {
     this.authService.sendEmailLink(this.email);
   }
@@ -87,7 +90,7 @@ export class LoginComponent implements OnInit {
   }
 
   singup() {
-    this.authService.singup(this.email, this.password);
+    this.authService.singup(this.email, this.password, this.connecter);
   }
   signin() {
     this.authService.singin(this.email, this.password);

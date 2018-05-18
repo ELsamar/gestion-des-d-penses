@@ -7,10 +7,9 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class DepensesService {
-  private basePath = '/depenses';
   private storageBasePath = '/Depensesuploads';
-  depensesRef: AngularFireList<Depenses>;
-  depenseRef: AngularFireObject<Depenses>;
+ // depensesRef: AngularFireList<Depenses>;
+  // depenseRef: AngularFireObject<Depenses>;
   selectedDepense: Depenses = new Depenses();
   selectedDepenseR: Depenses = new Depenses();
   newdepenseKey: string;
@@ -18,7 +17,6 @@ export class DepensesService {
   depenseslist: AngularFireList <any>;
 
   constructor(private db: AngularFireDatabase, public authservice: AuthService) {
-    this.depensesRef = db.list(`${this.basePath}`);
   }
   checkdata(childPath) {
     const depenseslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
@@ -31,16 +29,10 @@ export class DepensesService {
   getnewdepenseKey(childPath: string) {
     return this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
   }
-
-  // getDepense(childPath: string) {
-  //   return this.depenseslist = this.db.list(childPath);
-  // }
-
   insertDepense(childPath: string, newdepenseKey: string, depenses: Depenses,
                 fileUpload: FileUpload, progress: { percentage: number }): void {
     this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
     const depenseslist = this.db.database.ref(childPath).child(this.currentUserId).child(newdepenseKey);
-    // depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
 
@@ -72,10 +64,9 @@ export class DepensesService {
     );
   }
   insertDepenseRecurrent(childPath: string, newdepenseKey: string,
-                         depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void {
+                         depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }) {
     this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
     const depenseslist = this.db.database.ref(childPath).child(this.currentUserId).child(newdepenseKey);
-   // this.depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
 
@@ -111,8 +102,6 @@ export class DepensesService {
             // this.depensesRef.push(depenses);
           }
       );
-
-
       });
   }
 
@@ -165,12 +154,11 @@ export class DepensesService {
     depenses.active = false;
     this.depenseslist.update(depenses.$iddepense,
       {
-        idauth: this.authservice.currentUserId,
         active: depenses.active
       });
   }
 
-  deleteDepense($iddepense: string,) {
+  deleteDepense($iddepense: string) {
     //const depenselist = this.db.list(childPath + '/' +  this.currentUserId);
     this.depenseslist.remove($iddepense);
   }

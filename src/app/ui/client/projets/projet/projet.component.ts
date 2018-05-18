@@ -19,8 +19,8 @@ export class ProjetComponent implements OnInit {
 
   priorites: priorite[] = [
     { id : 1 , nom : 'forte'},
-    { id : 1 , nom : 'moyenne'},
-    { id : 1 , nom : 'faible'},
+    { id : 2 , nom : 'moyenne'},
+    { id : 3 , nom : 'faible'},
   ];
   constructor(private projetservice: ProjetsService, private _elementRef: ElementRef) { }
 

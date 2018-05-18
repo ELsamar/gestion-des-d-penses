@@ -9,6 +9,7 @@ import {TransactionsModule} from './transactions/transactions.module';
 import {DepensesComponent} from './depense/depenses.component';
 import {ProjetsComponent} from './projets/projets.component';
 import {RevenusComponent} from './revenu/revenus.component';
+import {NotFound404Component} from '../../shared/not-found404/not-found404.component';
 
 const routes: Routes = <Routes> [
   {

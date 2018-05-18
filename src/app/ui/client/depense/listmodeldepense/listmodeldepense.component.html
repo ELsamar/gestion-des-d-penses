@@ -1,3 +1,5 @@
+<input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
+       data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
 <table class="table table-sm table-hover table table-striped ">
   <thead>
   <tr>
@@ -7,17 +9,32 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let Model of ModelDepenseslist">
-    <td>{{Model.titreModele}}</td>
-    <td>{{Model.montantModele}}</td>
-    <td>{{Model.cathegorieModele}}</td>
+  <tr *ngFor="let model of ModelDepenseslist">
+    <td>{{model.titreModele}}</td>
+    <td>{{model.montantModele}}</td>
+    <td>{{model.cathegorieModele}}</td>
     <td>
-      <a (click)="onEdit(Model)"><i class="far fa-edit"></i></a>
-      <a >
-        <i class="fas fa-trash-alt"></i>
-      </a>
-      <a ><i class="fas fa-eye"></i></a>
+      <a (click)="onEdit(model)"><i class="far fa-edit"></i></a>
+      <a  (click)="onDelete(model.$key)" ><i class="fas fa-trash-alt"></i></a>
+      <a (click)="openWindowCustomClass(contentDetailModel,model)"><i class="fas fa-eye"></i></a>
     </td>
   </tr>
   </tbody>
 </table>
+<ng-template #contentDetailModel let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <ul class="content-center detail">
+    <li><label class="col-form-label">titre: {{Selectmodel.titreModele}}</label></li>
+    <li><label class="col-form-label">Montant : {{Selectmodel.montantModele}} DT </label></li>
+    <li><label class="col-form-label">Date : {{Selectmodel.dateModele}}</label></li>
+    <li><label class="col-form-label">Cathegorie : {{Selectmodel.cathegorieModele}}</label></li>
+    <li><label class="col-form-label">Description: {{Selectmodel.descriptionModele}} </label></li>
+    <li><label class="col-form-label">Justificatif: </label>
+      <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+  </ul>
+</ng-template>

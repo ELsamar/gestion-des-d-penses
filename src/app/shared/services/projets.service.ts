@@ -3,18 +3,21 @@ import {AngularFireDatabase, AngularFireList} from'angularfire2/database';
 import { Projets } from '../.../../../shared/models/projets';
 import { Observable } from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
+import {promise} from 'selenium-webdriver';
+import {ModeleDepense} from '../models/modele-depense';
 
 @Injectable()
 export class ProjetsService {
   projetlist: AngularFireList <any>;
   selectedprojet: Projets = new Projets();
-
+  currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
   constructor(private firebase: AngularFireDatabase, public authservice: AuthService) { }
   getProjet () {
-    return this.projetlist = this.firebase.list('projets');
+    return this.projetlist = this.firebase.list('Projets/' + this.currentUserId);
   }
   insertProjet (projet: Projets) {
-    this.projetlist = this.firebase.list('projets');
+    const bath = ('Projets/' + this.currentUserId);
+    this.projetlist = this.firebase.list(bath);
     this.projetlist.push({
       idauth: this.authservice.currentUserId,
       titreprojet: projet.titreprojet,
@@ -25,6 +28,7 @@ export class ProjetsService {
     });
   }
   updateProjet(projet: Projets) {
+    this.projetlist = this.firebase.list('Projets/' + this.currentUserId);
     this.projetlist.update(projet.$idprojet,
       {
         idauth: this.authservice.currentUserId,
@@ -36,7 +40,13 @@ export class ProjetsService {
       });
   }
   deleteProjet ($idprojet: string) {
+    this.projetlist = this.firebase.list('Projets/' + this.currentUserId);
     this.projetlist.remove($idprojet);
   }
-
+  getSearchProjet(start, end): Observable<ModeleDepense[]> {
+    const bath = ('Projets/' +  this.currentUserId);
+    return this.firebase.list<ModeleDepense>(bath,
+      ref => ref.orderByChild('titreprojet').startAt(start).endAt(end)
+    ).valueChanges();
+  }
 }
