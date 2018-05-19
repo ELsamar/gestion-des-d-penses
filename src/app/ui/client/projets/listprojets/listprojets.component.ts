@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProjetsService } from '../../../../shared/services/projets.service';
 import {priorite, Projets} from '../../../../shared/models/projets';
 import {FormsModule, NgForm} from '@angular/forms';
-import {Depenses} from '../../../../shared/models/depenses';
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
@@ -17,15 +16,13 @@ export class ListprojetsComponent implements OnInit {
   endAt: string;
   constructor(private projetservice: ProjetsService, private tostr: ToastrService, private modalService: NgbModal) { }
   ngOnInit() {
-    var x = this.projetservice.getProjet();
-    x.snapshotChanges().subscribe(item => {
+    var p = this.projetservice.getProjet();
+    p.snapshotChanges().subscribe(item => {
       this.projetlist = [];
       item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        console.log(y);
-        console.log(y.priorteprojet);
-        this.projetlist.push(y as Projets);
+        var q = element.payload.toJSON();
+        q['$key'] = element.key;
+        this.projetlist.push(q as Projets);
       });
     });
   }

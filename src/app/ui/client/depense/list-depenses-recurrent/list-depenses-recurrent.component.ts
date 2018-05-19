@@ -11,7 +11,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./list-depenses-recurrent.component.css']
 })
 export class ListDepensesRecurrentComponent implements OnInit {
-  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
+  categories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
   repetes: any = ['Jamais' , 'Semaine' , 'mois'];
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
@@ -78,5 +78,8 @@ export class ListDepensesRecurrentComponent implements OnInit {
     const text = event.target.value;
     this.onSearchdep(text);
   }
-
+  ontrie(type: string) {
+    this.depenseservice.trie('Depenses/DepensesRecurrent', type)
+      .subscribe((depenses) => this.DepensesRlist = depenses);
+  }
 }

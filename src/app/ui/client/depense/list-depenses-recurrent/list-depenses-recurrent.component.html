@@ -1,26 +1,23 @@
 <div class="container-fluid">
   <div class="content row">
     <nav class="navbar container-fluid">
-      <h1> depense Recurrent </h1>
+      <h1> Depense Recurrent </h1>
       <div class="dropdown">
         <button class="dropdown-toggle nav-item" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
           {{typeaffich}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">toutes les depences</a>
-          <a class="dropdown-item" href="#">depences recurantes</a>
-          <a class="dropdown-item" href="#">depences models </a>
-          <a class="dropdown-item" (click)="getdepsimpl()">depences simple </a>
+          <a class="dropdown-item" (click)="ontrie('montantdepense')">par montant</a>
+          <a class="dropdown-item" (click)="ontrie('titredepense')" >par titre</a>
+          <a class="dropdown-item" (click)="ontrie('datedepense')">par date</a>
         </div>
       </div>
       <form class="form-inline nav-item">
         <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
-               data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+               data-toggle="dropdown" placeholder="Chercher ..." aria-label="Search">
       </form>
       <button class="btn btn-danger btn-sm" (click)="onDeleteAll()">suprimmertout</button>
-
     </nav>
     <div class="card">
       <div class="container-fluid">
@@ -31,7 +28,7 @@
               <th scope="col">Titre</th>
               <th scope="col">Date</th>
               <th scope="col">Montant</th>
-              <th scope="col">Cathégorie</th>
+              <th scope="col">Catégorie</th>
             </tr>
             </thead>
             <tbody>
@@ -39,7 +36,7 @@
               <td>{{depensesR.titredepense}}</td>
               <td>{{depensesR.datedepense}}</td>
               <td>{{depensesR.montantdepense}}</td>
-              <td>{{depensesR.cathegoriedepense}}</td>
+              <td>{{depensesR.categoriedepense}}</td>
               <td>
                 <a (click)="openWindowCustomClass(contentEditR,depensesR)"><i class="far fa-edit"></i></a>
                 <a (click)="onDelete(depensesR.$key)">
@@ -119,10 +116,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-form-label">Cathegorie :</label>
-                <select class="custom-select form-group mr-sm-2" name="cathegoriedepense" #cathegoriedepense="ngModel"
-                        [(ngModel)]="selectedDepenseR.cathegoriedepense">
-                  <option *ngFor="let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
+                <label class="col-form-label">Categorie :</label>
+                <select class="custom-select form-group mr-sm-2" name="categoriedepense" #categoriedepense="ngModel"
+                        [(ngModel)]="selectedDepenseR.categoriedepense" required>
+                  <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
                 </select>
               </div>
               <div class="form-group">
@@ -149,9 +146,8 @@
                         <option *ngFor="let repete of repetes" [value]="repete">{{repete}}</option>
                       </select>
                     </div>
-                    {{selectedDepenseR | json}}
+
                     <div class="form-group">
-                      {{selectedDepenseR.jourrep.value}} aaa
                       <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
                               [(ngModel)]="selectedDepenseR.jourrep">
                         <option *ngFor="let semaine of semaines" [value]="semaine">{{semaine}}</option>

@@ -196,7 +196,7 @@ button {
   box-sizing: border-box;
 }
 .listes-projets.row {
-  background-color: #e4e3cf;
+  //background-color: #f2f2f2;
 
 }
 .row {
@@ -227,9 +227,12 @@ button {
 .projet.projet-success {
   border-left: 3px solid #34a853;
   border-left-color: #34a853;
+  box-shadow: 0px 15px 15px 3px rgba(39, 39, 39, 0.1);
 }
 .projet.projet-soldout {
-  border-left-color: #e3e3e3;
+  border-left: 3px solid #34a853;
+  border-left-color: #34a853;
+  box-shadow: 3px 15px 15px 3px rgba(31, 227, 28, 0.1);
 }
 .projet.projet-warning {
   border-left: 3px solid #fbbc05;
@@ -238,6 +241,7 @@ button {
 .projet.projet-danger {
   border-left: 3px solid #ea4335;
   border-left-color: #ea4335;
+  box-shadow: 0px 15px 15px 3px rgba(39, 39, 39, 0.1);
 }
 .be-booking-promo-color.be-booking-promo-primary {
   background-color: #4285f4;

@@ -7,6 +7,8 @@ import {AlertService} from '../../../../shared/services/alert.service';
 import {ModeleDepense} from '../../../../shared/models/modele-depense';
 import {ModeleDepenseService} from '../../../../shared/services/modele-depense.service';
 import {Alert} from '../../../../shared/models/alert';
+import {TransactionService} from '../../../../shared/services/transaction.service';
+import {Transaction} from '../../../../shared/models/transaction';
 
 @Component({
   selector: 'app-formulairedepense',
@@ -26,8 +28,9 @@ export class DepenseComponent implements OnInit {
   Mois: any = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   ajoute = false;
+  newdepenseKey: string;
   constructor(private alertservice: AlertService, private depenseservice: DepensesService, public authservice: AuthService,
-              private modeledepenseservice: ModeleDepenseService) {
+              private modeledepenseservice: ModeleDepenseService, private transactionservice: TransactionService) {
   }
 
   currentdepenses: any;
@@ -60,22 +63,33 @@ export class DepenseComponent implements OnInit {
     this.modeledepenseservice.selectedModele = Object.assign({}, model);
     console.log(this.modeledepenseservice.selectedModele);
   }
-
-  savedepense() {
+savetransaction(titre: string , depense: Depenses) {
+    const transaction = new Transaction();
+    const d = new Date().getDate();
+    const m = (new Date().getMonth()) + 1 ;
+    const y = new Date().getFullYear();
+    transaction.date = d + '-' + m + '-' + y;
+    console.log(transaction.date);
+  transaction.titre = titre;
+    this.transactionservice.insertTransaction(transaction, depense);
+}
+  async savedepense() {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
     const newdepenseKey = this.depenseservice.getnewdepenseKey('Depenses/Depenses');
     this.currentFileUpload = new FileUpload(file);
-    this.depenseservice.insertDepense('Depenses/Depenses', newdepenseKey, this.currentdepenses, this.currentFileUpload, this.progress);
-
+   await this.depenseservice.insertDepense('Depenses/Depenses', newdepenseKey, this.currentdepenses, this.currentFileUpload, this.progress);
+  this.savetransaction('Depenses', this.currentdepenses);
   }
-  savedepenseRecurrent() {
+   async savedepenseRecurrent() {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
-    const newdepenseKey = this.depenseservice.getnewdepenseKey('Depenses/DepensesRecurrent');
+    this.newdepenseKey = await this.depenseservice.getnewdepenseKey('Depenses/DepensesRecurrent');
     this.currentFileUpload = new FileUpload(file);
-    this.depenseservice.insertDepenseRecurrent('Depenses/DepensesRecurrent', newdepenseKey,
+   await this.depenseservice.insertDepenseRecurrent('Depenses/DepensesRecurrent', this.newdepenseKey,
       this.currentdepenses, this.currentFileUpload, this.progress);
+     this.savetransaction('DepensesRecurrent', this.currentdepenses);
+      this.alertservice.insertAlert('Depenses/DepensesRecurrent', this.newdepenseKey, this.alerts) ;
   }
 
   // onSubmit(depensesForm: NgForm) {

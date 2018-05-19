@@ -13,7 +13,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import { AuthService} from './providers/auth.service';
-import {TransactionService} from './shared/transaction.service';
+import {TransactionService} from './shared/services/transaction.service';
 
 import {ClientModule} from './ui/client/client.module';
 import {PageService} from './shared/page.service';

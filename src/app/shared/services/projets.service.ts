@@ -43,9 +43,9 @@ export class ProjetsService {
     this.projetlist = this.firebase.list('Projets/' + this.currentUserId);
     this.projetlist.remove($idprojet);
   }
-  getSearchProjet(start, end): Observable<ModeleDepense[]> {
+  getSearchProjet(start, end): Observable<Projets[]> {
     const bath = ('Projets/' +  this.currentUserId);
-    return this.firebase.list<ModeleDepense>(bath,
+    return this.firebase.list<Projets>(bath,
       ref => ref.orderByChild('titreprojet').startAt(start).endAt(end)
     ).valueChanges();
   }

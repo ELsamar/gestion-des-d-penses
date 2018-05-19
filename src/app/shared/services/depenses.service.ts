@@ -4,6 +4,7 @@ import {Depenses, FileUpload} from '../.../../../shared/models/depenses';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
 import * as firebase from 'firebase';
+import {promise} from 'selenium-webdriver';
 
 @Injectable()
 export class DepensesService {
@@ -56,7 +57,7 @@ export class DepensesService {
           titredepense: depenses.titredepense,
           montantdepense: depenses.montantdepense,
           datedepense: depenses.datedepense,
-          cathegoriedepense: depenses.cathegoriedepense,
+          categoriedepense: depenses.categoriedepense,
           descriptiondepense: depenses.descriptiondepense,
           justificatifdepenses: depenses.coverUrl
         });
@@ -90,7 +91,7 @@ export class DepensesService {
             titredepense: depenses.titredepense,
             montantdepense: depenses.montantdepense,
             datedepense: depenses.datedepense,
-            cathegoriedepense: depenses.cathegoriedepense,
+            categoriedepense: depenses.categoriedepense,
             descriptiondepense: depenses.descriptiondepense,
             justificatifdepenses: depenses.coverUrl,
             typerep: depenses.typerep,
@@ -100,8 +101,7 @@ export class DepensesService {
             dateform: depenses.datefrom,
             dateto: depenses.dateto
             // this.depensesRef.push(depenses);
-          }
-      );
+          });
       });
   }
 
@@ -113,16 +113,10 @@ export class DepensesService {
         titredepense: depenses.titredepense,
         montantdepense: depenses.montantdepense,
         datedepense: depenses.datedepense,
-        cathegoriedepense: depenses.cathegoriedepense,
+        cathegoriedepense: depenses.categoriedepense,
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
-      }).then((response) => {
-      if (response) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+      });
   }
 
   updateDepenseRecurrent(depenses: Depenses) {
@@ -132,7 +126,7 @@ export class DepensesService {
         titredepense: depenses.titredepense,
         montantdepense: depenses.montantdepense,
         datedepense: depenses.datedepense,
-        cathegoriedepense: depenses.cathegoriedepense,
+        categoriedepense: depenses.categoriedepense,
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
         typerep: depenses.typerep,
@@ -187,5 +181,11 @@ export class DepensesService {
     const depenselist = this.db.list(chilbath);
     return this.db.list<Depenses>(chilbath,
       ref => ref.limitToFirst(num));
+  }
+  trie(bath: string , type: string) {
+    const chilbath = bath + '/' +  this.currentUserId ;
+    const depenselist = this.db.list(chilbath);
+    return this.db.list<Depenses>(chilbath,
+      ref => ref.orderByChild(type)).valueChanges();
   }
 }

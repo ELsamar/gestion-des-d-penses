@@ -18,15 +18,12 @@ export class AlertService {
       ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));
   }
   insertAlert (childPath: string, newdepenseKey: string, alert: Alert ) {
-    const alertlist = this.db.database.ref(childPath).child('qfLQdWnNA5U4IiRQxevRB4Z46bg1' + '/' + newdepenseKey).child('alert');
-    console.log(alertlist);
-    console.log(alert);
-    console.log('testalert');
+    const alertlist = this.db.database.ref(childPath).child('qfLQdWnNA5U4IiRQxevRB4Z46bg1' + '/' + newdepenseKey);
     alertlist.set({
-      alert : {
-      msg : alert.msg,
-      date: alert.date
-      }
+      alert: {
+        id: alert.$idalert,
+      msgalert : alert.msg,
+      date: alert.date }
     }) ;
 
   }

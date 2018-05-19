@@ -21,7 +21,7 @@ export class ModeleDepenseService {
       titreModele: modele.titreModele,
     montantModele: modele.montantModele,
     dateModele: modele.dateModele,
-    cathegorieModele: modele.cathegorieModele,
+    categorieModele: modele.categorieModele,
     descriptionModele: modele.descriptionModele
     }) ;
   }
@@ -33,7 +33,7 @@ export class ModeleDepenseService {
         titreModele: modele.titreModele,
         montantModele: modele.montantModele,
         dateModele: modele.dateModele,
-        cathegorieModele: modele.cathegorieModele,
+        categorieModele: modele.categorieModele,
         descriptionModele: modele.descriptionModele
       });
   }

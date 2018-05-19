@@ -22,22 +22,21 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>titre</th>
+                  <th>date</th>
+                  <th>titre </th>
+                  <th>montant</th>
                 </tr>
                 </thead>
                 <tr *ngFor="let transaction of transactionList">
                   <td> </td>
                   <td>{{transaction.titre}}</td>
                   <td>{{transaction.date}}</td>
-                  <td>
-                    <a class="btn" (click)="onEdit(transaction)">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </a>
-                    <a class="btn" (click)="onDelete(transaction.$key)">
-                      <i class="fa fa-trash-o"></i>
-                    </a>
-                  </td>
+                  <td *ngIf="(transaction.action.titredepense)"> {{transaction.action.titredepense}}</td>
+                  <td *ngIf="(transaction.action.montantdepense)"> {{transaction.action.montantdepense}}</td>
+                  <td *ngIf="(transaction.action.titrerevenu)">{{transaction.action.titrerevenu}}</td>
+                  <td *ngIf="(transaction.action.montantrevenu)">{{transaction.action.montantrevenu}}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td></td>

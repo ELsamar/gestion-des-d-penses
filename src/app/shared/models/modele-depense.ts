@@ -3,6 +3,6 @@ export class ModeleDepense {
   titreModele: string;
   montantModele: number;
   dateModele: Date ;
-  cathegorieModele: string ;
+  categorieModele: string ;
   descriptionModele: string ;
 }

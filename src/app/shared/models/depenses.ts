@@ -4,7 +4,7 @@ export class Depenses {
     titredepense: string;
     montantdepense: number;
     datedepense: Date ;
-    cathegoriedepense: string ;
+    categoriedepense: string ;
     descriptiondepense: string ;
   coverUrl: string;
     //justificatifdepense: File;
