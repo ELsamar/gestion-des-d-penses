@@ -1,42 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Revenus } from '../../../../shared/models/revenus';
-import { RevenusService } from '../../../../shared/services/revenus.service';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {RevenusService} from '../../../../shared/services/revenus.service';
+import {Revenus} from '../../../../shared/models/revenus';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
-  selector: 'app-revenulist',
-  templateUrl: './revenulist.component.html',
-  styleUrls: ['./revenulist.component.css']
+  selector: 'app-listrevenusrecurrants',
+  templateUrl: './listrevenusrecurrants.component.html',
+  styleUrls: ['./listrevenusrecurrants.component.css']
 })
-export class RevenulistComponent implements OnInit {
-  revenuslist: Revenus[];
-  constructor(private revenuservice: RevenusService, private tostr: ToastrService, private modalService: NgbModal) { }
+export class ListrevenusrecurrantsComponent implements OnInit {
   repetes: any = ['Jamais' , 'Semaine' , 'mois'];
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  
-  typeaffich: string;
+  RevenusRlist: Revenus[];
   startAt: string;
   endAt: string;
-  revenus: Revenus[];
+  revenusR: Revenus[];
+  selectedRevenuR: any;
+  constructor(private revenuservice: RevenusService, private tostr: ToastrService, private modalService: NgbModal) { }
+
   ngOnInit() {
-    var x = this.revenuservice.getRevenu('Revenus/Revenus');
+    var x = this.revenuservice.getRevenu('Revenus/RevenusRecurrent');
     x.snapshotChanges().subscribe(item => {
-      this.revenuslist = [];
+      this.RevenusRlist = [];
       item.forEach(element => {
         var y = element.payload.toJSON();
         y['$key'] = element.key;
-        this.revenuslist.push(y as Revenus);
+        this.RevenusRlist.push(y as Revenus);
       });
     });
-  
   }
+
   openWindowCustomClass(content, revenu: Revenus) {
     this.modalService.open(content, {windowClass: 'dark-modal'});
-    this.revenuservice.selectedrevenu = Object.assign({}, revenu);
+    this.selectedRevenuR = Object.assign({}, revenu);
   }
 
 
@@ -48,11 +48,11 @@ export class RevenulistComponent implements OnInit {
   }
 
   onEdit(revenu: Revenus) {
-  this.revenuservice.selectedrevenu = Object.assign({}, revenu);
+  this.revenuservice.selectedrevenuR = Object.assign({}, revenu);
   }
 
-  onUpdate(revenusForm: NgForm) {
-    if (this.revenuservice.updateRevenusRecurrent(revenusForm.value)) {
+  onUpdateR(revenusFormR: NgForm) {
+    if (this.revenuservice.updateRevenusRecurrent(revenusFormR.value)) {
       console.log('test');
     }
     this.tostr.success('modification', 'modification avec succès');
@@ -61,17 +61,16 @@ export class RevenulistComponent implements OnInit {
     // else
   }
 
-  onSearchrev(searchText) {
+  onSearchdep(searchText) {
     const text = searchText;
     this.startAt = text;
     this.endAt = text + '\uf8ff';
-    this.revenuservice.getSearchrev(this.startAt, this.endAt, 'Revenus/Revenus')
-      .subscribe((Revenus) => this.revenuslist = this.revenus);
+    this.revenuservice.getSearchrev(this.startAt, this.endAt, 'Revenus/RevenusRecurrent')
+      .subscribe((Revenus) => this.RevenusRlist = this.revenusR);
   }
   onSearch(event) {
     const text = event.target.value;
-    this.onSearch(text);
+    this.onSearchdep(text);
   }
-
 
 }

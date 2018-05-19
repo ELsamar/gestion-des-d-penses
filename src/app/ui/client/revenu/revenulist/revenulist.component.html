@@ -1,26 +1,162 @@
-<div class="table-responsive">
-  <table class="table">
-      <thead>
+<div class="content row">
+  <nav class="navbar container-fluid">
+    <h1> Revenus simple </h1>
+    <div class="dropdown">
+      <button class="dropdown-toggle nav-item" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+        {{typeaffich}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">toutes les revenus</a>
+        <a class="dropdown-item" href="#">revenus recurantes</a>
+        <a class="dropdown-item" href="#">revenus models </a>
+        <a class="dropdown-item" (click)="getrevsimpl()">revenu simple </a>
+      </div>
+    </div>
+    <form class="form-inline nav-item">
+      <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
+             data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+  </nav>
+  <div class="card">
+    <div class="container-fluid">
+      <div class="table-responsive">
+        <table class="table table-sm table-hover table table-striped ">
+          <thead>
           <tr>
             <th scope="col">Titre</th>
             <th scope="col">Date</th>
             <th scope="col">Montant</th>
-            <th scope="col">Type</th>
           </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let Revenus of revenuslist">
-                <td>{{Revenus.titrerevenu}}</td>
-                <td>{{Revenus.daterevenu}}</td>
-                <td>{{Revenus.montantrevenu}}</td>
-                <td>{{Revenus.typerevenu}}</td>
-                <td>
-                  <a (click)="onEdit(Revenus.$key)"><i class="far fa-edit"></i></a>   
-                  <a class="btn btn-danger" (click)="onDelete(Revenus.$key)">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </td>
-            </tr>
-        </tbody>
-  </table>
+          </thead>
+          <tbody>
+          <tr *ngFor="let revenus of revenuslist">
+            <td>{{revenus.titrerevenu}}</td>
+            <td>{{revenus.daterevenu}}</td>
+            <td>{{revenus.montantrevenu}}</td>
+            <td>
+              <a (click)="openWindowCustomClass(contentEdit,Revenus)"><i class="far fa-edit"></i></a>
+              <a (click)="onDelete(Revenus.$key)">
+                <i class="fas fa-trash-alt"></i>
+              </a>
+              <a (click)="openWindowCustomClass(contentDetail,Revenus)"><i class="fas fa-eye"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #contentEdit let-c="close" let-d="dismiss">
+<div class="modal-header">
+  <h4 class="modal-title">Modifier</h4>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form #revenusForm="ngForm" (ngSubmit)="onUpdate(revenusForm)">
+    <input type="text" name="$idrevenu" #idrevenu="ngModel" [(ngModel)]="revenuservice.selectedRevenu.$key">
+
+    <div class="container-fluid">
+      <div class=" content row">
+        <div class="card">
+          <div class="container-fluid">
+            <div class="form-group">
+              <label class="col-form-label">Titre:</label>
+              <input type="text" class="form-control" name="titrerevenu" #titrerevenu="ngModel"
+                     [(ngModel)]="revenuservice.selectedRevenu.titrerevenu" required minlength="4">
+              <div *ngIf="titrerevenu.errors && (titrerevenu.dirty|| titrerevenu.touched)"
+                   class="alert alert-danger">
+                <div [hidden]="!titrerevenu.errors.required">
+                  <strong>Error:</strong>Ce champs est obligatoire
+                </div>
+                <div [hidden]="!titrerevenu.errors.minlength">
+                  <strong>Error:</strong>Ce champs est trés cours
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Montant :</label>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu"
+                       #montantrevenu="ngModel" [(ngModel)]="revenuservice.selectedRevenu.montantrevenu"
+                       pattern="\d*" required>
+                <div class="input-group-prepend">
+                  <div class="input-group-text">TND</div>
+                </div>
+                <div *ngIf="montantrevenu.errors && (montantrevenu.dirty|| montantrevenu.touched)"
+                     class="alert alert-danger">
+                  <div [hidden]="!montantrevenu.errors.required">
+                    <strong>Error:</strong>Ce champs est obligatoire
+                  </div>
+                  <div [hidden]="!montantrevenu.errors.pattern">
+                    <strong>Error:</strong>le montant doit étre nombre
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Date :</label>
+              <input type="date" class="form-control" name="daterevenu" #daterevenu="ngModel"
+                     [(ngModel)]="revenuservice.selectedRevenu.daterevenu "
+                     pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+                     required/>
+              <div *ngIf="daterevenu.errors && (daterevenu.dirty|| daterevenu.touched)" class="alert alert-danger">
+                <div [hidden]="!daterevenu.errors.required">
+                  <strong>Error:</strong>Ce champs est obligatoire
+                </div>
+                <div [hidden]="!daterevenu.errors.pattern">
+                  <strong>Error:</strong>Veuillez inserrez une date correcte
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Description: </label>
+              <input class="form-control" name="descriptionrevenu" #descriptionrevenu="ngModel"
+                     [(ngModel)]="revenuservice.selectedRevenu.descriptionrevenu"/>
+            </div>
+            
+            <div class="row">
+              <div class="col-3 content-center">
+                <button type="submit" class="btn btn-primary bouton" [disabled]="!revenusForm.valid">modifier
+                </button>
+              </div>
+              <div class="col-3 content-center">
+                <button type="reset" class="btn btn-secondary  bouton">annuler
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-light" (click)="c('Close click')">Annuler</button>
+</div>
+</ng-template>
+<ng-template #contentDetail let-c="close" let-d="dismiss">
+<div class="modal-header">
+  <h4 class="modal-title">Detail</h4>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ul class="content-center detail">
+    <li><label class="col-form-label">titre: {{revenuservice.selectedRevenu.titrerevenu}}</label></li>
+    <li><label class="col-form-label">Montant : {{revenuservice.selectedRevenu.montantrevenue}} DT </label></li>
+    <li><label class="col-form-label">Date : {{revenuservice.selectedRevenu.daterevenu}}</label></li>
+    <li><label class="col-form-label">Cathegorie : {{revenuservice.selectedRevenu.cathegorierevenu}}</label></li>
+    <li><label class="col-form-label">Description: {{revenuservice.selectedRevenu.descriptionrevenu}} </label></li>
+    <li><label class="col-form-label">Justificatif: </label>
+    </li>
+  </ul>
+</div>
+</ng-template>
