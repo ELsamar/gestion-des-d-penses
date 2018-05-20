@@ -51,7 +51,7 @@ export class DepensesService {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
-        depenses.coverUrl = fileUpload.url;
+        depenses.justificatifdepense = fileUpload.url;
         depenseslist.set({
           idauth: this.authservice.currentUserId,
           titredepense: depenses.titredepense,
@@ -59,7 +59,7 @@ export class DepensesService {
           datedepense: depenses.datedepense,
           categoriedepense: depenses.categoriedepense,
           descriptiondepense: depenses.descriptiondepense,
-          justificatifdepenses: depenses.coverUrl
+          justificatifdepenses: depenses.justificatifdepense
         });
       }
     );
@@ -85,7 +85,7 @@ export class DepensesService {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
-        depenses.coverUrl = fileUpload.url;
+        depenses.justificatifdepense = fileUpload.url;
         depenseslist.set({
             idauth: this.authservice.currentUserId,
             titredepense: depenses.titredepense,
@@ -93,7 +93,7 @@ export class DepensesService {
             datedepense: depenses.datedepense,
             categoriedepense: depenses.categoriedepense,
             descriptiondepense: depenses.descriptiondepense,
-            justificatifdepenses: depenses.coverUrl,
+            justificatifdepenses: depenses.justificatifdepense,
             typerep: depenses.typerep,
             active: true,
             jourrep: depenses.jourrep,
@@ -106,7 +106,7 @@ export class DepensesService {
   }
 
   updateDepense(depenses: Depenses, childPath: string ) {
-    const depenselist = this.db.list(childPath + '/' +  this.currentUserId);
+    this.depenseslist = this.db.list(childPath + '/' +  this.currentUserId);
     this.depenseslist.update(depenses.$iddepense,
       {
         idauth: this.authservice.currentUserId,
@@ -135,12 +135,6 @@ export class DepensesService {
         moisrep: depenses.moisrep,
         dateform: depenses.datefrom,
         dateto: depenses.dateto
-      }).then((response) => {
-      if (response) {
-        return true;
-      } else {
-        return false;
-      }
     });
   }
 

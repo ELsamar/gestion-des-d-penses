@@ -1,14 +1,14 @@
 <div class="row">
-  <div class="col-md-6 mb-3">
-    <form  #ModeleDepenseForm="ngForm" >
-      <input type="hidden" name="$idModele" #$idModele="ngModel" [(ngModel)]="modeledepenseservice.selectedModele.$key">
+  <div class="col-6">
+    <form  #ModelerevForm="ngForm" >
+      <input type="" name="$idModele" #$idModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.$key">
       <div class="container-fluid">
-        <div class="content row">
+        <div class=" content row">
           <div class="card">
             <div class="container-fluid">
               <div class="form-group">
                 <label class="col-form-label">Titre:</label>
-                <input type="text" class="form-control" name="titreModele" #titreModele="ngModel" [(ngModel)]="this.modeledepenseservice.selectedModele.titreModele" required minlength="4">
+                <input type="text" class="form-control" name="titreModele" #titreModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.titreModele" required minlength="4">
 
                 <div *ngIf ="titreModele.errors && (titreModele.dirty|| titreModele.touched)" class ="alert alert-danger"  >
                   <div [hidden] = "!titreModele.errors.required">
@@ -22,11 +22,10 @@
                 <div class="form-group">
                   <label class="col-form-label">Montant :</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="0000.0000" name="montantModele" #montantModele="ngModel" [(ngModel)]="modeledepenseservice.selectedModele.montantModele" pattern= "\d*" required>
+                    <input type="text" class="form-control" placeholder="0000.0000" name="montantModele" #montantModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.montantModele" pattern= "\d*" required>
                     <div class="input-group-prepend">
                       <div class="input-group-text">TND</div>
                     </div>
-                  </div>
                     <div *ngIf ="montantModele.errors && (montantModele.dirty|| montantModele.touched)" class ="alert alert-danger"  >
                       <div [hidden] = "!montantModele.errors.required">
                         <strong>Error:</strong>Ce champs est obligatoire
@@ -35,12 +34,13 @@
                         <strong>Error:</strong>le montant doit étre nombre
                       </div>
                     </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Date :</label>
-                  <input type="date" class="form-control" name="dateModele" #dateModele="ngModel" [(ngModel)]="modeledepenseservice.selectedModele.dateModele" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required  />
+                  <input type="date" class="form-control" name="dateModele" #dateModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.dateModele" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required  />
                   <div *ngIf ="dateModele.errors && (dateModele.dirty|| dateModele.touched)" class ="alert alert-danger"  >
-                    <div [hidden] = "!datedepense.errors.required">
+                    <div [hidden] = "!dateModele.errors.required">
                       <strong>Error:</strong>Ce champs est obligatoire
                     </div>
                     <div [hidden] = "!dateModele.errors.pattern">
@@ -51,22 +51,22 @@
 
                 <div class="form-group">
                   <label  class="col-form-label">Categorie :</label>
-                  <select class="custom-select form-group mr-sm-2" name="categorieModele" #categorieModele="ngModel" [(ngModel)]="modeledepenseservice.selectedModele.categorieModele">
+                  <select class="custom-select form-group mr-sm-2" name="categorieModele" #categorieModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.categorieModele">
                     <option *ngFor = "let categorie of categories" [value]="categorie">{{categorie}}</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="col-form-label">Description: </label>
-                  <input class="form-control" name="descriptionModele" #descriptionModele="ngModel" [(ngModel)]="modeledepenseservice.selectedModele.descriptionModele"/>
+                  <input class="form-control" name="descriptionModele" #descriptionModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.descriptionModele"/>
                 </div>
 
                 <div class="row">
                   <div class="col-4 content-center">
-                    <button type="submit" class="" [disabled]="(!ModeleDepenseForm.valid)" (click)="onSubmit(ModeleDepenseForm)">
+                    <button type="submit" class="" [disabled]="(!ModelerevForm.valid)" (click)="saveModelerev(ModelerevForm)">
                       ajouter</button>
                   </div>
                   <div class="col-4 content-center">
-                    <button type="submit" class="" [disabled]="(!ModeleDepenseForm.valid)" (click)="onUpdateModeleDepense(ModeleDepenseForm)">
+                    <button type="submit" class="" [disabled]="(!ModelerevForm.valid)" (click)="onUpdateModelerev(ModelerevForm)">
                       modifier</button>
                   </div>
 
@@ -80,6 +80,7 @@
         </div>
       </div>
   </form></div>
-  <div class="col-md-6 mb-3 text-center "><app-listmodeldepense></app-listmodeldepense></div>
+  <div class="col-6"><app-listmodelsrev></app-listmodelsrev></div>
   </div>
+
 

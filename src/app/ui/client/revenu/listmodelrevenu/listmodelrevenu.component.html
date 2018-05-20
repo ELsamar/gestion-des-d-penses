@@ -5,22 +5,23 @@
   <tr>
     <th scope="col">Titre</th>
     <th scope="col">Montant</th>
-    <th scope="col">Categorie</th>
+    <th scope="col">Date</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let model of ModelDepenseslist">
-    <td>{{model.titreModele}}</td>
-    <td>{{model.montantModele}}</td>
-    <td>{{model.cathegorieModele}}</td>
+  <tr *ngFor="let Modelerev of ModelRevlist">
+    <td>{{Modelerev.titreModele}}</td>
+    <td>{{Modelerev.montantModele}}</td>
+    <td>{{Modelerev.dateModele}}</td>.
     <td>
-      <a (click)="onEdit(model)"><i class="far fa-edit"></i></a>
-      <a  (click)="onDelete(model.$key)" ><i class="fas fa-trash-alt"></i></a>
-      <a (click)="openWindowCustomClass(contentDetailModel,model)"><i class="fas fa-eye"></i></a>
+      <a (click)="onEdit(Modelerev)"><i class="far fa-edit"></i></a>
+      <a  (click)="onDelete(Modelerev.$key)" ><i class="fas fa-trash-alt"></i></a>
+      <a (click)="openWindowCustomClass(contentDetailModel,Modelerev)"><i class="fas fa-eye"></i></a>
     </td>
   </tr>
-  </tbody>
+  </tbody>.
 </table>
+
 <ng-template #contentDetailModel let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Detail</h4>
@@ -32,7 +33,7 @@
     <li><label class="col-form-label">titre: {{Selectmodel.titreModele}}</label></li>
     <li><label class="col-form-label">Montant : {{Selectmodel.montantModele}} DT </label></li>
     <li><label class="col-form-label">Date : {{Selectmodel.dateModele}}</label></li>
-    <li><label class="col-form-label">Cathegorie : {{Selectmodel.categorieModele}}</label></li>
+    <li><label class="col-form-label">Cathegorie : {{Selectmodel.cathegorieModele}}</label></li>
     <li><label class="col-form-label">Description: {{Selectmodel.descriptionModele}} </label></li>
     <li><label class="col-form-label">Justificatif: </label>
       <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->

@@ -22,7 +22,8 @@ export class DepenseComponent implements OnInit {
   progress: { percentage: number } = {percentage: 0};
   Modelelist: ModeleDepense [];
   currentalert: Alert = new Alert();
-  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
+    'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants', 'autre'];
   repetes: any = ['Jamais', 'Semaine', 'mois'];
   semaines: any = ['', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
   Mois: any = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];

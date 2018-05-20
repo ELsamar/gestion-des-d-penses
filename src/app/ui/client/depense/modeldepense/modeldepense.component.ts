@@ -10,7 +10,8 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./modeldepense.component.css']
 })
 export class ModeldepenseComponent implements OnInit {
-  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
+    'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants'];
   currentModeleDepense: any ;
   constructor(private modeledepenseservice: ModeleDepenseService, private toastr: ToastrService) { }
 

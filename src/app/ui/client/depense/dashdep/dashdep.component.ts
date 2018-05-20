@@ -8,12 +8,6 @@ import {DepensesService} from '../../../../shared/services/depenses.service';
   styleUrls: ['./dashdep.component.css']
 })
 export class DashdepComponent implements OnInit {
-
-  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
-  repetes: any = ['Jamais' , 'Semaine' , 'mois'];
-  semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
-  Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   depenseslist: Depenses[];
   DepensesRlist: Depenses[];
   typeaffich: string;

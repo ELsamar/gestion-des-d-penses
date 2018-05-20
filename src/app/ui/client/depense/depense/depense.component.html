@@ -67,10 +67,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-form-label">Cathegorie :</label>
+            <label class="col-form-label">Categorie :</label>
             <select class="custom-select form-group mr-sm-2" name="categoriedepense" #categoriedepense="ngModel"
-                    [(ngModel)]="currentdepenses.categoriedepense">
-              <option *ngFor="let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
+                    [(ngModel)]="currentdepenses.categoriedepense" required>
+              <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
             </select>
           </div>
           <div class="form-group">

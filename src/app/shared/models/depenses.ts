@@ -6,14 +6,14 @@ export class Depenses {
     datedepense: Date ;
     categoriedepense: string ;
     descriptiondepense: string ;
-  coverUrl: string;
-    //justificatifdepense: File;
+  justificatifdepense: string;
     typerep: string ;
     active: boolean;
     jourrep: string;
     moisrep: string;
-  datefrom: Date;
-  dateto: Date;
+    datefrom: Date;
+    dateto: Date;
+    categorirevenu: string ;
 }
 export class FileUpload {
 
