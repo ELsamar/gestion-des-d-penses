@@ -1,3 +1,4 @@
+
 export class Depenses {
     $iddepense: string;
   //  idauth: any;
@@ -13,7 +14,16 @@ export class Depenses {
     moisrep: string;
     datefrom: Date;
     dateto: Date;
-    categorirevenu: string ;
+  constructor() {
+    //  idauth: any;
+    this.descriptiondepense = '';
+    this.justificatifdepense = '';
+    this.typerep = '';
+    this.jourrep = '';
+    this.moisrep = '';
+    this.datefrom = new Date();
+    this.dateto = new Date();
+  }
 }
 export class FileUpload {
 

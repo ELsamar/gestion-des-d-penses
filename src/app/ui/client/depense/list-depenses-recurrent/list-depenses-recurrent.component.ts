@@ -11,15 +11,16 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./list-depenses-recurrent.component.css']
 })
 export class ListDepensesRecurrentComponent implements OnInit {
-  categories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
+    'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants', 'autre'];
   repetes: any = ['Jamais' , 'Semaine' , 'mois'];
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  DepensesRlist: Depenses[];
+  DepensesRlist: {Depenses}[];
   startAt: string;
   endAt: string;
-  depensesR: Depenses[];
+  depensesR: {Depenses}[];
   selectedDepenseR: any;
   constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) { }
 
@@ -30,7 +31,7 @@ export class ListDepensesRecurrentComponent implements OnInit {
       item.forEach(element => {
         var y = element.payload.toJSON();
         y['$key'] = element.key;
-        this.DepensesRlist.push(y as Depenses);
+        this.DepensesRlist.push(y as {Depenses} );
       });
     });
   }

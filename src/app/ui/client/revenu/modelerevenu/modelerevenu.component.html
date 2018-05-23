@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-6">
     <form  #ModelerevForm="ngForm" >
-      <input type="" name="$idModele" #$idModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.$key">
+      <input type="hidden" name="$idModele" #$idModele="ngModel" [(ngModel)]="modelerevenusservice.selectedModele.$key">
       <div class="container-fluid">
         <div class=" content row">
           <div class="card">
@@ -62,11 +62,11 @@
 
                 <div class="row">
                   <div class="col-4 content-center">
-                    <button type="submit" class="" [disabled]="(!ModelerevForm.valid)" (click)="saveModelerev(ModelerevForm)">
+                    <button type="submit" class="btn btn-primary bouton" [disabled]="(!ModelerevForm.valid)" (click)="saveModelerev(ModelerevForm)">
                       ajouter</button>
                   </div>
                   <div class="col-4 content-center">
-                    <button type="submit" class="" [disabled]="(!ModelerevForm.valid)" (click)="onUpdateModelerev(ModelerevForm)">
+                    <button type="submit" class="btn btn-primary bouton" [disabled]="(!ModelerevForm.valid)" (click)="onUpdateModelerev(ModelerevForm)">
                       modifier</button>
                   </div>
 

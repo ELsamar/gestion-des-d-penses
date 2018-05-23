@@ -26,7 +26,6 @@ export class ListmodelrevenuComponent implements OnInit {
       item.forEach(element => {
         var y = element.payload.toJSON();
         y['$key'] = element.key;
-        console.log(y);
         this.ModelRevlist.push(y as ModeleRevenus);
       });
     });

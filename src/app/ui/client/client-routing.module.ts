@@ -13,10 +13,6 @@ import {NotFound404Component} from '../../shared/not-found404/not-found404.compo
 
 const routes: Routes = <Routes> [
   {
-    path: '',
-    component: DashboardComponent
-  },
-  {
     path: 'dash',
     component: DashboardComponent
   },

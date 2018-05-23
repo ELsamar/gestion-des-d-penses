@@ -36,6 +36,7 @@
               <td>{{revenusR.titrerevenu}}</td>
               <td>{{revenusR.daterevenu}}</td>
               <td>{{revenusR.montantrevenu}}</td>
+              <td>{{revenusR.categorierevenu}}</td>
               <td>
                 <a (click)="openWindowCustomClass(contentEditR,revenusR)"><i class="far fa-edit"></i></a>
                 <a (click)="onDelete(revenusR.$key)">
@@ -60,7 +61,7 @@
   </div>
   <div class="modal-body">
     <form #revenusFormR="ngForm" (ngSubmit)="onUpdateR(revenusFormR)">
-      <input type="" name="$idrevenu" #$idrevenu="ngModel" [(ngModel)]="selectedRevenuR.$key">
+      <input type="hidden" name="$idrevenu" #$idrevenu="ngModel" [(ngModel)]="selectedRevenuR.$key">
       <div class="container-fluid">
         <div class="content row">
             <div class="container-fluid">
@@ -188,11 +189,11 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-1 content-center">
+                <div class="col-3 content-center">
                   <button type="submit" class="btn btn-primary bouton" [disabled]="!revenusFormR.valid">modifier
                   </button>
                 </div>
-                <div class="col-1 content-center">
+                <div class="col-2 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
                   </button>
                 </div>
@@ -215,11 +216,14 @@
     <li><label class="col-form-label">Montant : {{selectedRevenuR.montantrevenu}} DT </label></li>
     <li><label class="col-form-label">Date : {{selectedRevenuR.daterevenu}}</label></li>
     <li><label class="col-form-label">Description: {{selectedRevenuR.descriptionrevenu}} </label></li>
-
-    <li *ngIf="(!selectedRevenuR.active)"><label class="col-form-label"> Dépense disactivè ou bien sa
+    <li><label class="col-form-label">Justificatif: </label>
+      <br>
+      <img src={{selectedRevenuR.justificatifrevenu}} width="150cm" height="150cm">
+    </li>
+    <li *ngIf="(!selectedRevenuR.active)"><label class="col-form-label"> revenu disactivè ou bien sa
       durée de repition a été terminè </label></li>
     <div *ngIf="(selectedRevenuR.active)">
-      <li><label class="col-form-label">Dépense activè encours </label></li>
+      <li><label class="col-form-label">revenu activè encours </label></li>
       <li>
         <p class="col-form-label">type de repition: par {{selectedRevenuR.typerep}}
           de : {{selectedRevenuR.dateform}} à :

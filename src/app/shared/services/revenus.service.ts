@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
 import * as firebase from 'firebase';
 import {Depenses} from '../models/depenses';
+import {ToastrService} from 'ngx-toastr';
 @Injectable()
 export class RevenusService {
   revenuslist: AngularFireList <any>;
@@ -13,7 +14,7 @@ export class RevenusService {
   selectedrevenuR: Revenus = new Revenus();
   newrevenusKey: string;
   currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
-  constructor(private db: AngularFireDatabase, public authservice: AuthService) {
+  constructor(private db: AngularFireDatabase, public authservice: AuthService, private toaster: ToastrService) {
   }
   checkdata(childPath) {
     const revenuslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
@@ -58,6 +59,7 @@ descriptionrevenu: revenus.descriptionrevenu,
 justificatifrevenu: revenus.justificatifrevenu
 
 });
+this.toaster.success('ajouter', 'revenu ajoutè avec succes');
 }
 );
 }
@@ -98,10 +100,9 @@ jourrep: revenus.jourrep,
 moisrep: revenus.moisrep,
 dateform: revenus.datefrom,
 dateto: revenus.dateto
-}
-);
+});
 
-
+  this.toaster.success('ajouter', 'revenu ajoutè avec succes');
 });
 }
 
@@ -116,6 +117,7 @@ daterevenu: revenus.daterevenu,
 descriptionrevenu: revenus.descriptionrevenu,
   categorierevenu: revenus.categorierevenu
 });
+  this.toaster.success('modifier', 'revenu modifier avec succes');
 }
 
 updateRevenusRecurrent(revenus: Revenus) {
@@ -132,6 +134,7 @@ moisrep: revenus.moisrep,
 dateform: revenus.datefrom,
 dateto: revenus.dateto
 });
+  this.toaster.success('modifier', 'revenu modifier avec succes');
 }
 
 disactiveRev(revenus: Revenus) {

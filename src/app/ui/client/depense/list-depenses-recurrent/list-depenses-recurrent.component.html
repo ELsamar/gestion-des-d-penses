@@ -54,14 +54,14 @@
 </div>
 <ng-template #contentEditR let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">update</h4>
+    <h4 class="modal-title">Modifier</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form #depensesFormR="ngForm" (ngSubmit)="onUpdateR(depensesFormR)">
-      <input type="" name="$iddepense" #$iddepense="ngModel" [(ngModel)]="selectedDepenseR.$key">
+      <input type="hidden" name="$iddepense" #$iddepense="ngModel" [(ngModel)]="selectedDepenseR.$key">
 
       <div class="container-fluid">
         <div class=" content row">
@@ -196,11 +196,11 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-1 content-center">
+                <div class="col-3 content-center">
                   <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesFormR.valid">modifier
                   </button>
                 </div>
-                <div class="col-1 content-center">
+                <div class="col-2 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
                   </button>
                 </div>
@@ -224,8 +224,8 @@
     <li><label class="col-form-label">Date : {{selectedDepenseR.datedepense}}</label></li>
     <li><label class="col-form-label">Cathegorie : {{selectedDepenseR.cathegoriedepense}}</label></li>
     <li><label class="col-form-label">Description: {{selectedDepenseR.descriptiondepense}} </label></li>
-    <li><label class="col-form-label">Justificatif: </label>
-      <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+    <li><label class="col-form-label">Justificatif: {{depenseservice.selectedDepense.justificatifdepenses}}</label>
+      <img src={{selectedDepenseR.justificatifdepenses}} height="250" width="250">
     </li>
     <li *ngIf="(!selectedDepenseR.active)"><label class="col-form-label"> Dépense disactivè ou bien sa
       durée de repition a été terminè </label></li>

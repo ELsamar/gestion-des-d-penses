@@ -90,43 +90,45 @@
               </div>
             </div>
           </div>
-          <div class="custom-control custom-checkbox récurents ">
-            <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
-                   role="button" aria-expanded="false" aria-controls="collapseExample"
-                   id="customCheckrecudep">
-            <label class="col-form-label" for="customCheckrecudep"> Définir comme dépense récurrent </label>
-            <div class="collapse" id="collapserecudep">
-              <div class="card card-body form-group">
-                <div class="form-group">
-                  <select class="custom-select mr-sm-2 form-control" name="typerep" #typerep="ngModel"
-                          [(ngModel)]="currentdepenses.typerep">
-                    <option *ngFor="let repete of repetes" [value]="repete">{{repete}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
-                          [(ngModel)]="currentdepenses.jourrep">
-                    <option *ngFor="let semaine of semaines" [value]="semaine">{{semaine}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <select class="custom-select mr-sm-2" name="moisrep" #moisrep="ngModel"
-                          [(ngModel)]="currentdepenses.moisrep">
-                    <option *ngFor="let mois of Mois" [value]="mois">{{mois}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  Du <input type="date" class="form-control" name="datefrom" #datefrom="ngModel"
-                            [(ngModel)]="currentdepenses.datefrom"/>
-                  au <input type="date" class="form-control" name="dateto" #dateto="ngModel"
-                            [(ngModel)]="currentdepenses.dateto"/>
-                </div>
-                <div *ngIf="dateto.value < datefrom.value">
-                  <div class="alert alert-danger">
-                    <strong>Error:</strong>date invalide
-                  </div>
-                </div>
-                <div class="custom-control custom-checkbox alerte  ">
+
+          <div class="form-group">
+            <label>  Définir comme dépense récurrent:  </label>
+            <div class="custom-control custom-checkbox alerte">
+              <input type="checkbox"  id='jamais'name="jamais" [(ngModel)]="jamais"  checked>
+              <label for="jamais">jamais</label>
+              <input type="checkbox"  id='semaine'name="semaine"  [(ngModel)]="semaine">
+              <label for="semaine">par semaine</label>
+              <input type="checkbox"  id='mois'name="mois"  [(ngModel)]="mois">
+              <label for="mois">par mois</label>
+            </div>
+          </div>
+
+          <div [hidden]="!semaine" class="form-group">
+            <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
+                    [(ngModel)]="currentdepenses.jourrep">
+              <option selected> veuillez choisir un jour</option>
+              <option *ngFor="let semaine of semaines" >{{semaine}}</option>
+            </select>
+          </div>
+          <div [hidden]="!mois" class="form-group">
+            <select class="custom-select mr-sm-2" name="moisrep" #moisrep="ngModel"
+                    [(ngModel)]="currentdepenses.moisrep">
+              <option selected> veuillez choisir un mois</option>
+              <option *ngFor="let mois of Mois" [value]="mois">{{mois}}</option>
+            </select>
+          </div>
+          <div [hidden]="((!semaine) &&(!mois))" class="form-group">
+            Du <input type="date" class="form-control" name="datefrom" #datefrom="ngModel"
+                      [(ngModel)]="currentdepenses.datefrom"/>
+            au <input type="date" class="form-control" name="dateto" #dateto="ngModel"
+                      [(ngModel)]="currentdepenses.dateto"/>
+          </div>
+          <div *ngIf="dateto.value < datefrom.value">
+            <div class="alert alert-danger">
+              <strong>Error:</strong>date invalide
+            </div>
+          </div>
+          <div class="custom-control custom-checkbox alerte  ">
                   <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
                          role="button" aria-expanded="false" aria-controls="collapseExample"
                          id="customCheckalertedep">
@@ -138,30 +140,30 @@
                         <div class="row">.
                           <div class="col-6">
                             <select class="custom_menu">
-                              <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
+                             <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
                             </select>
                           </div>
-                          <div class="col-6"><label class="" type=""> jour(s) </label></div>
+                          <input type="number" class="form-control">
+                          <div class="col-6">
+                            <label class="" type=""> jour(s) </label></div>
                         </div>
                         <div class="row">
-                          <input type="hidden" class="form-control" name="msgalert" #msgalert="ngModel"
+                          <input type="hidden" class="form-control" name="idalert" #idalert="ngModel"
                                  [(ngModel)]="currentalert.$idalert">
                         </div>
                         <div class="row">
                           <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
-                                      [(ngModel)]="currentalert.msg">
+                                      [(ngModel)]="this.currentalert.msg">
                         </div>
                         <div class="row">
                           <input type="date" class="form-control" name="datealert" #datealert="ngModel"
-                                 [(ngModel)]="currentalert.date"/>
+                                 [(ngModel)]="this.currentalert.date"/>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+
 
           <div *ngIf="currentFileUpload" class="progress">
             <div class="progress-bar progress-bar-info progress-bar-striped"
@@ -172,14 +174,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-1 content-center">
-              <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
+            <div class="col-2 content-center">
+              <button [hidden]="!jamais" class="btn btn-primary bouton" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
                       (click)="savedepense()">
                 ajouter
               </button>
             </div>
-            <div class="col-1 content-center">
-              <button type="submit" class="" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
+            <div class="col-3 content-center">
+              <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-primary bouton" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
                       (click)="savedepenseRecurrent()">ajouter recurent
               </button>
             </div>

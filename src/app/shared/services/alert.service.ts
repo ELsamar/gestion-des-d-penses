@@ -7,9 +7,10 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class AlertService {
- alertlist: AngularFireList<any>;
+  alertlist: AngularFireList<any>;
  alert: Alert ;
  list: AngularFireList<Depenses>;
+  currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
   constructor(private db: AngularFireDatabase, public authservice: AuthService) { }
   getalertauth( bath: string) {
     const myUserId = this.authservice.currentUserId;
@@ -17,23 +18,23 @@ export class AlertService {
     return this.db.list<Alert>(bath,
       ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));
   }
-  insertAlert (childPath: string, newdepenseKey: string, alert: Alert ) {
-    const alertlist = this.db.database.ref(childPath).child('qfLQdWnNA5U4IiRQxevRB4Z46bg1' + '/' + newdepenseKey);
-    alertlist.set({
-      alert: {
-        id: alert.$idalert,
-      msgalert : alert.msg,
-      date: alert.date }
+async  insertAlert (childPath: string, newdepenseKey: string, alert: Alert ) {
+    const newalertKey = this.db.database.ref(childPath + this.currentUserId + '/' + newdepenseKey ).child('Alert').push().key;
+  const alertlist = this.db.database.ref(childPath + this.currentUserId + '/' + newdepenseKey + '/Alert/' + newalertKey );
+  console.log(childPath + this.currentUserId + '/' + newdepenseKey + '/Alert/' + newalertKey );
+   await alertlist.set({
+      msgalert : alert.msgalert,
+      date: alert.datealert
     }) ;
 
   }
 
-  updateAler(alert: Alert) {
+  updateAlert(alert: Alert) {
     this.alertlist.update(alert.$idalert,
       {
         idauth: this.authservice.currentUserId,
-        msg : alert.msg,
-        date: alert.date
+        msg : alert.msgalert,
+        date: alert.msgalert
     });
   }
   deleteDepense($idalert: string) {

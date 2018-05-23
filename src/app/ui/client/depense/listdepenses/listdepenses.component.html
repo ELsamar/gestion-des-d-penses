@@ -69,7 +69,7 @@
             <div class="container-fluid">
               <div class="form-group">
                 <label class="col-form-label">Titre:</label>
-                <input type="text" class="form-control" name="titredepense" #titredepense="ngModel"
+                <input type="hidden" class="form-control" name="titredepense" #titredepense="ngModel"
                        [(ngModel)]="depenseservice.selectedDepense.titredepense" required minlength="4">
                 <div *ngIf="titredepense.errors && (titredepense.dirty|| titredepense.touched)"
                      class="alert alert-danger">
@@ -138,7 +138,7 @@
                   <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesForm.valid">modifier
                   </button>
                 </div>
-                <div class="col-3 content-center">
+                <div class="col-2 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
                   </button>
                 </div>
@@ -164,8 +164,10 @@
       <li><label class="col-form-label">Categorie : {{depenseservice.selectedDepense.categoriedepense}}</label></li>
       <li><label class="col-form-label">Description: {{depenseservice.selectedDepense.descriptiondepense}} </label></li>
       <li><label class="col-form-label">Justificatif: </label>
-        <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+        <br>
+        <img src={{depenseservice.selectedDepense.justificatifdepenses}} height="250" width="250">
       </li>
+
     </ul>
   </div>
 </ng-template>

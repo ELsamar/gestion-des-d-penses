@@ -5,14 +5,24 @@
                   <h1 class="h2">Transactions</h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                      <button class="btn btn-sm btn-outline-secondary">cette semaine</button>
+                      <button class="btn btn-sm btn-outline-secondary"(click)="getweek()">cette semaine</button>
                       <button class="btn btn-sm btn-outline-secondary">cet ans</button>
-                      <button class="btn btn-sm btn-outline-secondary">ce mois</button>
+                      <button class="btn btn-sm btn-outline-secondary" (click)="getMonth()">ce mois</button>
                     </div>
-                    <button class="btn btn-sm btn-outline-secondary ">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="ngOnInit()">
                       tous
                     </button>
                   </div>
+        <form class="form-inline nav-item">
+          <input class="form-control mr-sm-2" type="text"  name="st"  [(ngModel)]="st"
+                  placeholder="dd-m-yyyy" >
+          <input class="form-control mr-sm-2" type="text"   name="ed" [(ngModel)]="ed"
+                 placeholder="dd-m-yyyy" >
+
+          <button class="btn btn-sm btn-outline-secondary" type="submit" (click)="filtrer()">
+            filtrer
+          </button>
+        </form>
       </nav>
       <hr>
       <div class="container-fluid">

@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
   isLogged: boolean;
   pseudo: String;
   email: string;
+  email1: string ;
   emailSent = false;
   errorMessage: string;
   password: string;
-  resetPassword: boolean = false;
+  resetPassword = false;
   connecter = true;
   public formModel: FormModel = {};
   constructor(public authService: AuthService, private router: Router,
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
     this.connecter = false;
   }
   async sendEmailLink() {
-    this.authService.sendEmailLink(this.email);
+    this.authService.sendEmailLink(this.email1);
   }
 
   async confirmSignIn(url) {

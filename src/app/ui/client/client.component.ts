@@ -1,8 +1,9 @@
-import { Component, OnInit,EventEmitter,Output} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {AuthService} from '../../providers/auth.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import{trigger,state,transition,style,animate} from '@angular/animations';
+import {trigger, state, transition , style, animate} from '@angular/animations';
+import {UserService} from '../../shared/services/user.service';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
@@ -15,25 +16,29 @@ import{trigger,state,transition,style,animate} from '@angular/animations';
         transition ('close=>open',animate ('400ms ease-out')),
       ]),
 
-      trigger('maincAnim',[
+      trigger('maincAnim', [
         state('close', style({marginLeft : '0px'})),
-        state('open' ,style({marginLeft:'350px'})),
-        transition ('open=>close',animate ('400ms ease-in')),
-        transition ('close=>open',animate ('400ms ease-out')),
-      
-      ])
+        state('open' , style({marginLeft: '350px'})),
+        transition ('open=>close', animate ('400ms ease-in')),
+        transition ('close=>open', animate ('400ms ease-out'))])
   ]
 })
 export class ClientComponent implements OnInit {
-  constructor(public authService: AuthService) {
+  openclose = 'open'
+  constructor(public authService: AuthService, public userservice: UserService) {
     console.log(this.authService.currentUserId);
     localStorage.setItem('currentUserId', this.authService.currentUserId);
   }
-  openclose :string ='open'
   ngOnInit() {
+
+    this.userservice.getUser().then(snapshot => {
+      if (snapshot.val()) {
+        this.userservice.userpict = snapshot.val().imageuser;
+      } else if (!snapshot.val()) {}
+    });
+    console.log(this.userservice.userpict);
   }
   toggle(): void {
-    this.openclose=(this.openclose==='open')?'close':'open';
-  
+    this.openclose = (this.openclose === 'open' ) ? 'close' : 'open' ;
   }
 }

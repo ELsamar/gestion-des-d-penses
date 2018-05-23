@@ -1,5 +1,5 @@
 export class Alert {
   $idalert: string;
-  msg: string ;
-  date: string ;
+  msgalert: string ;
+  datealert: Date ;
 }

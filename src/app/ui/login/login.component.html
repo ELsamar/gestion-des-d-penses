@@ -92,8 +92,8 @@
       <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
       <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
       <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
-      <button class="btn btn-lg btn-primary btn-block" type="reset"  (click)="formModel.captcha =''">Annuler</button>
       <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="singup()">s'inscrire</button>
+      <button class="btn btn-lg btn-primary btn-block" type="reset"  (click)="formModel.captcha =''">Annuler</button>
     </form>
   </div>
 

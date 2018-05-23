@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
 import * as firebase from 'firebase';
 import {promise} from 'selenium-webdriver';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class DepensesService {
@@ -17,7 +18,7 @@ export class DepensesService {
   currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
   depenseslist: AngularFireList <any>;
 
-  constructor(private db: AngularFireDatabase, public authservice: AuthService) {
+  constructor(private db: AngularFireDatabase, public authservice: AuthService, private toastr: ToastrService) {
   }
   checkdata(childPath) {
     const depenseslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
@@ -61,7 +62,8 @@ export class DepensesService {
           descriptiondepense: depenses.descriptiondepense,
           justificatifdepenses: depenses.justificatifdepense
         });
-      }
+    this.toastr.success('ajouter', 'depense ajoute par succes');
+    }
     );
   }
   insertDepenseRecurrent(childPath: string, newdepenseKey: string,
@@ -99,10 +101,11 @@ export class DepensesService {
             jourrep: depenses.jourrep,
             moisrep: depenses.moisrep,
             dateform: depenses.datefrom,
-            dateto: depenses.dateto
+            dateto: depenses.dateto,
             // this.depensesRef.push(depenses);
-          });
-      });
+        });
+        this.toastr.success('ajouter', 'depense ajoute par succes');
+    });
   }
 
   updateDepense(depenses: Depenses, childPath: string ) {
@@ -117,6 +120,7 @@ export class DepensesService {
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
       });
+    this.toastr.success('modifier', 'depense modifiè par succes');
   }
 
   updateDepenseRecurrent(depenses: Depenses) {
@@ -136,6 +140,7 @@ export class DepensesService {
         dateform: depenses.datefrom,
         dateto: depenses.dateto
     });
+    this.toastr.success('modifier', 'depense modifiè par succes');
   }
 
   disactivedep(depenses: Depenses) {
@@ -143,7 +148,7 @@ export class DepensesService {
     this.depenseslist.update(depenses.$iddepense,
       {
         active: depenses.active
-      });
+      })
   }
 
   deleteDepense($iddepense: string) {

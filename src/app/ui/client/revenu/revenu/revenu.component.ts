@@ -29,8 +29,8 @@ export class RevenuComponent implements OnInit {
   semaines: any = ['', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
   Mois: any = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-  ajoute = false;
   currentrevenus: any;
+  nbr: number;
   Modelelist: ModeleRevenus [];
   selectedModel: ModeleRevenus;
   ModelelistDefault =
@@ -59,6 +59,15 @@ export class RevenuComponent implements OnInit {
     });
     }
 
+  async  savealert(titre: string, bath: string, key: string ) {
+      let d = new Date();
+    await  d.setDate(d.getDate() - 5);
+      console.log(this.nbr);
+    this.currentalert.datealert = d;
+    console.log(this.currentalert.datealert);
+      this.currentalert.msgalert = ('pour votre revenu' + titre + 'reste' + this.nbr + 'jours' );
+     await this.alertservice.insertAlert(bath, key, this.currentalert);
+    }
   selectModelAction(model: any) {
     console.log('test');
     this.modelerevenuservice.selectedModele = Object.assign({}, model);
@@ -96,6 +105,7 @@ async  onSubmit(revenusForm: NgForm) {
    await this.revenuservice.insertrevenusRecurrent('Revenus/RevenusRecurrent', newrevenuKey,
       this.currentrevenus, this.currentFileUpload, this.progress);
    this.savetransaction('Revenus Recurrent', this.currentrevenus );
+   await this.savealert(this.currentrevenus.titrerevenu, 'Revenus/RevenusRecurrent/', newrevenuKey);
   }
   selectFile(event) {
     const file = event.target.files.item(0);

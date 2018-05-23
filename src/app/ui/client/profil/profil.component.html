@@ -1,3 +1,4 @@
+
 <form #UserForm="ngForm" (ngSubmit)="onSubmit(UserForm)">
   <div class="container-fluid">
     <div class="row">
@@ -121,12 +122,12 @@
       <div *ngIf="test" class="col-md-4">
         <div class="card card-user">
           <div class="image">
-            <img src="" alt="...">
+            <img src="../../../../assets/img/bg5.jpg" alt="...">
           </div>
           <div class="card-body">
             <div class="author">
               <a href="#">
-                <img class="avatar border-gray" src="../assets/img/profil.png" alt="...">
+                <img class="avatar border-gray" src={{userObject.imageuser}} alt="...">
                 <h5 class="title"> {{userObject.nom}} {{userObject.prenom}}</h5>
               </a>
               <p class="description">
@@ -154,7 +155,7 @@
         </div>
 
       </div>
-      <div *ngIf="!test" class="col-md-4">
+      <div *ngIf="userObject.imageuser === ' '" class="col-md-4">
         <div class="card card-user">
           <div class="image">
             <img src="" alt="...">
@@ -163,18 +164,26 @@
             <div class="author">
               <a href="#">
                 <img class="avatar border-gray" src="../assets/img/profil.png" alt="...">
-                <h6 class="my-0">Télécharger mon image </h6>
-                <input type="file" class="form-control" name="image">
+                <div class="form-group">
+                  <label class="col-form-label">Télécharger mon image</label>
+                  <input type="file" class="form-control" name="cover" id="cover" (change)="selectFile($event)">
+                </div>
                 <h5 class="title"> {{userObject.nom}} {{userObject.prenom}}</h5>
               </a>
               <p class="description">
               </p>
             </div>
             <p class="description text-center">
-              "Lamborghini Mercy
-              <br> Your chick she so thirsty
-              <br> I'm in that two seat Lambo"
             </p>
+            <div *ngIf="currentFileUpload" class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped"
+                   role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                   aria-valuemin="0" aria-valuemax="100"
+                   [ngStyle]="{width:progress.percentage+'%'}">
+                <!--{{progress.percentage}}%-->
+              </div>
+            </div>
+            <button type="submit" class="btn btn-secondary button" (click)="uploadimage()">Télécharger</button>
           </div>
           <hr>
           <div class="button-container">
