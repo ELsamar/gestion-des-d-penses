@@ -149,7 +149,7 @@ return false;
 });
 }
 
-disactivedep(revenus: Revenus) {
+disactiverev(revenus: Revenus) {
   revenus.active = false;
 this.revenuslist.update(revenus.$idrevenu,
 {
