@@ -30,6 +30,10 @@ const routes: Routes = <Routes>  [
     path: 'login',
     component: LoginComponent,
     loadChildren: './ui/login/login.module#LoginModule'
+  },
+  {
+    path: '',
+    component: NotFound404Component,
   }
 ];
 

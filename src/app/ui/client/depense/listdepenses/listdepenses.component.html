@@ -1,23 +1,21 @@
 <div class="container-fluid">
   <div class="content row">
     <nav class="navbar container-fluid">
-      <h1> depense simple </h1>
+      <h1> Depense simple </h1>
       <div class="dropdown">
         <button class="dropdown-toggle nav-item" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
           {{typeaffich}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">toutes les depences</a>
-          <a class="dropdown-item" href="#">depences recurantes</a>
-          <a class="dropdown-item" href="#">depences models </a>
-          <a class="dropdown-item" (click)="getdepsimpl()">depences simple </a>
+          <a class="dropdown-item" (click)="ontrie('montantdepense')">par montant</a>
+          <a class="dropdown-item" (click)="ontrie('titredepense')" >par titre</a>
+          <a class="dropdown-item" (click)="ontrie('datedepense')">par date</a>
         </div>
       </div>
       <form class="form-inline nav-item">
         <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
                data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <button class="btn btn-danger btn-sm" (click)="onDeleteAll()">suprimmertout</button>
 
@@ -31,7 +29,7 @@
               <th scope="col">Titre</th>
               <th scope="col">Date</th>
               <th scope="col">Montant</th>
-              <th scope="col">Cathégorie</th>
+              <th scope="col">Catégorie</th>
             </tr>
             </thead>
             <tbody>
@@ -39,7 +37,7 @@
               <td>{{Depenses.titredepense}}</td>
               <td>{{Depenses.datedepense}}</td>
               <td>{{Depenses.montantdepense}}</td>
-              <td>{{Depenses.cathegoriedepense}}</td>
+              <td>{{Depenses.categoriedepense}}</td>
               <td>
                 <a (click)="openWindowCustomClass(contentEdit,Depenses)"><i class="far fa-edit"></i></a>
                 <a (click)="onDelete(Depenses.$key)">
@@ -68,11 +66,10 @@
 
       <div class="container-fluid">
         <div class=" content row">
-          <div class="card">
             <div class="container-fluid">
               <div class="form-group">
                 <label class="col-form-label">Titre:</label>
-                <input type="text" class="form-control" name="titredepense" #titredepense="ngModel"
+                <input type="hidden" class="form-control" name="titredepense" #titredepense="ngModel"
                        [(ngModel)]="depenseservice.selectedDepense.titredepense" required minlength="4">
                 <div *ngIf="titredepense.errors && (titredepense.dirty|| titredepense.touched)"
                      class="alert alert-danger">
@@ -121,10 +118,10 @@
               </div>
 
               <div class="form-group">
-                <label class="col-form-label">Cathegorie :</label>
-                <select class="custom-select form-group mr-sm-2" name=cathegoriedepense #cathegoriedepense="ngModel"
-                        [(ngModel)]="depenseservice.selectedDepense.cathegoriedepense">
-                  <option *ngFor="let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
+                <label class="col-form-label">Categorie :</label>
+                <select class="custom-select form-group mr-sm-2" name=categoriedepense #categoriedepense="ngModel"
+                        [(ngModel)]="depenseservice.selectedDepense.categoriedepense" required>
+                  <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
                 </select>
               </div>
               <div class="form-group">
@@ -141,20 +138,15 @@
                   <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesForm.valid">modifier
                   </button>
                 </div>
-                <div class="col-3 content-center">
+                <div class="col-2 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
                   </button>
                 </div>
               </div>
-
             </div>
-          </div>
         </div>
       </div>
     </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Annuler</button>
   </div>
 </ng-template>
 <ng-template #contentDetail let-c="close" let-d="dismiss">
@@ -169,11 +161,13 @@
       <li><label class="col-form-label">titre: {{depenseservice.selectedDepense.titredepense}}</label></li>
       <li><label class="col-form-label">Montant : {{depenseservice.selectedDepense.montantdepense}} DT </label></li>
       <li><label class="col-form-label">Date : {{depenseservice.selectedDepense.datedepense}}</label></li>
-      <li><label class="col-form-label">Cathegorie : {{depenseservice.selectedDepense.cathegoriedepense}}</label></li>
+      <li><label class="col-form-label">Categorie : {{depenseservice.selectedDepense.categoriedepense}}</label></li>
       <li><label class="col-form-label">Description: {{depenseservice.selectedDepense.descriptiondepense}} </label></li>
       <li><label class="col-form-label">Justificatif: </label>
-        <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+        <br>
+        <img src={{depenseservice.selectedDepense.justificatifdepenses}} height="250" width="250">
       </li>
+
     </ul>
   </div>
 </ng-template>

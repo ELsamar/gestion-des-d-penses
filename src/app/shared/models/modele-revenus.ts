@@ -1,7 +1,8 @@
-export class Modelerev {
+export class ModeleRevenus {
         $idModele: string;
         titreModele: string;
         montantModele: number;
         dateModele: Date ;
-        descriptionModele: string ;      
+        descriptionModele: string ;
+  categorieModele: string ;
 }

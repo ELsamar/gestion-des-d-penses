@@ -1,26 +1,23 @@
 <div class="container-fluid">
   <div class="content row">
     <nav class="navbar container-fluid">
-      <h1> depense Recurrent </h1>
+      <h1> Depense Recurrent </h1>
       <div class="dropdown">
         <button class="dropdown-toggle nav-item" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
           {{typeaffich}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">toutes les depences</a>
-          <a class="dropdown-item" href="#">depences recurantes</a>
-          <a class="dropdown-item" href="#">depences models </a>
-          <a class="dropdown-item" (click)="getdepsimpl()">depenses simple </a>
+          <a class="dropdown-item" (click)="ontrie('montantdepense')">par montant</a>
+          <a class="dropdown-item" (click)="ontrie('titredepense')" >par titre</a>
+          <a class="dropdown-item" (click)="ontrie('datedepense')">par date</a>
         </div>
       </div>
       <form class="form-inline nav-item">
         <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
-               data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+               data-toggle="dropdown" placeholder="Chercher ..." aria-label="Search">
       </form>
       <button class="btn btn-danger btn-sm" (click)="onDeleteAll()">suprimmertout</button>
-
     </nav>
     <div class="card">
       <div class="container-fluid">
@@ -31,7 +28,7 @@
               <th scope="col">Titre</th>
               <th scope="col">Date</th>
               <th scope="col">Montant</th>
-              <th scope="col">Cathégorie</th>
+              <th scope="col">Catégorie</th>
             </tr>
             </thead>
             <tbody>
@@ -39,7 +36,7 @@
               <td>{{depensesR.titredepense}}</td>
               <td>{{depensesR.datedepense}}</td>
               <td>{{depensesR.montantdepense}}</td>
-              <td>{{depensesR.cathegoriedepense}}</td>
+              <td>{{depensesR.categoriedepense}}</td>
               <td>
                 <a (click)="openWindowCustomClass(contentEditR,depensesR)"><i class="far fa-edit"></i></a>
                 <a (click)="onDelete(depensesR.$key)">
@@ -57,18 +54,17 @@
 </div>
 <ng-template #contentEditR let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">update</h4>
+    <h4 class="modal-title">Modifier</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form #depensesFormR="ngForm" (ngSubmit)="onUpdateR(depensesFormR)">
-      <input type="" name="$iddepense" #$iddepense="ngModel" [(ngModel)]="selectedDepenseR.$key">
+      <input type="hidden" name="$iddepense" #$iddepense="ngModel" [(ngModel)]="selectedDepenseR.$key">
 
       <div class="container-fluid">
         <div class=" content row">
-          <div class="card">
             <div class="container-fluid">
               <div class="form-group">
                 <label class="col-form-label">Titre:</label>
@@ -120,10 +116,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-form-label">Cathegorie :</label>
-                <select class="custom-select form-group mr-sm-2" name="cathegoriedepense" #cathegoriedepense="ngModel"
-                        [(ngModel)]="selectedDepenseR.cathegoriedepense">
-                  <option *ngFor="let cathegorie of cathegories" [value]="cathegorie">{{cathegorie}}</option>
+                <label class="col-form-label">Categorie :</label>
+                <select class="custom-select form-group mr-sm-2" name="categoriedepense" #categoriedepense="ngModel"
+                        [(ngModel)]="selectedDepenseR.categoriedepense" required>
+                  <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
                 </select>
               </div>
               <div class="form-group">
@@ -150,9 +146,8 @@
                         <option *ngFor="let repete of repetes" [value]="repete">{{repete}}</option>
                       </select>
                     </div>
-                    {{selectedDepenseR | json}}
+
                     <div class="form-group">
-                      {{selectedDepenseR.jourrep.value}} aaa
                       <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
                               [(ngModel)]="selectedDepenseR.jourrep">
                         <option *ngFor="let semaine of semaines" [value]="semaine">{{semaine}}</option>
@@ -201,24 +196,19 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-1 content-center">
+                <div class="col-3 content-center">
                   <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesFormR.valid">modifier
                   </button>
                 </div>
-                <div class="col-1 content-center">
+                <div class="col-2 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
                   </button>
                 </div>
               </div>
-
             </div>
-          </div>
         </div>
       </div>
     </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Annuler</button>
   </div>
 </ng-template>
 <ng-template #contentDetailR let-c="close" let-d="dismiss">
@@ -234,8 +224,8 @@
     <li><label class="col-form-label">Date : {{selectedDepenseR.datedepense}}</label></li>
     <li><label class="col-form-label">Cathegorie : {{selectedDepenseR.cathegoriedepense}}</label></li>
     <li><label class="col-form-label">Description: {{selectedDepenseR.descriptiondepense}} </label></li>
-    <li><label class="col-form-label">Justificatif: </label>
-      <!--<input type="file" class="form-control" name="justificatifdepense" #justificatifdepense="ngModel" [(ngModel)]="currentdepenses.coverUrl" />-->
+    <li><label class="col-form-label">Justificatif: {{depenseservice.selectedDepense.justificatifdepenses}}</label>
+      <img src={{selectedDepenseR.justificatifdepenses}} height="250" width="250">
     </li>
     <li *ngIf="(!selectedDepenseR.active)"><label class="col-form-label"> Dépense disactivè ou bien sa
       durée de repition a été terminè </label></li>
@@ -243,7 +233,7 @@
       <li><label class="col-form-label">Dépense activè encours </label></li>
       <li>
         <p class="col-form-label">type de repition: par {{selectedDepenseR.typerep}}
-          de : {{selectedDepenseR.dateFrom}} à :
+          de : {{selectedDepenseR.datefrom}} à :
           {{selectedDepenseR.dateto}}
         </p>
       </li>

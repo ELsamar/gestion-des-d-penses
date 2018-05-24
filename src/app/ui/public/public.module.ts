@@ -9,12 +9,13 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { PublicComponent } from './public.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {Routes, RouterModule} from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   imports: [
     CommonModule,
     PublicRoutingModule,
   ],
   declarations: [AcceuilComponent, EngagementsComponent,
-    FonctionalitesComponent, ContactsComponent, PublicComponent]
+    FonctionalitesComponent, ContactsComponent, PublicComponent, HeaderComponent]
 })
 export class PublicModule { }

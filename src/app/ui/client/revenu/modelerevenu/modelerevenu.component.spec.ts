@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RevenulistComponent } from './revenulist.component';
+import { ModelerevenuComponent } from './modelerevenu.component';
 
-describe('RevenulistComponent', () => {
-  let component: RevenulistComponent;
-  let fixture: ComponentFixture<RevenulistComponent>;
+describe('ModelsrevComponent', () => {
+  let component: ModelerevenuComponent;
+  let fixture: ComponentFixture<ModelerevenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RevenulistComponent ]
+      declarations: [ ModelerevenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RevenulistComponent);
+    fixture = TestBed.createComponent(ModelerevenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,19 +1,29 @@
+
 export class Depenses {
     $iddepense: string;
   //  idauth: any;
     titredepense: string;
     montantdepense: number;
     datedepense: Date ;
-    cathegoriedepense: string ;
+    categoriedepense: string ;
     descriptiondepense: string ;
-    coverUrl: string;
-    //justificatifdepense: File;
+  justificatifdepense: string;
     typerep: string ;
     active: boolean;
     jourrep: string;
     moisrep: string;
     datefrom: Date;
     dateto: Date;
+  constructor() {
+    //  idauth: any;
+    this.descriptiondepense = '';
+    this.justificatifdepense = '';
+    this.typerep = '';
+    this.jourrep = '';
+    this.moisrep = '';
+    this.datefrom = new Date();
+    this.dateto = new Date();
+  }
 }
 export class FileUpload {
 

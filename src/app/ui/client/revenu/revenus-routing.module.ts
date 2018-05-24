@@ -4,22 +4,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import {RevenuComponent} from './revenu/revenu.component';
-import {RevenusComponent} from './revenus.component';
-import { RevenulistComponent } from './revenulist/revenulist.component';
-
 import { DashrevComponent } from './dashrev/dashrev.component';
 import { ListrevenusrecurrantsComponent } from './listrevenusrecurrants/listrevenusrecurrants.component';
-import { ListmodelsrevComponent } from './listmodelsrev/listmodelsrev.component';
-import { ModelsrevComponent } from './modelsrev/modelsrev.component';
+import {ModelerevenuComponent} from './modelerevenu/modelerevenu.component';
+import {ListmodelrevenuComponent} from './listmodelrevenu/listmodelrevenu.component';
+import {ListrevenuComponent} from './listrevenu/listrevenu.component';
 
 const routes: Routes = [
   {
     path: '' ,
-    component: DashrevComponent 
+    component: DashrevComponent
   },
   {
     path: 'listrev' ,
-    component: RevenulistComponent
+    component: ListrevenuComponent
   },
   {
     path: 'listrevR' ,
@@ -31,11 +29,11 @@ const routes: Routes = [
   },
   {
     path: 'model' ,
-    component: ModelsrevComponent
+    component: ModelerevenuComponent
   },
   {
     path: 'listmodel' ,
-    component: ListmodelsrevComponent
+    component: ListmodelrevenuComponent
   }
 ];
 

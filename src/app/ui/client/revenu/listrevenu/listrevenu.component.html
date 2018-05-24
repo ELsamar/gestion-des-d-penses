@@ -7,16 +7,14 @@
         {{typeaffich}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">toutes les revenus</a>
-        <a class="dropdown-item" href="#">revenus recurantes</a>
-        <a class="dropdown-item" href="#">revenus models </a>
-        <a class="dropdown-item" (click)="getrevsimpl()">revenu simple </a>
+        <a class="dropdown-item" (click)="ontrie('montantrevenu')">par montant</a>
+        <a class="dropdown-item" (click)="ontrie('titrerevenu')" >par titre</a>
+        <a class="dropdown-item" (click)="ontrie('daterevenu')">par date</a>
       </div>
     </div>
     <form class="form-inline nav-item">
       <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
              data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 
   </nav>
@@ -29,6 +27,7 @@
             <th scope="col">Titre</th>
             <th scope="col">Date</th>
             <th scope="col">Montant</th>
+            <th scope="col">categorie</th>
           </tr>
           </thead>
           <tbody>
@@ -36,12 +35,13 @@
             <td>{{revenus.titrerevenu}}</td>
             <td>{{revenus.daterevenu}}</td>
             <td>{{revenus.montantrevenu}}</td>
+            <td>{{revenus.categorierevenu}}</td>
             <td>
-              <a (click)="openWindowCustomClass(contentEdit,Revenus)"><i class="far fa-edit"></i></a>
-              <a (click)="onDelete(Revenus.$key)">
+              <a (click)="openWindowCustomClass(contentEdit,revenus)"><i class="far fa-edit"></i></a>
+              <a (click)="onDelete(revenus.$key)">
                 <i class="fas fa-trash-alt"></i>
               </a>
-              <a (click)="openWindowCustomClass(contentDetail,Revenus)"><i class="fas fa-eye"></i></a>
+              <a (click)="openWindowCustomClass(contentDetail,revenus)"><i class="fas fa-eye"></i></a>
             </td>
           </tr>
           </tbody>
@@ -59,16 +59,15 @@
 </div>
 <div class="modal-body">
   <form #revenusForm="ngForm" (ngSubmit)="onUpdate(revenusForm)">
-    <input type="text" name="$idrevenu" #idrevenu="ngModel" [(ngModel)]="revenuservice.selectedRevenu.$key">
+    <input type="hidden" name="$idrevenu" #idrevenu="ngModel" [(ngModel)]="revenuservice.selectedrevenu.$key">
 
     <div class="container-fluid">
       <div class=" content row">
-        <div class="card">
           <div class="container-fluid">
             <div class="form-group">
               <label class="col-form-label">Titre:</label>
               <input type="text" class="form-control" name="titrerevenu" #titrerevenu="ngModel"
-                     [(ngModel)]="revenuservice.selectedRevenu.titrerevenu" required minlength="4">
+                     [(ngModel)]="revenuservice.selectedrevenu.titrerevenu" required minlength="4">
               <div *ngIf="titrerevenu.errors && (titrerevenu.dirty|| titrerevenu.touched)"
                    class="alert alert-danger">
                 <div [hidden]="!titrerevenu.errors.required">
@@ -83,11 +82,12 @@
               <label class="col-form-label">Montant :</label>
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu"
-                       #montantrevenu="ngModel" [(ngModel)]="revenuservice.selectedRevenu.montantrevenu"
+                       #montantrevenu="ngModel" [(ngModel)]="revenuservice.selectedrevenu.montantrevenu"
                        pattern="\d*" required>
                 <div class="input-group-prepend">
-                  <div class="input-group-text">TND</div>
+                  <div class="input-group-text">DNT</div>
                 </div>
+              </div>
                 <div *ngIf="montantrevenu.errors && (montantrevenu.dirty|| montantrevenu.touched)"
                      class="alert alert-danger">
                   <div [hidden]="!montantrevenu.errors.required">
@@ -97,12 +97,11 @@
                     <strong>Error:</strong>le montant doit étre nombre
                   </div>
                 </div>
-              </div>
             </div>
             <div class="form-group">
               <label class="col-form-label">Date :</label>
               <input type="date" class="form-control" name="daterevenu" #daterevenu="ngModel"
-                     [(ngModel)]="revenuservice.selectedRevenu.daterevenu "
+                     [(ngModel)]="revenuservice.selectedrevenu.daterevenu "
                      pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
                      required/>
               <div *ngIf="daterevenu.errors && (daterevenu.dirty|| daterevenu.touched)" class="alert alert-danger">
@@ -115,30 +114,33 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-form-label">Categorie :</label>
+              <select class="custom-select form-group mr-sm-2" name="categorierevenu" #categorierevenu="ngModel"
+                      [(ngModel)]="revenuservice.selectedrevenu.categorierevenu" required>
+                <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label class="col-form-label">Description: </label>
               <input class="form-control" name="descriptionrevenu" #descriptionrevenu="ngModel"
-                     [(ngModel)]="revenuservice.selectedRevenu.descriptionrevenu"/>
+                     [(ngModel)]="revenuservice.selectedrevenu.descriptionrevenu"/>
             </div>
-            
+
             <div class="row">
               <div class="col-3 content-center">
                 <button type="submit" class="btn btn-primary bouton" [disabled]="!revenusForm.valid">modifier
                 </button>
               </div>
-              <div class="col-3 content-center">
+              <div class="col-2 content-center">
                 <button type="reset" class="btn btn-secondary  bouton">annuler
                 </button>
               </div>
             </div>
 
           </div>
-        </div>
       </div>
     </div>
   </form>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-light" (click)="c('Close click')">Annuler</button>
 </div>
 </ng-template>
 <ng-template #contentDetail let-c="close" let-d="dismiss">
@@ -150,12 +152,14 @@
 </div>
 <div class="modal-body">
   <ul class="content-center detail">
-    <li><label class="col-form-label">titre: {{revenuservice.selectedRevenu.titrerevenu}}</label></li>
-    <li><label class="col-form-label">Montant : {{revenuservice.selectedRevenu.montantrevenue}} DT </label></li>
-    <li><label class="col-form-label">Date : {{revenuservice.selectedRevenu.daterevenu}}</label></li>
-    <li><label class="col-form-label">Cathegorie : {{revenuservice.selectedRevenu.cathegorierevenu}}</label></li>
-    <li><label class="col-form-label">Description: {{revenuservice.selectedRevenu.descriptionrevenu}} </label></li>
+    <li><label class="col-form-label">titre: {{revenuservice.selectedrevenu.titrerevenu}}</label></li>
+    <li><label class="col-form-label">Montant : {{revenuservice.selectedrevenu.montantrevenu}} DT </label></li>
+    <li><label class="col-form-label">Date : {{revenuservice.selectedrevenu.daterevenu}}</label></li>
+    <li><label class="col-form-label">Categorie : {{revenuservice.selectedrevenu.categorierevenu}}</label></li>
+    <li><label class="col-form-label">Description: {{revenuservice.selectedrevenu.descriptionrevenu}} </label></li>
     <li><label class="col-form-label">Justificatif: </label>
+      <br>
+      <img src={{revenuservice.selectedrevenu.justificatifrevenu}} height="300" width="250" >
     </li>
   </ul>
 </div>

@@ -4,20 +4,17 @@ import { Revenus,FileUpload } from '../.../../../shared/models/revenus';
 import { Observable } from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
 import * as firebase from 'firebase';
+import {Depenses} from '../models/depenses';
+import {ToastrService} from 'ngx-toastr';
 @Injectable()
 export class RevenusService {
   revenuslist: AngularFireList <any>;
-  justificatifrevenu: File;
-  private basePath = '/revenus';
   private storageBasePath = '/Revenusuploads';
-  revenusRef: AngularFireList<Revenus>;
-  revenuRef: AngularFireObject<Revenus>;
   selectedrevenu: Revenus = new Revenus();
   selectedrevenuR: Revenus = new Revenus();
   newrevenusKey: string;
   currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
-  constructor(private db: AngularFireDatabase, public authservice: AuthService) {
-    this.revenusRef = db.list(`${this.basePath}`);
+  constructor(private db: AngularFireDatabase, public authservice: AuthService, private toaster: ToastrService) {
   }
   checkdata(childPath) {
     const revenuslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
@@ -30,10 +27,7 @@ export class RevenusService {
   getnewrevenusKey(childPath: string) {
     return this.newrevenusKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
   }
-  /*getRevenu () {
-    return this.revenuslist = this.db.list('revenus');
-  }*/
-  insertrevenus(childPath: string, newrevenusKey: string, revenus:Revenus,
+  insertrevenus(childPath: string, newrevenusKey: string, revenus: Revenus,
     fileUpload: FileUpload, progress: { percentage: number }): void {
         this.newrevenusKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
         const revenuslist = this.db.database.ref(childPath).child(this.currentUserId).child(newrevenusKey);
@@ -54,15 +48,18 @@ export class RevenusService {
 // success
 fileUpload.url = uploadTask.snapshot.downloadURL;
 fileUpload.name = fileUpload.file.name;
-revenus.coverUrl = fileUpload.url;
+revenus.justificatifrevenu = fileUpload.url;
 revenuslist.set({
 idauth: this.authservice.currentUserId,
 titrerevenu: revenus.titrerevenu,
 montantrevenu: revenus.montantrevenu,
 daterevenu: revenus.daterevenu,
+categorierevenu: revenus.categorierevenu,
 descriptionrevenu: revenus.descriptionrevenu,
-justificatifrevenu: revenus.coverUrl
+justificatifrevenu: revenus.justificatifrevenu
+
 });
+this.toaster.success('ajouter', 'revenu ajoutè avec succes');
 }
 );
 }
@@ -88,29 +85,29 @@ console.log(error);
 // success
 fileUpload.url = uploadTask.snapshot.downloadURL;
 fileUpload.name = fileUpload.file.name;
-revenus.coverUrl = fileUpload.url;
+revenus.justificatifrevenu = fileUpload.url;
 revenuslist.set({
 idauth: this.authservice.currentUserId,
 titrerevenu: revenus.titrerevenu,
 montantrevenu: revenus.montantrevenu,
 daterevenu: revenus.daterevenu,
+categorierevenu: revenus.categorierevenu,
 descriptionrevenu: revenus.descriptionrevenu,
-justificatifrevenus: revenus.coverUrl,
+justificatifrevenu: revenus.justificatifrevenu,
 typerep: revenus.typerep,
 active: true,
 jourrep: revenus.jourrep,
 moisrep: revenus.moisrep,
 dateform: revenus.datefrom,
 dateto: revenus.dateto
-}
-);
+});
 
-
+  this.toaster.success('ajouter', 'revenu ajoutè avec succes');
 });
 }
 
-updateRevenuS(revenus: Revenus, childPath: string ) {
-const revenulist = this.db.list(childPath + '/' +  this.currentUserId);
+updateRevenu( childPath: string, revenus: Revenus, ) {
+  this.revenuslist = this.db.list(childPath + '/' +  this.currentUserId);
 this.revenuslist.update(revenus.$idrevenu,
 {
 idauth: this.authservice.currentUserId,
@@ -118,13 +115,9 @@ titrerevenu: revenus.titrerevenu,
 montantrevenu: revenus.montantrevenu,
 daterevenu: revenus.daterevenu,
 descriptionrevenu: revenus.descriptionrevenu,
-}).then((response) => {
-if (response) {
-return true;
-} else {
-return false;
-}
+  categorierevenu: revenus.categorierevenu
 });
+  this.toaster.success('modifier', 'revenu modifier avec succes');
 }
 
 updateRevenusRecurrent(revenus: Revenus) {
@@ -140,16 +133,11 @@ jourrep: revenus.jourrep,
 moisrep: revenus.moisrep,
 dateform: revenus.datefrom,
 dateto: revenus.dateto
-}).then((response) => {
-if (response) {
-return true;
-} else {
-return false;
-}
 });
+  this.toaster.success('modifier', 'revenu modifier avec succes');
 }
 
-disactiverev(revenus: Revenus) {
+disactiveRev(revenus: Revenus) {
   revenus.active = false;
 this.revenuslist.update(revenus.$idrevenu,
 {
@@ -158,7 +146,7 @@ active: revenus.active
 });
 }
 
-deleteRevenus($idrevenu: string,) {
+deleteRevenus($idrevenu: string) {
 this.revenuslist.remove($idrevenu);
 }
 
@@ -187,5 +175,11 @@ const revenulist = this.db.list(chilbath);
 return this.db.list<Revenus>(chilbath,
 ref => ref.limitToFirst(num));
 }
+  trie(bath: string , type: string) {
+    const chilbath = bath + '/' +  this.currentUserId ;
+    const depenselist = this.db.list(chilbath);
+    return this.db.list(chilbath,
+      ref => ref.orderByChild(type)).valueChanges();
+  }
 
 }

@@ -12,11 +12,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./listdepenses.component.css']
 })
 export class ListdepensesComponent implements OnInit {
-  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
-  repetes: any = ['Jamais' , 'Semaine' , 'mois'];
-  semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
-  Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
+    'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants', 'autre'];
   depenseslist: Depenses[];
   typeaffich: string;
   startAt: string;
@@ -94,5 +91,8 @@ export class ListdepensesComponent implements OnInit {
     const text = event.target.value;
     this.onSearchdep(text);
   }
-
+ontrie(type: string) {
+    this.depenseservice.trie('Depenses/Depenses', type)
+      .subscribe((depenses) => this.depenseslist = depenses);
+}
 }

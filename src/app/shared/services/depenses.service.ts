@@ -4,20 +4,21 @@ import {Depenses, FileUpload} from '../.../../../shared/models/depenses';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../../providers/auth.service';
 import * as firebase from 'firebase';
+import {promise} from 'selenium-webdriver';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class DepensesService {
-  private basePath = '/depenses';
   private storageBasePath = '/Depensesuploads';
-  depensesRef: AngularFireList<Depenses>;
-  depenseRef: AngularFireObject<Depenses>;
+ // depensesRef: AngularFireList<Depenses>;
+  // depenseRef: AngularFireObject<Depenses>;
   selectedDepense: Depenses = new Depenses();
   selectedDepenseR: Depenses = new Depenses();
   newdepenseKey: string;
   currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
-  depenseslist: AngularFireList <any> ;
-  constructor(private db: AngularFireDatabase, public authservice: AuthService) {
-    this.depensesRef = db.list(`${this.basePath}`);
+  depenseslist: AngularFireList <any>;
+
+  constructor(private db: AngularFireDatabase, public authservice: AuthService, private toastr: ToastrService) {
   }
   checkdata(childPath) {
     const depenseslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
@@ -30,16 +31,10 @@ export class DepensesService {
   getnewdepenseKey(childPath: string) {
     return this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
   }
-
-  // getDepense(childPath: string) {
-  //   return this.depenseslist = this.db.list(childPath);
-  // }
-
   insertDepense(childPath: string, newdepenseKey: string, depenses: Depenses,
                 fileUpload: FileUpload, progress: { percentage: number }): void {
     this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
     const depenseslist = this.db.database.ref(childPath).child(this.currentUserId).child(newdepenseKey);
-    // depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
 
@@ -57,24 +52,24 @@ export class DepensesService {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
-        depenses.coverUrl = fileUpload.url;
+        depenses.justificatifdepense = fileUpload.url;
         depenseslist.set({
           idauth: this.authservice.currentUserId,
           titredepense: depenses.titredepense,
           montantdepense: depenses.montantdepense,
           datedepense: depenses.datedepense,
-          cathegoriedepense: depenses.cathegoriedepense,
+          categoriedepense: depenses.categoriedepense,
           descriptiondepense: depenses.descriptiondepense,
-          justificatifdepenses: depenses.coverUrl
+          justificatifdepenses: depenses.justificatifdepense
         });
-      }
+    this.toastr.success('ajouter', 'depense ajoute par succes');
+    }
     );
   }
   insertDepenseRecurrent(childPath: string, newdepenseKey: string,
-                         depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }): void {
+                         depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }) {
     this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
     const depenseslist = this.db.database.ref(childPath).child(this.currentUserId).child(newdepenseKey);
-   // this.depenseslist = this.db.list(childPath);
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
 
@@ -92,47 +87,40 @@ export class DepensesService {
         // success
         fileUpload.url = uploadTask.snapshot.downloadURL;
         fileUpload.name = fileUpload.file.name;
-        depenses.coverUrl = fileUpload.url;
+        depenses.justificatifdepense = fileUpload.url;
         depenseslist.set({
             idauth: this.authservice.currentUserId,
             titredepense: depenses.titredepense,
             montantdepense: depenses.montantdepense,
             datedepense: depenses.datedepense,
-            cathegoriedepense: depenses.cathegoriedepense,
+            categoriedepense: depenses.categoriedepense,
             descriptiondepense: depenses.descriptiondepense,
-            justificatifdepenses: depenses.coverUrl,
+            justificatifdepenses: depenses.justificatifdepense,
             typerep: depenses.typerep,
             active: true,
             jourrep: depenses.jourrep,
             moisrep: depenses.moisrep,
             dateform: depenses.datefrom,
-            dateto: depenses.dateto
+            dateto: depenses.dateto,
             // this.depensesRef.push(depenses);
-          }
-      );
-
-
-      });
+        });
+        this.toastr.success('ajouter', 'depense ajoute par succes');
+    });
   }
 
   updateDepense(depenses: Depenses, childPath: string ) {
-    const depenselist = this.db.list(childPath + '/' +  this.currentUserId);
+    this.depenseslist = this.db.list(childPath + '/' +  this.currentUserId);
     this.depenseslist.update(depenses.$iddepense,
       {
         idauth: this.authservice.currentUserId,
         titredepense: depenses.titredepense,
         montantdepense: depenses.montantdepense,
         datedepense: depenses.datedepense,
-        cathegoriedepense: depenses.cathegoriedepense,
+        cathegoriedepense: depenses.categoriedepense,
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
-      }).then((response) => {
-      if (response) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+      });
+    this.toastr.success('modifier', 'depense modifiè par succes');
   }
 
   updateDepenseRecurrent(depenses: Depenses) {
@@ -142,7 +130,7 @@ export class DepensesService {
         titredepense: depenses.titredepense,
         montantdepense: depenses.montantdepense,
         datedepense: depenses.datedepense,
-        cathegoriedepense: depenses.cathegoriedepense,
+        categoriedepense: depenses.categoriedepense,
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
         typerep: depenses.typerep,
@@ -151,25 +139,19 @@ export class DepensesService {
         moisrep: depenses.moisrep,
         dateform: depenses.datefrom,
         dateto: depenses.dateto
-      }).then((response) => {
-      if (response) {
-        return true;
-      } else {
-        return false;
-      }
     });
+    this.toastr.success('modifier', 'depense modifiè par succes');
   }
 
   disactivedep(depenses: Depenses) {
     depenses.active = false;
     this.depenseslist.update(depenses.$iddepense,
       {
-        idauth: this.authservice.currentUserId,
         active: depenses.active
-      });
+      })
   }
 
-  deleteDepense($iddepense: string,) {
+  deleteDepense($iddepense: string) {
     //const depenselist = this.db.list(childPath + '/' +  this.currentUserId);
     this.depenseslist.remove($iddepense);
   }
@@ -198,5 +180,11 @@ export class DepensesService {
     const depenselist = this.db.list(chilbath);
     return this.db.list<Depenses>(chilbath,
       ref => ref.limitToFirst(num));
+  }
+  trie(bath: string , type: string) {
+    const chilbath = bath + '/' +  this.currentUserId ;
+    const depenselist = this.db.list(chilbath);
+    return this.db.list<Depenses>(chilbath,
+      ref => ref.orderByChild(type)).valueChanges();
   }
 }

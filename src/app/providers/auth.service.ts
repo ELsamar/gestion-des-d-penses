@@ -30,16 +30,16 @@ export class AuthService {
     });
     return (this.authState !== null) ? this.authState.uid : '';
   }
-  singup(email: string, password: string) {
+  singup(email: string, password: string, varr: boolean) {
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password);
       this.toastr.success('user created', 'singup seccued');
+      varr = true;
     } catch (error) {
       // Handle Errors here.
       this.errorCode = error.code;
       this.errorMessage = error.message;
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
-      this.toastr.error(this.errorCode.toLocaleString(), 'erreur');
     }
   }
   singin(email: string, password: string) {
@@ -51,12 +51,11 @@ export class AuthService {
       this.errorCode = error.code;
       this.errorMessage = error.message;
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
-      this.toastr.error(this.errorCode.toLocaleString(), 'erreur');
     }
   }
   resetPassword(email: string) {
     return this.afAuth.auth.sendPasswordResetEmail(email)
-      .then(() => console.log('sent Password Reset Email!'))
+      .then(() =>  this.toastr.success('sent Password Reset Email!', ''))
       .catch((error) => console.log(error));
   }
   loginWithFacebook() {

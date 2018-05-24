@@ -10,7 +10,39 @@
     margin-left: .60rem;
 }
 #engagements {
-    background-attachment: fixed;
-    bakground-size: 50%;
-    background-repeat: repeat;
+    background-attachment:fixed;
+    background-size:100%;
+    background-repeat:no-repeat;
+}
+.section-heading > h2 {
+    font-weight: 300;
+    font-family: 'Monotype Corsiva', sans-serif;
+    color: #ffffff;
+    font-size: 48px;
+    margin: 0;
+}
+
+.featurette-divider{
+    color:#ffffff;
+}
+.section-heading1 {
+    margin-bottom: 60px;
+}
+
+
+
+.section-heading {
+    margin-bottom: 60px;
+}
+
+.line-shape-white,
+.line-shape {
+    width: 100px;
+    height: 4px;
+    background-color: #000000;
+    margin-top: 15px;
+}
+
+.line-shape {
+    margin-left: calc(50% - 40px);
 }

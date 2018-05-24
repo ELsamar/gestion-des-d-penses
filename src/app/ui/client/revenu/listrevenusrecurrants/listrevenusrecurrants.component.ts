@@ -11,6 +11,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./listrevenusrecurrants.component.css']
 })
 export class ListrevenusrecurrantsComponent implements OnInit {
+  categories: any = ['Salaires Net', 'Bourses', 'Remboursements Sécurité Sociale', 'prêt bancaire',
+    'allocation familiale', 'Aides diverses', 'avance et acompte'];
   repetes: any = ['Jamais' , 'Semaine' , 'mois'];
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
@@ -52,9 +54,7 @@ export class ListrevenusrecurrantsComponent implements OnInit {
   }
 
   onUpdateR(revenusFormR: NgForm) {
-    if (this.revenuservice.updateRevenusRecurrent(revenusFormR.value)) {
-      console.log('test');
-    }
+    this.revenuservice.updateRevenusRecurrent(revenusFormR.value);
     this.tostr.success('modification', 'modification avec succès');
 
     //modal clonse
@@ -66,11 +66,14 @@ export class ListrevenusrecurrantsComponent implements OnInit {
     this.startAt = text;
     this.endAt = text + '\uf8ff';
     this.revenuservice.getSearchrev(this.startAt, this.endAt, 'Revenus/RevenusRecurrent')
-      .subscribe((Revenus) => this.RevenusRlist = this.revenusR);
+      .subscribe((revenu) => this.RevenusRlist = revenu);
   }
   onSearch(event) {
     const text = event.target.value;
     this.onSearchdep(text);
   }
-
+  ontrie(type: string) {
+    this.revenuservice.trie('Revenus/RevenusRecurrent', type)
+      .subscribe((revenu) => this.RevenusRlist = revenu);
+  }
 }

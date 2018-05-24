@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TransactionService} from '../../../shared/transaction.service';
+import {TransactionService} from '../../../shared/services/transaction.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

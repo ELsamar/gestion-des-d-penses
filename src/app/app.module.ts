@@ -13,10 +13,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import { AuthService} from './providers/auth.service';
-import {TransactionService} from './shared/transaction.service';
+import {TransactionService} from './shared/services/transaction.service';
 
 import {ClientModule} from './ui/client/client.module';
-import {PageService} from './shared/page.service';
 import { LoginComponent } from './login/login.component';
 
 
@@ -27,6 +26,7 @@ import {LoginModule} from './ui/login/login.module';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 
 import {} from '@polymer/paper-toggle-button';
+import {UserService} from './shared/services/user.service';
 
 
 
@@ -59,7 +59,7 @@ import {} from '@polymer/paper-toggle-button';
     NgbModule,
 
   ],
-  providers: [PageService, AuthService, TransactionService , AuthGuardService  ],
+  providers: [AuthService, TransactionService , AuthGuardService, UserService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

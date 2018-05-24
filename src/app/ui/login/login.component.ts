@@ -18,10 +18,12 @@ export class LoginComponent implements OnInit {
   isLogged: boolean;
   pseudo: String;
   email: string;
+  email1: string ;
   emailSent = false;
   errorMessage: string;
   password: string;
-  resetPassword: boolean = false;
+  resetPassword = false;
+  connecter = true;
   public formModel: FormModel = {};
   constructor(public authService: AuthService, private router: Router,
               private afs: AngularFirestore, private toastr: ToastrService) {
@@ -64,9 +66,11 @@ export class LoginComponent implements OnInit {
       this.confirmSignIn(url);
     }
   }
-
+  sinscrire() {
+    this.connecter = false;
+  }
   async sendEmailLink() {
-    this.authService.sendEmailLink(this.email);
+    this.authService.sendEmailLink(this.email1);
   }
 
   async confirmSignIn(url) {
@@ -87,7 +91,7 @@ export class LoginComponent implements OnInit {
   }
 
   singup() {
-    this.authService.singup(this.email, this.password);
+    this.authService.singup(this.email, this.password, this.connecter);
   }
   signin() {
     this.authService.singin(this.email, this.password);

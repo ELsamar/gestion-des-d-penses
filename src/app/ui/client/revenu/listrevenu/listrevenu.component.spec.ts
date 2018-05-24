@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListmodelsrevComponent } from './listmodelsrev.component';
+import { ListrevenuComponent } from './listrevenu.component';
 
-describe('ListmodelsrevComponent', () => {
-  let component: ListmodelsrevComponent;
-  let fixture: ComponentFixture<ListmodelsrevComponent>;
+describe('RevenulistComponent', () => {
+  let component: ListrevenuComponent;
+  let fixture: ComponentFixture<ListrevenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListmodelsrevComponent ]
+      declarations: [ ListrevenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListmodelsrevComponent);
+    fixture = TestBed.createComponent(ListrevenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

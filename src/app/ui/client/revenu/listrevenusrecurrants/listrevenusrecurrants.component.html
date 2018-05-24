@@ -8,16 +8,14 @@
           {{typeaffich}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">toutes les revenus</a>
-          <a class="dropdown-item" href="#">revenus recurantes</a>
-          <a class="dropdown-item" href="#">revenus models </a>
-          <a class="dropdown-item" (click)="getrevsimpl()">revenus simple </a>
+          <a class="dropdown-item" (click)="ontrie('montantrevenu')">par montant</a>
+          <a class="dropdown-item" (click)="ontrie('titrerevenu')" >par titre</a>
+          <a class="dropdown-item" (click)="ontrie('daterevenu')">par date</a>
         </div>
       </div>
       <form class="form-inline nav-item">
         <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
-               data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+               data-toggle="dropdown" placeholder="chercher ..." aria-label="Search">
       </form>
 
     </nav>
@@ -30,7 +28,7 @@
               <th scope="col">Titre</th>
               <th scope="col">Date</th>
               <th scope="col">Montant</th>
-              <th scope="col">Cathégorie</th>
+              <th scope="col">Catégorie</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +36,7 @@
               <td>{{revenusR.titrerevenu}}</td>
               <td>{{revenusR.daterevenu}}</td>
               <td>{{revenusR.montantrevenu}}</td>
+              <td>{{revenusR.categorierevenu}}</td>
               <td>
                 <a (click)="openWindowCustomClass(contentEditR,revenusR)"><i class="far fa-edit"></i></a>
                 <a (click)="onDelete(revenusR.$key)">
@@ -55,18 +54,16 @@
 </div>
 <ng-template #contentEditR let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">update</h4>
+    <h4 class="modal-title">Modifier</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form #revenusFormR="ngForm" (ngSubmit)="onUpdateR(revenusFormR)">
-      <input type="" name="$idrevenu" #$idrevenu="ngModel" [(ngModel)]="selectedrevenuR.$key">
-
+      <input type="hidden" name="$idrevenu" #$idrevenu="ngModel" [(ngModel)]="selectedRevenuR.$key">
       <div class="container-fluid">
-        <div class=" content row">
-          <div class="card">
+        <div class="content row">
             <div class="container-fluid">
               <div class="form-group">
                 <label class="col-form-label">Titre:</label>
@@ -85,7 +82,7 @@
               <div class="form-group">
                 <label class="col-form-label">Montant :</label>
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="0000.0000" name="montantRevenu"
+                  <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu"
                          #montantrevenu="ngModel" [(ngModel)]="selectedRevenuR.montantrevenu"
                          pattern="\d*" required>
                   <div class="input-group-prepend">
@@ -118,11 +115,17 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="col-form-label">Categorie :</label>
+                <select class="custom-select form-group mr-sm-2" name="categorierevenu" #categorierevenu="ngModel"
+                        [(ngModel)]="selectedRevenuR.categorierevenu" required>
+                  <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label class="col-form-label">Description: </label>
                 <input class="form-control" name="descriptionrevenu" #descriptionrevenu="ngModel"
                        [(ngModel)]="selectedRevenuR.descriptionrevenu"/>
               </div>
-
               <div class="custom-control custom-checkbox récurents ">
                 <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
                        role="button" aria-expanded="false" aria-controls="collapseExample"
@@ -137,9 +140,7 @@
                         <option *ngFor="let repete of repetes" [value]="repete">{{repete}}</option>
                       </select>
                     </div>
-                    {{selectedRevenuR | json}}
                     <div class="form-group">
-                      {{selectedRevenuR.jourrep.value}} aaa
                       <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
                               [(ngModel)]="selectedRevenuR.jourrep">
                         <option *ngFor="let semaine of semaines" [value]="semaine">{{semaine}}</option>
@@ -147,7 +148,7 @@
                     </div>
                     <div class="form-group">
                       <select class="custom-select mr-sm-2 form-control" name="moisrep" #moisrep="ngModel"
-                              [(ngModel)]="selectedRevenu.moisrep">
+                              [(ngModel)]="selectedRevenuR.moisrep">
                         <option *ngFor="let mois of Mois" [value]="mois">{{mois}}</option>
                       </select>
                     </div>
@@ -155,7 +156,7 @@
                       Du <input type="date" class="form-control" name="datefrom" #datefrom="ngModel"
                              [(ngModel)]="selectedRevenuR.dateform"/>
                       au <input type="date" class="form-control" name="dateto" #dateto="ngModel"
-                                [(ngModel)]="selectedRevenu.dateto"/>
+                                [(ngModel)]="selectedRevenuR.dateto"/>
                     </div>
                     <div *ngIf="dateto.value < datefrom.value">
                       <div class="alert alert-danger">
@@ -188,24 +189,19 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-1 content-center">
-                  <button type="submit" class="btn btn-primary bouton" [disabled]="!RevenuFormR.valid">modifier
+                <div class="col-3 content-center">
+                  <button type="submit" class="btn  bouton" style="background-color: #0D47A1" [disabled]="!revenusFormR.valid">modifier
                   </button>
                 </div>
-                <div class="col-1 content-center">
+                <div class="col-2 content-center">
                   <button type="reset" class="btn btn-secondary  bouton">annuler
                   </button>
                 </div>
               </div>
-
             </div>
           </div>
-        </div>
       </div>
     </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Annuler</button>
   </div>
 </ng-template>
 <ng-template #contentDetailR let-c="close" let-d="dismiss">
@@ -220,14 +216,17 @@
     <li><label class="col-form-label">Montant : {{selectedRevenuR.montantrevenu}} DT </label></li>
     <li><label class="col-form-label">Date : {{selectedRevenuR.daterevenu}}</label></li>
     <li><label class="col-form-label">Description: {{selectedRevenuR.descriptionrevenu}} </label></li>
-    
-    <li *ngIf="(!selectedRevenuR.active)"><label class="col-form-label"> Dépense disactivè ou bien sa
+    <li><label class="col-form-label">Justificatif: </label>
+      <br>
+      <img src={{selectedRevenuR.justificatifrevenu}} width="150cm" height="150cm">
+    </li>
+    <li *ngIf="(!selectedRevenuR.active)"><label class="col-form-label"> revenu disactivè ou bien sa
       durée de repition a été terminè </label></li>
     <div *ngIf="(selectedRevenuR.active)">
-      <li><label class="col-form-label">Dépense activè encours </label></li>
+      <li><label class="col-form-label">revenu activè encours </label></li>
       <li>
         <p class="col-form-label">type de repition: par {{selectedRevenuR.typerep}}
-          de : {{selectedRevenuR.dateFrom}} à :
+          de : {{selectedRevenuR.dateform}} à :
           {{selectedRevenuR.dateto}}
         </p>
       </li>

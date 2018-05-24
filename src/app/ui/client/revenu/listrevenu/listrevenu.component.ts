@@ -7,17 +7,16 @@ import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-revenulist',
-  templateUrl: './revenulist.component.html',
-  styleUrls: ['./revenulist.component.css']
+  templateUrl: './listrevenu.component.html',
+  styleUrls: ['./listrevenu.component.css']
 })
-export class RevenulistComponent implements OnInit {
+export class ListrevenuComponent implements OnInit {
   revenuslist: Revenus[];
+  categories: any = ['Salaires Net', 'Bourses', 'Remboursements Sécurité Sociale', 'prêt bancaire',
+    'allocation familiale', 'Aides diverses', 'avance et acompte'];
   constructor(private revenuservice: RevenusService, private tostr: ToastrService, private modalService: NgbModal) { }
-  repetes: any = ['Jamais' , 'Semaine' , 'mois'];
-  semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
-  Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  
+
+
   typeaffich: string;
   startAt: string;
   endAt: string;
@@ -32,7 +31,7 @@ export class RevenulistComponent implements OnInit {
         this.revenuslist.push(y as Revenus);
       });
     });
-  
+
   }
   openWindowCustomClass(content, revenu: Revenus) {
     this.modalService.open(content, {windowClass: 'dark-modal'});
@@ -52,26 +51,26 @@ export class RevenulistComponent implements OnInit {
   }
 
   onUpdate(revenusForm: NgForm) {
-    if (this.revenuservice.updateRevenusRecurrent(revenusForm.value)) {
-      console.log('test');
-    }
+    this.revenuservice.updateRevenu( 'Revenus/Revenus', revenusForm.value);
     this.tostr.success('modification', 'modification avec succès');
-
     //modal clonse
     // else
   }
 
-  onSearchrev(searchText) {
+  onSearchdep(searchText) {
     const text = searchText;
     this.startAt = text;
     this.endAt = text + '\uf8ff';
     this.revenuservice.getSearchrev(this.startAt, this.endAt, 'Revenus/Revenus')
-      .subscribe((Revenus) => this.revenuslist = this.revenus);
+      .subscribe((revenu) => this.revenuslist = revenu);
   }
   onSearch(event) {
     const text = event.target.value;
-    this.onSearch(text);
+    this.onSearchdep(text);
   }
-
+  ontrie(type: string) {
+    this.revenuservice.trie('Revenus/Revenus', type)
+      .subscribe((revenu) => this.revenuslist = revenu);
+  }
 
 }

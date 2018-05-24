@@ -23,6 +23,7 @@ export class DashrevComponent implements OnInit {
         item.forEach(element => {
           var y = element.payload.toJSON();
           y['$key'] = element.key;
+          console.log(y);
           this.revenuslist.push(y as Revenus);
         });
       });

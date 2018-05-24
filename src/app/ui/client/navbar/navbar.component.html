@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-light " style="background-color:#fff" >
-  <div class="container-fluid row">      
+  <div class="container-fluid row">
         <div class="col-2">
             <a class="navbar-brand my-0 mr-md-auto font-weight-normal" routerLink="/">
               <img src="./../../../../assets/img/logo.png" width="40" height="40" class="d-inline-block align-top img-circle"
@@ -31,16 +31,22 @@
                   <a class="dropdown-item" href="#">
                     notification2
                   </a>
-      
+
                 </div>
               </form>
             </li>
           </ul>
-          <a class=""role="button" routerLink="profil" aria-haspopup="true" aria-expanded="false">
+         <!-- <a class=""role="button" routerLink="profil" aria-haspopup="true" aria-expanded="false">
               <img class="rounded-circle" alt="Card image cap" src="assets/img/profil.png"
                    width="35">
-            </a>     
-           
+            </a>-->
+    <a class="" role="button" routerLink="profil" aria-haspopup="true" aria-expanded="false">
+      <img  class="rounded-circle" alt="image " src={{this.userservice.userpict}}
+           width="40">
+    </a>
+
+
+
   </div>
   <div class="col-2"></div>
 </nav>

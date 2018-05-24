@@ -5,39 +5,48 @@
                   <h1 class="h2">Transactions</h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                      <button class="btn btn-sm btn-outline-secondary">cette semaine</button>
-                      <button class="btn btn-sm btn-outline-secondary">cet ans</button>
-                      <button class="btn btn-sm btn-outline-secondary">ce mois</button>
+                      <button class="btn btn-sm btn-outline-secondary"style="background-color:#1565C0"(click)="getweek()">cette semaine</button>
+                      <button class="btn btn-sm btn-outline-secondary"style="background-color: #0D47A1">cet ans</button>
+                      <button class="btn btn-sm btn-outline-secondary" (click)="getMonth()"style="background-color:#1565C0">ce mois</button>
                     </div>
-                    <button class="btn btn-sm btn-outline-secondary ">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="ngOnInit()"style="background-color: #0D47A1">
                       tous
                     </button>
                   </div>
+        <form class="form-inline nav-item">
+          <input class="form-control mr-sm-2" type="text"  name="st"  [(ngModel)]="st"
+                  placeholder="dd-m-yyyy" >
+          <input class="form-control mr-sm-2" type="text"   name="ed" [(ngModel)]="ed"
+                 placeholder="dd-m-yyyy" >
+
+          <button class="btn btn-sm btn-outline-secondary" style="background-color: #0D47A1" type="submit" (click)="filtrer()">
+            filtrer
+          </button>
+        </form>
       </nav>
       <hr>
       <div class="container-fluid">
-            <h6 class="text-center">---</h6><br/>
+            <!--<h6 class="text-center">---</h6><br/>-->
             <div class="table-responsive">
               <table class="table table-sm table-hover table table-striped ">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>Type</th>
+                  <th>Date</th>
+                  <th>Titre </th>
+                  <th>Montant</th>
                 </tr>
                 </thead>
                 <tr *ngFor="let transaction of transactionList">
                   <td> </td>
                   <td>{{transaction.titre}}</td>
                   <td>{{transaction.date}}</td>
-                  <td>
-                    <a class="btn" (click)="onEdit(transaction)">
-                      <i class="fa fa-pencil-square-o"></i>
-                    </a>
-                    <a class="btn" (click)="onDelete(transaction.$key)">
-                      <i class="fa fa-trash-o"></i>
-                    </a>
-                  </td>
+                  <td *ngIf="(transaction.action.titredepense)"> {{transaction.action.titredepense}}</td>
+                  <td *ngIf="(transaction.action.montantdepense)"> {{transaction.action.montantdepense}}</td>
+                  <td *ngIf="(transaction.action.titrerevenu)">{{transaction.action.titrerevenu}}</td>
+                  <td *ngIf="(transaction.action.montantrevenu)">{{transaction.action.montantrevenu}}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td></td>

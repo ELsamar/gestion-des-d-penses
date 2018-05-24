@@ -9,7 +9,7 @@
                   <div class="col-2">
                     <div class="form-group">
                       <select class="custom-select mr-sm-2 btn btn-primary" id="selectrevenu">
-                        <option *ngFor = "let typedep of typedeps" [value]="typedep">{{typedep}}</option>
+                        <option *ngFor = "let model of Modelelist" [value]="model">{{model.titreModele}}</option>
                       </select>
                     </div>
                   </div>
@@ -24,137 +24,133 @@
                         <strong>Error:</strong>Ce champs est trés cours
                       </div>
                     </div>
-                <div class="form-group">
-                  <label class="col-form-label">Montant :</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu" #montantrevenu="ngModel" [(ngModel)]="currentrevenus.montantrevenu" pattern= "\d*" required>
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">TND</div>
-                    </div>
                   </div>
-                  <div *ngIf ="montantrevenu.errors && (montantrevenu.dirty|| montantrevenu.touched)" class ="alert alert-danger"  >
-                    <div [hidden] = "!montantrevenu.errors.required">
-                      <strong>Error:</strong>Ce champs est obligatoire
-                    </div>
-                    <div [hidden] = "!montantrevenu.errors.pattern">.
-                      <strong>Error:</strong>le montant doit étre nombre
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-form-label">Date :</label>
-                  <input type="date" class="form-control" name="daterevenu" #daterevenu="ngModel" [(ngModel)]="currentrevenus.daterevenu " pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required  />
-                  <div *ngIf ="daterevenu.errors && (daterevenu.dirty|| daterevenu.touched)" class ="alert alert-danger"  >
-                    <div [hidden] = "!daterevenu.errors.required">
-                      <strong>Error:</strong>Ce champs est obligatoire
-                    </div>
-                    <div [hidden] = "!daterevenu.errors.pattern">
-                      <strong>Error:</strong>Veuillez inserrez une date correcte
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-form-label">Description: </label>
-                  <input class="form-control" name="descriptionrevenu" #descriptionrevenu="ngModel" [(ngModel)]="currentrevenus.descriptionrevenu"/>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-4">
-                    <label>Justificatif:</label>
-                  </div>
-                  <div class="col-md-8">
-                    <input type="file" class="form-control" name="cover" id="cover" (change)="selectFile($event)">
-                  </div>
-                </div>
-                <div *ngIf="currentFileUpload" class="progress">
-                  <div class="progress-bar progress-bar-info progress-bar-striped"
-                       role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
-                       aria-valuemin="0" aria-valuemax="100"
-                       [ngStyle]="{width:progress.percentage+'%'}">
-                    <!--{{progress.percentage}}%-->
-                  </div>
-                </div>
-
-                <div class="custom-control custom-checkbox récurents ">
-                  <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapserecudep"
-                         role="button" aria-expanded="false" aria-controls="collapseExample"
-                         id="customCheckrecudep">
-                  <label class="col-form-label" for="customCheckrecudep"> Définir comme dépense récurrent </label>
-                  <div class="collapse" id="collapserecudep">
-                    <div class="card card-body form-group">
-                      <div class="form-group">
-                        <select class="custom-select mr-sm-2 form-control" name="typerep" #typerep="ngModel"
-                                [(ngModel)]="currentrevenus.typerep">
-                          <option *ngFor="let repete of repetes" [value]="repete">{{repete}}</option>
-                        </select>
+                  <div class="form-group">
+                      <label class="col-form-label">Montant :</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="0000.0000" name="montantrevenu" #montantrevenu="ngModel" [(ngModel)]="currentrevenus.montantrevenu" pattern= "\d*" required>
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">TND</div>
+                        </div>
                       </div>
-                      <div class="form-group">
+                      <div *ngIf ="montantrevenu.errors && (montantrevenu.dirty|| montantrevenu.touched)" class ="alert alert-danger"  >
+                        <div [hidden] = "!montantrevenu.errors.required">
+                          <strong>Error:</strong>Ce champs est obligatoire
+                        </div>
+                        <div [hidden] = "!montantrevenu.errors.pattern">.
+                          <strong>Error:</strong>le montant doit étre nombre
+                        </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-form-label">Categorie :</label>
+                      <select class="custom-select form-group mr-sm-2" name="categoriedepense" #categoriedepense="ngModel"
+                              [(ngModel)]="currentrevenus.categorierevenu" required>
+                        <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label">Description: </label>
+                    <input class="form-control" name="descriptionrevenu" #descriptionrevenu="ngModel" [(ngModel)]="currentrevenus.descriptionrevenu"/>
+                  </div>
+                <div class="form-group">
+                    <label class="col-form-label">Justificatif:</label>
+                    <input type="file" class="form-control" name="cover" id="cover" (change)="selectFile($event)">
+                </div>
+                  <div class="form-group">
+                    <label class="col-form-label" for="daterevenu">Date :</label>
+                    <input type="date" class="form-control" id="daterevenu" name="daterevenu" #daterevenu="ngModel" [(ngModel)]="currentrevenus.daterevenu" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required  />
+                    <div *ngIf ="daterevenu.errors && (daterevenu.dirty|| daterevenu.touched)" class ="alert alert-danger"  >
+                      <div [hidden] = "!daterevenu.errors.required">
+                        <strong>Error:</strong>Ce champs est obligatoire
+                      </div>
+                      <div [hidden] = "!daterevenu.errors.pattern">
+                        <strong>Error:</strong>Veuillez inserrez une date correcte
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>  Définir comme dépense récurrent:  </label>
+                  <div class="custom-control custom-checkbox alerte">
+                    <input type="checkbox" role="button" id='jamais'name="jamais" [(ngModel)]="jamais"  checked>
+                    <label for="jamais">jamais</label>
+                    <input type="checkbox" role="button" id='semaine'name="semaine"  [(ngModel)]="semaine">
+                    <label for="semaine">par semaine</label>
+                    <input type="checkbox" role="button" id='mois'name="mois"  [(ngModel)]="mois">
+                    <label for="mois">par mois</label>
+                  </div>
+                  </div>
+
+                  <div [hidden]="!semaine" class="form-group">
                         <select class="custom-select mr-sm-2 form-control" name="jourrep" #jourrep="ngModel"
                                 [(ngModel)]="currentrevenus.jourrep">
-                          <option *ngFor="let semaine of semaines" [value]="semaine">{{semaine}}</option>
+                          <option selected> veuillez choisir un jour</option>
+                          <option *ngFor="let semaine of semaines" >{{semaine}}</option>
                         </select>
-                      </div>
-                      <div class="form-group">
+                  </div>
+                  <div [hidden]="!mois" class="form-group">
                         <select class="custom-select mr-sm-2" name="moisrep" #moisrep="ngModel"
                                 [(ngModel)]="currentrevenus.moisrep">
+                          <option selected> veuillez choisir un mois</option>
                           <option *ngFor="let mois of Mois" [value]="mois">{{mois}}</option>
                         </select>
-                      </div>
-                      <div class="form-group">
+                  </div>
+                  <div [hidden]="((!semaine) &&(!mois))" class="form-group">
                         Du <input type="date" class="form-control" name="datefrom" #datefrom="ngModel"
                                   [(ngModel)]="currentrevenus.datefrom"/>
                         au <input type="date" class="form-control" name="dateto" #dateto="ngModel"
                                   [(ngModel)]="currentrevenus.dateto"/>
-                      </div>
-                      <div *ngIf="dateto.value < datefrom.value">
+                  </div>
+                  <div *ngIf="dateto.value < datefrom.value">
                         <div class="alert alert-danger">
                           <strong>Error:</strong>date invalide
                         </div>
-                      </div>
-                      <div class="custom-control custom-checkbox alerte  ">
+                  </div>
+                  <div class="custom-control custom-checkbox alerte">
                         <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
                                role="button" aria-expanded="false" aria-controls="collapseExample"
                                id="customCheckalertedep">
                         <label class="custom-control-label" for="customCheckalertedep">Ajouter un alerte :</label>
                         <div class="collapse" id="collapsealertedep">
                           <div class="card card-body">
+                            <input type="hidden" class="form-control" name="msgalert" #msgalert="ngModel"
+                                   [(ngModel)]="currentalert.$idalert">
                             <div class="form-group">
                               <label class="" type=""> m'avertir avant : </label>
-                              <div class="row">.
+                              <div class="row">
                                 <div class="col-6">
-                                  <select class="custom_menu">
-                                    <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
-                                  </select>
+                                  <div class="custom_menu">
+                                    <select class="custom_menu" name="nbr" #nbr="ngModel" [ngModel]="nbr">
+                                      <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
+                                    </select>
+                                  </div>
                                 </div>
                                 <div class="col-6"><label class="" type=""> jour(s) </label></div>
                               </div>
-                              <div class="row">
-                                <input type="hidden" class="form-control" name="msgalert" #msgalert="ngModel"
-                                       [(ngModel)]="currentalert.$idalert">
-                              </div>
-                              <div class="row">
-                                <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
-                                            [(ngModel)]="currentalert.msg">
-                              </div>
-                              <div class="row">
-                                <input type="date" class="form-control" name="datealert" #datealert="ngModel"
-                                       [(ngModel)]="currentalert.date"/>
                               </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
+                  </div>
+
+                  <div *ngIf="currentFileUpload" class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped"
+                         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                         aria-valuemin="0" aria-valuemax="100"
+                         [ngStyle]="{width:progress.percentage+'%'}">
+                      <!--{{progress.percentage}}%-->
                     </div>
                   </div>
                 </div>
+
                 <div class="row">
                   <div class="col-1 content-center">
-                    <button type="submit" class="" [disabled]="!revenusForm.valid || ( dateto.value < datefrom.value )"
+                    <button type="submit" [hidden]="!jamais" class="btn btn-primary bouton" [disabled]="!revenusForm.valid || ( dateto.value < datefrom.value )"
                             (click)="saverevenu()">
                       ajouter
                     </button>
                   </div>
-                  <div class="col-1 content-center">
-                    <button type="submit" class="" [disabled]="!revenusForm.valid || ( dateto.value < datefrom.value )"
+                  <div class="col-2 content-center">
+                    <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-primary bouton" [disabled]="(dateto.value < datefrom.value )"
                             (click)="saverevenuRecurrent()">ajouter recurent
                     </button>
                   </div>
@@ -163,8 +159,8 @@
                   </div>
                 </div>
               </div>
-            </div>
+
           </div>
         </div>
-      </div>
+
 </form>

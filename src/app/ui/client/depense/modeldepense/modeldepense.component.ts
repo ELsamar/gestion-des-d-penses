@@ -10,7 +10,8 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./modeldepense.component.css']
 })
 export class ModeldepenseComponent implements OnInit {
-  cathegories: any = ['Transport/Vehicule', 'Loisir', ' Eléctricité'];
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
+    'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants'];
   currentModeleDepense: any ;
   constructor(private modeledepenseservice: ModeleDepenseService, private toastr: ToastrService) { }
 
@@ -25,9 +26,11 @@ export class ModeldepenseComponent implements OnInit {
     this.modeledepenseservice.updateModeleDepense(ModeleDepenseForm.value);
   }
   onSubmit(ModeleDepenseForm: NgForm) {
-    if (ModeleDepenseForm.value.$key == null) {
+    console.log(ModeleDepenseForm.value.key);
+    if (!(ModeleDepenseForm.value.key)) {
       this.modeledepenseservice.insertModeleDepense(ModeleDepenseForm.value);
-    } else { this.modeledepenseservice.updateModeleDepense(ModeleDepenseForm.value); }
+    } else {
+      this.modeledepenseservice.updateModeleDepense(ModeleDepenseForm.value); }
     this.resetForm(ModeleDepenseForm);
   }
 
