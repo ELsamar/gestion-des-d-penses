@@ -91,8 +91,8 @@ export class ListdepensesComponent implements OnInit {
     const text = event.target.value;
     this.onSearchdep(text);
   }
-ontrie(type: string) {
+ /* ontrie(type: string) {
     this.depenseservice.trie('Depenses/Depenses', type)
-      .subscribe((depenses) => this.depenseslist = depenses);
-}
+    .subscribe((depenses) => this.depenseslist = depenses);
+  }*/
 }
