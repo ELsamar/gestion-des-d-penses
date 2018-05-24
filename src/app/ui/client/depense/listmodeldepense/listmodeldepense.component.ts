@@ -20,17 +20,24 @@ export class ListmodeldepenseComponent implements OnInit {
   constructor(private modeledepenseservice: ModeleDepenseService, private toastr: ToastrService, private modalService: NgbModal) {
   }
 
-  ngOnInit() {
-    var x = this.modeledepenseservice.getdataauth();
-    x.snapshotChanges().subscribe(item => {
-      this.ModelDepenseslist = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        console.log(y);
-        this.ModelDepenseslist.push(y as ModeleDepense);
+ async ngOnInit() {
+    this.modeledepenseservice.checkdata()
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          const x = this.modeledepenseservice.getdataauth();
+          x.snapshotChanges().subscribe(item => {
+            this.ModelDepenseslist = [];
+            item.forEach(element => {
+              const y = element.payload.toJSON();
+              y['$key'] = element.key;
+              console.log(y);
+              this.ModelDepenseslist.push(y as ModeleDepense);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Modeles Depenses', 'vide');
+        }
       });
-    });
   }
 
   onEdit(model: ModeleDepense) {

@@ -4,6 +4,7 @@ import {ToastrService} from 'ngx-toastr';
 import {ModeleRevenus} from '../../../../shared/models/modele-revenus';
 import {ModeleRevenusService} from '../../../../shared/services/modele-revenus.service';
 import {ModeleDepense} from '../../../../shared/models/modele-depense';
+import {Revenus} from '../../../../shared/models/revenus';
 
 @Component({
   selector: 'app-listmodelsrev',
@@ -20,15 +21,22 @@ export class ListmodelrevenuComponent implements OnInit {
   constructor(private modelerevenusservice: ModeleRevenusService, private toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    var x = this.modelerevenusservice.getdataauth();
-    x.snapshotChanges().subscribe(item => {
-      this.ModelRevlist = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        this.ModelRevlist.push(y as ModeleRevenus);
+    this.modelerevenusservice.checkdata()
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          var x = this.modelerevenusservice.getdataauth();
+          x.snapshotChanges().subscribe(item => {
+            this.ModelRevlist = [];
+            item.forEach(element => {
+              var y = element.payload.toJSON();
+              y['$key'] = element.key;
+              this.ModelRevlist.push(y as ModeleRevenus);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Modeles Revenus  ', 'vide');
+        }
       });
-    });
   }
   onEdit(model: ModeleRevenus) {
     this.modelerevenusservice.selectedModele = Object.assign({}, model);

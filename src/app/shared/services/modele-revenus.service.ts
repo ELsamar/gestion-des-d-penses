@@ -8,9 +8,12 @@ import {Observable} from 'rxjs/Observable';
 export class ModeleRevenusService {
   Modelelist: AngularFireList<any>;
   selectedModele: ModeleRevenus = new ModeleRevenus() ;
-  currentUserId = this.authservice.currentUserId;
+  currentUserId = localStorage.getItem('userid');
   constructor(private db: AngularFireDatabase, public authservice: AuthService) { }
-
+  checkdata() {
+    const Modelelist = this.db.database.ref('ModeleRevenus').child(this.currentUserId);
+    return Modelelist.once('value');
+  }
   insertModeleRevenu(modele: ModeleRevenus ) {
     this.Modelelist = this.db.list('ModeleRevenus/' + this.currentUserId);
     this.Modelelist.push({

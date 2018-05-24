@@ -9,7 +9,7 @@ import {Revenus} from '../models/revenus';
 export class TransactionService {
   transactionlist: AngularFireList<any>;
   selectedtransaction: Transaction = new Transaction();
-  currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
+  currentUserId = localStorage.getItem('userid');
   constructor(private db: AngularFireDatabase) { }
 
   getTransaction() {

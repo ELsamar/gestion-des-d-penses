@@ -4,6 +4,7 @@ import {priorite, Projets} from '../../../../shared/models/projets';
 import {FormsModule, NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ModeleDepense} from '../../../../shared/models/modele-depense';
 @Component({
   selector: 'app-listprojets',
   templateUrl: './listprojets.component.html',
@@ -14,17 +15,25 @@ export class ListprojetsComponent implements OnInit {
   projetlist: Projets[];
   startAt: string;
   endAt: string;
-  constructor(private projetservice: ProjetsService, private tostr: ToastrService, private modalService: NgbModal) { }
+  constructor(private projetservice: ProjetsService, private toastr: ToastrService, private modalService: NgbModal) { }
   ngOnInit() {
-    var p = this.projetservice.getProjet();
-    p.snapshotChanges().subscribe(item => {
-      this.projetlist = [];
-      item.forEach(element => {
-        var q = element.payload.toJSON();
-        q['$key'] = element.key;
-        this.projetlist.push(q as Projets);
+    this.projetservice.checkdata()
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          var p = this.projetservice.getProjet();
+          p.snapshotChanges().subscribe(item => {
+            this.projetlist = [];
+            item.forEach(element => {
+              var q = element.payload.toJSON();
+              q['$key'] = element.key;
+              this.projetlist.push(q as Projets);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Projet', 'vide');
+        }
       });
-    });
+
   }
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce projet ?') === true) {
@@ -37,8 +46,8 @@ export class ListprojetsComponent implements OnInit {
   }
   onUpdate(projetForm: NgForm) {
     this.projetservice.updateProjet(projetForm.value);
-    this.tostr.success('modification', 'modification avec succès');
-    //modal clonse
+    this.toastr.success('modification', 'modification avec succès');
+    // modal clonse
     // else
   }
 

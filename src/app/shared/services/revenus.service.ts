@@ -13,15 +13,15 @@ export class RevenusService {
   selectedrevenu: Revenus = new Revenus();
   selectedrevenuR: Revenus = new Revenus();
   newrevenusKey: string;
-  currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
-  constructor(private db: AngularFireDatabase, public authservice: AuthService, private toaster: ToastrService) {
-  }
+  currentUserId = localStorage.getItem('userid');
+  constructor(private db: AngularFireDatabase, public authservice: AuthService, private toaster: ToastrService) {}
   checkdata(childPath) {
-    const revenuslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
+    const revenuslist = this.db.database.ref(childPath).child(this.currentUserId);
     return revenuslist.once('value').then();
   }
   getRevenu(childPath: string) {
-    this.revenuslist = this.db.list(childPath + '/' +  this.currentUserId);
+    this.revenuslist = this.db.list(childPath + '/' + this.currentUserId);
+    console.log(this.authservice.currentUserId);
     return this.revenuslist;
   }
   getnewrevenusKey(childPath: string) {
@@ -163,7 +163,7 @@ ref => ref.orderByChild('titrerevenu').limitToFirst(10).startAt(start).endAt(end
 }
 
 getdataauth(bath: string) {
-let myUserId = this.authservice.currentUserId;
+let myUserId = this.currentUserId;
 console.log(myUserId);
 return this.db.list<Revenus>(bath,
 ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));

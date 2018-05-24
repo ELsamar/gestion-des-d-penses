@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
     this.user.subscribe((auth) => {
 
         if (auth) {
-
+          localStorage.setItem( 'userid', this.authService.currentUserId);
+          sessionStorage.setItem('id', JSON.stringify(auth));
           this.isLogged = true;
           this.pseudo = auth.displayName;
           this.email = auth.email;

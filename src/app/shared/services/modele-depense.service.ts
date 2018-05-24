@@ -10,10 +10,13 @@ import {Observable} from 'rxjs/Observable';
 export class ModeleDepenseService {
   Modelelist: AngularFireList<any>;
   selectedModele: ModeleDepense = new ModeleDepense() ;
-  currentUserId = this.authservice.currentUserId;
+ currentUserId = localStorage.getItem('userid');
 
   constructor(private db: AngularFireDatabase, public authservice: AuthService) { }
-
+  checkdata() {
+    const Modelelist = this.db.database.ref('ModeleDépense').child(this.currentUserId);
+    return Modelelist.once('value');
+  }
   insertModeleDepense(modele: ModeleDepense ) {
     this.Modelelist = this.db.list('ModeleDépense/' + this.currentUserId);
     this.Modelelist.push({

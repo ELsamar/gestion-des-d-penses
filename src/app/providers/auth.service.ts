@@ -18,17 +18,15 @@ export class AuthService {
   emailSent = false;
   errorMessage: string;
   errorCode: string;
+  currentuserId: string;
   constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
-    });
+      console.log(this.authState);
+  });
   }
   get currentUserId(): string {
-    this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth;
-      return (this.authState !== null) ? this.authState.uid : '';
-    });
-    return (this.authState !== null) ? this.authState.uid : '';
+    return (this.authState) ? this.authState.uid : '';
   }
   singup(email: string, password: string, varr: boolean) {
     try {
@@ -111,6 +109,7 @@ export class AuthService {
       //return this.afAuth.auth.signOut();
     //thismethodforemaipasswordlogout
     return firebase.auth().signOut().then(function() {
+      this.router.navigate(['login']);
     // Sign-out successful.
     }).catch(function(error) {
       console.log(error);

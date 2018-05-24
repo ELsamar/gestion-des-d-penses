@@ -15,25 +15,26 @@ export class UserService {
   private storageBasePath = '/Useruploads';
   userlist: AngularFireList<any>;
   selecteduser: Object;
-  curentuser = this.authservice.currentUserId;
+  currentUserId = localStorage.getItem('userid');
   userprofil: any[];
-userpict = 'https://firebasestorage.googleapis.com/v0/b/pfe2018-f27c8.appspot.com/o/uploads%2Fprofil.png?alt=media&token=d5a2dd55-8e36-4bfe-b2ec-c02c5f3b1c73'
-  constructor(public firebase: AngularFireDatabase, public authservice: AuthService, private toster: ToastrService) {
+userpict = 'https://firebasestorage.googleapis.com/v0/b/pfe2018-f27c8.appspot.com/o/' +
+  'uploads%2Fprofil.png?alt=media&token=d5a2dd55-8e36-4bfe-b2ec-c02c5f3b1c73'
+  constructor(public db: AngularFireDatabase, public authservice: AuthService, private toster: ToastrService) {
   }
 
   getdata() {
-    this.userlist = this.firebase.list('User' + this.curentuser);
+    this.userlist = this.db.list('User' + this.currentUserId);
     console.log(this.userlist);
     return this.userlist;
   }
 
   getUser() {
-    const userlistt = this.firebase.database.ref('User').child(this.curentuser);
+    const userlistt = this.db.database.ref('User').child(this.currentUserId);
     return userlistt.once('value');
   }
 
   insertUser(user: User) {
-    const userlistt = this.firebase.database.ref('User').child(this.curentuser);
+    const userlistt = this.db.database.ref('User').child(this.currentUserId);
     // this.userlist = this.firebase.list('User/' + this.curentuser);
     userlistt.set({
       nom: user.nom,
@@ -52,7 +53,7 @@ userpict = 'https://firebasestorage.googleapis.com/v0/b/pfe2018-f27c8.appspot.co
   }
 
   updateuser(user: User)  {
-    const userlistt = this.firebase.database.ref('User').child(this.curentuser);
+    const userlistt = this.db.database.ref('User').child(this.currentUserId);
    userlistt.set({
         nom: user.nom,
         prenom: user.prenom,
@@ -71,7 +72,7 @@ userpict = 'https://firebasestorage.googleapis.com/v0/b/pfe2018-f27c8.appspot.co
   }
   uploadeimage(user: User, fileUpload: FileUpload, progress: { percentage: number }): void {
 
-    const userlistt = this.firebase.database.ref('User').child(this.curentuser);
+    const userlistt = this.db.database.ref('User').child(this.currentUserId);
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.storageBasePath}/${fileUpload.file.name}`).put(fileUpload.file);
 
