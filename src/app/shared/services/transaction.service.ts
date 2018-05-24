@@ -25,21 +25,6 @@ export class TransactionService {
       action: transaction.action,
     });
   }
-
-  updateTransaction(transaction: Transaction) {
-    this.transactionlist = this.db.list('Transaction/' + this.currentUserId);
-    this.transactionlist.update(transaction.$key,
-      {
-        key: transaction.$key,
-        titre: transaction.titre,
-        date: transaction.date
-      });
-  }
-
-  deletetran($key: string) {
-    this.transactionlist.remove($key);
-  }
-
   trie(bath: string , type: string) {
     const chilbath = bath + '/' +  this.currentUserId ;
     const depenselist = this.db.list(chilbath);

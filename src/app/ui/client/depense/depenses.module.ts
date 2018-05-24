@@ -24,11 +24,10 @@ import {ModeleDepenseService} from '../../../shared/services/modele-depense.serv
   declarations: [
     DepenseComponent,
     ListdepensesComponent,
-    DepensesComponent,
     ModeldepenseComponent,
     ListmodeldepenseComponent,
     ListDepensesRecurrentComponent,
-    DashdepComponent,
+
   ],
   providers: [
     DepensesService,

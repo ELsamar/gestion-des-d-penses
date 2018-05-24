@@ -14,7 +14,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class ListdepensesComponent implements OnInit {
   categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
     'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants', 'autre'];
-  depenseslist: Depenses[];
+  depenseslist: any[];
   typeaffich: string;
   startAt: string;
   endAt: string;
@@ -33,7 +33,7 @@ export class ListdepensesComponent implements OnInit {
             item.forEach(element => {
               let y = element.payload.toJSON();
               y['$key'] = element.key;
-              this.depenseslist.push(y as Depenses);
+              this.depenseslist.push(y);
             });
           });
         } else {

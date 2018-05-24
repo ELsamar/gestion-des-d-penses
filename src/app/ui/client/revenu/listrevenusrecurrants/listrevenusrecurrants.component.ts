@@ -17,10 +17,9 @@ export class ListrevenusrecurrantsComponent implements OnInit {
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  RevenusRlist: Revenus[];
+  RevenusRlist: any[];
   startAt: string;
   endAt: string;
-  revenusR: Revenus[];
   selectedRevenuR: any;
   constructor(private revenuservice: RevenusService, private toastr: ToastrService, private modalService: NgbModal) { }
 
@@ -34,7 +33,7 @@ export class ListrevenusrecurrantsComponent implements OnInit {
             item.forEach(element => {
               let y = element.payload.toJSON();
               y['$key'] = element.key;
-              this.RevenusRlist.push(y as Revenus);
+              this.RevenusRlist.push(y);
             });
           });
         } else {

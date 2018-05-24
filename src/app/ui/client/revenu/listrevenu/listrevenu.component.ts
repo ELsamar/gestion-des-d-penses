@@ -12,7 +12,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./listrevenu.component.css']
 })
 export class ListrevenuComponent implements OnInit {
-  revenuslist: Revenus[];
+  revenuslist: any[];
   categories: any = ['Salaires Net', 'Bourses', 'Remboursements Sécurité Sociale', 'prêt bancaire',
     'allocation familiale', 'Aides diverses', 'avance et acompte'];
   constructor(private revenuservice: RevenusService, private toastr: ToastrService, private modalService: NgbModal) { }
@@ -32,7 +32,7 @@ export class ListrevenuComponent implements OnInit {
             item.forEach(element => {
               var y = element.payload.toJSON();
               y['$key'] = element.key;
-              this.revenuslist.push(y as Revenus);
+              this.revenuslist.push(y);
             });
           });
         } else {

@@ -17,10 +17,9 @@ export class ListDepensesRecurrentComponent implements OnInit {
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  DepensesRlist: {Depenses}[];
+  DepensesRlist: any[];
   startAt: string;
   endAt: string;
-  depensesR: {Depenses}[];
   selectedDepenseR: any;
   constructor(private depenseservice: DepensesService, private toastr: ToastrService, private modalService: NgbModal) { }
 
@@ -34,11 +33,12 @@ export class ListDepensesRecurrentComponent implements OnInit {
             item.forEach(element => {
               const y = element.payload.toJSON();
               y['$key'] = element.key;
-              this.DepensesRlist.push(y as {Depenses} );
+              this.DepensesRlist.push(y);
             });
           });
         } else {
-          this.toastr.warning('vous n"avez encore des Depenses Recurrent', 'vide');}
+          this.toastr.warning('vous n"avez encore des Depenses Recurrent', 'vide');
+        }
       });
   }
   openWindowCustomClass(content, depense: Depenses) {

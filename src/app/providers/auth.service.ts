@@ -1,8 +1,8 @@
-import { AngularFireAuth } from 'angularfire2/auth';
+import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Observable} from 'rxjs/Observable';
 import {User} from 'firebase';
@@ -19,15 +19,18 @@ export class AuthService {
   errorMessage: string;
   errorCode: string;
   currentuserId: string;
+
   constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
       console.log(this.authState);
-  });
+    });
   }
+
   get currentUserId(): string {
     return (this.authState) ? this.authState.uid : '';
   }
+
   singup(email: string, password: string, varr: boolean) {
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -40,9 +43,10 @@ export class AuthService {
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
     }
   }
+
   singin(email: string, password: string) {
     try {
-       firebase.auth().signInWithEmailAndPassword(email, password);
+      firebase.auth().signInWithEmailAndPassword(email, password);
       this.toastr.success('bienvenu', 'singin seccued');
     } catch (error) {
       // Handle Errors here.
@@ -51,20 +55,24 @@ export class AuthService {
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
     }
   }
+
   resetPassword(email: string) {
     return this.afAuth.auth.sendPasswordResetEmail(email)
-      .then(() =>  this.toastr.success('sent Password Reset Email!', ''))
+      .then(() => this.toastr.success('sent Password Reset Email!', ''))
       .catch((error) => console.log(error));
   }
+
   loginWithFacebook() {
     this.providerF = new firebase.auth.FacebookAuthProvider();
     return this.afAuth.auth.signInWithPopup(this.providerF);
   }
+
   loginWithGoogle() {
     this.providerG = new firebase.auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(this.providerG);
 
   }
+
   async sendEmailLink(email: string) {
     const actionCodeSettings = {
       // Your redirect URL
@@ -72,11 +80,11 @@ export class AuthService {
       handleCodeInApp: true
     };
     try {
-      if ( await this.afAuth.auth.sendSignInLinkToEmail(email, actionCodeSettings)) {
-      sessionStorage.setItem('emailForSignIn', email);
-      this.toastr.success( 'Cool! We sent you an email with your login link', 'succes');
-      this.emailSent = true;
-      console.log(this.emailSent);
+      if (await this.afAuth.auth.sendSignInLinkToEmail(email, actionCodeSettings)) {
+        sessionStorage.setItem('emailForSignIn', email);
+        this.toastr.success('Cool! We sent you an email with your login link', 'succes');
+        this.emailSent = true;
+        console.log(this.emailSent);
       }
     } catch (err) {
       this.errorMessage = err.message;
@@ -97,7 +105,7 @@ export class AuthService {
 
         // Signin user and remove the email localStorage
         const result = await this.afAuth.auth.signInWithEmailLink(email, url);
-       // sessionStorage.removeItem('emailForSignIn');
+        // sessionStorage.removeItem('emailForSignIn');
         this.toastr.success('Congrats You logged in without a password!', 'succes');
       }
     } catch (err) {
@@ -105,16 +113,17 @@ export class AuthService {
       this.toastr.error(this.errorMessage.toLocaleString(), 'erreur');
     }
   }
+
   signout() {
-      //return this.afAuth.auth.signOut();
-    //thismethodforemaipasswordlogout
-    return firebase.auth().signOut().then(function() {
-      this.router.navigate(['login']);
-    // Sign-out successful.
-    }).catch(function(error) {
+    const Localrouter: Router = this.router;
+    return firebase.auth().signOut().then(function () {
+      Localrouter.navigate(['login']);
+
+      // Sign-out successful.
+    }).catch(function (error) {
       console.log(error);
       // An error happened.
-     });
+    });
   }
 
 }
