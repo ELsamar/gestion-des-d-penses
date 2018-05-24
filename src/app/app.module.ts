@@ -16,7 +16,6 @@ import { AuthService} from './providers/auth.service';
 import {TransactionService} from './shared/services/transaction.service';
 
 import {ClientModule} from './ui/client/client.module';
-import {PageService} from './shared/page.service';
 import { LoginComponent } from './login/login.component';
 
 

@@ -29,7 +29,17 @@
     top: -2px;
     width: 5px;
 }
-
+.nomargin { margin:0px; padding:0px;}
+a{
+    color: #0056b3;
+}
+ul a {
+    margin: 0.5rem;
+}
+.footer-bottom {
+    min-height: 30px;
+    width: 100%;
+}
 
 
 .widget_nav_menu ul {

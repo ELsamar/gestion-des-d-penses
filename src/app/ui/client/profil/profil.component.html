@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-6 mb-3 ">
               <label >Prenom</label>
-              <input type="text" class="form-control" name="prenom" #prenom="ngModel" [(ngModel)]="userObject.prenom" [ngModelOptions]="{updateOn: 'submit'}"required minlength="4"pattern= "[A-Za-z]*">
+              <input type="text" class="form-control " name="prenom" #prenom="ngModel" [(ngModel)]="userObject.prenom" [ngModelOptions]="{updateOn: 'submit'}"required minlength="4"pattern= "[A-Za-z]*">
               <div *ngIf ="prenom.errors && (prenom.dirty|| prenom.touched)" class ="alert alert-danger"  >
                 <div [hidden] = "!prenom.errors.required">
                   <strong>Error:</strong>Ce champs est obligatoire
@@ -37,7 +37,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
-                <input type="text" class="form-control" name="nomutulisateur" #nomutulisateur="ngModel"
+              </div>
+                <input type="text" class="form-control " name="nomutulisateur" #nomutulisateur="ngModel"
                        [(ngModel)]="userObject.nomutulisateur" [ngModelOptions]="{updateOn: 'submit'}" placeholder="Username" required minlength="4" pattern= "[A-Za-z]*">
                        <div *ngIf ="nomutulisateur.errors && (nomutulisateur.dirty|| nomutulisateur.touched)" class ="alert alert-danger"  >
                         <div [hidden] = "!nomutulisateur.errors.required">
@@ -50,7 +51,6 @@
                           <strong>Error:</strong>votre nom d'utilisateur n'est pas un nombre
                         </div>
                       </div>
-              </div>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label for="emailuser">Email </label>
@@ -101,20 +101,23 @@
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label class="mr-sm-2" >état civil</label>
-                 <select class="custom-select mr-sm-2"  name="etatcivil" [(ngModel)]="userObject.etatcivil" [ngModelOptions]="{updateOn: 'submit'}">
+                 <select class="custom-select mr-sm-2 form-control"  name="etatcivil" [(ngModel)]="userObject.etatcivil" [ngModelOptions]="{updateOn: 'submit'}">
                    <option *ngFor="let etatcivil of Etatcivil" [value]="etatcivil">{{etatcivil}}</option>
                  </select>
             </div>
             <div class="col-md-6 mb-3 form-group">
               <label class="mr-sm-2" for="profession">Profession</label>
-              <select class="custom-select mr-sm-2" id="profession" name="profession" #profession="ngModel" [(ngModel)]="userObject.profession" >
+              <select class="custom-select mr-sm-2 form-control" id="profession" name="profession" #profession="ngModel" [(ngModel)]="userObject.profession" >
                 <option *ngFor="let profession of Profession" [value]="profession">{{profession}}</option>
               </select>
             </div>
             <hr class="col-md-6 mb-3 form-group center">
-            <button type="submit" class="btn btn-primary bouton">ajouter</button>
-            <button class="btn" type="submit">Modifier</button>
-            <button class="btn" type="reseat">Annuler</button>
+            <div class="row">
+              <div class="col-5 mb-3"></div>
+             <!-- <button type="submit" class="btn btn-primary bouton">ajouter</button>-->
+             <button class="btn" type="submit" style="background-color: #2B32C0">Modifier</button>
+            <button class="btn" type="reseat" style="background-color: #2B32C0">Annuler</button>
+            </div>
           </div>
         </div>
 
@@ -142,13 +145,13 @@
           </div>
           <hr>
           <div class="button-container">
-            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg" style="background-color: #2B32C0">
               <i class="fab fa-facebook-f"></i>
             </button>
-            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg" style="background-color:#2BA3C0 ">
               <i class="fab fa-twitter"></i>
             </button>
-            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg" style="background-color:#E74C3C ">
               <i class="fab fa-google-plus-g"></i>
             </button>
           </div>
@@ -187,13 +190,13 @@
           </div>
           <hr>
           <div class="button-container">
-            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg" style="background-color: #2B32C0">
               <i class="fab fa-facebook-f"></i>
             </button>
-            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg" style="background-color:#2BA3C0 ">
               <i class="fab fa-twitter"></i>
             </button>
-            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg" style="background-color:#E74C3C ">
               <i class="fab fa-google-plus-g"></i>
             </button>
           </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit , Input } from '@angular/core';
 import {NavbarComponent} from '../navbar/navbar.component';
-import {PageService} from '../../../shared/page.service';
 import {AuthService} from '../../../providers/auth.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 declare const $: any;
