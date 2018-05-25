@@ -23,7 +23,6 @@ import {ListrevenuComponent} from './listrevenu/listrevenu.component';
     RevenusComponent,
     RevenuComponent,
     ListrevenuComponent,
-    DashrevComponent,
     ListrevenusrecurrantsComponent,
     ModelerevenuComponent,
     ListmodelrevenuComponent],

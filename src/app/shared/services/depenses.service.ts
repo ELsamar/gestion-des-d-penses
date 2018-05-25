@@ -15,17 +15,17 @@ export class DepensesService {
   selectedDepense: Depenses = new Depenses();
   selectedDepenseR: Depenses = new Depenses();
   newdepenseKey: string;
-  currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
+  currentUserId = localStorage.getItem('userid');
   depenseslist: AngularFireList <any>;
 
   constructor(private db: AngularFireDatabase, public authservice: AuthService, private toastr: ToastrService) {
   }
   checkdata(childPath) {
-    const depenseslist = this.db.database.ref(childPath).child(this.authservice.currentUserId);
-    return depenseslist.once('value').then();
+    const depenseslist = this.db.database.ref(childPath).child(this.currentUserId);
+    return depenseslist.once('value');
   }
   getDepense(childPath: string) {
-    this.depenseslist = this.db.list(childPath + '/' +  this.currentUserId);
+    this.depenseslist = this.db.list(childPath + '/' + this.currentUserId);
     return this.depenseslist;
   }
   getnewdepenseKey(childPath: string) {
@@ -148,7 +148,7 @@ export class DepensesService {
     this.depenseslist.update(depenses.$iddepense,
       {
         active: depenses.active
-      })
+      });
   }
 
   deleteDepense($iddepense: string) {
@@ -161,28 +161,28 @@ export class DepensesService {
   }
 
 
-  getSearchdep(start, end, bath: string): Observable<Depenses[]> {
-    const chilbath = bath + '/' +  this.currentUserId ;
+  getSearchdep(start, end, path: string): Observable<Depenses[]> {
+    const chilbath = path + '/' +  this.currentUserId ;
     return this.db.list<Depenses>(chilbath,
       ref => ref.orderByChild('titredepense').limitToFirst(10).startAt(start).endAt(end)
     ).valueChanges();
   }
 
-  getdataauth(bath: string) {
-    let myUserId = this.authservice.currentUserId;
+  getdataauth(path: string) {
+    let myUserId = this.currentUserId;
     console.log(myUserId);
-    return this.db.list<Depenses>(bath,
+    return this.db.list<Depenses>(path,
       ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));
   }
 
-  getdatadash(bath: string, num: number) {
-    const chilbath = bath + '/' +  this.currentUserId ;
+  getdatadash(path: string, num: number) {
+    const chilbath = path + '/' +  this.currentUserId ;
     const depenselist = this.db.list(chilbath);
     return this.db.list<Depenses>(chilbath,
       ref => ref.limitToFirst(num));
   }
-  trie(bath: string , type: string) {
-    const chilbath = bath + '/' +  this.currentUserId ;
+  trie(path: string , type: string) {
+    const chilbath = path + '/' +  this.currentUserId;
     const depenselist = this.db.list(chilbath);
     return this.db.list<Depenses>(chilbath,
       ref => ref.orderByChild(type)).valueChanges();

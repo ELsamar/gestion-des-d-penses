@@ -14,26 +14,33 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class ListdepensesComponent implements OnInit {
   categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
     'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants', 'autre'];
-  depenseslist: Depenses[];
+  depenseslist: any[];
   typeaffich: string;
   startAt: string;
   endAt: string;
   depenses: Depenses[];
 
-  constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) {
+  constructor(private depenseservice: DepensesService, private toastr: ToastrService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
-    var x = this.depenseservice.getDepense('Depenses/Depenses');
-     x.snapshotChanges().subscribe(item => {
-       this.depenseslist = [];
-       item.forEach(element => {
-         var y = element.payload.toJSON();
-         y['$key'] = element.key;
-         this.depenseslist.push(y as Depenses);
-       });
-     });
-  }
+    this.depenseservice.checkdata('Depenses/Depenses')
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          let x = this.depenseservice.getDepense('Depenses/Depenses');
+          x.snapshotChanges().subscribe(item => {
+            this.depenseslist = [];
+            item.forEach(element => {
+              let y = element.payload.toJSON();
+              y['$key'] = element.key;
+              this.depenseslist.push(y);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Depenses ', 'vide');
+ }
+      });
+ }
   checkdata() {
     this.depenseservice.checkdata('Depenses/Depenses').
     then(snapshot => {
@@ -56,13 +63,13 @@ export class ListdepensesComponent implements OnInit {
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce depense ?') === true) {
       this.depenseservice.deleteDepense(key);
-      this.tostr.warning('suppression', 'depense supprimée avec succée');
+      this.toastr.warning('suppression', 'depense supprimée avec succée');
     }
   }
   onDeleteAll() {
     if (confirm('éte vous sure de supprimer toutes tes depenses ?') === true) {
       this.depenseservice.deleteAllDepense();
-      this.tostr.warning('suppression', 'Depense supprimée avec succée');
+      this.toastr.warning('suppression', 'Depense supprimée avec succée');
     }
   }
 
@@ -74,9 +81,9 @@ export class ListdepensesComponent implements OnInit {
     if (this.depenseservice.updateDepense(depenseForm.value, 'Depenses/Depenses')) {
       console.log('test');
     }
-    this.tostr.success('modification', 'modification avec succès');
+    this.toastr.success('modification', 'modification avec succès');
 
-    //modal clonse
+    // modal clonse
     // else
   }
 

@@ -25,10 +25,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginModule} from './ui/login/login.module';
 import {AuthGuardService} from './shared/services/auth-guard.service';
 
-import {} from '@polymer/paper-toggle-button';
 import {UserService} from './shared/services/user.service';
 
-
+import {} from '@polymer/paper-toggle-button';
+import { AmChartsModule } from "amcharts3-angular2";
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import {UserService} from './shared/services/user.service';
     AppComponent,
     NotFound404Component,
     LoginComponent,
-
+    
   ],
   imports: [
     BrowserModule,
@@ -57,6 +57,7 @@ import {UserService} from './shared/services/user.service';
     }),
     BrowserAnimationsModule,
     NgbModule,
+    AmChartsModule,
 
   ],
   providers: [AuthService, TransactionService , AuthGuardService, UserService  ],

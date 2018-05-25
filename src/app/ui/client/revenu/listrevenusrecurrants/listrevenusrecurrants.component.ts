@@ -17,23 +17,29 @@ export class ListrevenusrecurrantsComponent implements OnInit {
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  RevenusRlist: Revenus[];
+  RevenusRlist: any[];
   startAt: string;
   endAt: string;
-  revenusR: Revenus[];
   selectedRevenuR: any;
-  constructor(private revenuservice: RevenusService, private tostr: ToastrService, private modalService: NgbModal) { }
+  constructor(private revenuservice: RevenusService, private toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    var x = this.revenuservice.getRevenu('Revenus/RevenusRecurrent');
-    x.snapshotChanges().subscribe(item => {
-      this.RevenusRlist = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        this.RevenusRlist.push(y as Revenus);
+    this.revenuservice.checkdata('Revenus/RevenusRecurrent')
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          let x = this.revenuservice.getRevenu('Revenus/RevenusRecurrent');
+          x.snapshotChanges().subscribe(item => {
+            this.RevenusRlist = [];
+            item.forEach(element => {
+              let y = element.payload.toJSON();
+              y['$key'] = element.key;
+              this.RevenusRlist.push(y);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Revenus Recurrent ', 'vide');
+        }
       });
-    });
   }
 
   openWindowCustomClass(content, revenu: Revenus) {
@@ -45,7 +51,7 @@ export class ListrevenusrecurrantsComponent implements OnInit {
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce revenu ?') === true) {
       this.revenuservice.deleteRevenus(key);
-      this.tostr.warning('suppression', 'revenu supprimée avec succée');
+      this.toastr.success('suppression', 'revenu supprimée avec succée');
     }
   }
 
@@ -55,9 +61,9 @@ export class ListrevenusrecurrantsComponent implements OnInit {
 
   onUpdateR(revenusFormR: NgForm) {
     this.revenuservice.updateRevenusRecurrent(revenusFormR.value);
-    this.tostr.success('modification', 'modification avec succès');
+    this.toastr.success('modification', 'modification avec succès');
 
-    //modal clonse
+    // modal clonse
     // else
   }
 

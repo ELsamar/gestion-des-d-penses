@@ -10,14 +10,18 @@ import {ModeleDepense} from '../models/modele-depense';
 export class ProjetsService {
   projetlist: AngularFireList <any>;
   selectedprojet: Projets = new Projets();
-  currentUserId = 'qfLQdWnNA5U4IiRQxevRB4Z46bg1';
-  constructor(private firebase: AngularFireDatabase, public authservice: AuthService) { }
+  currentUserId = localStorage.getItem('userid');
+  constructor(private firebase: AngularFireDatabase, public authservice: AuthService) {}
+  checkdata() {
+    const depenseslist = this.firebase.database.ref('Projets').child(this.currentUserId);
+    return depenseslist.once('value');
+  }
   getProjet () {
     return this.projetlist = this.firebase.list('Projets/' + this.currentUserId);
   }
   insertProjet (projet: Projets) {
-    const bath = ('Projets/' + this.currentUserId);
-    this.projetlist = this.firebase.list(bath);
+    const path = ('Projets/' + this.currentUserId );
+    this.projetlist = this.firebase.list(path);
     this.projetlist.push({
       idauth: this.authservice.currentUserId,
       titreprojet: projet.titreprojet,
@@ -44,8 +48,8 @@ export class ProjetsService {
     this.projetlist.remove($idprojet);
   }
   getSearchProjet(start, end): Observable<Projets[]> {
-    const bath = ('Projets/' +  this.currentUserId);
-    return this.firebase.list<Projets>(bath,
+    const path = ('Projets/' + this.currentUserId);
+    return this.firebase.list<Projets>(path,
       ref => ref.orderByChild('titreprojet').startAt(start).endAt(end)
     ).valueChanges();
   }

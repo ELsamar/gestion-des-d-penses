@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {isMoment, calendarFormat, Locale, locale} from 'moment';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import {TransactionService} from '../../../../shared/services/transaction.service';
-import { Transaction} from '../../../../shared/models/transaction';
+import {TransactionService} from '../../../shared/services/transaction.service';
+import { Transaction} from '../../../shared/models/transaction';
 
 
 
@@ -16,8 +16,6 @@ export class ListTransactionComponent implements OnInit {
 action: object[];
 st: string;
 ed: string;
-   moment = require('moment');
-
   constructor(private transactionservice: TransactionService, private tostr: ToastrService) {
   }
 
@@ -41,10 +39,9 @@ ed: string;
       .subscribe((transaction) => this.transactionList = transaction);
   }
 getweek() {
-const d = this.moment().format('L');
-console.log(d);
+  let now = moment().format('L');
 
-const f = this.moment().subtract( 10, 'days').calendar();
+const f = moment().subtract( 10, 'days').calendar();
   console.log(f);
 }
 filtrer() {

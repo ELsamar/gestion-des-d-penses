@@ -17,23 +17,29 @@ export class ListDepensesRecurrentComponent implements OnInit {
   semaines: any = ['', 'Lundi' , 'Mardi' , 'Mercredi' , 'Jeudi' , 'Vendredi' , 'Samedi' , 'Dimanche'];
   Mois: any = ['', '1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
   alerts: any = ['1' , '2' , '3' , '4' , '5', '6', '7' , '8' , '9', '10' , '11' , '12'];
-  DepensesRlist: {Depenses}[];
+  DepensesRlist: any[];
   startAt: string;
   endAt: string;
-  depensesR: {Depenses}[];
   selectedDepenseR: any;
-  constructor(private depenseservice: DepensesService, private tostr: ToastrService, private modalService: NgbModal) { }
+  constructor(private depenseservice: DepensesService, private toastr: ToastrService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    var x = this.depenseservice.getDepense('Depenses/DepensesRecurrent');
-    x.snapshotChanges().subscribe(item => {
-      this.DepensesRlist = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        this.DepensesRlist.push(y as {Depenses} );
+    this.depenseservice.checkdata('Depenses/DepensesRecurrent')
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          const x = this.depenseservice.getDepense('Depenses/DepensesRecurrent');
+          x.snapshotChanges().subscribe(item => {
+            this.DepensesRlist = [];
+            item.forEach(element => {
+              const y = element.payload.toJSON();
+              y['$key'] = element.key;
+              this.DepensesRlist.push(y);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Depenses Recurrent', 'vide');
+        }
       });
-    });
   }
   openWindowCustomClass(content, depense: Depenses) {
     this.modalService.open(content, {windowClass: 'dark-modal'});
@@ -44,13 +50,13 @@ export class ListDepensesRecurrentComponent implements OnInit {
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce depense ?') === true) {
       this.depenseservice.deleteDepense(key);
-      this.tostr.warning('suppression', 'depense supprimée avec succée');
+      this.toastr.warning('suppression', 'depense supprimée avec succée');
     }
   }
   onDeleteAll() {
     if (confirm('éte vous sure de supprimer toutes tes depenses ?') === true) {
       this.depenseservice.deleteAllDepense();
-      this.tostr.warning('suppression', 'Depense supprimée avec succée');
+      this.toastr.warning('suppression', 'Depense supprimée avec succée');
     }
   }
 
@@ -62,9 +68,9 @@ export class ListDepensesRecurrentComponent implements OnInit {
     if (this.depenseservice.updateDepenseRecurrent(depensesFormR.value)) {
       console.log('test');
     }
-    this.tostr.success('modification', 'modification avec succès');
+    this.toastr.success('modification', 'modification avec succès');
 
-    //modal clonse
+    // modal clonse
     // else
   }
 

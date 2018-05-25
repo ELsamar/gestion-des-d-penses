@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
   logout() {
+    localStorage.removeItem('userid');
     return this.authservice.signout();
   }
 }

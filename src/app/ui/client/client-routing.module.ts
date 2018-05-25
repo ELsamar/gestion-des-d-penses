@@ -5,11 +5,12 @@ import {DepensesModule} from './depense/depenses.module';
 import {ProjetsModule} from './projets/projets.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ProfilComponent} from './profil/profil.component';
-import {TransactionsModule} from './transactions/transactions.module';
 import {DepensesComponent} from './depense/depenses.component';
 import {ProjetsComponent} from './projets/projets.component';
 import {RevenusComponent} from './revenu/revenus.component';
 import {NotFound404Component} from '../../shared/not-found404/not-found404.component';
+import {ListTransactionComponent} from './list-transaction/list-transaction.component';
+import { ChartComponent } from './chart/chart.component';
 
 const routes: Routes = <Routes> [
   {
@@ -18,7 +19,7 @@ const routes: Routes = <Routes> [
   },
   {
     path: 'transaction',
-    loadChildren: './transactions/transactions.module#TransactionsModule'
+    component: ListTransactionComponent
   },
   {
     path: 'profil',
@@ -38,6 +39,10 @@ const routes: Routes = <Routes> [
     path: 'projets',
     component: ProjetsComponent,
     loadChildren: './projets/projets.module#ProjetsModule'
+  },
+  {
+    path: 'rapports',
+    component:ChartComponent,
   },
 ];
 

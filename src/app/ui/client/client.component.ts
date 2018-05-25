@@ -26,8 +26,7 @@ import {UserService} from '../../shared/services/user.service';
 export class ClientComponent implements OnInit {
   openclose = 'open'
   constructor(public authService: AuthService, public userservice: UserService) {
-    console.log(this.authService.currentUserId);
-    localStorage.setItem('currentUserId', this.authService.currentUserId);
+  console.log(localStorage.getItem('userid'));
   }
   ngOnInit() {
 

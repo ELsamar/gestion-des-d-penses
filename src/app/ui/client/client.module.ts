@@ -10,7 +10,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfilComponent } from './profil/profil.component';
-import {TransactionsModule} from './transactions/transactions.module';
+import {ListTransactionComponent} from './list-transaction/list-transaction.component';
+import {DepensesComponent} from './depense/depenses.component';
+import {RevenusComponent} from './revenu/revenus.component';
+import {DashrevComponent} from './revenu/dashrev/dashrev.component';
+import {DashdepComponent} from './depense/dashdep/dashdep.component';
+import { ChartComponent } from './chart/chart.component';
+
 
 
 @NgModule({
@@ -19,7 +25,6 @@ import {TransactionsModule} from './transactions/transactions.module';
     DepensesModule,
     RevenusModule,
     ProjetsModule,
-    TransactionsModule,
     FormsModule,
     ClientRoutingModule,
   ],
@@ -29,6 +34,11 @@ import {TransactionsModule} from './transactions/transactions.module';
     SidebarComponent,
     NavbarComponent,
     ProfilComponent,
-    ]
+    ListTransactionComponent,
+    DepensesComponent,
+    DashdepComponent,
+    DashrevComponent,
+    ChartComponent
+  ]
 })
 export class ClientModule { }

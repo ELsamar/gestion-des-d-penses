@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@amcharts/amcharts3-angular": "github:amcharts/amcharts3-angular2",
     "@angular/animations": "^5.2.10",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
@@ -23,6 +24,8 @@
     "@angular/router": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@polymer/paper-toggle-button": "^3.0.0-pre.19",
+    "amcharts3": "^3.21.13",
+    "amcharts3-angular2": "^1.2.1",
     "angular-date-value-accessor": "0.0.2",
     "angularfire2": "^5.0.0-rc.3",
     "bootstrap": "^4.0.0",

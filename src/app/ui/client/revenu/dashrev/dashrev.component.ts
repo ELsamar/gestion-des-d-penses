@@ -18,19 +18,23 @@ export class DashrevComponent implements OnInit {
   constructor( private revenuservice: RevenusService) { }
 
   ngOnInit() {
+    this.revenuservice.checkdata('Revenus/Revenus')
+      .then(snapshot => {
+        if ((snapshot.val())) {
     this.revenuservice.getdatadash('Revenus/Revenus', 5).snapshotChanges().subscribe(item => {
         this.revenuslist = [];
         item.forEach(element => {
-          var y = element.payload.toJSON();
+          let y = element.payload.toJSON();
           y['$key'] = element.key;
           console.log(y);
           this.revenuslist.push(y as Revenus);
         });
       });
+    } });
       this.revenuservice.getdatadash('Revenus/RevenusRecurrent', 5).snapshotChanges().subscribe(item => {
         this.revenusRlist = [];
         item.forEach(element => {
-          var T = element.payload.toJSON();
+          let T = element.payload.toJSON();
           T['$key'] = element.key;
           this.revenusRlist.push(T as Revenus);
         });

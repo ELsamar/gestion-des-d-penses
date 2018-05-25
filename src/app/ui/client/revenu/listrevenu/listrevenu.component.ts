@@ -5,16 +5,17 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-revenulist',
   templateUrl: './listrevenu.component.html',
   styleUrls: ['./listrevenu.component.css']
 })
 export class ListrevenuComponent implements OnInit {
-  revenuslist: Revenus[];
+  revenuslist: any[];
   categories: any = ['Salaires Net', 'Bourses', 'Remboursements Sécurité Sociale', 'prêt bancaire',
     'allocation familiale', 'Aides diverses', 'avance et acompte'];
-  constructor(private revenuservice: RevenusService, private tostr: ToastrService, private modalService: NgbModal) { }
+  constructor(private revenuservice: RevenusService, private toastr: ToastrService, private modalService: NgbModal) { }
 
 
   typeaffich: string;
@@ -22,16 +23,22 @@ export class ListrevenuComponent implements OnInit {
   endAt: string;
   revenus: Revenus[];
   ngOnInit() {
-    var x = this.revenuservice.getRevenu('Revenus/Revenus');
-    x.snapshotChanges().subscribe(item => {
-      this.revenuslist = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y['$key'] = element.key;
-        this.revenuslist.push(y as Revenus);
+    this.revenuservice.checkdata('Revenus/Revenus')
+      .then(snapshot => {
+        if ((snapshot.val())) {
+          var x = this.revenuservice.getRevenu('Revenus/Revenus');
+          x.snapshotChanges().subscribe(item => {
+            this.revenuslist = [];
+            item.forEach(element => {
+              var y = element.payload.toJSON();
+              y['$key'] = element.key;
+              this.revenuslist.push(y);
+            });
+          });
+        } else {
+          this.toastr.warning('vous n"avez encore des Revenus ', 'vide');
+        }
       });
-    });
-
   }
   openWindowCustomClass(content, revenu: Revenus) {
     this.modalService.open(content, {windowClass: 'dark-modal'});
@@ -42,7 +49,7 @@ export class ListrevenuComponent implements OnInit {
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce revenu ?') === true) {
       this.revenuservice.deleteRevenus(key);
-      this.tostr.warning('suppression', 'revenu supprimée avec succée');
+      this.toastr.warning('suppression', 'revenu supprimée avec succée');
     }
   }
 
@@ -52,8 +59,8 @@ export class ListrevenuComponent implements OnInit {
 
   onUpdate(revenusForm: NgForm) {
     this.revenuservice.updateRevenu( 'Revenus/Revenus', revenusForm.value);
-    this.tostr.success('modification', 'modification avec succès');
-    //modal clonse
+    this.toastr.success('modification', 'modification avec succès');
+    // modal clonse
     // else
   }
 

@@ -11,7 +11,7 @@ import {LoginComponent} from './ui/login/login.component';
 
 import {PasswordlessAuthComponent} from './ui/login/passwordless-auth/passwordless-auth.component';
 import {PublicComponent} from './ui/public/public.component';
-import {AuthGuardService} from './shared/services/auth-guard.service';
+import {AuthGuardService as AuthGuard} from './shared/services/auth-guard.service';
 
 const routes: Routes = <Routes>  [
   {
@@ -22,8 +22,8 @@ const routes: Routes = <Routes>  [
   {
     path: 'client',
     component: ClientComponent,
-    //CanActivate: [AuthGuardService],
     loadChildren: './ui/client/client.module#ClientModule',
+    canActivate: [AuthGuard],
 
   },
   {
@@ -32,8 +32,8 @@ const routes: Routes = <Routes>  [
     loadChildren: './ui/login/login.module#LoginModule'
   },
   {
-    path: '',
-    component: NotFound404Component,
+    path: '**',
+    component: NotFound404Component
   }
 ];
 
