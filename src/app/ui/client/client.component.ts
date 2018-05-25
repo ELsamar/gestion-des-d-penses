@@ -35,7 +35,6 @@ export class ClientComponent implements OnInit {
         this.userservice.userpict = snapshot.val().imageuser;
       } else if (!snapshot.val()) {}
     });
-    console.log(this.userservice.userpict);
   }
   toggle(): void {
     this.openclose = (this.openclose === 'open' ) ? 'close' : 'open' ;

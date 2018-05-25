@@ -10,11 +10,17 @@ import {ProjetsComponent} from './projets/projets.component';
 import {RevenusComponent} from './revenu/revenus.component';
 import {NotFound404Component} from '../../shared/not-found404/not-found404.component';
 import {ListTransactionComponent} from './list-transaction/list-transaction.component';
+import {ChartComponent} from './chart/chart.component';
+
 
 const routes: Routes = <Routes> [
   {
     path: 'dash',
     component: DashboardComponent
+  },
+  {
+    path: 'chart',
+    component: ChartComponent
   },
   {
     path: 'transaction',

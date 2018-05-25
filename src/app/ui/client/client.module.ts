@@ -15,6 +15,8 @@ import {DepensesComponent} from './depense/depenses.component';
 import {RevenusComponent} from './revenu/revenus.component';
 import {DashrevComponent} from './revenu/dashrev/dashrev.component';
 import {DashdepComponent} from './depense/dashdep/dashdep.component';
+import { ChartComponent } from './chart/chart.component';
+
 
 
 
@@ -36,7 +38,8 @@ import {DashdepComponent} from './depense/dashdep/dashdep.component';
     ListTransactionComponent,
     DepensesComponent,
     DashdepComponent,
-    DashrevComponent
+    DashrevComponent,
+    ChartComponent,
   ]
 })
 export class ClientModule { }

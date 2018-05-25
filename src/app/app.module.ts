@@ -10,6 +10,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ChatModule } from './chat/chat.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AmChartsModule } from '@amcharts/amcharts3-angular';
+
+
 import {AppComponent} from './app.component';
 import {NotFound404Component} from './shared/not-found404/not-found404.component';
 import { AuthService} from './providers/auth.service';
@@ -17,8 +20,6 @@ import {TransactionService} from './shared/services/transaction.service';
 
 import {ClientModule} from './ui/client/client.module';
 import { LoginComponent } from './login/login.component';
-
-
 import {FormsModule} from '@angular/forms';
 import {PublicModule} from './ui/public/public.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -56,6 +57,7 @@ import {} from '@polymer/paper-toggle-button';
     }),
     BrowserAnimationsModule,
     NgbModule,
+    AmChartsModule
 
   ],
   providers: [AuthService, TransactionService , AuthGuardService, UserService  ],
