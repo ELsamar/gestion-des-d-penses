@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.userservice.userpict);
   }
 
   logout() {

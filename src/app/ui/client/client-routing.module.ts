@@ -18,6 +18,10 @@ const routes: Routes = <Routes> [
     component: DashboardComponent
   },
   {
+    path: 'chart',
+    component: ChartComponent
+  },
+  {
     path: 'transaction',
     component: ListTransactionComponent
   },

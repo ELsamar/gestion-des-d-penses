@@ -5,48 +5,167 @@ import { AmChartsService } from "amcharts3-angular2";
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit,OnDestroy {
+export class ChartComponent implements OnInit {
   private chart: any;
-  constructor(private AmCharts: AmChartsService) { }
+  
+  chartData = [{
+   date: '2012-01-01',
+    distance: 227,
+   townName: 'New York',
+   townName2: 'New York',
+   townSize: 25,
+    latitude: 40.71,
+    duration: 408
+ }, {
+    date: '2012-01-02',
+    distance: 371,
+   townName: 'Washington',
+   townSize: 14,
+    latitude: 38.89,
+    duration: 482
+  }, {
+    date: '2012-01-03',
+    distance: 433,
+   townName: 'Wilmington',
+    townSize: 6,
+   latitude: 34.22,
+    duration: 562
+  }, {
+    date: '2012-01-04"',
+    distance: 345,
+    townName: 'Jacksonville',
+    townSize: 7,
+    latitude: 30.35,
+    duration: 379
+  },
+    {
+      date: '2012-01-05',
+      distance: 480,
+      townName: 'Miami',
+      townName2: 'Miami',
+      townSize: 10,
+      latitude: 25.83,
+      duration: 501
+    }, {
+      "date": "2012-01-06",
+      "distance": 386,
+      "townName": "Tallahassee",
+      "townSize": 7,
+      "latitude": 30.46,
+      "duration": 443
+    }, {
+      "date": "2012-01-07",
+      "distance": 348,
+      "townName": "New Orleans",
+      "townSize": 10,
+      "latitude": 29.94,
+      "duration": 405
+    },
+    {
+      "date": "2012-01-08",
+      "distance": 238,
+      "townName": "Houston",
+      "townName2": "Houston",
+      "townSize": 16,
+      "latitude": 29.76,
+      "duration": 309
+    }, {
+      "date": "2012-01-09",
+      "distance": 218,
+      "townName": "Dalas",
+      "townSize": 17,
+      "latitude": 32.8,
+      "duration": 287
+    },
+    {
+      "date": "2012-01-10",
+      "distance": 349,
+      "townName": "Oklahoma City",
+      "townSize": 11,
+      "latitude": 35.49,
+      "duration": 485
+    }, {
+      "date": "2012-01-11",
+      "distance": 603,
+      "townName": "Kansas City",
+      "townSize": 10,
+      "latitude": 39.1,
+      "duration": 890
+    },
+    {
+      "date": "2012-01-12",
+      "distance": 534,
+      "townName": "Denver",
+      "townName2": "Denver",
+      "townSize": 18,
+      "latitude": 39.74,
+      "duration": 810
+    },
+    {
+      "date": "2012-01-13",
+      "townName": "Salt Lake City",
+      "townSize": 12,
+      "distance": 425,
+      "duration": 670,
+      "latitude": 40.75,
+      "alpha": 0.4
+    }, {
+      "date": "2012-01-14",
+      "latitude": 36.1,
+      "duration": 470,
+      "townName": "Las Vegas",
+      "townName2": "Las Vegas",
+      "bulletClass": "lastBullet"
+    }, {
+      date: '2012-01-15'
+    }, {
+      date: '2012-01-16'
+    }, {
+      date: '2012-01-17'
+    }, {
+      date: '2012-01-18'
+    }, {
+      date: '2012-01-19'
+    }];
+ constructor(private AmCharts: AmChartsService) { }
   ngOnInit() {
-
-    this.chart = this.AmCharts.makeChart("chartdiv", {
-      "theme": "light",
-      "type": "serial",
-      "dataProvider": [{
-          "month": "Janvier",
+    var chart1 = this.AmCharts.makeChart("chartdiv1", {
+      theme: "light",
+      type: "serial",
+      dataProvider: [{
+          "country": "USA",
           "year2004": 3.5,
           "year2005": 4.2
       }, {
-          "month": "Fevrier",
+          "country": "UK",
           "year2004": 1.7,
           "year2005": 3.1
       }, {
-          "month": "Mars",
+          "country": "Canada",
           "year2004": 2.8,
           "year2005": 2.9
       }, {
-          "month": "Avril",
+          "country": "Japan",
           "year2004": 2.6,
           "year2005": 2.3
       }, {
-          "month": "Mai",
+          "country": "France",
           "year2004": 1.4,
           "year2005": 2.1
       }, {
-          "month": "Juin",
+          "country": "Brazil",
           "year2004": 2.6,
           "year2005": 4.9
       }, {
-          "month": "Juiller",
+          "country": "Russia",
           "year2004": 6.4,
           "year2005": 7.2
       }, {
-          "month": "Aout",
+          "country": "India",
           "year2004": 8,
           "year2005": 7.1
       }, {
-          "month": "Decembre",
+          "country": "China",
           "year2004": 9.9,
           "year2005": 10.1
       }],
@@ -54,7 +173,7 @@ export class ChartComponent implements OnInit,OnDestroy {
           "stackType": "3d",
           "unit": "%",
           "position": "left",
-          "title": "L'evolution des revenus et des dépenses (montant/mois)",
+          "title": "GDP growth rate",
       }],
       "startDuration": 1,
       "graphs": [{
@@ -83,11 +202,179 @@ export class ChartComponent implements OnInit,OnDestroy {
         "enabled": true
        }
   });
+    
 
-  this.chart.path = "/node_modules/amcharts3/amcharts/";
+  const chart = this.AmCharts.makeChart("chart",
+       {
+          type: 'serial',
+          theme: 'none',
+          dataDateFormat: 'YYYY-MM-DD',
+          dataProvider: this.chartData,
+          addClassNames: true,
+          startDuration: 1,
+          //"color": "#FFFFFF",
+          marginLeft: 0,
+          categoryField: 'date',
+          categoryAxis: {
+            parseDates: true,
+            minPeriod: 'DD',
+            autoGridCount: false,
+            gridCount: 50,
+            gridAlpha: 0.1,
+            gridColor: '#FFFFFF',
+            axisColor: '#555555',
+            dateFormats: [{
+              period: 'DD',
+              format: 'DD'
+            },
+              {
+                period: 'WW',
+                format: 'MMM DD'
+              }, {
+                period: 'MM',
+                format: 'MMM'
+              },
+              {
+                period: 'YYYY',
+                format: 'YYYY'
+              }]
+          },
+  
+          valueAxes: [{
+            id: 'a1',
+            title: 'distance',
+            gridAlpha: 0,
+            axisAlpha: 0
+          }, {
+            id: 'a2',
+            position: 'right',
+            gridAlpha: 0,
+            axisAlpha: 0,
+            labelsEnabled: false
+          },
+            {
+              id: 'a3',
+              title: 'duration',
+              position: 'right',
+              gridAlpha: 0,
+              axisAlpha: 0,
+              inside: true,
+              duration: 'mm',
+              durationUnits: {
+                DD: 'd. ',
+                hh: 'h ',
+                mm: 'min',
+                ss: ''
+              }
+            }],
+          graphs: [{
+            id: 'g1',
+            valueField: 'distance',
+            title: 'distance',
+            type: 'column',
+            fillAlphas: 0.9,
+            valueAxis: 'a1',
+            balloonText: '[[value]] miles',
+            legendValueText: '[[value]] mi',
+            legendPeriodValueText: 'total: [[value.sum]] mi',
+            lineColor: '#263138',
+            alphaField: 'alpha'
+          },
+            {
+              "id": "g2",
+              "valueField": "latitude",
+              "classNameField": "bulletClass",
+              "title": "latitude/city",
+              "type": "line",
+              "valueAxis": "a2",
+              "lineColor": "#786c56",
+              "lineThickness": 1,
+              "legendValueText": "[[value]]/[[description]]",
+              "descriptionField": "townName",
+              "bullet": "round",
+              "bulletSizeField": "townSize",
+              "bulletBorderColor": "#786c56",
+              "bulletBorderAlpha": 1,
+              "bulletBorderThickness": 2,
+              "bulletColor": "#000000",
+              "labelText": "[[townName2]]",
+              "labelPosition": "right",
+              "balloonText": "latitude:[[value]]",
+              "showBalloon": true,
+              "animationPlayed": true
+            }, {
+              "id": "g3",
+              "title": "duration",
+              "valueField": "duration",
+              "type": "line",
+              "valueAxis": "a3",
+              "lineColor": "#ff5755",
+              "balloonText": "[[value]]",
+             "lineThickness": 1,
+              "legendValueText": "[[value]]",
+              "bullet": "square",
+              "bulletBorderColor": "#ff5755",
+              "bulletBorderThickness": 1,
+              "bulletBorderAlpha": 1,
+              "dashLengthField": "dashLength",
+              "animationPlayed": true
+            }],
+  
+          chartCursor: {
+            zoomable: false,
+            categoryBalloonDateFormat: 'DD',
+            cursorAlpha: 0,
+            valueBalloonsEnabled: false
+          },
+          legend: {
+            bulletType: 'round',
+            equalWidths: false,
+            valueWidth: 120,
+            useGraphSettings: true,
+            //"color": "#FFFFFF"
+          }
+        });
+      var chart1 = this.AmCharts.makeChart("chartdiv", {
+        "type": "pie",
+        "theme": "light",
+        "dataProvider": [{
+          "country": "Lithuania",
+         "litres": 501.9
+        }, {
+          "country": "Czech Republic",
+          "litres": 301.9
+        }, {
+       "country": "Ireland",
+         "litres": 201.1
+      }, {
+          "country": "Germany",
+          "litres": 165.8
+        }, {
+          "country": "Australia",
+          "litres": 139.9
+        }, {
+          "country": "Austria",
+          "litres": 128.3
+        }, {
+          "country": "UK",
+          "litres": 99
+        }, {
+          "country": "Belgium",
+          "litres": 60
+        }, {
+          "country": "The Netherlands",
+          "litres": 50
+        }],
+        "valueField": "litres",
+        "titleField": "country",
+        "balloon": {
+          "fixedPosition": true
+        },
+        "export": {
+          "enabled": true
+        }
+      });
   }
-  ngOnDestroy() {
-    this.AmCharts.destroyChart(this.chart);
   }
 
-}
+ 
