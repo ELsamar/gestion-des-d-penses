@@ -13,7 +13,6 @@ export class DashrevComponent implements OnInit {
   startAt: string;
   endAt: string;
   revenus: Revenus[];
-  revenusR: Revenus[];
 
   constructor( private revenuservice: RevenusService) { }
 
@@ -26,7 +25,6 @@ export class DashrevComponent implements OnInit {
         item.forEach(element => {
           let y = element.payload.toJSON();
           y['$key'] = element.key;
-          console.log(y);
           this.revenuslist.push(y as Revenus);
         });
       });

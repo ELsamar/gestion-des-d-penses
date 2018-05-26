@@ -3,8 +3,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrService} from 'ngx-toastr';
 import {ModeleRevenus} from '../../../../shared/models/modele-revenus';
 import {ModeleRevenusService} from '../../../../shared/services/modele-revenus.service';
-import {ModeleDepense} from '../../../../shared/models/modele-depense';
-import {Revenus} from '../../../../shared/models/revenus';
+
 
 @Component({
   selector: 'app-listmodelsrev',
@@ -40,7 +39,6 @@ export class ListmodelrevenuComponent implements OnInit {
   }
   onEdit(model: ModeleRevenus) {
     this.modelerevenusservice.selectedModele = Object.assign({}, model);
-    console.log(model);
   }
 
   onDelete(key: string) {

@@ -25,7 +25,8 @@ import {ListrevenuComponent} from './listrevenu/listrevenu.component';
     ListrevenuComponent,
     ListrevenusrecurrantsComponent,
     ModelerevenuComponent,
-    ListmodelrevenuComponent],
+    ListmodelrevenuComponent,
+  DashrevComponent],
   providers: [
     RevenusService,
     AuthService,

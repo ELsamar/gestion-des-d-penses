@@ -3,8 +3,7 @@ import { AmChartsService, AmChart, AmChartsDirective } from '@amcharts/amcharts3
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
-  directives: [AmChartsDirective]
+  styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
   private pieChart: AmChart;
@@ -130,7 +129,6 @@ export class ChartComponent implements OnInit {
 
   constructor(private AmCharts: AmChartsService) {
   }
-
   ngOnInit() {
     const chart = this.AmCharts.makeChart("chart",
       {
@@ -262,39 +260,76 @@ export class ChartComponent implements OnInit {
           //"color": "#FFFFFF"
         }
       });
-    var chart = this.AmCharts.makeChart("chartdiv", {
+    let chartdep = this.AmCharts.makeChart("categoriedepensechartdiv", {
       "type": "pie",
       "theme": "light",
       "dataProvider": [{
-        "country": "Lithuania",
+        "categorie": 'Alimentation',
         "litres": 501.9
       }, {
-        "country": "Czech Republic",
+        "categorie": 'Transports / Véhicule',
         "litres": 301.9
       }, {
-        "country": "Ireland",
+        "categorie": 'Loisir',
         "litres": 201.1
       }, {
-        "country": "Germany",
+        "categorie": 'Logement',
         "litres": 165.8
       }, {
-        "country": "Australia",
+        "categorie": 'Santé',
         "litres": 139.9
       }, {
-        "country": "Austria",
+        "categorie": 'Habillement',
         "litres": 128.3
       }, {
-        "country": "UK",
+        "categorie": 'Assurance',
         "litres": 99
       }, {
-        "country": "Belgium",
+        "categorie": 'Téléphone/Internet',
         "litres": 60
       }, {
-        "country": "The Netherlands",
+        "categorie": 'Enfants',
+        "litres": 60
+      }, {
+        "categorie": 'autre',
         "litres": 50
       }],
       "valueField": "litres",
-      "titleField": "country",
+      "titleField": "categorie",
+      "balloon": {
+        "fixedPosition": true
+      },
+      "export": {
+        "enabled": true
+      }
+    });
+    let chartrev = this.AmCharts.makeChart("categorierevenuchartdiv", {
+      "type": "pie",
+      "theme": "light",
+      "dataProvider": [{
+        "categorie": 'Salaires Net',
+        "litres": 501.9
+      }, {
+        "categorie": 'Bourses',
+        "litres": 301.9
+      }, {
+        "categorie": 'Remboursements Sécurité Sociale',
+        "litres": 201.1
+      }, {
+        "categorie": 'prêt bancaire',
+        "litres": 165.8
+      }, {
+        "categorie": 'allocation familiale',
+        "litres": 139.9
+      }, {
+        "categorie": 'Aides diverses',
+        "litres": 128.3
+      }, {
+        "categorie": 'avance et acompte',
+        "litres": 99
+      }],
+      "valueField": "litres",
+      "titleField": "categorie",
       "balloon": {
         "fixedPosition": true
       },

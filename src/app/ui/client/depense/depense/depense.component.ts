@@ -22,30 +22,19 @@ export class DepenseComponent implements OnInit {
   progress: { percentage: number } = {percentage: 0};
   Modelelist: ModeleDepense [];
   currentalert: Alert = new Alert();
-  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', ' Logement',
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir', 'Logement',
     'Santé', 'Habillement', 'Assurance', 'Téléphone/Internet', 'Enfants', 'autre'];
   repetes: any = ['Jamais', 'Semaine', 'mois'];
   semaines: any = ['', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
   Mois: any = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-  ajoute = false;
+  private titre = 'choissisez une modele';
   newdepenseKey: string;
   constructor(private alertservice: AlertService, private depenseservice: DepensesService, public authservice: AuthService,
               private modeledepenseservice: ModeleDepenseService, private transactionservice: TransactionService) {
   }
 
   currentdepenses: any;
-  ModelelistDefault =
-    {
-      cathegorieModele: 'TEstttttt',
-      dateModele: '2018-05-11',
-      descriptionModele: 'test 2',
-      idauth: 'uvnasK7OPvMHgTRueGo0Vqi39l63',
-      montantModele: '220',
-      titreModele: 'modelnada',
-      $key: '-LCF8LOqcROMRIsrxmGc'
-    };
-
   ngOnInit() {
     this.currentdepenses = new Depenses();
     let x = this.modeledepenseservice.getdataauth();
@@ -60,9 +49,12 @@ export class DepenseComponent implements OnInit {
     }
 
   selectModelAction(model: any) {
-    console.log('test');
     this.modeledepenseservice.selectedModele = Object.assign({}, model);
-    console.log(this.modeledepenseservice.selectedModele);
+    this.titre = this.modeledepenseservice.selectedModele.titreModele;
+    this.currentdepenses.titredepense = this.modeledepenseservice.selectedModele.titreModele;
+    this.currentdepenses.montantdepense = this.modeledepenseservice.selectedModele.montantModele;
+    this.currentdepenses.descriptiondepense = this.modeledepenseservice.selectedModele.descriptionModele;
+    this.currentdepenses.categoriedepense = this.modeledepenseservice.selectedModele.categorieModele;
   }
 savetransaction(titre: string , depense: Depenses) {
     const transaction = new Transaction();

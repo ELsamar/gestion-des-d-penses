@@ -2,18 +2,19 @@
   <div class=" content row">
     <div class="card">
       <div class="container-fluid">
-        <h3 class="col-10"></h3>
-        <div class="col-2">
-          <div class="form-group">
-            <select class="custom-select btn " id="selectdepense" name="selectdepense" #selectdepense="ngModel"  [(ngModel)]="selectedModel"
-                    (click)="selectModelAction(selectedModel)">
-              <option *ngFor="let Modele of Modelelist , let  i = index " [value]="Modele" >
-                {{Modele.titreModele}}
-              </option>
-            </select>
+        <h3 class="col-8"></h3>
+        <div class="">
+        <div class="dropdown">
+          <button class="dropdown-toggle btn-secondary nav-item" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+           {{titre}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" *ngFor="let Modele of Modelelist "
+               (click)="selectModelAction(Modele)"> {{Modele.titreModele}}</a>
           </div>
         </div>
-
+        </div>
         <form #depensesForm="ngForm">
           <input type="hidden" name="$iddepense" #iddepense [(ngModel)]="currentdepenses.$iddepense">
           <input type="hidden" name="iduser" #iduser ngModel [(ngModel)]="currentdepenses.idauth">
@@ -170,7 +171,7 @@
                  role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
                  aria-valuemin="0" aria-valuemax="100"
                  [ngStyle]="{width:progress.percentage+'%'}">
-          
+
             </div>
           </div>
           <div class="row">
