@@ -21,7 +21,6 @@ export class RevenusService {
   }
   getRevenu(childPath: string) {
     this.revenuslist = this.db.list(childPath + '/' + this.currentUserId);
-    console.log(this.authservice.currentUserId);
     return this.revenuslist;
   }
   getnewrevenusKey(childPath: string) {

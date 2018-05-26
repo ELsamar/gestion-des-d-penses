@@ -37,6 +37,8 @@
       <div class="be-soldout-title">
         <div (click)="openWindowCustomClass(contentEditp,Projets)" > <i  class="far fa-1x fa-edit"></i></div>
       <div (click)="onDelete(Projets.$key)" > <i class="far fa-trash-alt"></i> </div>
+        <div *ngIf="Projets.faite" (click)="doneProjet(Projets,Projets.$key)"><i class="fas fa-thumbs-up"></i></div>
+       <div *ngIf="!(Projets.faite)"(click)="doneProjet(Projets,Projets.$key)"> <i class="far fa-thumbs-up"></i> </div>
       </div>
     </div>
   </div>

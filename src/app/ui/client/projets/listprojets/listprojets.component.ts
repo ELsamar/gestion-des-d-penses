@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjetsService } from '../../../../shared/services/projets.service';
-import {priorite, Projets} from '../../../../shared/models/projets';
+import {Priorite, Projets} from '../../../../shared/models/projets';
 import {FormsModule, NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -61,5 +61,8 @@ export class ListprojetsComponent implements OnInit {
   onSearch(event) {
     const text = event.target.value;
     this.onSearchdep(text);
+  }
+  doneProjet(projet: Projets, key: string) {
+    this.projetservice.doneProjet(projet, key);
   }
 }
