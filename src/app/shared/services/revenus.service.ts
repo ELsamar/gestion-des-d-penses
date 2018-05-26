@@ -137,13 +137,18 @@ dateto: revenus.dateto
   this.toaster.success('modifier', 'revenu modifier avec succes');
 }
 
-disactiveRev(revenus: Revenus) {
-  revenus.active = false;
-this.revenuslist.update(revenus.$idrevenu,
-{
-idauth: this.authservice.currentUserId,
-active: revenus.active
-});
+disactiveRev(revenus: Revenus, key: string) {
+  if (revenus.active) {
+    revenus.active = false;
+    this.toaster.success('depenses disactivè', 'disactive');
+  } else {
+    revenus.active = true;
+    this.toaster.success('depenses activè', 'active');
+  }
+  this.revenuslist.update(key,
+    {
+      active: revenus.active
+    });
 }
 
 deleteRevenus($idrevenu: string) {

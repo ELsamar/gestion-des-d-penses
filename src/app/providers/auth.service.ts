@@ -18,12 +18,10 @@ export class AuthService {
   emailSent = false;
   errorMessage: string;
   errorCode: string;
-  currentuserId: string;
 
   constructor(public afAuth: AngularFireAuth, private router: Router, private toastr: ToastrService) {
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth;
-      console.log(this.authState);
     });
   }
 

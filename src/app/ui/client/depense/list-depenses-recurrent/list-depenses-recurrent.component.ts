@@ -5,6 +5,7 @@ import {Depenses} from '../../../../shared/models/depenses';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {log} from 'util';
 @Component({
   selector: 'app-list-depenses-recurrent',
   templateUrl: './list-depenses-recurrent.component.html',
@@ -44,6 +45,8 @@ export class ListDepensesRecurrentComponent implements OnInit {
   openWindowCustomClass(content, depense: Depenses) {
     this.modalService.open(content, {windowClass: 'dark-modal'});
     this.selectedDepenseR = Object.assign({}, depense);
+    console.log(depense);
+    console.log(this.depenseservice.selectedDepenseR);
   }
 
 
@@ -66,7 +69,6 @@ export class ListDepensesRecurrentComponent implements OnInit {
 
   onUpdateR(depensesFormR: NgForm) {
     if (this.depenseservice.updateDepenseRecurrent(depensesFormR.value)) {
-      console.log('test');
     }
     this.toastr.success('modification', 'modification avec succès');
 
@@ -88,5 +90,8 @@ export class ListDepensesRecurrentComponent implements OnInit {
   ontrie(type: string) {
     this.depenseservice.trie('Depenses/DepensesRecurrent', type)
       .subscribe((depenses) => this.DepensesRlist = depenses);
+  }
+  activedisactivdep(depense: Depenses, key: string) {
+    this.depenseservice.disactivedep(depense, key);
   }
 }
