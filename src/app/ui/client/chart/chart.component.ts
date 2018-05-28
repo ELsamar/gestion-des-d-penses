@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AmChartsService, AmChart, AmChartsDirective } from '@amcharts/amcharts3-angular';
+import {Projets} from '../../../shared/models/projets';
+import {ProjetsService} from '../../../shared/services/projets.service';
+import {ListprojetsComponent} from '../projets/listprojets/listprojets.component';
+
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -127,7 +131,7 @@ export class ChartComponent implements OnInit {
       date: '2012-01-19'
     }];
 
-  constructor(private AmCharts: AmChartsService) {
+  constructor(private AmCharts: AmChartsService, private projetservice: ProjetsService, private projet: ListprojetsComponent) {
   }
   ngOnInit() {
     const chart = this.AmCharts.makeChart("chart",
@@ -337,5 +341,25 @@ export class ChartComponent implements OnInit {
         "enabled": true
       }
     });
+    let chartprojet = this.AmCharts.makeChart("projetchart", {
+      "type": "pie",
+      "theme": "light",
+      "dataProvider": [{
+        "categorie": 'Prjet faite',
+        "litres":   5
+      }, {
+        "categorie": 'projet non faite',
+        "litres": 10
+      }],
+      "valueField": "litres",
+      "titleField": "categorie",
+      "balloon": {
+        "fixedPosition": true
+      },
+      "export": {
+        "enabled": true
+      }
+    });
   }
+  
 }

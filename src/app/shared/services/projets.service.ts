@@ -13,6 +13,7 @@ export class ProjetsService {
   projetlist: AngularFireList <any>;
   selectedprojet: Projets = new Projets();
   currentUserId = localStorage.getItem('userid');
+  i: number;
   constructor(private firebase: AngularFireDatabase, public authservice: AuthService, private toastr: ToastrService) {}
   checkdata() {
     const depenseslist = this.firebase.database.ref('Projets').child(this.currentUserId);

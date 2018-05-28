@@ -18,6 +18,7 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
   providers: [
     ProjetsService,
     DateValueAccessorModule,
+    ListprojetsComponent
   ],
 })
 export class ProjetsModule { }

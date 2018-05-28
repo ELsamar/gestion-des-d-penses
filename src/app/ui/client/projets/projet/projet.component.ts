@@ -1,6 +1,6 @@
 import { Component, OnInit ,Directive, ElementRef, HostListener, Renderer, forwardRef } from '@angular/core';
 import { ProjetsService } from '../../../../shared/services/projets.service';
-import {Projets , priorite } from '../../../../shared/models/projets';
+import {Projets , Priorite } from '../../../../shared/models/projets';
 import {FormsModule, NgForm ,ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 /*export const DATE_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -17,7 +17,7 @@ import {FormsModule, NgForm ,ControlValueAccessor, NG_VALUE_ACCESSOR} from '@ang
 })
 export class ProjetComponent implements OnInit {
 
-  priorites: priorite[] = [
+  priorites: Priorite[] = [
     { id : 1 , nom : 'forte'},
     { id : 2 , nom : 'moyenne'},
     { id : 3 , nom : 'faible'},

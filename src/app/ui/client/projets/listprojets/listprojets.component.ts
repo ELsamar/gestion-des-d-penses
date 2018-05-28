@@ -15,6 +15,8 @@ export class ListprojetsComponent implements OnInit {
   projetlist: Projets[];
   startAt: string;
   endAt: string;
+  done = 0;
+  totalprojets = 0;
   constructor(private projetservice: ProjetsService, private toastr: ToastrService, private modalService: NgbModal) { }
   ngOnInit() {
     this.projetservice.checkdata()
@@ -27,13 +29,15 @@ export class ListprojetsComponent implements OnInit {
               var q = element.payload.toJSON();
               q['$key'] = element.key;
               this.projetlist.push(q as Projets);
+              console.log('test');
+              if (!element.faite) {this.done ++ ; }
+              this.totalprojets = 1 ;
             });
           });
         } else {
           this.toastr.warning('vous n"avez encore des Projet', 'vide');
         }
       });
-
   }
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce projet ?') === true) {
@@ -64,5 +68,17 @@ export class ListprojetsComponent implements OnInit {
   }
   doneProjet(projet: Projets, key: string) {
     this.projetservice.doneProjet(projet, key);
+  }
+async  countPtojet()  {
+    let d = 0 ;
+  await  this.projetlist.forEach((item, index) => {
+      if (item.faite) { d ++ ;
+      }
+      console.log(item); // 9, 2, 5
+      console.log(index); // 0, 1, 2
+    });
+    console.log(d);
+    console.log(this.projetlist.length);
+  return d ;
   }
 }
