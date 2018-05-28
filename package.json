@@ -24,6 +24,7 @@
     "@angular/router": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@polymer/paper-toggle-button": "^3.0.0-pre.19",
+    "amcharts3": "^3.21.13",
     "angular-date-value-accessor": "0.0.2",
     "angularfire2": "^5.0.0-rc.3",
     "bootstrap": "^4.0.0",

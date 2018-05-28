@@ -10,7 +10,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ChatModule } from './chat/chat.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AmChartsModule } from '@amcharts/amcharts3-angular';
+import {AmChartsModule, AmChartsService} from '@amcharts/amcharts3-angular';
 
 
 import {AppComponent} from './app.component';
@@ -57,10 +57,10 @@ import {} from '@polymer/paper-toggle-button';
     }),
     BrowserAnimationsModule,
     NgbModule,
-    AmChartsModule
+    AmChartsModule,
 
   ],
-  providers: [AuthService, TransactionService , AuthGuardService, UserService  ],
+  providers: [AuthService, TransactionService , AuthGuardService, UserService, AmChartsService  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

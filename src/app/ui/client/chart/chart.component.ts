@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AmChartsService, AmChart, AmChartsDirective } from '@amcharts/amcharts3-angular';
 import {Projets} from '../../../shared/models/projets';
@@ -10,30 +11,33 @@ import {ListprojetsComponent} from '../projets/listprojets/listprojets.component
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  private pieChart: AmChart;
+  private chart: any;
+
   chartData = [{
-    date: '2012-01-01',
+   date: '2012-01-01',
     distance: 227,
-    townName: 'New York',
-    townName2: 'New York',
-    townSize: 25,
+   townName: 'New York',
+   townName2: 'New York',
+   townSize: 25,
     latitude: 40.71,
     duration: 408
-  }, {
+ },
+    {
     date: '2012-01-02',
     distance: 371,
-    townName: 'Washington',
-    townSize: 14,
+   townName: 'Washington',
+   townSize: 14,
     latitude: 38.89,
     duration: 482
   }, {
     date: '2012-01-03',
     distance: 433,
-    townName: 'Wilmington',
+   townName: 'Wilmington',
     townSize: 6,
-    latitude: 34.22,
+   latitude: 34.22,
     duration: 562
-  }, {
+  },
+    {
     date: '2012-01-04"',
     distance: 345,
     townName: 'Jacksonville',
@@ -56,7 +60,8 @@ export class ChartComponent implements OnInit {
       "townSize": 7,
       "latitude": 30.46,
       "duration": 443
-    }, {
+    },
+    {
       "date": "2012-01-07",
       "distance": 348,
       "townName": "New Orleans",
@@ -72,7 +77,8 @@ export class ChartComponent implements OnInit {
       "townSize": 16,
       "latitude": 29.76,
       "duration": 309
-    }, {
+    },
+    {
       "date": "2012-01-09",
       "distance": 218,
       "townName": "Dalas",
@@ -87,7 +93,8 @@ export class ChartComponent implements OnInit {
       "townSize": 11,
       "latitude": 35.49,
       "duration": 485
-    }, {
+    },
+    {
       "date": "2012-01-11",
       "distance": 603,
       "townName": "Kansas City",
@@ -112,14 +119,16 @@ export class ChartComponent implements OnInit {
       "duration": 670,
       "latitude": 40.75,
       "alpha": 0.4
-    }, {
+    },
+    {
       "date": "2012-01-14",
       "latitude": 36.1,
       "duration": 470,
       "townName": "Las Vegas",
       "townName2": "Las Vegas",
       "bulletClass": "lastBullet"
-    }, {
+    },
+    {
       date: '2012-01-15'
     }, {
       date: '2012-01-16'
@@ -131,7 +140,7 @@ export class ChartComponent implements OnInit {
       date: '2012-01-19'
     }];
 
-  constructor(private AmCharts: AmChartsService, private projetservice: ProjetsService, private projet: ListprojetsComponent) {
+  constructor(private AmCharts: AmChartsService) {
   }
   ngOnInit() {
     const chart = this.AmCharts.makeChart("chart",
@@ -264,7 +273,8 @@ export class ChartComponent implements OnInit {
           //"color": "#FFFFFF"
         }
       });
-    let chartdep = this.AmCharts.makeChart("categoriedepensechartdiv", {
+    let chartdep = this.AmCharts.makeChart("categoriedepensechartdiv",
+      {
       "type": "pie",
       "theme": "light",
       "dataProvider": [{
@@ -354,12 +364,8 @@ export class ChartComponent implements OnInit {
       "valueField": "litres",
       "titleField": "categorie",
       "balloon": {
-        "fixedPosition": true
-      },
-      "export": {
-        "enabled": true
-      }
-    });
+        "fixedPosition": true}}
+        );
   }
-  
 }
+

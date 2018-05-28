@@ -20,7 +20,6 @@ import {AmChartsDirective} from '@amcharts/amcharts3-angular';
 
 
 
-
 @NgModule({
   imports: [
     CommonModule,

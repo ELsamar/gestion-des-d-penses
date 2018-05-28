@@ -29,9 +29,6 @@ export class ListprojetsComponent implements OnInit {
               var q = element.payload.toJSON();
               q['$key'] = element.key;
               this.projetlist.push(q as Projets);
-              console.log('test');
-              if (!element.faite) {this.done ++ ; }
-              this.totalprojets = 1 ;
             });
           });
         } else {
