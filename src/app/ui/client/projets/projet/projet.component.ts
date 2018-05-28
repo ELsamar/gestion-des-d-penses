@@ -16,7 +16,7 @@ import {FormsModule, NgForm ,ControlValueAccessor, NG_VALUE_ACCESSOR} from '@ang
     ],
 })
 export class ProjetComponent implements OnInit {
-
+  alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   priorites: Priorite[] = [
     { id : 1 , nom : 'forte'},
     { id : 2 , nom : 'moyenne'},

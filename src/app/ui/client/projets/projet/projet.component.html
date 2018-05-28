@@ -66,6 +66,29 @@
                   <label class="col-form-label">Description: </label>
                   <input class="form-control" name="descriptionprojet" #descriptionprojet="ngModel" [(ngModel)]="currentprojet.descriptionprojet"/>
                 </div>
+                  <div class="custom-control custom-checkbox alerte  ">
+                    <input type="checkbox" class="custom-control-input" data-toggle="collapse" href="#collapsealertedep"
+                           role="button" aria-expanded="false" aria-controls="collapseExample"
+                           id="customCheckalertedep">
+                    <label class="custom-control-label" for="customCheckalertedep">Ajouter un alerte :</label>
+                    <div class="collapse" id="collapsealertedep">
+                      <div class="card card-body">
+                        <div class="form-group">
+                          <label class="" type=""> m'avertir avant : </label>
+                          <div class="row">.
+                            <div class="col-6">
+                              <select class="custom_menu">
+                                <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
+                              </select>
+                            </div>
+                            <div class="col-6">
+                              <label class="" type=""> jour(s) </label></div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 <div class="row">
                 <div class="col-1 content-center">
                   <button type="submit" class="btn btn-primary bouton">ajouter</button>

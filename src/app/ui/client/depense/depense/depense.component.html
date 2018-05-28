@@ -138,28 +138,16 @@
                     <div class="card card-body">
                       <div class="form-group">
                         <label class="" type=""> m'avertir avant : </label>
-                        <div class="row">.
+                        <div class="row">
                           <div class="col-6">
                             <select class="custom_menu">
                              <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
                             </select>
                           </div>
-                          <input type="number" class="form-control">
                           <div class="col-6">
                             <label class="" type=""> jour(s) </label></div>
                         </div>
-                        <div class="row">
-                          <input type="hidden" class="form-control" name="idalert" #idalert="ngModel"
-                                 [(ngModel)]="currentalert.$idalert">
-                        </div>
-                        <div class="row">
-                          <input type="text" class="form-control" name="msgalert" #msgalert="ngModel"
-                                      [(ngModel)]="this.currentalert.msg">
-                        </div>
-                        <div class="row">
-                          <input type="date" class="form-control" name="datealert" #datealert="ngModel"
-                                 [(ngModel)]="this.currentalert.date"/>
-                        </div>
+
                       </div>
                     </div>
                   </div>
