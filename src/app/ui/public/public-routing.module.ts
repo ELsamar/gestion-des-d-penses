@@ -6,6 +6,22 @@ import { FonctionalitesComponent } from './fonctionalites/fonctionalites.compone
 import { ContactsComponent } from './contacts/contacts.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 const routes: Routes = [
+  {
+    path: 'acceuil',
+    component:AcceuilComponent 
+  },
+  {
+    path: 'engagements',
+    component:EngagementsComponent
+  },
+  {
+    path: 'fonctionalites',
+    component:FonctionalitesComponent
+  },
+  {
+    path: 'contacts',
+    component: ContactsComponent
+  },
 ];
 
 @NgModule({

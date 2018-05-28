@@ -1,5 +1,12 @@
-import { Component, OnInit ,OnDestroy} from '@angular/core';
+import { Component, OnInit ,OnDestroy,ViewChild} from '@angular/core';
 import { AmChartsService } from "amcharts3-angular2";
+import {TransactionService} from '../../../shared/services/transaction.service';
+import {Transaction} from '../../../shared/models/transaction';
+import {DepensesService} from '../../../shared/services/depenses.service';
+import {RevenusService} from '../../../shared/services/revenus.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireList } from 'angularfire2/database/interfaces';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -7,7 +14,86 @@ import { AmChartsService } from "amcharts3-angular2";
 })
 export class ChartComponent implements OnInit {
   private chart: any;
-  
+  data: Observable<any[]>;
+  ref: AngularFireList<any>;
+  titre = [
+    {value: 0, name: 'depenses'},
+    {value: 1, name: 'revenus'},
+    ];
+  @ViewChild('chartdiv2') chartdiv2;
+  valueBarsChart: any;
+  chartData1 = null ;
+  transactionList: Transaction[];
+  ViewDidLoad() {
+    // Reference to our Firebase List
+    this.ref = this.db.list('Transaction', ref => ref.orderByChild('titre'));
+ 
+
+    var x = this.transactionservice.getTransaction();
+    x.snapshotChanges().subscribe(item => {
+      this.transactionList = [];
+      item.forEach(element => {
+        var y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.transactionList.push(y as Transaction);
+      });
+    });
+    // Catch any update to draw the Chart
+    this.ref.valueChanges().subscribe(result => {
+      if (this.chartData1) {
+        this.updateCharts(result)
+      } else {
+        this.createCharts(result)
+      }
+    })
+  }
+
+  getReportValues() {
+    let reportByTitre = {
+      0: null,
+      1: null,
+    };
+   
+    for (let trans of this.chartData1) {
+        if (trans.titre == 'depense') {
+          reportByTitre[trans.titre] += +trans.action.montantdepense;
+          
+        } else {
+          reportByTitre[trans.titre] += +trans.action.montantrevenu;
+        }
+    }
+    console.log(this.chartData1);
+    return Object.keys(reportByTitre).map(a => reportByTitre[a]);
+  }
+
+  createCharts(data) {
+    this.chartData1 = data;
+   
+    // Calculate Values for the Chart
+    let chartData1 = this.getReportValues();
+   
+    // Create the chart
+    var chart2 =this.AmCharts.makeChart( "chartdiv2", {
+      type: 'pie',
+      dataProvider: [ {
+        "title":Object.keys(this.titre).map(a => this.titre[a]),
+        "value": this.getReportValues
+      }],
+    });
+  }
+
+
+  updateCharts(data) {
+    this.chartData1 = data;
+    let chartData1 = this.getReportValues();
+    // Update our dataset
+    this.valueBarsChart.data.datasets.forEach((dataset) => {
+      dataset.data = chartData1
+    });
+    this.valueBarsChart.update();
+  }
+
+
   chartData = [{
    date: '2012-01-01',
     distance: 227,
@@ -127,67 +213,69 @@ export class ChartComponent implements OnInit {
     }, {
       date: '2012-01-19'
     }];
- constructor(private AmCharts: AmChartsService) { }
+ constructor(private transactionservice: TransactionService,private AmCharts: AmChartsService , private db: AngularFireDatabase) { }
   ngOnInit() {
-    var chart1 = this.AmCharts.makeChart("chartdiv1", {
+    console.log(this.ViewDidLoad());
+    var chart1 = this.AmCharts.makeChart("chartdiv1", 
+    {
       theme: "light",
       type: "serial",
       dataProvider: [{
-          "country": "USA",
+          "country": "1",
           "year2004": 3.5,
           "year2005": 4.2
       }, {
-          "country": "UK",
+          "country": "4",
           "year2004": 1.7,
           "year2005": 3.1
       }, {
-          "country": "Canada",
+          "country": "8",
           "year2004": 2.8,
           "year2005": 2.9
       }, {
-          "country": "Japan",
+          "country": "12",
           "year2004": 2.6,
           "year2005": 2.3
       }, {
-          "country": "France",
+          "country": "16",
           "year2004": 1.4,
           "year2005": 2.1
       }, {
-          "country": "Brazil",
+          "country": "20",
           "year2004": 2.6,
           "year2005": 4.9
       }, {
-          "country": "Russia",
+          "country": "24",
           "year2004": 6.4,
           "year2005": 7.2
       }, {
-          "country": "India",
+          "country": "28",
           "year2004": 8,
           "year2005": 7.1
       }, {
-          "country": "China",
+          "country": "30",
           "year2004": 9.9,
           "year2005": 10.1
       }],
       "valueAxes": [{
           "stackType": "3d",
-          "unit": "%",
+          "unit": "D",
           "position": "left",
-          "title": "GDP growth rate",
+          "title": "Evolution ses revenus et des dépenses (montant/jour)",
       }],
-      "startDuration": 1,
+      "startDuration": 10,
       "graphs": [{
-          "balloonText": "GDP grow in [[category]] (2004): <b>[[value]]</b>",
+          "balloonText": "Les dépenses sont évolu le [[category]] (dépenses): <b>[[value]]</b>",
           "fillAlphas": 0.9,
           "lineAlpha": 0.2,
-          "title": "2004",
+          "title": "dépenses",
           "type": "column",
           "valueField": "year2004"
       }, {
-          "balloonText": "GDP grow in [[category]] (2005): <b>[[value]]</b>",
+          "balloonText": "les revenus sont évolu le [[category]] (revenus): <b>[[value]]</b>",
           "fillAlphas": 0.9,
           "lineAlpha": 0.2,
-          "title": "2005",
+          "title": "Revenus",
           "type": "column",
           "valueField": "year2005"
       }],
@@ -374,6 +462,8 @@ export class ChartComponent implements OnInit {
           "enabled": true
         }
       });
+  
+      
   }
   }
 
