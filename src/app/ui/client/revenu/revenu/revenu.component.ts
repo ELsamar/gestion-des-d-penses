@@ -32,18 +32,7 @@ export class RevenuComponent implements OnInit {
   currentrevenus: any;
   nbr: number;
   Modelelist: ModeleRevenus [];
-  selectedModel: ModeleRevenus;
-  ModelelistDefault =
-    {
-      cathegorieModele: 'TEstttttt',
-      dateModele: '2018-05-11',
-      descriptionModele: 'test 2',
-      idauth: 'uvnasK7OPvMHgTRueGo0Vqi39l63',
-      montantModele: '220',
-      titreModele: 'modelnada',
-      $key: '-LCF8LOqcROMRIsrxmGc'
-    };
-
+  private titre = 'choissisez une modeles';
   constructor(private revenuservice: RevenusService, public authservice: AuthService, private alertservice: AlertService,
               private transactionservice: TransactionService, private modelerevenuservice: ModeleRevenusService) { }
   ngOnInit() {
@@ -59,6 +48,14 @@ export class RevenuComponent implements OnInit {
     });
     }
 
+  selectModelAction(model: any) {
+    this.modelerevenuservice.selectedModele = Object.assign({}, model);
+    this.titre = this.modelerevenuservice.selectedModele.titreModele;
+    this.currentrevenus.titrerevenu = this.modelerevenuservice.selectedModele.titreModele;
+    this.currentrevenus.montantrevenu = this.modelerevenuservice.selectedModele.montantModele;
+    this.currentrevenus.descriptionrevenu = this.modelerevenuservice.selectedModele.descriptionModele;
+    this.currentrevenus.categorierevenu = this.modelerevenuservice.selectedModele.categorieModele;
+  }
   async  savealert(titre: string, bath: string, key: string ) {
       let d = new Date();
     await  d.setDate(d.getDate() - 5);
@@ -68,12 +65,6 @@ export class RevenuComponent implements OnInit {
       this.currentalert.msgalert = ('pour votre revenu' + titre + 'reste' + this.nbr + 'jours' );
      await this.alertservice.insertAlert(bath, key, this.currentalert);
     }
-  selectModelAction(model: any) {
-    console.log('test');
-    this.modelerevenuservice.selectedModele = Object.assign({}, model);
-    console.log(this.modelerevenuservice.selectedModele);
-  }
-
 async  onSubmit(revenusForm: NgForm) {
     await this.saverevenu();
     this.savetransaction('revenus', this.currentrevenus );

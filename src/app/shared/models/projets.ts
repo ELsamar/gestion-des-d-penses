@@ -5,8 +5,9 @@ export class Projets {
     dateprojet: Date ;
     descriptionprojet: string ;
     prioriteprojet: string;
+  faite: boolean;
 }
-export class priorite {
+export class Priorite {
     id: number ;
     nom: string ;
 }

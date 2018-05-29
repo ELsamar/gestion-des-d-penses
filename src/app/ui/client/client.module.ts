@@ -16,6 +16,7 @@ import {RevenusComponent} from './revenu/revenus.component';
 import {DashrevComponent} from './revenu/dashrev/dashrev.component';
 import {DashdepComponent} from './depense/dashdep/dashdep.component';
 import { ChartComponent } from './chart/chart.component';
+import {AmChartsDirective} from '@amcharts/amcharts3-angular';
 
 
 
@@ -36,8 +37,6 @@ import { ChartComponent } from './chart/chart.component';
     ProfilComponent,
     ListTransactionComponent,
     DepensesComponent,
-    DashdepComponent,
-    DashrevComponent,
     ChartComponent
   ]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjetsService } from '../../../../shared/services/projets.service';
-import {priorite, Projets} from '../../../../shared/models/projets';
+import {Priorite, Projets} from '../../../../shared/models/projets';
 import {FormsModule, NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,8 @@ export class ListprojetsComponent implements OnInit {
   projetlist: Projets[];
   startAt: string;
   endAt: string;
+  done = 0;
+  totalprojets = 0;
   constructor(private projetservice: ProjetsService, private toastr: ToastrService, private modalService: NgbModal) { }
   ngOnInit() {
     this.projetservice.checkdata()
@@ -33,7 +35,6 @@ export class ListprojetsComponent implements OnInit {
           this.toastr.warning('vous n"avez encore des Projet', 'vide');
         }
       });
-
   }
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce projet ?') === true) {
@@ -61,5 +62,20 @@ export class ListprojetsComponent implements OnInit {
   onSearch(event) {
     const text = event.target.value;
     this.onSearchdep(text);
+  }
+  doneProjet(projet: Projets, key: string) {
+    this.projetservice.doneProjet(projet, key);
+  }
+async  countPtojet()  {
+    let d = 0 ;
+  await  this.projetlist.forEach((item, index) => {
+      if (item.faite) { d ++ ;
+      }
+      console.log(item); // 9, 2, 5
+      console.log(index); // 0, 1, 2
+    });
+    console.log(d);
+    console.log(this.projetlist.length);
+  return d ;
   }
 }

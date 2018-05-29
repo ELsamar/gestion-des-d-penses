@@ -27,7 +27,7 @@ import {ModeleDepenseService} from '../../../shared/services/modele-depense.serv
     ModeldepenseComponent,
     ListmodeldepenseComponent,
     ListDepensesRecurrentComponent,
-
+DashdepComponent
   ],
   providers: [
     DepensesService,

@@ -1,5 +1,5 @@
 import { Component, OnInit ,OnDestroy,ViewChild} from '@angular/core';
-import { AmChartsService } from "amcharts3-angular2";
+import { AmChartsService, AmChart, AmChartsDirective } from '@amcharts/amcharts3-angular';
 import {TransactionService} from '../../../shared/services/transaction.service';
 import {Transaction} from '../../../shared/models/transaction';
 import {DepensesService} from '../../../shared/services/depenses.service';
@@ -280,180 +280,230 @@ export class ChartComponent implements OnInit {
        }
   });
     
-
   const chart = this.AmCharts.makeChart("chart",
-       {
-          type: 'serial',
-          theme: 'none',
-          dataDateFormat: 'YYYY-MM-DD',
-          dataProvider: this.chartData,
-          addClassNames: true,
-          startDuration: 1,
-          //"color": "#FFFFFF",
-          marginLeft: 0,
-          categoryField: 'date',
-          categoryAxis: {
-            parseDates: true,
-            minPeriod: 'DD',
-            autoGridCount: false,
-            gridCount: 50,
-            gridAlpha: 0.1,
-            gridColor: '#FFFFFF',
-            axisColor: '#555555',
-            dateFormats: [{
-              period: 'DD',
-              format: 'DD'
-            },
-              {
-                period: 'WW',
-                format: 'MMM DD'
-              }, {
-                period: 'MM',
-                format: 'MMM'
-              },
-              {
-                period: 'YYYY',
-                format: 'YYYY'
-              }]
-          },
-  
-          valueAxes: [{
-            id: 'a1',
-            title: 'distance',
-            gridAlpha: 0,
-            axisAlpha: 0
-          }, {
-            id: 'a2',
-            position: 'right',
-            gridAlpha: 0,
-            axisAlpha: 0,
-            labelsEnabled: false
-          },
-            {
-              id: 'a3',
-              title: 'duration',
-              position: 'right',
-              gridAlpha: 0,
-              axisAlpha: 0,
-              inside: true,
-              duration: 'mm',
-              durationUnits: {
-                DD: 'd. ',
-                hh: 'h ',
-                mm: 'min',
-                ss: ''
-              }
-            }],
-          graphs: [{
-            id: 'g1',
-            valueField: 'distance',
-            title: 'distance',
-            type: 'column',
-            fillAlphas: 0.9,
-            valueAxis: 'a1',
-            balloonText: '[[value]] miles',
-            legendValueText: '[[value]] mi',
-            legendPeriodValueText: 'total: [[value.sum]] mi',
-            lineColor: '#263138',
-            alphaField: 'alpha'
-          },
-            {
-              "id": "g2",
-              "valueField": "latitude",
-              "classNameField": "bulletClass",
-              "title": "latitude/city",
-              "type": "line",
-              "valueAxis": "a2",
-              "lineColor": "#786c56",
-              "lineThickness": 1,
-              "legendValueText": "[[value]]/[[description]]",
-              "descriptionField": "townName",
-              "bullet": "round",
-              "bulletSizeField": "townSize",
-              "bulletBorderColor": "#786c56",
-              "bulletBorderAlpha": 1,
-              "bulletBorderThickness": 2,
-              "bulletColor": "#000000",
-              "labelText": "[[townName2]]",
-              "labelPosition": "right",
-              "balloonText": "latitude:[[value]]",
-              "showBalloon": true,
-              "animationPlayed": true
-            }, {
-              "id": "g3",
-              "title": "duration",
-              "valueField": "duration",
-              "type": "line",
-              "valueAxis": "a3",
-              "lineColor": "#ff5755",
-              "balloonText": "[[value]]",
-             "lineThickness": 1,
-              "legendValueText": "[[value]]",
-              "bullet": "square",
-              "bulletBorderColor": "#ff5755",
-              "bulletBorderThickness": 1,
-              "bulletBorderAlpha": 1,
-              "dashLengthField": "dashLength",
-              "animationPlayed": true
-            }],
-  
-          chartCursor: {
-            zoomable: false,
-            categoryBalloonDateFormat: 'DD',
-            cursorAlpha: 0,
-            valueBalloonsEnabled: false
-          },
-          legend: {
-            bulletType: 'round',
-            equalWidths: false,
-            valueWidth: 120,
-            useGraphSettings: true,
-            //"color": "#FFFFFF"
-          }
-        });
-      var chart1 = this.AmCharts.makeChart("chartdiv", {
-        "type": "pie",
-        "theme": "light",
-        "dataProvider": [{
-          "country": "Lithuania",
-         "litres": 501.9
+  {
+    type: 'serial',
+    theme: 'none',
+    dataDateFormat: 'YYYY-MM-DD',
+    dataProvider: this.chartData,
+    addClassNames: true,
+    startDuration: 1,
+    //"color": "#FFFFFF",
+    marginLeft: 0,
+    categoryField: 'date',
+    categoryAxis: {
+      parseDates: true,
+      minPeriod: 'DD',
+      autoGridCount: false,
+      gridCount: 50,
+      gridAlpha: 0.1,
+      gridColor: '#FFFFFF',
+      axisColor: '#555555',
+      dateFormats: [{
+        period: 'DD',
+        format: 'DD'
+      },
+        {
+          period: 'WW',
+          format: 'MMM DD'
         }, {
-          "country": "Czech Republic",
-          "litres": 301.9
-        }, {
-       "country": "Ireland",
-         "litres": 201.1
-      }, {
-          "country": "Germany",
-          "litres": 165.8
-        }, {
-          "country": "Australia",
-          "litres": 139.9
-        }, {
-          "country": "Austria",
-          "litres": 128.3
-        }, {
-          "country": "UK",
-          "litres": 99
-        }, {
-          "country": "Belgium",
-          "litres": 60
-        }, {
-          "country": "The Netherlands",
-          "litres": 50
-        }],
-        "valueField": "litres",
-        "titleField": "country",
-        "balloon": {
-          "fixedPosition": true
+          period: 'MM',
+          format: 'MMM'
         },
-        "export": {
-          "enabled": true
+        {
+          period: 'YYYY',
+          format: 'YYYY'
+        }]
+    },
+
+    valueAxes: [{
+      id: 'a1',
+      title: 'distance',
+      gridAlpha: 0,
+      axisAlpha: 0
+    }, {
+      id: 'a2',
+      position: 'right',
+      gridAlpha: 0,
+      axisAlpha: 0,
+      labelsEnabled: false
+    },
+      {
+        id: 'a3',
+        title: 'duration',
+        position: 'right',
+        gridAlpha: 0,
+        axisAlpha: 0,
+        inside: true,
+        duration: 'mm',
+        durationUnits: {
+          DD: 'd. ',
+          hh: 'h ',
+          mm: 'min',
+          ss: ''
         }
-      });
-  
-      
+      }],
+    graphs: [{
+      id: 'g1',
+      valueField: 'distance',
+      title: 'distance',
+      type: 'column',
+      fillAlphas: 0.9,
+      valueAxis: 'a1',
+      balloonText: '[[value]] miles',
+      legendValueText: '[[value]] mi',
+      legendPeriodValueText: 'total: [[value.sum]] mi',
+      lineColor: '#263138',
+      alphaField: 'alpha'
+    },
+      {
+        "id": "g2",
+        "valueField": "latitude",
+        "classNameField": "bulletClass",
+        "title": "latitude/city",
+        "type": "line",
+        "valueAxis": "a2",
+        "lineColor": "#786c56",
+        "lineThickness": 1,
+        "legendValueText": "[[value]]/[[description]]",
+        "descriptionField": "townName",
+        "bullet": "round",
+        "bulletSizeField": "townSize",
+        "bulletBorderColor": "#786c56",
+        "bulletBorderAlpha": 1,
+        "bulletBorderThickness": 2,
+        "bulletColor": "#000000",
+        "labelText": "[[townName2]]",
+        "labelPosition": "right",
+        "balloonText": "latitude:[[value]]",
+        "showBalloon": true,
+        "animationPlayed": true
+      }, {
+        "id": "g3",
+        "title": "duration",
+        "valueField": "duration",
+        "type": "line",
+        "valueAxis": "a3",
+        "lineColor": "#ff5755",
+        "balloonText": "[[value]]",
+        "lineThickness": 1,
+        "legendValueText": "[[value]]",
+        "bullet": "square",
+        "bulletBorderColor": "#ff5755",
+        "bulletBorderThickness": 1,
+        "bulletBorderAlpha": 1,
+        "dashLengthField": "dashLength",
+        "animationPlayed": true
+      }],
+
+    chartCursor: {
+      zoomable: false,
+      categoryBalloonDateFormat: 'DD',
+      cursorAlpha: 0,
+      valueBalloonsEnabled: false
+    },
+    legend: {
+      bulletType: 'round',
+      equalWidths: false,
+      valueWidth: 120,
+      useGraphSettings: true,
+      //"color": "#FFFFFF"
+    }
+  });
+let chartdep = this.AmCharts.makeChart("categoriedepensechartdiv",
+  {
+  "type": "pie",
+  "theme": "light",
+  "dataProvider": [{
+    "categorie": 'Alimentation',
+    "litres": 501.9
+  }, {
+    "categorie": 'Transports / Véhicule',
+    "litres": 301.9
+  }, {
+    "categorie": 'Loisir',
+    "litres": 201.1
+  }, {
+    "categorie": 'Logement',
+    "litres": 165.8
+  }, {
+    "categorie": 'Santé',
+    "litres": 139.9
+  }, {
+    "categorie": 'Habillement',
+    "litres": 128.3
+  }, {
+    "categorie": 'Assurance',
+    "litres": 99
+  }, {
+    "categorie": 'Téléphone/Internet',
+    "litres": 60
+  }, {
+    "categorie": 'Enfants',
+    "litres": 60
+  }, {
+    "categorie": 'autre',
+    "litres": 50
+  }],
+  "valueField": "litres",
+  "titleField": "categorie",
+  "balloon": {
+    "fixedPosition": true
+  },
+  "export": {
+    "enabled": true
   }
+});
+let chartrev = this.AmCharts.makeChart("categorierevenuchartdiv", {
+  "type": "pie",
+  "theme": "light",
+  "dataProvider": [{
+    "categorie": 'Salaires Net',
+    "litres": 501.9
+  }, {
+    "categorie": 'Bourses',
+    "litres": 301.9
+  }, {
+    "categorie": 'Remboursements Sécurité Sociale',
+    "litres": 201.1
+  }, {
+    "categorie": 'prêt bancaire',
+    "litres": 165.8
+  }, {
+    "categorie": 'allocation familiale',
+    "litres": 139.9
+  }, {
+    "categorie": 'Aides diverses',
+    "litres": 128.3
+  }, {
+    "categorie": 'avance et acompte',
+    "litres": 99
+  }],
+  "valueField": "litres",
+  "titleField": "categorie",
+  "balloon": {
+    "fixedPosition": true
+  },
+  "export": {
+    "enabled": true
+  }
+});
+let chartprojet = this.AmCharts.makeChart("projetchart", {
+  "type": "pie",
+  "theme": "light",
+  "dataProvider": [{
+    "categorie": 'Prjet faite',
+    "litres":   5
+  }, {
+    "categorie": 'projet non faite',
+    "litres": 10
+  }],
+  "valueField": "litres",
+  "titleField": "categorie",
+  "balloon": {
+    "fixedPosition": true}}
+    );
+}
   }
 
  

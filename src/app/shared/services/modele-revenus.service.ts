@@ -21,7 +21,8 @@ export class ModeleRevenusService {
       titreModele: modele.titreModele,
       montantModele: modele.montantModele,
       dateModele: modele.dateModele,
-      descriptionModele: modele.descriptionModele
+      descriptionModele: modele.descriptionModele,
+      categorieModele: modele.categorieModele
     }) ;
   }
   updateModeleRevenu(modele: ModeleRevenus )  {
@@ -31,7 +32,8 @@ export class ModeleRevenusService {
         titreModele: modele.titreModele,
         montantModele: modele.montantModele,
         dateModele: modele.dateModele,
-        descriptionModele: modele.descriptionModele
+        descriptionModele: modele.descriptionModele,
+        categorieModele: modele.categorieModele
       });
   }
   deleteModeleRevenu($idModele: string) {

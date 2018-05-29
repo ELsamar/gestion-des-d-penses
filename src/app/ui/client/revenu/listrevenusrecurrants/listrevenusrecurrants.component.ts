@@ -82,4 +82,7 @@ export class ListrevenusrecurrantsComponent implements OnInit {
     this.revenuservice.trie('Revenus/RevenusRecurrent', type)
       .subscribe((revenu) => this.RevenusRlist = revenu);
   }
+  activedisactivrev(revenu: Revenus, key: string) {
+    this.revenuservice.disactiveRev( revenu , key);
+  }
 }
