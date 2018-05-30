@@ -88,3 +88,7 @@
   .demo-flipper-front.demo-panel-white, body {
     background-color: #161616;
   }	
+  #projetchart {
+    width: 100%;
+    height: 100%;
+  }

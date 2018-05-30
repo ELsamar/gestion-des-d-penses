@@ -492,7 +492,7 @@ let chartprojet = this.AmCharts.makeChart("projetchart", {
   "type": "pie",
   "theme": "light",
   "dataProvider": [{
-    "categorie": 'Prjet faite',
+    "categorie": 'Projet faite',
     "litres":   5
   }, {
     "categorie": 'projet non faite',

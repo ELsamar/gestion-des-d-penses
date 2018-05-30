@@ -1,6 +1,6 @@
 #fonctionnalite{
     background-attachment:fixed;
-    background-size:100%;
+    
     background-repeat:no-repeat;
 
 }
@@ -35,4 +35,17 @@
 
 .line-shape {
     margin-left: calc(50% - 40px);
+}
+
+@media (min-width: 40em) {
+
+    .featurette-heading {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 62em) {
+    .featurette-heading {
+        margin-top: 7rem;
+    }
 }
