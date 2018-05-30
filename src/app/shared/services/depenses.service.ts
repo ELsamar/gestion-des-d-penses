@@ -146,10 +146,10 @@ export class DepensesService {
   disactivedep(depenses: Depenses, key: string) {
     if (depenses.active) {
       depenses.active = false;
-      this.toastr.success('depenses disactivè', 'disactive');
+      this.toastr.success('Depenses ' + depenses.titredepense + ' disactivè', 'Disactive');
     } else {
       depenses.active = true;
-      this.toastr.success('depenses activè', 'active');
+      this.toastr.success('Depenses ' + depenses.titredepense + ' activè', 'Active');
     }
     this.depenseslist = this.db.list( 'Depenses/DepensesRecurrent/' +  this.currentUserId);
     console.log(key);

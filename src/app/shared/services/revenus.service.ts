@@ -139,10 +139,10 @@ dateto: revenus.dateto
 disactiveRev(revenus: Revenus, key: string) {
   if (revenus.active) {
     revenus.active = false;
-    this.toaster.success('depenses disactivè', 'disactive');
+    this.toaster.success('Revenu ' + revenus.titrerevenu + 'disactivè', 'Disactive');
   } else {
     revenus.active = true;
-    this.toaster.success('depenses activè', 'active');
+    this.toaster.success('Revenu ' + revenus.titrerevenu + 'activè' , 'Active');
   }
   this.revenuslist.update(key,
     {
