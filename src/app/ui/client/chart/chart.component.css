@@ -1,5 +1,16 @@
-
-
+#chartdiv1 {
+    width: 100%;
+    height: 500px;
+  }
+  #chartdiv2{
+    width		: 100%;
+    height		: 500px;
+    font-size	: 11px;
+  }
+#chartdiv{
+  width: 100%;
+  height: 500px;
+}
 .amcharts-graph-g2 .amcharts-graph-stroke {
   stroke-dasharray: 3px 3px;
   stroke-linejoin: round;
@@ -7,7 +18,6 @@
   -webkit-animation: am-moving-dashes 1s linear infinite;
   animation: am-moving-dashes 1s linear infinite;
 }
-
 @-webkit-keyframes am-moving-dashes {
   100% {
     stroke-dashoffset: -31px;
@@ -18,8 +28,6 @@
     stroke-dashoffset: -31px;
   }
 }
-
-
 .lastBullet {
   -webkit-animation: am-pulsating 1s ease-out infinite;
   animation: am-pulsating 1s ease-out infinite;
