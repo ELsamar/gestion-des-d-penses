@@ -17,6 +17,7 @@ import {DashrevComponent} from './revenu/dashrev/dashrev.component';
 import {DashdepComponent} from './depense/dashdep/dashdep.component';
 import { ChartComponent } from './chart/chart.component';
 import {AmChartsDirective} from '@amcharts/amcharts3-angular';
+import { AlertComponent } from './alert/alert.component';
 
 
 
@@ -37,7 +38,8 @@ import {AmChartsDirective} from '@amcharts/amcharts3-angular';
     ProfilComponent,
     ListTransactionComponent,
     DepensesComponent,
-    ChartComponent
+    ChartComponent,
+    AlertComponent
   ]
 })
 export class ClientModule { }

@@ -11,6 +11,7 @@ import {RevenusComponent} from './revenu/revenus.component';
 import {NotFound404Component} from '../../shared/not-found404/not-found404.component';
 import {ListTransactionComponent} from './list-transaction/list-transaction.component';
 import { ChartComponent } from './chart/chart.component';
+import { AlertComponent } from './alert/alert.component';
 
 const routes: Routes = <Routes> [
   {
@@ -47,6 +48,10 @@ const routes: Routes = <Routes> [
   {
     path: 'rapports',
     component:ChartComponent,
+  },
+  {
+    path: 'alert',
+    component:AlertComponent,
   },
 ];
 
