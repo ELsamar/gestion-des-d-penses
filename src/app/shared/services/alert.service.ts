@@ -19,12 +19,11 @@ export class AlertService {
       ref => ref.orderByChild('idauth').startAt(myUserId).endAt(myUserId + '\uf8ff'));
   }
 async  insertAlert (childPath: string, newdepenseKey: string, alert: Alert ) {
-    const newalertKey = this.db.database.ref(childPath + this.currentUserId + '/' + newdepenseKey ).child('Alert').push().key;
-  const alertlist = this.db.database.ref(childPath + this.currentUserId + '/' + newdepenseKey + '/Alert/' + newalertKey );
-  console.log(childPath + this.currentUserId + '/' + newdepenseKey + '/Alert/' + newalertKey );
+    const newalertKey = this.db.database.ref(childPath + this.currentUserId + '/' + newdepenseKey ).child('alert').push().key;
+  const alertlist = this.db.database.ref(childPath + this.currentUserId + '/' + newdepenseKey + '/alert/' + newalertKey );
+  console.log(childPath + this.currentUserId + '/' + newdepenseKey + '/alert/' + newalertKey );
    await alertlist.set({
       msgalert : alert.msgalert,
-      date: alert.datealert
     }) ;
 
   }

@@ -82,7 +82,7 @@ savetransaction(titre: string , depense: Depenses) {
    await this.depenseservice.insertDepenseRecurrent('Depenses/DepensesRecurrent', this.newdepenseKey,
       this.currentdepenses, this.currentFileUpload, this.progress);
      this.savetransaction('DepensesRecurrent', this.currentdepenses);
-      this.alertservice.insertAlert('Depenses/DepensesRecurrent', this.newdepenseKey, this.currentalert);
+    await await  this.alertservice.insertAlert('Depenses/DepensesRecurrent/', this.newdepenseKey, this.currentalert);
   }
 
   // onSubmit(depensesForm: NgForm) {
