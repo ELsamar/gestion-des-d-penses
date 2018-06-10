@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           console.log('Connecté');
           console.log(auth);
           console.log(this.pseudo);
-          this.router.navigate(['client']);
+          this.router.navigate(['client/dash']);
         } else {
 
           console.log('Déconnecté');
