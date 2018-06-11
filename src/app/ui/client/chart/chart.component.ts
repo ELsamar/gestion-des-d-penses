@@ -209,6 +209,7 @@ export class ChartComponent implements OnInit {
     {
       theme: "light",
       type: "serial",
+      "radius": 100,
       dataProvider: [{
           "country": "1",
           "year2004": 3.5,
@@ -284,6 +285,7 @@ export class ChartComponent implements OnInit {
   {
     type: 'serial',
     theme: 'none',
+    "radius": 100,
     dataDateFormat: 'YYYY-MM-DD',
     dataProvider: this.chartData,
     addClassNames: true,
@@ -413,6 +415,8 @@ export class ChartComponent implements OnInit {
 let chartdep = this.AmCharts.makeChart("categoriedepensechartdiv",
   {
   "type": "pie",
+  "fontSize": 8,
+  "radius": 100,
   "theme": "light",
   "dataProvider": [{
     "categorie": 'Alimentation',
@@ -456,6 +460,8 @@ let chartdep = this.AmCharts.makeChart("categoriedepensechartdiv",
 });
 let chartrev = this.AmCharts.makeChart("categorierevenuchartdiv", {
   "type": "pie",
+  "fontSize": 8,
+  "radius": 100,
   "theme": "light",
   "dataProvider": [{
     "categorie": 'Salaires Net',
@@ -490,6 +496,8 @@ let chartrev = this.AmCharts.makeChart("categorierevenuchartdiv", {
 });
 let chartprojet = this.AmCharts.makeChart("projetchart", {
   "type": "pie",
+  "radius": 100,
+  "fontSize": 8,
   "theme": "light",
   "dataProvider": [{
     "categorie": 'Projet faite',

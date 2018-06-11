@@ -9,7 +9,7 @@
         <div class=" col-md-3 col-12 sidebar" [@sidebarAnim]='openclose' >
           <app-sidebar></app-sidebar>
         </div>
-            <div class="toggle-btn col-1" (click)=toggle()>
+            <div class="toggle-btn col-1"  [@toggleAnim]='openclose'(click)=toggle()>
                 <span></span>
                 <span></span>
                 <span></span>

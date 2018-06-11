@@ -16,20 +16,20 @@
   .icon{
     width: 2.4em;
   }
+  .toggle-btn span{
+    display : block ;
+    width: 30px;
+    height: 3px;
+    background: rgb(7, 7, 7);
+    margin: 3px 0px;
+   
+  }
   .toggle-btn{
     position: absolute;
     top: 20px;
     left: 0px;
-    padding-top: 80px;
-    margin-left: 320px
-  }
-  .toggle-btn span{
-    display : block ;
-    width: 30px;
-    height: 1px;
-    background: #151719;
-    margin: 3px 0px;
-   
+    padding-top: 60px;
+    margin-left: 200px
   }
   .sidebar{
     width: 380px;
