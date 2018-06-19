@@ -30,11 +30,19 @@ import {UserService} from '../../shared/services/user.service';
 })
 export class ClientComponent implements OnInit {
   openclose = 'open'
+  visible = true;
+  @Output() open: EventEmitter<any> = new EventEmitter();
+  @Output() close: EventEmitter<any> = new EventEmitter();
   constructor(public authService: AuthService, public userservice: UserService ,) {
   console.log(localStorage.getItem('userid'));
   }
-  toggle(){
-   this.openclose=(this.openclose==='open')?'close':'open';
+  toggle() {
+    this.visible = !this.visible;
+    if (this.visible) {
+      this.open.emit(null);
+    } else {
+      this.close.emit(null);
+    }
   }
   ngOnInit() {
 

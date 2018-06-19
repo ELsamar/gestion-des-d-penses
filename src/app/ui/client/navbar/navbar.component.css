@@ -158,17 +158,19 @@ display: -ms-inline-flexbox;
 .icon{
   width: 2.4em;
 }
-.toggle-btn{
-  position: absolute;
-  top: 20px;
-  left: 0px;
-}
 .toggle-btn span{
   display : block ;
   width: 30px;
-  height: 5px;
-  background: #151719;
+  height: 3px;
+  background: rgb(7, 7, 7);
   margin: 3px 0px;
 }
 
+.sidebar{
+  width: 380px;
+  height: 100%;
+  position: fixed;
+  padding-top: 70px;
+  margin-left: -30px;
+}
 

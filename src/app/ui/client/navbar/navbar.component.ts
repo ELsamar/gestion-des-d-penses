@@ -18,7 +18,14 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  toggle() {
+    this.visible = !this.visible;
+    if (this.visible) {
+      this.open.emit(null);
+    } else {
+      this.close.emit(null);
+    }
+  }
   logout() {
     return this.authservice.signout();
   }
