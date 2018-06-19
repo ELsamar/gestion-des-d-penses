@@ -168,6 +168,7 @@
                 ajouter
               </button>
             </div>
+            <div class="col-1"></div>
             <div class="col-3 content-center">
               <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-primary bouton" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
                       (click)="savedepenseRecurrent()">ajouter recurent
