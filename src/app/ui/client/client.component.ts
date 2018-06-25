@@ -33,6 +33,8 @@ export class ClientComponent implements OnInit {
     this.userservice.getUser().then(snapshot => {
       if (snapshot.val()) {
         this.userservice.userpict = snapshot.val().imageuser;
+        console.log(this.userservice.userpict);
+        console.log(snapshot.val().imageuser);
       } else if (!snapshot.val()) {}
     });
   }

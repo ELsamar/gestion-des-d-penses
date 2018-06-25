@@ -16,6 +16,8 @@ import {FormsModule, NgForm ,ControlValueAccessor, NG_VALUE_ACCESSOR} from '@ang
     ],
 })
 export class ProjetComponent implements OnInit {
+  currentalert: any ;
+  nbr: any ;
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   priorites: Priorite[] = [
     { id : 1 , nom : 'forte'},
@@ -33,6 +35,15 @@ export class ProjetComponent implements OnInit {
       this.currentprojet.titreprojet = null;
       this.currentprojet.descriptionprojet = null;
       this.currentprojet.prioriteprojet = null;
+  }
+  async  savealert(titre: string, key: string ) {
+    let d = new Date();
+    console.log(this.nbr);
+    d.setDate(d.getDate() - this.nbr);
+    this.currentalert.datealert = d;
+    console.log(this.currentalert.datealert);
+    this.currentalert.msgalert = ('pour votre revenu' + titre + '  reste ' + this.nbr + ' jours ' );
+    return this.currentalert.datealert ;
   }
   onSubmit(projetForm: NgForm) {
     this.projetservice.insertProjet(projetForm.value);

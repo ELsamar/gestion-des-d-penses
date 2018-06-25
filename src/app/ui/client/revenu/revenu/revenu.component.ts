@@ -5,7 +5,6 @@ import {Revenus, FileUpload} from '../../../../shared/models/revenus';
 import {FormGroup, NgForm} from '@angular/forms';
 import {TransactionService} from '../../../../shared/services/transaction.service';
 import {Transaction} from '../../../../shared/models/transaction';
-import {Depenses} from '../../../../shared/models/depenses';
 import {AuthService} from '../../../../providers/auth.service';
 import {AlertService} from '../../../../shared/services/alert.service';
 import {Alert} from '../../../../shared/models/alert';
@@ -30,7 +29,7 @@ export class RevenuComponent implements OnInit {
   Mois: any = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   currentrevenus: any;
-  nbr: number;
+  nbr: any;
   Modelelist: ModeleRevenus [];
   private titre = 'choissisez une modeles';
   constructor(private revenuservice: RevenusService, public authservice: AuthService, private alertservice: AlertService,
@@ -56,14 +55,14 @@ export class RevenuComponent implements OnInit {
     this.currentrevenus.descriptionrevenu = this.modelerevenuservice.selectedModele.descriptionModele;
     this.currentrevenus.categorierevenu = this.modelerevenuservice.selectedModele.categorieModele;
   }
-  async  savealert(titre: string, bath: string, key: string ) {
+  async  savealert(titre: string, key: string ) {
       let d = new Date();
-    await  d.setDate(d.getDate() - 5);
-      console.log(this.nbr);
+    console.log(this.nbr);
+      d.setDate(d.getDate() - this.nbr);
     this.currentalert.datealert = d;
     console.log(this.currentalert.datealert);
-      this.currentalert.msgalert = ('pour votre revenu' + titre + 'reste' + this.nbr + 'jours' );
-     await this.alertservice.insertAlert(bath, key, this.currentalert);
+      this.currentalert.msgalert = ('pour votre revenu' + titre + '  reste ' + this.nbr + ' jours ' );
+     return this.currentalert.datealert ;
     }
 async  onSubmit(revenusForm: NgForm) {
     await this.saverevenu();
@@ -96,7 +95,10 @@ async  onSubmit(revenusForm: NgForm) {
    await this.revenuservice.insertrevenusRecurrent('Revenus/RevenusRecurrent', newrevenuKey,
       this.currentrevenus, this.currentFileUpload, this.progress);
    this.savetransaction('Revenus Recurrent', this.currentrevenus );
-   await this.savealert(this.currentrevenus.titrerevenu, 'Revenus/RevenusRecurrent/', newrevenuKey);
+   await this.savealert(this.currentrevenus.titrerevenu, newrevenuKey).then( () =>
+      this.alertservice.insertAlert('null', newrevenuKey, 'null', this.currentalert)
+   );
+   console.log(this.currentalert);
   }
   selectFile(event) {
     const file = event.target.files.item(0);

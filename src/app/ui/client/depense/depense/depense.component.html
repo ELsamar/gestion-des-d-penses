@@ -140,7 +140,7 @@
                         <label class="" type=""> m'avertir avant : </label>
                         <div class="row">
                           <div class="col-6">
-                            <select class="custom_menu">
+                            <select class="custom_menu"name="Nbr" #Nbr="ngModel" [(ngModel)]="this.nbr">
                              <option *ngFor="let alert of alerts" [value]="alert"> {{alert}}</option>
                             </select>
                           </div>

@@ -67,7 +67,7 @@ export class DepensesService {
     }
     );
   }
-  insertDepenseRecurrent(childPath: string, newdepenseKey: string,
+  async insertDepenseRecurrent(childPath: string, newdepenseKey: string,
                          depenses: Depenses, fileUpload: FileUpload, progress: { percentage: number }) {
     this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
     const depenseslist = this.db.database.ref(childPath).child(this.currentUserId).child(newdepenseKey);
@@ -106,6 +106,7 @@ export class DepensesService {
             // this.depensesRef.push(depenses);
         });
         this.toastr.success('ajouter', 'depense ajoute par succes');
+
     });
   }
 

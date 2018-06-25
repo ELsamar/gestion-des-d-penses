@@ -30,6 +30,7 @@ export class DepenseComponent implements OnInit {
   alerts: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   private titre = 'choissisez une modele';
   newdepenseKey: string;
+  nbr: any;
   constructor(private alertservice: AlertService, private depenseservice: DepensesService, public authservice: AuthService,
               private modeledepenseservice: ModeleDepenseService, private transactionservice: TransactionService) {
   }
@@ -66,6 +67,14 @@ savetransaction(titre: string , depense: Depenses) {
   transaction.titre = titre;
     this.transactionservice.insertTransaction(transaction, depense);
 }
+  async  savealert(titre: string, key: string ) {
+    let d = new Date();
+    console.log(this.nbr);
+    d.setDate(d.getDate() - this.nbr);
+    this.currentalert.datealert = d;
+    this.currentalert.msgalert = ('pour votre revenu' + titre + '  reste ' + this.nbr + ' jours ' );
+    return this.currentalert.datealert;
+  }
   async savedepense() {
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
@@ -80,9 +89,11 @@ savetransaction(titre: string , depense: Depenses) {
     this.newdepenseKey = await this.depenseservice.getnewdepenseKey('Depenses/DepensesRecurrent');
     this.currentFileUpload = new FileUpload(file);
    await this.depenseservice.insertDepenseRecurrent('Depenses/DepensesRecurrent', this.newdepenseKey,
-      this.currentdepenses, this.currentFileUpload, this.progress);
-     this.savetransaction('DepensesRecurrent', this.currentdepenses);
-    await await  this.alertservice.insertAlert('Depenses/DepensesRecurrent/', this.newdepenseKey, this.currentalert);
+      this.currentdepenses, this.currentFileUpload, this.progress)
+   this.savetransaction('DepensesRecurrent', this.currentdepenses);
+     await this.savealert(this.currentdepenses.titrerevenu, this.newdepenseKey).then( () =>
+       this.alertservice.insertAlert(this.newdepenseKey, 'null', 'null', this.currentalert)
+     );
   }
 
   // onSubmit(depensesForm: NgForm) {
