@@ -10,7 +10,7 @@ import {UserService} from '../../shared/services/user.service';
   styleUrls: ['./client.component.css'],
   animations: [
       trigger('sidebarAnim',[
-        state('close', style({width : '0px' ,visibility : 'hidden'})),
+        state('close', style({width : '0px'})),
         state('open' ,style({width:'350px'})),
         transition ('open=>close',animate ('400ms ease-in')),
         transition ('close=>open',animate ('400ms ease-out')),
@@ -20,13 +20,29 @@ import {UserService} from '../../shared/services/user.service';
         state('close', style({marginLeft : '0px'})),
         state('open' , style({marginLeft: '350px'})),
         transition ('open=>close', animate ('400ms ease-in')),
+        transition ('close=>open', animate ('400ms ease-out'))]),
+      trigger('toggleAnim', [
+        state('close', style({marginLeft : '0px'})),
+        state('open' , style({marginLeft: '200px'})),
+        transition ('open=>close', animate ('400ms ease-in')),
         transition ('close=>open', animate ('400ms ease-out'))])
-  ]
+    ]
 })
 export class ClientComponent implements OnInit {
   openclose = 'open'
-  constructor(public authService: AuthService, public userservice: UserService) {
+  visible = true;
+  @Output() open: EventEmitter<any> = new EventEmitter();
+  @Output() close: EventEmitter<any> = new EventEmitter();
+  constructor(public authService: AuthService, public userservice: UserService ,) {
   console.log(localStorage.getItem('userid'));
+  }
+  toggle() {
+    this.visible = !this.visible;
+    if (this.visible) {
+      this.open.emit(null);
+    } else {
+      this.close.emit(null);
+    }
   }
   ngOnInit() {
 
@@ -37,8 +53,5 @@ export class ClientComponent implements OnInit {
         console.log(snapshot.val().imageuser);
       } else if (!snapshot.val()) {}
     });
-  }
-  toggle(): void {
-    this.openclose = (this.openclose === 'open' ) ? 'close' : 'open' ;
   }
 }

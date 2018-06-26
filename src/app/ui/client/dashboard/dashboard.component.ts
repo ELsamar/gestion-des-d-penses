@@ -3,6 +3,10 @@ import {ListdepensesComponent} from '../depense/listdepenses/listdepenses.compon
 import { AmChartsService, AmChart, AmChartsDirective } from '@amcharts/amcharts3-angular';
 import { ProjetsService } from '../../../shared/services/projets.service';
 import { Projets} from '../../../shared/models/projets';
+import { DepensesService } from '../../../shared/services/depenses.service';
+import { Depenses} from '../../../shared/models/depenses';
+import { RevenusService } from '../../../shared/services/revenus.service';
+import { Revenus} from '../../../shared/models/revenus';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,9 +14,19 @@ import { Projets} from '../../../shared/models/projets';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private AmCharts: AmChartsService,private projetservice: ProjetsService) { }
+  constructor(private AmCharts: AmChartsService,private projetservice: ProjetsService ,private depenseservice: DepensesService ,private revenuservice: RevenusService) { }
   priorites: any = ['forte', 'moyenne', 'faible'];
   projetlist: Projets[];
+  depenseslist: Depenses[];
+  DepensesRlist: Depenses[];
+  typeaffich: string;
+  startAt: string;
+  endAt: string;
+  depenses: Depenses[];
+  depensesR: Depenses[];
+  revenuslist: Revenus[];
+  revenusRlist: Revenus[];
+  revenus: Revenus[];
   ngOnInit() {
     this.projetservice.checkdata()
       .then(snapshot => {
@@ -28,6 +42,49 @@ export class DashboardComponent implements OnInit {
           });
         }
       });
+      this.depenseservice.checkdata('Depenses/Depenses')
+      .then(snapshot => {
+      if ((snapshot.val())) {
+        this.depenseservice.getdatadash('Depenses/Depenses', 5).snapshotChanges().subscribe(item => {
+          this.depenseslist = [];
+          item.forEach(element => {
+            let y = element.payload.toJSON();
+            y['$key'] = element.key;
+            this.depenseslist.push(y as Depenses);
+          });
+        });
+   }
+      });
+    this.depenseservice.getdatadash('Depenses/DepensesRecurrent', 5).snapshotChanges().subscribe(item => {
+      this.DepensesRlist = [];
+      item.forEach(element => {
+        let T = element.payload.toJSON();
+        T['$key'] = element.key;
+        this.DepensesRlist.push(T as Depenses);
+      });
+    });
+
+      this.revenuservice.checkdata('Revenus/Revenus')
+        .then(snapshot => {
+          if ((snapshot.val())) {
+      this.revenuservice.getdatadash('Revenus/Revenus', 5).snapshotChanges().subscribe(item => {
+          this.revenuslist = [];
+          item.forEach(element => {
+            let y = element.payload.toJSON();
+            y['$key'] = element.key;
+            this.revenuslist.push(y as Revenus);
+          });
+        });
+      } });
+        this.revenuservice.getdatadash('Revenus/RevenusRecurrent', 5).snapshotChanges().subscribe(item => {
+          this.revenusRlist = [];
+          item.forEach(element => {
+            let T = element.payload.toJSON();
+            T['$key'] = element.key;
+            this.revenusRlist.push(T as Revenus);
+          });
+        });
+  
       var chart = this.AmCharts.makeChart("chartdiv", {
         "type": "serial",
         "theme": "light",
@@ -139,9 +196,8 @@ export class DashboardComponent implements OnInit {
             "axisAlpha": 0,
             "gridAlpha": 0,
             "inside": true,
-            "color":"#8e0404",
             "position": "right",
-            "title": "Dépenses"
+            "title": "Dépenses/Revenus"
         }],
         "graphs": [{
             "alphaField": "alpha",
@@ -150,13 +206,16 @@ export class DashboardComponent implements OnInit {
             "fillAlphas": 0.7,
             "legendPeriodValueText": "total: [[value.sum]]",
             "legendValueText": "[[value]]",
+            "lineColor":"#0489B1",
             "title": "Montant",
             "type": "column",
             "valueField": "distance",
             "valueAxis": "distanceAxis"
         }, {
             "balloonText": "Dépenses:[[value]]",
+            "color": "#ff0000",
             "bullet": "round",
+            "lineColor":"#d80f0f",
             "bulletBorderAlpha": 1,
             "useLineColorForBulletBorder": true,
             "bulletColor": "#FFFFFF",
@@ -176,6 +235,7 @@ export class DashboardComponent implements OnInit {
             "bulletBorderThickness": 1,
             "dashLengthField": "dashLength",
             "legendValueText": "[[value]]",
+            "lineColor":"#1c8e42",
             "title": "Revenus",
             "fillAlphas": 0,
             "valueField": "duration",
@@ -218,6 +278,8 @@ export class DashboardComponent implements OnInit {
     });
     let chartprojet = this.AmCharts.makeChart("projetchart", {
       "type": "pie",
+      "radius": 100,
+      "fontSize": 8,
       "theme": "light",
       "dataProvider": [{
         "categorie": 'Projet faite',
@@ -231,4 +293,5 @@ export class DashboardComponent implements OnInit {
       "balloon": {
         /*"fixedPosition": true*/}})
     }
+     
 }

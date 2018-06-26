@@ -13,6 +13,14 @@
     color: #fff;
     text-decoration: none;
 }
+.title{
+    font-family: "Bradley Hand ITC";
+    display: inline-block;
+    margin: 0;
+    line-height: 1.8em;
+    font-size: 1em;
+    font-weight: 400; 
+  }
 @media (min-width: 768px) {
     .flex-md-equal > * {
       -ms-flex: 1;

@@ -1,20 +1,74 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
-      <app-navbar></app-navbar>
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg fixed-top navbar-light " style="background-color:#fff" >
+        <div class="container-fluid row">
+            <div class="">
+                <div class="toggle-btn"(click)=toggle()>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+      </div>
+      <div class="col-2">
+                  <a class="navbar-brand my-0 mr-md-auto font-weight-normal" routerLink="#">
+                    <img src="./../../../../assets/img/logo.png" width="40" height="40" class="d-inline-block align-top img-circle"
+                         alt="">
+                    <label class="title" ><strong>Port money</strong></label>
+                  </a>
+              </div>
+        <!--<div class="my-2 my-md-0 mr-md-3 ml-5">-->
+        <div class="col-md-8 col-2"></div>
+        <!--<div class="col-1">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>-->
+              <ul class="navbar-nav">
+                  <li class="">
+                    <form class=" dropdown form-inline ">
+      
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/png/alarm.png" class="icon">
+                        <!--<i class="fas fa-bell fa-2x"></i>-->
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" href="#">
+                          notification1
+                        </a>
+                        <a class="dropdown-item" href="#">
+                          notification2
+                        </a>
+                        <a class="dropdown-item" role="button" routerLink="alert" aria-haspopup="true" aria-expanded="false">
+                            Afficher tous
+                        </a>
+      
+                      </div>
+                    </form>
+                  </li>
+                </ul>
+               <!-- <a class=""role="button" routerLink="profil" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded-circle" alt="Card image cap" src="assets/img/profil.png"
+                         width="35">
+                  </a>-->
+        
+            <a class="" role="button" routerLink="profil" aria-haspopup="true" aria-expanded="false">
+              <img  class="rounded-circle" alt="image " src={{this.userservice.userpict}}
+                   width="40" height= "40px">
+            </a> 
+          </div>
+      </nav>      
     </div>
   </div>
     <div class="col-12">
       <div class="row">
-        <div class=" col-md-3 col-12 sidebar" [@sidebarAnim]='openclose' >
-          <app-sidebar></app-sidebar>
+        <div class="col-md-3 col-12 sidebar">
+            <div [hidden]="!visible">
+                <app-sidebar></app-sidebar>
+              </div>
         </div>
-            <div class="toggle-btn col-1" (click)=toggle()>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        <div class="col-md-9 col-12 mainc" [@maincAnim]='openclose'>
+      <div class="col-md-9 col-12 mainc" >
             <router-outlet></router-outlet>
         </div>
     </div>

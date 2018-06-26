@@ -54,6 +54,75 @@
  </div>
 </div>-->
 <div class="row">
+    <div class="col-12">
+            <div class="row">
+                    <div class="col-md-6 mb-3 text-center ">
+                      <div class="card">
+                        <div class="container-fluid">
+                          <div class="card-header">
+                          <h3> Derniers Dépenses Recurrent</h3>
+                        </div>
+                          <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-sm table-hover table table-striped ">
+                              <thead>
+                              <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">Date</th>
+                               <th scope="col"></th>.
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let depensesR of DepensesRlist">
+                                <td>{{depensesR.titredepense}}</td>
+                                <td>{{depensesR.montantdepense}}</td>
+                                <td>{{depensesR.datedepense}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div></div>
+                          <div class="card-footer"><a routerLink="/client/depenses/listdepR">afficher la suite</a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3 text-center ">
+                      <div class="card">
+                        <div class="container-fluid">
+                          <div class="card-header">
+                          <h3> Derniers Dépenses </h3>
+                          </div>
+                          <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-sm table-hover table table-striped ">
+                              <thead>
+                              <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">Catégorie</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let Depenses of depenseslist">
+                                <td>{{Depenses.titredepense}}</td>
+                                <td>{{Depenses.datedepense}}</td>
+                                <td>{{Depenses.montantdepense}}</td>
+                                <td>{{Depenses.categoriedepense}}</td>
+
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                          <div class="card-footer"> <a routerLink="/client/depenses/listdep">afficher la suite</a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-7">
         <div class="card">
             <div class="container-fluid">
@@ -82,6 +151,79 @@
             </div>
           </div>
     </div>
-    <div class="col-5"><div id="projetchart"></div></div>
+
+    <div class="col-5 card-body">
+        <div id="projetchart"></div>
+    </div>
+
 </div>
 
+<div class="row">
+    <div class="col-12">
+            <div class="row">
+                    <div class="col-md-6 mb-3 text-center">
+                      <div class="card">
+                        <div class="container-fluid">
+                          <div class="card-header">
+                          <h3> Derniers Revenus Recurrent</h3>
+                        </div>.
+                          <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-sm table-hover table table-striped ">
+                              <thead>
+                              <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">Date</th>
+                               <th scope="col">categorie</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let revenusR of revenusRlist">
+                                <td>{{revenusR.titrerevenu}}</td>
+                                <td>{{revenusR.montantrevenu}}</td>
+                                <td>{{revenusR.daterevenu}}</td>
+                                <td>{{revenusR.categorierevenu}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div></div>
+                          <div class="card-footer"><a routerLink="/client/revenus/listrevR">afficher la suite</a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3 text-center">
+                      <div class="card">
+                        <div class="container-fluid">
+                          <div class="card-header">
+                          <h3> Derniers Revenus </h3>
+                          </div>
+                          <div class="card-body">
+                          <div class="table-responsive">
+                            <table class="table table-sm table-hover table table-striped ">
+                              <thead>
+                              <tr>
+                                <th scope="col">Titre</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">categorie</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let revenus of revenuslist">
+                                <td>{{revenus.titrerevenu}}</td>
+                                <td>{{revenus.montantrevenu}}</td>
+                                <td>{{revenus.daterevenu}}</td>
+                                <td>{{revenus.categorierevenu}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                          <div class="card-footer"> <a routerLink="/client/revenus/listrev">afficher la suite</a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    </div>
+</div>
