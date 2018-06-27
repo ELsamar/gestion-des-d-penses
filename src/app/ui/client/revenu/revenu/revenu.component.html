@@ -149,19 +149,19 @@
 
                 <div class="row">
                   <div class="col-1 content-center">
-                    <button type="submit" [hidden]="!jamais" class="btn btn-primary bouton" [disabled]="!revenusForm.valid || ( dateto.value < datefrom.value )"
+                    <button type="submit" [hidden]="!jamais" class="btn btn-secondary bouton" style="background-color: #096A09" [disabled]="!revenusForm.valid || ( dateto.value < datefrom.value )"
                             (click)="saverevenu()">
-                      ajouter
+                      Ajouter
                     </button>
                   </div>
-                  <div class="col-2 content-center">
-                    <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-primary bouton" [disabled]="(dateto.value < datefrom.value )"
-                            (click)="saverevenuRecurrent()">ajouter recurent
-                    </button>
-                  </div>
-                  <div class="col-1"></div>
                   <div class="col-1 content-center">
-                    <button type="reset" class="btn btn-secondary bouton">annuler</button>
+                    <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-secondary bouton" style="background-color: #096A09" [disabled]="(dateto.value < datefrom.value )"
+                            (click)="saverevenuRecurrent()">Ajouter recurrent
+                    </button>
+                  </div>
+                  <div class="col-5"></div>
+                  <div class="col-1 content-center">
+                    <button type="reset" class="btn btn-secondary bouton">Annuler</button>
                   </div>
                 </div>
               </div>

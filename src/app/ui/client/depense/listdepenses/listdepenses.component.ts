@@ -63,13 +63,13 @@ export class ListdepensesComponent implements OnInit {
   onDelete(key: string) {
     if (confirm('éte vous sure de supprimer ce depense ?') === true) {
       this.depenseservice.deleteDepense(key);
-      this.toastr.warning('suppression', 'depense supprimée avec succée');
+      this.toastr.warning('suppression', 'Dépense supprimée avec succée');
     }
   }
   onDeleteAll() {
-    if (confirm('éte vous sure de supprimer toutes tes depenses ?') === true) {
+    if (confirm('Ete vous sure de supprimer toutes tes depenses ?') === true) {
       this.depenseservice.deleteAllDepense();
-      this.toastr.warning('suppression', 'Depense supprimée avec succée');
+      this.toastr.warning('suppression', 'Dépense supprimée avec succée');
     }
   }
 

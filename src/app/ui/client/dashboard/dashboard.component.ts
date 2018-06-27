@@ -6,7 +6,11 @@ import { Projets} from '../../../shared/models/projets';
 import { DepensesService } from '../../../shared/services/depenses.service';
 import { Depenses} from '../../../shared/models/depenses';
 import { RevenusService } from '../../../shared/services/revenus.service';
+import { TransactionService } from '../../../shared/services/transaction.service';
 import { Revenus} from '../../../shared/models/revenus';
+import { Transaction } from '../../../shared/models/transaction';
+import { Action } from 'rxjs/scheduler/Action';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +18,7 @@ import { Revenus} from '../../../shared/models/revenus';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private AmCharts: AmChartsService,private projetservice: ProjetsService ,private depenseservice: DepensesService ,private revenuservice: RevenusService) { }
+  constructor(private AmCharts: AmChartsService,private transactionSR:TransactionService,private projetservice: ProjetsService ,private depenseservice: DepensesService ,private revenuservice: RevenusService) { }
   priorites: any = ['forte', 'moyenne', 'faible'];
   projetlist: Projets[];
   depenseslist: Depenses[];
@@ -27,6 +31,7 @@ export class DashboardComponent implements OnInit {
   revenuslist: Revenus[];
   revenusRlist: Revenus[];
   revenus: Revenus[];
+  trliste:Transaction[];
   ngOnInit() {
     this.projetservice.checkdata()
       .then(snapshot => {
@@ -84,7 +89,7 @@ export class DashboardComponent implements OnInit {
             this.revenusRlist.push(T as Revenus);
           });
         });
-  
+      
       var chart = this.AmCharts.makeChart("chartdiv", {
         "type": "serial",
         "theme": "light",
@@ -292,6 +297,18 @@ export class DashboardComponent implements OnInit {
       "titleField": "categorie",
       "balloon": {
         /*"fixedPosition": true*/}})
+        this.transactionSR.getTransaction().snapshotChanges().subscribe(item => {
+            this.trliste = [];
+            item.forEach(element => {
+              let y = element.payload.toJSON();
+              let objdep = {
+                titre: y['titre'],
+                action : y['action']
+              };
+              for ( var i = 0; i < this.trliste.length; i++ ){
+                  console.log(this.trliste)
+              }
+            })
+        })
     }
-     
 }

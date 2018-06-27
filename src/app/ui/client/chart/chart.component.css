@@ -1,13 +1,17 @@
-#chartdiv1 {
+#chartrev {
     width: 100%;
     height: 500px;
   }
-  #chartdiv2{
+  #chartdep{
     width		: 100%;
     height		: 500px;
     font-size	: 11px;
   }
 #chartdiv{
+  width: 100%;
+  height: 500px;
+}
+#chartdeprev{
   width: 100%;
   height: 500px;
 }

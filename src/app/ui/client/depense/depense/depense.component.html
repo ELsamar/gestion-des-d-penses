@@ -162,20 +162,21 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-2 content-center">
-              <button [hidden]="!jamais" class="btn btn-primary bouton" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
-                      (click)="savedepense()">
-                ajouter
-              </button>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-3 content-center">
-              <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-primary bouton" [disabled]="( dateto.value < datefrom.value )"
-                      (click)="savedepenseRecurrent()">ajouter recurent
-              </button>
-            </div>
             <div class="col-1 content-center">
-              <button type="reset" class="btn btn-secondary bouton">annuler</button>
+              <button [hidden]="!jamais" class="btn btn-secondary bouton" style="background-color: #008000" [disabled]="!depensesForm.valid || ( dateto.value < datefrom.value )"
+                      (click)="savedepense()">
+                Ajouter
+              </button>
+            </div>
+            
+            <div class="col-1 content-center">
+              <button type="submit" [hidden]="((!semaine) &&(!mois))" class="btn btn-secondary bouton" style="background-color: #008000" [disabled]="( dateto.value < datefrom.value )"
+                      (click)="savedepenseRecurrent()">Ajouter recurrent
+              </button>
+            </div>
+            <div class="col-6"></div>
+            <div class="col-1 content-center">
+              <button type="reset" class="btn btn-secondary bouton">Annuler</button>
             </div>
           </div>
         </form>

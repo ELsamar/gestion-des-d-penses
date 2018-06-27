@@ -61,10 +61,10 @@ export class ProjetsService {
   doneProjet(projet: Projets, key: string) {
     if (projet.faite) {
       projet.faite = false;
-      this.toastr.warning('Mais t\'inquiète pas vous pouvez le faire ultérieurement', 'desolle');
+      this.toastr.warning('Mais t\'inquiète pas vous pouvez le faire ultérieurement', 'Désolée');
     } else {
       projet.faite = true;
-      this.toastr.success('Bravo pour votre realisation de projet', 'félicitation');
+      this.toastr.success('Bravo pour votre realisation de projet', 'Félicitation');
     }
     this.projetlist.update(key,
       {

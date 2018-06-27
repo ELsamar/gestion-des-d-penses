@@ -58,7 +58,7 @@ descriptionrevenu: revenus.descriptionrevenu,
 justificatifrevenu: revenus.justificatifrevenu
 
 });
-this.toaster.success('ajouter', 'revenu ajoutè avec succes');
+this.toaster.success('Ajouter', 'Revenu ajoutè avec succes');
 }
 );
 }
@@ -101,7 +101,7 @@ dateform: revenus.datefrom,
 dateto: revenus.dateto
 });
 
-  this.toaster.success('ajouter', 'revenu ajoutè avec succes');
+  this.toaster.success('Ajouter', 'Revenu ajoutè avec succes');
 });
 }
 
@@ -116,7 +116,7 @@ daterevenu: revenus.daterevenu,
 descriptionrevenu: revenus.descriptionrevenu,
   categorierevenu: revenus.categorierevenu
 });
-  this.toaster.success('modifier', 'revenu modifier avec succes');
+  this.toaster.success('Modifier', 'Revenu modifier avec succes');
 }
 
 updateRevenusRecurrent(revenus: Revenus) {
@@ -133,16 +133,16 @@ moisrep: revenus.moisrep,
 dateform: revenus.datefrom,
 dateto: revenus.dateto
 });
-  this.toaster.success('modifier', 'revenu modifier avec succes');
+  this.toaster.success('Modifier', 'Revenu modifier avec succes');
 }
 
 disactiveRev(revenus: Revenus, key: string) {
   if (revenus.active) {
     revenus.active = false;
-    this.toaster.success('Revenu ' + revenus.titrerevenu + 'disactivè', 'Disactive');
+    this.toaster.success('Revenu ' + revenus.titrerevenu + ' disactiver', 'Disactiver');
   } else {
     revenus.active = true;
-    this.toaster.success('Revenu ' + revenus.titrerevenu + 'activè' , 'Active');
+    this.toaster.success('Revenu ' + revenus.titrerevenu + ' activer' , 'Activer');
   }
   this.revenuslist.update(key,
     {

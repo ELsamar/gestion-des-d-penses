@@ -32,7 +32,7 @@
           <span class="price">{{Projets.montantprojet}}</span>
           <span class="frecuency"></span>
           <button (click)="openWindowCustomClass(contentDetailp,Projets)" class="btn btn-warning">détailler</button>
-        </div>
+          </div>
       </div>
       <div class="be-soldout-title">
         <div (click)="openWindowCustomClass(contentEditp,Projets)" > <i  class="far fa-1x fa-edit"></i></div>
@@ -115,12 +115,12 @@
                 <input class="form-control" name="descriptionprojet" #descriptionprojet="ngModel" [(ngModel)]="projetservice.selectedprojet.descriptionprojet"/>
               </div>
               <div class="row">
-                <div class="col-3 content-center">
-                  <button type="submit" class="btn btn-secondary bouton">Modifier</button>
+                <div class="col-2 content-center">
+                  <button type="submit" class="btn btn-secondary bouton" style="background-color: #008000 ">Modifier</button>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-2 content-center">
-                  <button type="reset" class="btn btn-secondary  bouton">annuler
+                  <button type="reset" class="btn btn-secondary  bouton">Annuler
                   </button>
                 </div>
               </div>

@@ -63,7 +63,7 @@ export class DepensesService {
           justificatifdepenses: depenses.justificatifdepense,
           alert: {},
         });
-    this.toastr.success('ajouter', 'depense ajoute par succes');
+    this.toastr.success('Ajouter', 'Dépense ajoute par succes');
     }
     );
   }
@@ -105,7 +105,7 @@ export class DepensesService {
             dateto: depenses.dateto,
             // this.depensesRef.push(depenses);
         });
-        this.toastr.success('ajouter', 'depense ajoute par succes');
+        this.toastr.success('Ajouter', 'Dépense ajoute par succes');
 
     });
   }
@@ -122,7 +122,7 @@ export class DepensesService {
         descriptiondepense: depenses.descriptiondepense,
         //   justificatifdepenses: depenses.justificatifdepense,
       });
-    this.toastr.success('modifier', 'depense modifiè par succes');
+    this.toastr.success('Modifier', 'Dépense modifiè par succes');
   }
 
   updateDepenseRecurrent(depenses: Depenses) {
@@ -142,16 +142,16 @@ export class DepensesService {
         dateform: depenses.datefrom,
         dateto: depenses.dateto
     });
-    this.toastr.success('modifier', 'depense modifiè par succes');
+    this.toastr.success('Modifier', 'Dépense modifiè par succes');
   }
 
   disactivedep(depenses: Depenses, key: string) {
     if (depenses.active) {
       depenses.active = false;
-      this.toastr.success('Depenses ' + depenses.titredepense + ' disactivè', 'Disactive');
+      this.toastr.success('Depenses ' + depenses.titredepense + ' disactiver', 'Disactiver');
     } else {
       depenses.active = true;
-      this.toastr.success('Depenses ' + depenses.titredepense + ' activè', 'Active');
+      this.toastr.success('Depenses ' + depenses.titredepense + ' activer', 'Activer');
     }
     this.depenseslist = this.db.list( 'Depenses/DepensesRecurrent/' +  this.currentUserId);
     console.log(key);

@@ -5,11 +5,11 @@
                   <h1 class="h2">Transactions</h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                      <button class="btn btn-sm btn-outline-secondary"style="background-color:#1565C0"(click)="getweek()">cette semaine</button>
-                      <button class="btn btn-sm btn-outline-secondary"style="background-color: #0D47A1">cet ans</button>
-                      <button class="btn btn-sm btn-outline-secondary" (click)="getMonth()"style="background-color:#1565C0">ce mois</button>
+                      <button class="btn btn-sm btn-outline-secondary"(click)="getweek()">cette semaine</button>
+                      <button class="btn btn-sm btn-outline-secondary">cet ans</button>
+                      <button class="btn btn-sm btn-outline-secondary" (click)="getMonth()">ce mois</button>
                     </div>
-                    <button class="btn btn-sm btn-outline-secondary" (click)="ngOnInit()"style="background-color: #0D47A1">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="ngOnInit()">
                       tous
                     </button>
                   </div>
@@ -19,7 +19,7 @@
           <input class="form-control mr-sm-2" type="text"   name="ed" [(ngModel)]="ed"
                  placeholder="dd-m-yyyy" >
 
-          <button class="btn btn-sm btn-outline-secondary" style="background-color: #0D47A1" type="submit" (click)="filtrer()">
+          <button class="btn btn-sm btn-outline-secondary"  type="submit" (click)="filtrer()">
             filtrer
           </button>
         </form>

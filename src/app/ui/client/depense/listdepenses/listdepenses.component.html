@@ -17,7 +17,7 @@
         <input class="form-control mr-sm-2" type="text" (keyup)="onSearch($event)" name="searchText"
                data-toggle="dropdown" placeholder="Search ..." aria-label="Search">
       </form>
-      <button class="btn btn-danger btn-sm" (click)="onDeleteAll()">suprimmertout</button>
+     <!-- <button class="btn btn-danger btn-sm" (click)="onDeleteAll()">suprimmertout</button>-->
 
     </nav>
     <div class="card">
@@ -135,7 +135,7 @@
               </div>
               <div class="row">
                 <div class="col-3 content-center">
-                  <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesForm.valid">modifier
+                  <button type="submit" class="btn btn-primary bouton" [disabled]="!depensesForm.valid" style="background-color: #2B32C0">modifier
                   </button>
                 </div>
                 <div class="col-1"></div>

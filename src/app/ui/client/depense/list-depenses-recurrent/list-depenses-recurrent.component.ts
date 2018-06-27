@@ -38,7 +38,7 @@ export class ListDepensesRecurrentComponent implements OnInit {
             });
           });
         } else {
-          this.toastr.warning('vous n"avez encore des Depenses Recurrent', 'vide');
+          this.toastr.warning('Vous n"avez encore des Depenses Recurrent', 'vide');
         }
       });
   }
@@ -51,15 +51,15 @@ export class ListDepensesRecurrentComponent implements OnInit {
 
 
   onDelete(key: string) {
-    if (confirm('éte vous sure de supprimer ce depense ?') === true) {
+    if (confirm('Ete vous sure de supprimer ce depense ?') === true) {
       this.depenseservice.deleteDepense(key);
       this.toastr.warning('suppression', 'depense supprimée avec succée');
     }
   }
   onDeleteAll() {
-    if (confirm('éte vous sure de supprimer toutes tes depenses ?') === true) {
+    if (confirm('Ete vous sure de supprimer toutes tes depenses ?') === true) {
       this.depenseservice.deleteAllDepense();
-      this.toastr.warning('suppression', 'Depense supprimée avec succée');
+      this.toastr.warning('Suppression', 'Dépense supprimée avec succée');
     }
   }
 
@@ -70,7 +70,7 @@ export class ListDepensesRecurrentComponent implements OnInit {
   onUpdateR(depensesFormR: NgForm) {
     if (this.depenseservice.updateDepenseRecurrent(depensesFormR.value)) {
     }
-    this.toastr.success('modification', 'modification avec succès');
+    this.toastr.success('Modification', 'Modification avec succès');
 
     // modal clonse
     // else
