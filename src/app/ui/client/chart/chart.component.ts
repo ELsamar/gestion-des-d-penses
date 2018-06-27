@@ -200,6 +200,34 @@ projetlist: any[];
         }
       });
     });
+    this.depenseSR.getDepense('Depenses/DepensesRecurrent').snapshotChanges().subscribe(item => {
+      this.depenselist = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        let objdep = {
+          'date': y['daterevenu'],
+          'montantdepense': y['montantdepense'],
+          'montantrevenu': '',
+        };
+        this.depenselist.push(objdep);
+      });
+      let chartdep = this.AmCharts.makeChart('categoriedepensechartdiv',
+        {
+          'type': 'pie',
+          'fontSize': 8,
+          'radius': 100,
+          'theme': 'light',
+          'dataProvider': this.depenselist,
+          'valueField': 'litres',
+          'titleField': 'categorie',
+          'balloon': {
+            'fixedPosition': true
+          },
+          'export': {
+            'enabled': true
+          }
+        });
+    });
     var chart1 = this.AmCharts.makeChart('chartdiv1',
       {
         theme: 'light',

@@ -11,6 +11,11 @@ import {ModeleDepense} from '../../../../shared/models/modele-depense';
   styleUrls: ['./listprojets.component.css']
 })
 export class ListprojetsComponent implements OnInit {
+  optimiser: {categories , pourcentages} [];
+  categories: any = ['Alimentation', 'Transports / Véhicule', 'Loisir'
+    , 'Habillement', 'Téléphone/Internet', 'Enfants', 'autre'];
+  pourcentages = ['5%', '15%', '30%'
+    , '20%', '10%', '10%', '15%'];
   priorites: any = ['forte', 'moyenne', 'faible'];
   projetlist: Projets[];
   startAt: string;
@@ -44,6 +49,18 @@ export class ListprojetsComponent implements OnInit {
   openWindowCustomClass(content, projet: Projets) {
     this.modalService.open(content, {windowClass: 'dark-modal'});
     this.projetservice.selectedprojet = Object.assign({}, projet);
+    console.log(this.projetservice.selectedprojet.prioriteprojet);
+    if ( this.projetservice.selectedprojet.prioriteprojet === 'forte') {
+      this.pourcentages = ['50%', '50%', '50%'
+        , '50%', '50%', '50%', '50%'];
+    } else if (this.projetservice.selectedprojet.prioriteprojet === 'moyenne') {
+      console.log(this.projetservice.selectedprojet.prioriteprojet);
+      this.pourcentages = ['25%', '25%', '25%'
+        , '25%', '25%', '25%', '25%'];
+    } else if (this.projetservice.selectedprojet.prioriteprojet === 'faible') {
+      this.pourcentages = ['15%', '15%', '15%'
+        , '15%', '15%', '15%', '15%'];
+    }
   }
   onUpdate(projetForm: NgForm) {
     this.projetservice.updateProjet(projetForm.value);

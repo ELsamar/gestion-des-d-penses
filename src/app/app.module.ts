@@ -8,7 +8,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { ChatModule } from './chat/chat.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AmChartsModule, AmChartsService} from '@amcharts/amcharts3-angular';
 
@@ -19,7 +18,7 @@ import { AuthService} from './providers/auth.service';
 import {TransactionService} from './shared/services/transaction.service';
 
 import {ClientModule} from './ui/client/client.module';
-import { LoginComponent } from './login/login.component';
+
 import {FormsModule} from '@angular/forms';
 import {PublicModule} from './ui/public/public.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -36,7 +35,6 @@ import {} from '@polymer/paper-toggle-button';
   declarations: [
     AppComponent,
     NotFound404Component,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,

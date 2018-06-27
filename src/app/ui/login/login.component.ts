@@ -19,9 +19,11 @@ export class LoginComponent implements OnInit {
   pseudo: String;
   email: string;
   email1: string ;
+  emailsignup: string;
   emailSent = false;
   errorMessage: string;
   password: string;
+  password2: string;
   resetPassword = false;
   connecter = true;
   public formModel: FormModel = {};
@@ -70,6 +72,9 @@ export class LoginComponent implements OnInit {
   sinscrire() {
     this.connecter = false;
   }
+  seconnecter() {
+    this.connecter = true;
+  }
   async sendEmailLink() {
     this.authService.sendEmailLink(this.email1);
   }
@@ -92,7 +97,7 @@ export class LoginComponent implements OnInit {
   }
 
   singup() {
-    this.authService.singup(this.email, this.password, this.connecter);
+    this.authService.singup(this.emailsignup, this.password, this.connecter);
   }
   signin() {
     this.authService.singin(this.email, this.password);

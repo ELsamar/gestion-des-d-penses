@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      
+
     </div>
   </div>
     <div *ngIf="!connecter">
@@ -102,12 +102,12 @@
       <h1 class="h3 mb-3 font-weight-normal">Je m'inscrire</h1>
       <label for="nomsignup" class="">Nom</label>
       <input type="text" id="nomsignup" class="form-control" name="nom" [(ngModel)]="nom" required>
-      <label for="Emailsignup" class="">Email</label>
-      <input type="email" id="Emailsignup" class="form-control" name="email" [(ngModel)]="email" required autofocus>
+      <label for="nomsignup" class="">Prénom</label>
+      <input type="text" id="prenomnomsignup" class="form-control" name="prenom" [(ngModel)]="prenom" required>
+      <label for="emailsignup" class="">Email</label>
+      <input type="email" id="emailsignup" class="form-control" name="emailsignUp" #emailsignUp="ngModel" [(ngModel)]="emailsignup" required autofocus pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" >
       <label for="Passwordsignup" class="">Mot de passe</label>
       <input type="password" id="Passwordsignup" class="form-control" name="password" [(ngModel)]="password" required>
-      <label for="Passwordsignup2" class="">Confirmer mot de passe</label>
-      <input type="password" id="Passwordsignup2" class="form-control" name="password2" [(ngModel)]="password2" required>
        <br>
       <re-captcha (resolved)="resolved($event)"  [(ngModel)]="formModel.captcha" name="captcha"required siteKey="6Ldw8FUUAAAAAGGrC5Sf-sI5N6co4HT5pykzIBDJ" #captchaControl="ngModel">
       </re-captcha>
@@ -116,9 +116,16 @@
       <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
       <div [hidden]="captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
       <div [hidden]="!captchaProtectedForm.form.valid" class="success">The form is valid</div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit"  (click)="singup()">s'inscrire</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit"
+              [disabled]=  "(!captchaProtectedForm.form.valid) || (!captchaControl.valid)" (click)="singup()">s'inscrire</button>
       <button class="btn btn-lg btn-primary btn-block" type="reset"  (click)="formModel.captcha =''">Annuler</button>
     </form>
+      <div class="row">
+        <div class="row">
+          <div class="col-5"></div>
+          <a  (click)="seconnecter()" class="txt1 p-r-17" style="color: #ffffff"> Se Connecter</a>
+        </div>
+      </div>
   </div>
 
   </div>

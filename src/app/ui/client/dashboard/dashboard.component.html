@@ -9,7 +9,7 @@
           </div>
           <div class="flex-grow-1 bg-white p-4">
               <p class="text-uppercase text-secondary mb-0">Revenus</p>
-              <h3 class="font-weight-bold mb-0">374</h3>
+              <h3 class="font-weight-bold mb-0">{{totalrev}}</h3>
           </div>
       </div>
   </div>
@@ -22,7 +22,7 @@
           </div>
           <div class="flex-grow-1 bg-white p-4">
               <p class="text-uppercase text-secondary mb-0">Dépenses</p>
-              <h3 class="font-weight-bold mb-0">73,829</h3>
+              <h3 class="font-weight-bold mb-0">{{totaldep}}</h3>
           </div>
       </div>
   </div>
@@ -34,25 +34,17 @@
               </div>
           </div>
           <div class="flex-grow-1 bg-white p-4">
-              <p class="text-uppercase text-secondary mb-0">Transactions</p>
-              <h3 class="font-weight-bold mb-0">1,683</h3>
+              <p class="text-uppercase text-secondary mb-0"> Budget</p>
+              <h3 class="font-weight-bold mb-0">{{budget}}</h3>
           </div>
       </div>
   </div>
 </div>
-<div class="row">
+<div [hidden]="(!calculchart)" class="row">
     <div class="col-12">
         <div id="chartdiv"></div>
     </div>
 </div>
-<!--<div class="col">
-  <div class="row">
-    <app-dashrev></app-dashrev>
-  </div>
- <div class="row">
-    <app-dashdep></app-dashdep>
- </div>
-</div>-->
 <div class="row">
     <div class="col-12">
             <div class="row">
@@ -152,7 +144,7 @@
           </div>
     </div>
 
-    <div class="col-md-5 mb-3">
+    <div [hidden]="(!calculchart)" class="col-md-5 mb-3">
         <div id="projetchart"></div>
     </div>
 

@@ -20,11 +20,11 @@
       <div class="projet-desc">
         <h4 class="projet-title">{{Projets.titreprojet}}</h4>
         <span class="projet-details">
-          {{Projets.priorteprojet}}
-          {{Projets.descriptionprojet}}
-          <br>{{Projets.dateprojet}}
+          Priorité : {{Projets.priorteprojet}}
+          <br>
+          <br>
+          Dateline : {{Projets.dateprojet}}
         </span>
-
       </div>
       <div class="projet-price">
         <div class="projet-amount">
@@ -37,6 +37,7 @@
       <div class="be-soldout-title">
         <div (click)="openWindowCustomClass(contentEditp,Projets)" > <i  class="far fa-1x fa-edit"></i></div>
       <div (click)="onDelete(Projets.$key)" > <i class="far fa-trash-alt"></i> </div>
+        <div (click)="openWindowCustomClass(contentOptimiser,Projets)" >  <i class="far fa-lightbulb"></i> </div>
         <div *ngIf="Projets.faite" (click)="doneProjet(Projets,Projets.$key)"><i class="fas fa-thumbs-up"></i></div>
        <div *ngIf="!(Projets.faite)"(click)="doneProjet(Projets,Projets.$key)"> <i class="far fa-thumbs-up"></i> </div>
       </div>
@@ -146,5 +147,31 @@
       <li *ngIf="projetservice.selectedprojet.faite"> <label class="col-form-label"><i class="far fa-smile"></i> Projet Realisè </label></li>
       <li *ngIf="!(projetservice.selectedprojet.faite)"> <label class="col-form-label"><i class="far fa-frown"></i> Projet non Realisè </label></li>
     </ul>
+  </div>
+</ng-template>
+<ng-template #contentOptimiser let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Optimiser </h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="col">
+      <div class="row">
+        <div class="col-5">
+             <div class="row" *ngFor="let categorie of categories">
+        <label class=" card" > {{categorie}}</label>
+        </div>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5" >
+          <div class="row" *ngFor="let pourcentage of pourcentages">
+        <label class=" card"  > {{pourcentage}} </label>
+        </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </ng-template>
