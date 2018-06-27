@@ -31,6 +31,9 @@ export class DepensesService {
   getnewdepenseKey(childPath: string) {
     return this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;
   }
+  gettotaldep() {
+    return 2790;
+  }
   insertDepense(childPath: string, newdepenseKey: string, depenses: Depenses,
                 fileUpload: FileUpload, progress: { percentage: number }): void {
     this.newdepenseKey = this.db.database.ref(childPath).child(this.currentUserId).push().key;

@@ -33,16 +33,16 @@ ed: string;
   getMonth() {
     const y = new Date().getFullYear();
     const m = (new Date().getMonth() ) + 1 ;
-    const start = '18-' + m + '-2018';
-    const end = '19-' + m + '-2018' ;
+    const start = '01-' + m + '-2018';
+    const end = '30-' + m + '-2018' ;
     this.transactionservice.getTrie( start, end)
       .subscribe((transaction) => this.transactionList = transaction);
   }
 getweek() {
   let now = moment().format('L');
-
 const f = moment().subtract( 10, 'days').calendar();
-  console.log(f);
+  this.transactionservice.getTrie('25-6-2018', '30-6-2018')
+    .subscribe((transaction) => this.transactionList = transaction);
 }
 filtrer() {
     console.log(this.st);

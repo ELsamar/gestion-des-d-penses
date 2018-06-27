@@ -11,14 +11,18 @@ import { Revenus} from '../../../shared/models/revenus';
 import { Transaction } from '../../../shared/models/transaction';
 import { Action } from 'rxjs/scheduler/Action';
 import { Title } from '@angular/platform-browser';
+import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor(private AmCharts: AmChartsService,private transactionSR:TransactionService,private projetservice: ProjetsService ,private depenseservice: DepensesService ,private revenuservice: RevenusService) { }
+  constructor(private AmCharts: AmChartsService, private projetservice: ProjetsService , private depenseservice: DepensesService ,
+              private revenuservice: RevenusService, private toastr: ToastrService) { }
+   totaldep: any;
+  totalrev: any;
+  budget: any;
   priorites: any = ['forte', 'moyenne', 'faible'];
   projetlist: Projets[];
   depenseslist: Depenses[];
@@ -31,7 +35,7 @@ export class DashboardComponent implements OnInit {
   revenuslist: Revenus[];
   revenusRlist: Revenus[];
   revenus: Revenus[];
-  trliste:Transaction[];
+  calculchart = true ;
   ngOnInit() {
     this.projetservice.checkdata()
       .then(snapshot => {
@@ -58,17 +62,19 @@ export class DashboardComponent implements OnInit {
             this.depenseslist.push(y as Depenses);
           });
         });
-   }
+        this.depenseservice.getdatadash('Depenses/DepensesRecurrent', 5).snapshotChanges().subscribe(item => {
+          this.DepensesRlist = [];
+          item.forEach(element => {
+            let T = element.payload.toJSON();
+            T['$key'] = element.key;
+            this.DepensesRlist.push(T as Depenses);
+          });
+        });
+        this.totaldep = this.depenseservice.gettotaldep();
+   } else {
+        this.totaldep = 0;
+      }
       });
-    this.depenseservice.getdatadash('Depenses/DepensesRecurrent', 5).snapshotChanges().subscribe(item => {
-      this.DepensesRlist = [];
-      item.forEach(element => {
-        let T = element.payload.toJSON();
-        T['$key'] = element.key;
-        this.DepensesRlist.push(T as Depenses);
-      });
-    });
-
       this.revenuservice.checkdata('Revenus/Revenus')
         .then(snapshot => {
           if ((snapshot.val())) {
@@ -80,16 +86,22 @@ export class DashboardComponent implements OnInit {
             this.revenuslist.push(y as Revenus);
           });
         });
-      } });
-        this.revenuservice.getdatadash('Revenus/RevenusRecurrent', 5).snapshotChanges().subscribe(item => {
-          this.revenusRlist = [];
-          item.forEach(element => {
-            let T = element.payload.toJSON();
-            T['$key'] = element.key;
-            this.revenusRlist.push(T as Revenus);
-          });
-        });
-      
+            this.revenuservice.getdatadash('Revenus/RevenusRecurrent', 5).snapshotChanges().subscribe(item => {
+              this.revenusRlist = [];
+              item.forEach(element => {
+                let T = element.payload.toJSON();
+                T['$key'] = element.key;
+                this.revenusRlist.push(T as Revenus);
+              });
+            });
+            this.totalrev = this.revenuservice.gettotalrevenu();
+            this.budget = this.totalrev - this.totaldep ;
+      } else {
+            this.totalrev = 0 ;
+            this.budget = this.totalrev - this.totaldep ;
+            this.calculchart = false;
+          } });
+
       var chart = this.AmCharts.makeChart("chartdiv", {
         "type": "serial",
         "theme": "light",
@@ -164,26 +176,14 @@ export class DashboardComponent implements OnInit {
             "distance": 603,
             "townSize": 10,
             "latitude": 39.1,
-            "duration": 890
+            "duration": 890,
         }, {
-            "date": "2012-01-12",
-            "distance": 534,
-            "townSize": 18,
-            "latitude": 39.74,
-            "duration": 810
-        }, {
-            "date": "2012-01-13",
-            "townSize": 12,
-            "distance": 425,
-            "duration": 670,
-            "latitude": 40.75,
-            "dashLength": 8,
-            "alpha": 0.4
-        }, {
-            "date": "2012-01-14",
-            "latitude": 36.1,
-            "duration": 470,
-        }],
+          "date": "2012-01-12",
+          "distance": 60,
+          "townSize": 9,
+          "latitude": 30.1,
+          "duration": 800,
+        },],
         "valueAxes": [{
             "id": "distanceAxis",
             "axisAlpha": 0,
@@ -195,12 +195,12 @@ export class DashboardComponent implements OnInit {
             "axisAlpha": 0,
             "gridAlpha": 0,
             "labelsEnabled": false,
-            "position": "right"
+           /* "position": "right"*/
         }, {
             "id": "durationAxis",
             "axisAlpha": 0,
             "gridAlpha": 0,
-            "inside": true,
+            "inside": false,
             "position": "right",
             "title": "Dépenses/Revenus"
         }],
@@ -297,18 +297,6 @@ export class DashboardComponent implements OnInit {
       "titleField": "categorie",
       "balloon": {
         /*"fixedPosition": true*/}})
-        this.transactionSR.getTransaction().snapshotChanges().subscribe(item => {
-            this.trliste = [];
-            item.forEach(element => {
-              let y = element.payload.toJSON();
-              let objdep = {
-                titre: y['titre'],
-                action : y['action']
-              };
-              for ( var i = 0; i < this.trliste.length; i++ ){
-                  console.log(this.trliste)
-              }
-            })
-        })
     }
 }
+

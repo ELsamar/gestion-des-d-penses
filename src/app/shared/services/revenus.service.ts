@@ -104,7 +104,9 @@ dateto: revenus.dateto
   this.toaster.success('Ajouter', 'Revenu ajoutè avec succes');
 });
 }
-
+  gettotalrevenu() {
+    return 252688;
+  }
 updateRevenu( childPath: string, revenus: Revenus, ) {
   this.revenuslist = this.db.list(childPath + '/' +  this.currentUserId);
 this.revenuslist.update(revenus.$idrevenu,
